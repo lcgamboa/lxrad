@@ -1,0 +1,25 @@
+#configuration
+
+PACKAGE = @PACKAGE@
+VERSION = @VERSION@
+MAINVER = @MAINVER@
+MINORVER = @MINORVER@
+
+MKDIR = mkdir -p
+RM = rm -f
+CC = @CXX@
+CXX = @CXX@
+AR = ar
+LN = ln -sfn
+CP = cp
+
+CFLAGS = @CFLAGS@ @LDFLAGS@
+
+datarootdir = @datarootdir@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+datadir = @datadir@
+includedir = @includedir@
+bindir = @bindir@
+libdir = @libdir@
+

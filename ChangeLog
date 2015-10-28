@@ -1,0 +1,79 @@
+Change Log:
+
+VERSION 0.8
+10/28/2015 Wxwidgets-3.0.2 port
+VERSION 0.7
+08/27/2011 Widows port
+07/25/2011 Layout components draw preview 
+06/12/2011 CCanvas resize implemented
+VERSION 0.6
+06/25/2010 Create Classes: CHtml, CStatusbar and CGrid
+06/24/2010 Layout bug fix 
+06/22/2010 CInput, Cmessage, CDialog and Clabel minor fix
+06/02/2010 CScroll fixed and CGauge create
+05/30/2008 Documentation doxygen
+02/10/2008 Layout bugs fixed (delete, window menu, frame draw)
+02/09/2008 Layout project format converted to xml
+02/08/2008 CPWindow Fixed
+01/25/2008 CDraw and CCanvas improved 
+01/24/2008 Layout bug fix
+01/09/2008 CSWindow class Create (splash)
+01/08/2008 CPWindow class Create (Window with Panel)
+11/08/2007 Porting layout to unicode
+06/21/2007 CList, CCombo, CFileList and CFileDialog fixed 
+06/20/2007 CCombo, CList and CTimer fixed
+06/19/2007 Unicode support implemented
+06/18/2007 CMenu, CPMenu and CItemMenu fixed
+06/17/2007 Initial Controls porting terminated  
+06/03/2007 New Implementation using WxWidgets started
+VERSION 0.5
+12/05/2007 GTK Widgtes is too complicated, GTK no more!
+12/16/2004 Layout bug fix
+12/16/2004 CString class renamed to CLabel
+12/15/2004 Major bug fix, restart work using GTK instead Xlib!
+04/23/2004 Layout files in XML format 
+01/27/2004 New Implementation using GTK Widgets started
+VERSION 0.4
+12/11/2002 Draw functions modiefied and optmized for fast draw
+11/25/2002 CString bugs fixed
+10/25/2002 CScroll bugs fixed
+10/07/2002 Speed Up CScroll and CWindow classes draw routines
+08/06/2002 CCombo class create
+07/01/2003 Layout generation of files optmized
+06/22/2002 layout upgrade
+06/21/2002 Window.ShowExclusive() implemented
+06/20/2002 Control.SetEnable() implemented
+04/30/2002 CList and CFileList bugs fixed
+04/21/2002 CFileDialog class create
+04/21/2002 CDialog class create
+04/07/2002 all memory leaks fixed
+04/03/2002 CStringClass recreate
+04/01/2002 String class create
+03/29/2003 Layout support menu editing
+03/01/2003 CHint Class Create and Hint system implemented
+VERSION 3.0
+12/18/2001 CScroll CList CFileList
+12/17/2001 Tab key implemented
+12/10/2001 CInput create
+03/21/2002 layout bugs fixed
+03/08/2002 cscroll bugs fixed
+03/04/2002 Draw functions Optimized
+VERSION 2.0
+12/09/2001 layout menus and file format improved
+12/07/2001 fix some layout bugs
+12/03/2001 CTimer implemented with thread 
+11/28/2001 color management create 
+11/27/2001 Menus fixed
+11/15/2001 layout update
+11/10/2001 CStrings improved
+10/22/2001 CXpmButton create
+10/20/2001 CToolButton create
+10/02/2001 layout format create
+09/02/2001 layout improved
+VERSION 1.0
+08/20/2001 CEdit work's more or less
+06/14/2001 Menus don't work
+05/20/2001 CText don't work :(
+05/10/2000 layout begin
+02/10/2000 LXRAD begin
+VERSION 0.0

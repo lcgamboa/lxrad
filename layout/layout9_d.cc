@@ -1,0 +1,64 @@
+CPWindow9::CPWindow9(void)
+{
+  SetFOwner(this);
+  SetClass(wxT("CPWindow"));
+  SetName(wxT("window9"));
+  SetTag(0);
+  SetX(334);
+  SetY(186);
+  SetWidth(221);
+  SetHeight(236);
+  SetHint(wxT(""));
+  SetEnable(1);
+  SetVisible(0);
+  SetPopupMenu(NULL);
+  SetTitle(wxT("PopupMenu"));
+  SetOverrideRedirect(0);
+  //list1
+  list1.SetFOwner(this);
+  list1.SetClass(wxT("CList"));
+  list1.SetName(wxT("list1"));
+  list1.SetTag(0);
+  list1.SetX(16);
+  list1.SetY(13);
+  list1.SetWidth(160);
+  list1.SetHeight(130);
+  list1.SetHint(wxT(""));
+  list1.SetEnable(1);
+  list1.SetVisible(1);
+  list1.SetPopupMenu(NULL);
+  list1.SetItems(wxT(""));
+  CreateChild(&list1);
+  //button1
+  button1.SetFOwner(this);
+  button1.SetClass(wxT("CButton"));
+  button1.SetName(wxT("button1"));
+  button1.SetTag(0);
+  button1.SetX(24);
+  button1.SetY(151);
+  button1.SetWidth(65);
+  button1.SetHeight(28);
+  button1.SetHint(wxT(""));
+  button1.SetEnable(1);
+  button1.SetVisible(1);
+  button1.SetPopupMenu(NULL);
+  button1.EvMouseButtonPress=EVMOUSEBUTTONPRESS & CPWindow9::button1_EvMouseButtonPress;
+  button1.SetText(wxT("Ok"));
+  CreateChild(&button1);
+  //button2
+  button2.SetFOwner(this);
+  button2.SetClass(wxT("CButton"));
+  button2.SetName(wxT("button2"));
+  button2.SetTag(0);
+  button2.SetX(100);
+  button2.SetY(151);
+  button2.SetWidth(65);
+  button2.SetHeight(28);
+  button2.SetHint(wxT(""));
+  button2.SetEnable(1);
+  button2.SetVisible(1);
+  button2.SetPopupMenu(NULL);
+  button2.EvMouseButtonPress=EVMOUSEBUTTONPRESS & CPWindow9::button2_EvMouseButtonPress;
+  button2.SetText(wxT("Cancel"));
+  CreateChild(&button2);
+};

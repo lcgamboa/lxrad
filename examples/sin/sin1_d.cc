@@ -1,0 +1,34 @@
+CPWindow1::CPWindow1(void)
+{
+  SetFOwner(this);
+  SetClass(wxT("CPWindow"));
+  SetName(wxT("window1"));
+  SetTag(0);
+  SetX(297);
+  SetY(125);
+  SetWidth(629);
+  SetHeight(508);
+  SetHint(wxT(""));
+  SetEnable(1);
+  SetVisible(1);
+  SetPopupMenu(NULL);
+  SetTitle(wxT("sin"));
+  SetOverrideRedirect(0);
+  //draw1
+  draw1.SetFOwner(this);
+  draw1.SetClass(wxT("CDraw"));
+  draw1.SetName(wxT("draw1"));
+  draw1.SetTag(0);
+  draw1.SetX(16);
+  draw1.SetY(14);
+  draw1.SetWidth(600);
+  draw1.SetHeight(480);
+  draw1.SetHint(wxT(""));
+  draw1.SetEnable(1);
+  draw1.SetVisible(1);
+  draw1.SetPopupMenu(NULL);
+  draw1.EvMouseButtonPress=EVMOUSEBUTTONPRESS & CPWindow1::draw1_EvMouseButtonPress;
+  draw1.SetTransparent(0);
+  draw1.SetImgFileName(wxT(""));
+  CreateChild(&draw1);
+};

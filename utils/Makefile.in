@@ -1,0 +1,16 @@
+include ../Makefile.Conf
+
+all:
+#	g++ -o lxconv0506 lxconv0506.cc -L../lib -llxrad `wxconfig --cxxflags --libs` 
+
+static:
+
+install:
+	chmod 755 lxrad-config
+	${CP} -v lxrad-config ${bindir}
+
+uninstall:
+	${RM} ${bindir}/lxrad-config
+
+clean:
+

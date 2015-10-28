@@ -1,0 +1,69 @@
+include ../Makefile.Conf
+
+all:: 
+
+LIBCFLAGS := $(CFLAGS) 
+ARCFLAGS := $(CFLAGS) -static
+
+# .ao files are used for static archives
+%.ao: %.cc
+	$(CXX) $(ARCFLAGS) -c $< -o $@
+
+# .lo files are used for shared libraries
+%.lo: %.cc
+	$(CXX) $(LIBCFLAGS) -c $< -o $@
+
+# The main and minor version of the library
+LIBMAINVER := ${MAINVER}
+LIBMINORVER := ${MINORVER}
+LIBVER := ${VERSION}
+
+# The static lib name, the shared lib name, and the internal ('so') name of
+# the shared lib.
+LIBNAME = lxrad
+LIBSHLIBNAME = $(LIBNAME).dll
+LIBSTLIBNAME = $(LIBNAME).a
+
+LIBTARGETS := $(LIBSHLIBNAME) 
+
+LIBSHOBJECTS := capplication.lo cbutton.lo cedit.lo cdraw.lo cimage.lo cdialog.lo cfiledialog.lo cobject.lo ccontrol.lo \
+		citemmenu.lo cmenu.lo cpmenu.lo clabel.lo ctext.lo cwindow.lo cmessage.lo cinput.lo ccheckbox.lo \
+		ctoolbutton.lo cxpmbutton.lo ctimer.lo clist.lo cfilelist.lo cscroll.lo ccombo.lo mstring.lo ccanvas.lo \
+		cpanel.lo cpwindow.lo cswindow.lo cdirdialog.lo cgauge.lo cgrid.lo chtml.lo cstatusbar.lo
+
+LIBSTOBJECTS := capplication.ao cbutton.ao cedit.ao cdraw.ao cimage.ao cdialog.ao cfiledialog.ao cobject.ao ccontrol.ao \
+		citemmenu.ao cmenu.ao cpmenu.ao clabel.ao ctext.ao cwindow.ao cmessage.ao cinput.ao ccheckbox.ao \
+		ctoolbutton.ao cxpmbutton.ao ctimer.ao clist.ao cfilelist.ao cscroll.ao ccombo.ao mstring.ao ccanvas.ao \
+		cpanel.ao cpwindow.ao cswindow.ao cdirdialog.ao cgauge.ao cgrid.ao chtml.lo cstatusbar.lo
+
+#LIBHEADERFILES := ../include/class.h ../include/controls.h 
+
+# How to create the shared library
+$(LIBSHLIBNAME): $(LIBSHOBJECTS)
+	$(CXX) -shared -Wl,--out-implib,lxrad.dll.a -Wl,--no-undefined -Wl,--enable-runtime-pseudo-reloc -o $@  $^ `i686-w64-mingw32-msw-unicode-3.0 --libs`
+
+
+# And the static library
+$(LIBSTLIBNAME): $(LIBSTOBJECTS) 
+	$(RM) $@
+	$(AR) rcvs $(LIBSTLIBNAME) $^
+
+# Include all dependency files
+#INCLUDEFILES += $(LIBCSOURCES:.c=.ld) $(LIBCSOURCES:.c=.ad)
+
+all-lib: $(LIBTARGETS)
+all :: all-lib
+static :: $(LIBSTLIBNAME) 
+
+clean-lib:
+	$(RM) *.ld *.ad
+	$(RM) *.lo *.ao *.a
+	$(RM) $(LIBTARGETS) $(LIBEXTRACLEAN)
+clean :: clean-lib
+
+install: all
+	$(CP) -dvf $(LIBNAME)* ${libdir}
+
+uninstall:
+	$(RM) ${libdir}/$(LIBNAME)* 
+

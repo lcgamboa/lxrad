@@ -1,0 +1,7 @@
+<LXRAD_Project>
+  <Version type="String">0.7</Version>
+  <PName type="String">LCDfont</PName>
+  <POptions type="String">-Wall -O2</POptions>
+  <PIncludeFile type="String"> </PIncludeFile>
+  <PNW type="String">1</PNW>
+</LXRAD_Project>

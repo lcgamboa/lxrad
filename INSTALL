@@ -1,0 +1,10 @@
+Installation:
+
+autoconf
+./configure
+
+make           - Compile the liblxrad dynamic
+make static    - Compile the liblxrad static
+make install   - Install liblxrad, layout and headers
+make uninstall - Uninstall liblxrad,layout and headers
+examples/make  - Compile the examples

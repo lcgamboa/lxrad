@@ -1,0 +1,3 @@
+g++ -c -Wall -O2 `lxrad-config --cxxflags` pLCDfont.cc 
+g++ -c -Wall -O2 `lxrad-config --cxxflags` LCDfont1.cc 
+g++ -Wall -O2 `lxrad-config --cxxflags` pLCDfont.o LCDfont1.o   -oLCDfont `lxrad-config --libs`

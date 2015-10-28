@@ -1,0 +1,20 @@
+This is the LXRAD directory tree:
+
+docs             - Documentation
+examples         - Examples
+include          - Header files for liblxrad
+layout           - RAD tool for build lxrad applications
+lib              - Source of liblxrad
+
+Requirements:
+XFree86        http://www.xfree.org
+wxwidgets      http://www.wxwidgets.org	
+
+Installation:
+
+./configure
+make           - Compile the liblxrad  and layout 
+make install   - Install liblxrad and headers
+make uninstall - Uninstall liblxrad and headers
+examples/make  - Compile the examples
+layout/make    - Compile layout

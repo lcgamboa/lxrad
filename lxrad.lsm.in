@@ -1,0 +1,16 @@
+Begin3
+Title:          LXRAD
+Version:        %%VERSION%%
+Entered-date:   %%DATE%%
+Description:    LXRAD means Linux X11 Rapid Application Development, LXRAD is written in c++ and uses own
+                component Library (liblxrad), there are components such as button, editbox, menu and others.
+		The LXRAD is a collection of RAD tools for creating x11 interface base
+Keywords:       x11, fast, small, source, development.
+Author:         lcgamboa@yahoo.com (gamboa)
+Maintained-by:  lcgamboa@yahoo.com (gamboa)
+Primary-site:   http://lxrad.sourceforge.net
+                ? KB icewm-%%VERSION%%.src.tar.gz
+Home-page:      http://lxrad.sourceforge.net/
+Platforms:      X11, Xpm, Imlib, c++
+Copying-policy: GPL
+End

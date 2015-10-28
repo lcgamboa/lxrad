@@ -1,0 +1,217 @@
+<window1>
+  <Class type="String">CPWindow</Class>
+  <Name type="String">window1</Name>
+  <Tag type="int">0</Tag>
+  <X type="int">23</X>
+  <Y type="int">31</Y>
+  <Width type="uint">595</Width>
+  <Height type="uint">90</Height>
+  <Hint type="String"></Hint>
+  <Enable type="bool">1</Enable>
+  <Visible type="bool">1</Visible>
+  <PopupMenu type="PopupMenu">NULL</PopupMenu>
+  <EvMouseMove type="Event">FALSE</EvMouseMove>
+  <EvMouseButtonPress type="Event">FALSE</EvMouseButtonPress>
+  <EvMouseButtonRelease type="Event">FALSE</EvMouseButtonRelease>
+  <EvMouseButtonClick type="Event">FALSE</EvMouseButtonClick>
+  <EvMouseButtonDoubleClick type="Event">FALSE</EvMouseButtonDoubleClick>
+  <EvKeyboardPress type="Event">FALSE</EvKeyboardPress>
+  <EvKeyboardRelease type="Event">FALSE</EvKeyboardRelease>
+  <EvKeyboardKey type="Event">FALSE</EvKeyboardKey>
+  <EvOnDraw type="Event">FALSE</EvOnDraw>
+  <EvOnFocusIn type="Event">FALSE</EvOnFocusIn>
+  <EvOnFocusOut type="Event">FALSE</EvOnFocusOut>
+  <Title type="String">LXRAD Layout -</Title>
+  <OverrideRedirect type="bool">0</OverrideRedirect>
+  <EvOnCreate type="Event">TRUE</EvOnCreate>
+  <EvOnDestroy type="Event">FALSE</EvOnDestroy>
+  <EvOnShow type="Event">FALSE</EvOnShow>
+  <EvOnHide type="Event">FALSE</EvOnHide>
+  <EvOnEnter type="Event">FALSE</EvOnEnter>
+  <EvOnLeave type="Event">FALSE</EvOnLeave>
+<menu1>
+  <Class type="String">CMenu</Class>
+  <Name type="String">menu1</Name>
+  <Tag type="int">0</Tag>
+  <MenuItems type="MenuItems">File,Edit,Project,Windows,Help,</MenuItems>
+</menu1>
+<filedialog1>
+  <Class type="String">CFileDialog</Class>
+  <Name type="String">filedialog1</Name>
+  <Tag type="int">0</Tag>
+  <FileName type="String">untitled.txt</FileName>
+  <Filter type="String">All Files (*.*)|*.*</Filter>
+  <Type type="int">129</Type>
+</filedialog1>
+<menu1_File>
+  <Class type="String">CPMenu</Class>
+  <Name type="String">menu1_File</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">File</Text>
+  <MenuItems type="MenuItems">New Project,New Window,Save,Preferences,Exit,</MenuItems>
+</menu1_File>
+<menu1_Edit>
+  <Class type="String">CPMenu</Class>
+  <Name type="String">menu1_Edit</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Edit</Text>
+  <MenuItems type="MenuItems">Options,Clear,Delete Control,Include Files,</MenuItems>
+</menu1_Edit>
+<menu1_Project>
+  <Class type="String">CPMenu</Class>
+  <Name type="String">menu1_Project</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Project</Text>
+  <MenuItems type="MenuItems">Run,Build,Clean,Edit Source,Debug,</MenuItems>
+</menu1_Project>
+<menu1_Windows>
+  <Class type="String">CPMenu</Class>
+  <Name type="String">menu1_Windows</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Windows</Text>
+  <MenuItems type="MenuItems"></MenuItems>
+</menu1_Windows>
+<menu1_Help>
+  <Class type="String">CPMenu</Class>
+  <Name type="String">menu1_Help</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Help</Text>
+  <MenuItems type="MenuItems">Contents,Reference,About,</MenuItems>
+</menu1_Help>
+<menu1_File_NewProject>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_File_NewProject</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">New Project</Text>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_File_NewProject>
+<menu1_File_NewWindow>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_File_NewWindow</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">New Window</Text>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_File_NewWindow>
+<menu1_File_Save>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_File_Save</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Save</Text>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_File_Save>
+<menu1_File_Preferences>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_File_Preferences</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Preferences</Text>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_File_Preferences>
+<menu1_File_Exit>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_File_Exit</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Exit</Text>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_File_Exit>
+<menu1_Edit_Options>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_Edit_Options</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Options</Text>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_Edit_Options>
+<menu1_Edit_Clear>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_Edit_Clear</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Clear</Text>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_Edit_Clear>
+<menu1_Edit_DeleteControl>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_Edit_DeleteControl</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Delete Control</Text>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_Edit_DeleteControl>
+<menu1_Edit_IncludeFiles>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_Edit_IncludeFiles</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Include Files</Text>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_Edit_IncludeFiles>
+<menu1_Project_Run>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_Project_Run</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Run</Text>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_Project_Run>
+<menu1_Project_Build>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_Project_Build</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Build</Text>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_Project_Build>
+<menu1_Project_Clean>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_Project_Clean</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Clean</Text>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_Project_Clean>
+<menu1_Project_EditSource>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_Project_EditSource</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Edit Source</Text>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_Project_EditSource>
+<menu1_Project_Debug>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_Project_Debug</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Debug</Text>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_Project_Debug>
+<menu1_Help_Contents>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_Help_Contents</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Contents</Text>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_Help_Contents>
+<menu1_Help_Reference>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_Help_Reference</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Reference</Text>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_Help_Reference>
+<menu1_Help_About>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_Help_About</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">About</Text>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_Help_About>
+</window1>

@@ -1,0 +1,43 @@
+CPWindow1::CPWindow1(void)
+{
+  SetFOwner(this);
+  SetClass(wxT("CPWindow"));
+  SetName(wxT("window1"));
+  SetTag(0);
+  SetX(310);
+  SetY(217);
+  SetWidth(285);
+  SetHeight(104);
+  SetHint(wxT(""));
+  SetEnable(1);
+  SetVisible(1);
+  SetPopupMenu(NULL);
+  SetTitle(wxT("clock"));
+  SetOverrideRedirect(0);
+  EvOnCreate=EVONCREATE & CPWindow1::_EvOnCreate;
+  //timer1
+  timer1.SetFOwner(this);
+  timer1.SetClass(wxT("CTimer"));
+  timer1.SetName(wxT("timer1"));
+  timer1.SetTag(0);
+  timer1.SetTime(1000);
+  timer1.SetRunState(1);
+  timer1.EvOnTime=EVONTIME & CPWindow1::timer1_EvOnTime;
+  CreateChild(&timer1);
+  //label1
+  label1.SetFOwner(this);
+  label1.SetClass(wxT("CLabel"));
+  label1.SetName(wxT("label1"));
+  label1.SetTag(0);
+  label1.SetX(16);
+  label1.SetY(16);
+  label1.SetWidth(236);
+  label1.SetHeight(40);
+  label1.SetHint(wxT(""));
+  label1.SetEnable(1);
+  label1.SetVisible(1);
+  label1.SetPopupMenu(NULL);
+  label1.SetText(wxT("Time"));
+  label1.SetAlign(1);
+  CreateChild(&label1);
+};

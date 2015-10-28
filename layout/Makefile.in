@@ -1,0 +1,29 @@
+include ../Makefile.Conf
+
+FLAGS = $(CFLAGS) -D_SHARE=\"${datadir}/lxrad\" -D_VERSION=\"${VERSION}\" 
+
+OBJS = playout.o controlsdef.o layout1.o layout2.o layout3.o layout4.o layout5.o layout6.o layout7.o layout8.o layout9.o layout0.o
+
+LINK= @LIBS@ -L../lib -llxrad 
+SLINK= @LIBS@ @X_LIBS@ -static -L../lib -llxrad 
+
+layout:all
+
+all: $(OBJS) 
+	$(CXX) $(FLAGS) $(OBJS) -olayout $(LINK)
+
+static: $(OBJS)
+	$(CC) $(FLAGS) $(OBJS) -olayout $(SLINK)
+	
+install: all
+	strip -s layout
+	$(CP) -dvf layout ${bindir}
+
+%.o: %.cc
+	$(CXX) -c $(FLAGS) $< 
+
+uninstall:
+	$(RM) ${bindir}/layout 
+
+clean:
+	rm -f layout *.o core

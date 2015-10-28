@@ -1,0 +1,20 @@
+include Makefile.Conf
+
+SUBDIRS= lib include share docs utils
+.PHONY: $(SUBDIRS) layout 
+
+all:$(SUBDIRS) 
+	doxygen doxygen.cfg > doxygen.log 2>&1
+
+static:$(SUBDIRS) 
+
+install:$(SUBDIRS) layout
+	
+clean:$(SUBDIRS) layout
+
+uninstall:$(SUBDIRS) layout
+	
+$(SUBDIRS) layout:
+	$(MAKE) -C $@ $(MAKECMDGOALS)
+
+

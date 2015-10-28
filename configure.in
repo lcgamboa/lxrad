@@ -1,0 +1,83 @@
+# Process this file with autoconf to produce a configure script.
+AC_INIT(lxrad, 0.5, lcgamboa@yahoo.com)
+AC_PREREQ([2.50])
+AC_CONFIG_SRCDIR([lib/capplication.cc])
+AC_CONFIG_HEADER([config.h])
+
+
+EXTERNAL_CFLAGS="$CFLAGS"
+
+# Checks for programs.
+AC_PROG_CPP
+AC_PROG_CC
+AC_PROG_CXX
+
+
+
+#check for wxwidget
+WXCONFIG=wx-config
+AC_ARG_WITH(wx-config,
+[[  --with-wx-config=FILE     Use the given path to wx-config when determining
+                            wxWidgets configuration; defaults to "wx-config"]],
+[
+    if test "$withval" != "yes" -a "$withval" != ""; then
+        WXCONFIG=$withval
+    fi
+])
+AC_MSG_CHECKING([wxWidgets version])
+if wxversion=`$WXCONFIG --version`; then
+    AC_MSG_RESULT([$wxversion])
+else
+    AC_MSG_RESULT([not found])
+    AC_MSG_ERROR([wxWidgets is required. Try --with-wx-config.])
+fi
+
+WX_CXXFLAGS="`$WXCONFIG --cxxflags`"
+WX_LIBS="`$WXCONFIG --libs`"
+
+
+AC_SUBST(WX_LIBS)
+ 
+
+CFLAGS="-Wall -O3  $WX_CXXFLAGS $EXTERNAL_CFLAGS"
+LIBS="$LIBS $WX_LIBS"
+
+
+# Checks for header files.
+AC_HEADER_STDC
+AC_CHECK_HEADERS([stdlib.h string.h unistd.h])
+
+# Checks for typedefs, structures, and compiler characteristics.
+AC_C_CONST
+AC_C_INLINE
+AC_TYPE_SIZE_T
+
+# Checks for library functions.
+AC_FUNC_MALLOC
+AC_FUNC_STAT
+AC_CHECK_FUNCS([getcwd mkdir strerror strrchr strstr strtol])
+
+AC_SUBST(PACKAGE,`sed -ne 's/PACKAGE=//p' VERSION`)
+AC_SUBST(VERSION,`sed -ne 's/VERSION=//p' VERSION`)
+AC_SUBST(MAINVER,`sed -ne 's/MAINVER=//p' VERSION`)
+AC_SUBST(MINORVER,`sed -ne 's/MINORVER=//p' VERSION`)
+AC_SUBST(HOSTOS,`uname -sr || echo unknown`)
+AC_SUBST(HOSTCPU,`uname -m || echo unknown`)
+
+AC_SUBST(LIBS)
+
+AC_SUBST(PREFIX)
+AC_SUBST(BINDIR)
+AC_SUBST(LIBDIR)
+
+
+AC_OUTPUT([Makefile
+           Makefile.Conf
+	   docs/Makefile
+           include/Makefile
+           layout/Makefile
+           lib/Makefile
+           share/Makefile
+           utils/Makefile
+	   utils/lxrad-config])
+

@@ -1,0 +1,7 @@
+<LXRAD_Project>
+  <Version type="String">0.6</Version>
+  <PName type="String">layout</PName>
+  <POptions type="String">-Wall -O2 -D_SHARE=\"../share\" -D_VERSION=\"0.6\" </POptions>
+  <PIncludeFile type="String">layout0.o controlsdef.o </PIncludeFile>
+  <PNW type="String">9</PNW>
+</LXRAD_Project>
