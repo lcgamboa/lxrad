@@ -106,9 +106,10 @@ CStatusbar::SetFields (String litems)
 {
   int f = 0;
   Fields.Clear ();
-  while (f + 1 <= (int) litems.size ())
+  while (litems.size () > 0)
     {
       f = litems.find (wxT(","));
+      if(f < 0)break;
       AddField (litems.substr (0, f));
       litems = litems.substr (f + 1, litems.size () - f -1);
     };

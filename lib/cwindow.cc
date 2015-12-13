@@ -295,6 +295,7 @@ CWindow::Event (wxEvent & event)
       //FIXME call applicatina::wdelete callback!!!!!!!!
        if(Application->ADestroyWindow ((wxCloseEvent*) &event)) 
        {
+/*
          if (!((wxCloseEvent*) &event)->CanVeto()) 
          {
            ((wxCloseEvent *)&event)->Skip();
@@ -303,6 +304,7 @@ CWindow::Event (wxEvent & event)
          {
            ((wxCloseEvent *)&event)->Veto(); 
          };
+*/
         }
       return; 
       break;

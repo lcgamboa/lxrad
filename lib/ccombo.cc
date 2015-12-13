@@ -249,9 +249,10 @@ CCombo::SetItems (String litems)
 {
   int f = 0;
   DeleteItems (1);
-  while (f + 1 <= (int) litems.size ())
+  while (litems.size () > 0)
     {
       f = litems.find (wxT(","));
+      if(f < 0)break;
       AddItem (litems.substr (0, f));
       litems = litems.substr (f + 1, litems.size () - f - 1);
     };
