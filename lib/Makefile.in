@@ -31,12 +31,12 @@ LIBTARGETS := $(LIBSHLIBNAME) $(LIBSHSONAME) $(LIBSHBASENAME)
 LIBSHOBJECTS := capplication.lo cbutton.lo cedit.lo cdraw.lo cimage.lo cdialog.lo cfiledialog.lo cobject.lo ccontrol.lo \
 		citemmenu.lo cmenu.lo cpmenu.lo clabel.lo ctext.lo cwindow.lo cmessage.lo cinput.lo ccheckbox.lo \
 		ctoolbutton.lo cxpmbutton.lo ctimer.lo clist.lo cfilelist.lo cscroll.lo ccombo.lo mstring.lo ccanvas.lo \
-		cpanel.lo cpwindow.lo cswindow.lo cdirdialog.lo cgauge.lo cgrid.lo chtml.lo cstatusbar.lo
+		cpanel.lo cpwindow.lo cswindow.lo cdirdialog.lo cgauge.lo cgrid.lo chtml.lo cstatusbar.lo cthread.lo
 
 LIBSTOBJECTS := capplication.ao cbutton.ao cedit.ao cdraw.ao cimage.ao cdialog.ao cfiledialog.ao cobject.ao ccontrol.ao \
 		citemmenu.ao cmenu.ao cpmenu.ao clabel.ao ctext.ao cwindow.ao cmessage.ao cinput.ao ccheckbox.ao \
 		ctoolbutton.ao cxpmbutton.ao ctimer.ao clist.ao cfilelist.ao cscroll.ao ccombo.ao mstring.ao ccanvas.ao \
-		cpanel.ao cpwindow.ao cswindow.ao cdirdialog.ao cgauge.ao cgrid.ao chtml.lo cstatusbar.lo
+		cpanel.ao cpwindow.ao cswindow.ao cdirdialog.ao cgauge.ao cgrid.ao chtml.ao cstatusbar.ao cthread.as
 
 #LIBHEADERFILES := ../include/class.h ../include/controls.h 
 
