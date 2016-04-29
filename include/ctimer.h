@@ -4,7 +4,7 @@
 
    ########################################################################
 
-   Copyright (c) : 2001  Luis Claudio Gamboa Lopes
+   Copyright (c) : 2001-2016  Luis Claudio Gamboa Lopes
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -23,11 +23,6 @@
    For e-mail suggestions :  lcgamboa@yahoo.com
    ######################################################################## */
 
-/**
- * \file ctimer.h
- * \author Luis Claudio Gamboa Lopes
- * \date 05-30-2008
- */
 
 #ifndef CTIMER
 #define CTIMER
@@ -36,7 +31,7 @@
 #include"cwindow.h"
 
 
-/** \brief Image Control.
+/** \brief Timer Control.
  *
  * Generic Timer Control Class.
  */

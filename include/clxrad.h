@@ -116,7 +116,8 @@ lxEVT_SCROLL_CHANGED,
 lxEVT_HTML_LINK_CLICKED,
 lxEVT_GRID_SELECT_CELL,
 lxEVT_GRID_CELL_LEFT_CLICK,
-lxEVT_GRID_CELL_RIGHT_CLICK
+lxEVT_GRID_CELL_RIGHT_CLICK,
+lxEVT_THREAD_END
 };
 
 #define Parent 99999
@@ -149,6 +150,9 @@ lxEVT_GRID_CELL_RIGHT_CLICK
 #define EVONCHANGEPOSITION         (void(CControl::*)(CControl*))
 
 #define EVONGRIDCELLLEFTCLICK      (void(CControl::*)(CControl*))
+
+#define EVTHREADRUN	           (void(CControl::*)(CControl*))
+#define EVTHREADEND	           (void(CControl::*)(CControl*))
 
 #define CA_LEFT   1
 #define CA_RIGHT  2

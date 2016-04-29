@@ -61,6 +61,7 @@ protected:
   long Color;
   long DisableColor;
   String ColorName;
+  unsigned char ColorRGB[3];
   CControl **Child;
   int ChildCount;
   String FontName;
@@ -107,8 +108,8 @@ public:
   virtual uint GetHeight (void);
   void SetWid (int wid);
   long GetWid (void);
-  void SetColor (const String name);
-  void SetColor (unsigned r, unsigned g, unsigned b);
+  virtual void SetColor (const String name);
+  virtual void SetColor (unsigned r, unsigned g, unsigned b);
   virtual void SetEnable (bool enable);
   virtual bool GetEnable (void);
   void SetOwner (CControl * control);

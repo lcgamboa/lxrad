@@ -161,3 +161,29 @@ CLabel::SetWidth (uint w)
 };
 
 
+void
+CLabel::SetColor (const String name)
+{
+  ColorName = name;
+  
+  wxColour color(name);
+  if (Widget != NULL)
+     ((wxStaticText*)Widget)->SetForegroundColour(color);
+
+};
+
+void 
+CLabel::SetColor (unsigned r, unsigned g, unsigned b)
+{
+  ColorRGB[0]=r;
+  ColorRGB[1]=g;
+  ColorRGB[2]=b;
+
+  wxColour color(r,g,b);
+  if (Widget != NULL)
+     ((wxStaticText*)Widget)->SetForegroundColour(color);
+
+};
+
+
+

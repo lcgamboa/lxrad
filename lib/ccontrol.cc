@@ -78,6 +78,9 @@ CControl::CControl (void)
 
   //CFont = NULL;
   ColorName = wxT("");
+  ColorRGB[0]=0;
+  ColorRGB[1]=0;
+  ColorRGB[2]=1;
 };
 
 CControl::~CControl ()
@@ -170,7 +173,11 @@ CControl::Create (CControl * control)
 
   SetHint (Hint);
 
- 
+  if(ColorName.size() > 0)
+     SetColor(ColorName);
+  
+  if(ColorRGB[0]+ColorRGB[1]+ColorRGB[2] != 1)  
+    SetColor(ColorRGB[0],ColorRGB[1],ColorRGB[2]);  
 
   return 1;
 };
@@ -731,6 +738,13 @@ CControl::SetColor (const String name)
 void
 CControl::SetColor (uint r, uint g, uint b)
 {
+  ColorRGB[0]=r;
+  ColorRGB[1]=g;
+  ColorRGB[2]=b;
+
+  wxColour color(r,g,b);
+  if (Widget != NULL)
+     Widget->SetOwnBackgroundColour(color);
 };
 
 void
