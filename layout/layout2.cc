@@ -141,7 +141,7 @@ CPWindow2::_EvKeyboardPress(CControl * control, uint key, uint x, uint y,uint ma
   for(i=0;i<bc;i++)
   {
   //itens[i].ctrl->SetVisible(true);
-  itens[i].ctrl->SetVisible(1); //FIXME
+  itens[i].ctrl->SetVisible(0); //FIXME
   Application->ProcessEvents (GetWidget());
 
   Canvas.Create (this,1);
@@ -149,9 +149,8 @@ CPWindow2::_EvKeyboardPress(CControl * control, uint key, uint x, uint y,uint ma
   org=((wxFrame*)GetWidget())->GetClientAreaOrigin();
   GetWidget()->ClientToScreen(&org.x, &org.y);
   NDC.SelectObject(*itens[i].Bitmap);
-  //drawcontrol(&NDC,itens[i].ctrl); 
-  NDC.Blit(0, 0, itens[i].ctrl->GetWidth(),itens[i].ctrl->GetHeight(),&SDC,org.x+itens[i].ctrl->GetX(), org.y+itens[i].ctrl->GetY());
-   itens[i].ctrl->SetVisible(0);
+  drawcontrol(&NDC,itens[i].ctrl); 
+  //NDC.Blit(0, 0, itens[i].ctrl->GetWidth(),itens[i].ctrl->GetHeight(),&SDC,org.x+itens[i].ctrl->GetX(), org.y+itens[i].ctrl->GetY());
   //itens[i].ctrl->SetVisible(0);
   Application->ProcessEvents (GetWidget());
   Canvas.GetDC()->Blit(itens[i].ctrl->GetX(),itens[i].ctrl->GetY()+0, itens[i].ctrl->GetWidth(),itens[i].ctrl->GetHeight(),&NDC,0,0); 
@@ -210,7 +209,7 @@ CPWindow2::_EvMouseButtonRelease(CControl * control, uint button, uint x, uint y
   */
 
   CreateChild(itens[bc].ctrl);
-  itens[bc].ctrl->SetVisible(1); //FIXME default 0
+  itens[bc].ctrl->SetVisible(0); //FIXME default 0
 
   Application->ProcessEvents (GetWidget());
 
@@ -223,11 +222,9 @@ CPWindow2::_EvMouseButtonRelease(CControl * control, uint button, uint x, uint y
   org=((wxFrame*)GetWidget())->GetClientAreaOrigin();
   GetWidget()->ClientToScreen(&org.x, &org.y);
   NDC.SelectObject(*itens[bc].Bitmap);
-  //drawcontrol(&NDC,itens[bc].ctrl); 
-  NDC.Blit(0, 0, itens[bc].ctrl->GetWidth(),itens[bc].ctrl->GetHeight(),&SDC,org.x+itens[bc].ctrl->GetX(), org.y+itens[bc].ctrl->GetY());
-  itens[bc].ctrl->SetVisible(0); 
-  //itens[bc].ctrl->SetAux(itens[bc].ctrl->GetVisible());
-  itens[bc].ctrl->SetAux(1);
+  drawcontrol(&NDC,itens[bc].ctrl); 
+  //NDC.Blit(0, 0, itens[bc].ctrl->GetWidth(),itens[bc].ctrl->GetHeight(),&SDC,org.x+itens[bc].ctrl->GetX(), org.y+itens[bc].ctrl->GetY());
+  itens[bc].ctrl->SetAux(itens[bc].ctrl->GetVisible());
  // itens[bc].ctrl->SetVisible(0);
 //  itens[bc].ctrl->SetVisible(itens[bc].visible,false);
   Application->ProcessEvents (GetWidget());
@@ -492,7 +489,7 @@ CPWindow2::_EvMouseMove(CControl * control, uint button, uint x, uint y,uint sta
     {
 	int xitem=item;
 
-        itens[xitem].ctrl->SetVisible(1); //FIXME
+        //itens[xitem].ctrl->SetVisible(1); //FIXME
         
 	Application->ProcessEvents (GetWidget());
         delete itens[xitem].Bitmap;	
@@ -505,9 +502,8 @@ CPWindow2::_EvMouseMove(CControl * control, uint button, uint x, uint y,uint sta
   	org=((wxFrame*)GetWidget())->GetClientAreaOrigin();
   	GetWidget()->ClientToScreen(&org.x, &org.y);
   	NDC.SelectObject(*itens[xitem].Bitmap);
-  //      drawcontrol(&NDC,itens[xitem].ctrl); 
-  	NDC.Blit(0, 0, itens[xitem].ctrl->GetWidth(),itens[xitem].ctrl->GetHeight(),&SDC,org.x+itens[xitem].ctrl->GetX(), org.y+itens[xitem].ctrl->GetY());
-        itens[xitem].ctrl->SetVisible(0);
+        drawcontrol(&NDC,itens[xitem].ctrl); 
+  //	NDC.Blit(0, 0, itens[xitem].ctrl->GetWidth(),itens[xitem].ctrl->GetHeight(),&SDC,org.x+itens[xitem].ctrl->GetX(), org.y+itens[xitem].ctrl->GetY());
   //	itens[xitem].ctrl->SetVisible(false);
   	Application->ProcessEvents (GetWidget());
   	Canvas.GetDC()->Blit(itens[xitem].ctrl->GetX(),itens[xitem].ctrl->GetY()+0, itens[xitem].ctrl->GetWidth(),itens[xitem].ctrl->GetHeight(),&NDC,0,0); 

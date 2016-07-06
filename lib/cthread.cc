@@ -100,7 +100,11 @@ CThread::Destroy (void)
 {
   while(runstate)
   {
+#ifndef __WXMSW__
       usleep(100);
+#else
+      Sleep(1);
+#endif 
   }      
   CControl::Destroy ();
 };
