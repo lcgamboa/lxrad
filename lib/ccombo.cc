@@ -201,8 +201,8 @@ CCombo::DeleteItems (bool clean)
 CStringList CCombo::GetContext (void)
 {
   CControl::GetContext ();
-  Context.AddLine (xml_out (wxT("Text"), wxT("String"), GetText ()));
   Context.AddLine (xml_out (wxT("Items"), wxT("StringList"), GetItems ()));
+  Context.AddLine (xml_out (wxT("Text"), wxT("String"), GetText ()));
   Context.AddLine (xml_out (wxT("ReadOnly"), wxT("bool"), itoa(GetReadOnly ())));
   Context.AddLine (xml_out (wxT("EvOnComboChange"), wxT("Event"), btoa (GetEv ())));
   return Context;

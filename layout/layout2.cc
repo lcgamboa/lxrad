@@ -209,12 +209,14 @@ CPWindow2::_EvMouseButtonRelease(CControl * control, uint button, uint x, uint y
   */
 
   CreateChild(itens[bc].ctrl);
-  itens[bc].ctrl->SetVisible(0); //FIXME default 0
+  //itens[bc].ctrl->SetVisible(0); 
 
   Application->ProcessEvents (GetWidget());
 
   itens[bc].Bitmap= new  wxBitmap(itens[bc].ctrl->GetWidth(), itens[bc].ctrl->GetHeight(),  -1);
-
+  
+  itens[bc].ctrl->SetAux(itens[bc].ctrl->GetVisible());
+  itens[bc].ctrl->SetVisible(0);
 
     
   Canvas.Create (this,1);
@@ -224,17 +226,16 @@ CPWindow2::_EvMouseButtonRelease(CControl * control, uint button, uint x, uint y
   NDC.SelectObject(*itens[bc].Bitmap);
   drawcontrol(&NDC,itens[bc].ctrl); 
   //NDC.Blit(0, 0, itens[bc].ctrl->GetWidth(),itens[bc].ctrl->GetHeight(),&SDC,org.x+itens[bc].ctrl->GetX(), org.y+itens[bc].ctrl->GetY());
-  itens[bc].ctrl->SetAux(itens[bc].ctrl->GetVisible());
- // itens[bc].ctrl->SetVisible(0);
 //  itens[bc].ctrl->SetVisible(itens[bc].visible,false);
   Application->ProcessEvents (GetWidget());
   
   Canvas.GetDC()->Blit(itens[bc].ctrl->GetX(),itens[bc].ctrl->GetY()+0, itens[bc].ctrl->GetWidth(),itens[bc].ctrl->GetHeight(),&NDC,0,0); 
   Canvas.End();
+  itens[bc].ctrl->SetVisible(1);
   bc++;
   NDC.SelectObject(wxNullBitmap);
   
-  
+ 
   operation = wxT("editar");
   }
   

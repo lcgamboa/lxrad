@@ -4,7 +4,7 @@
 
    ########################################################################
 
-   Copyright (c) : 2001  Luis Claudio Gamboa Lopes
+   Copyright (c) : 2001-2016  Luis Claudio Gamboa Lopes
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -34,79 +34,6 @@ CApplication *Application;
 
 
 
-
-//FIXME rip this code out
-/*
-void
-CApplication::events_callback (wxEvent& event)
-{
-
-
-
-// debug	
-CControl* ctrl=NULL;
-int cc;
-  if(wxEVT_MOTION != event.GetEventType())
-  {
-
-   for(cc=0;cc <= Application->GetAWindowCount();cc++)
-   {
-   if(Application->GetAWindow(cc)->GetWid() == event.GetId())
-   {
-     ctrl=Application->GetAWindow(cc);
-     break;
-   }
-   else
-   {
-       ctrl=Application->GetAWindow(cc)->GetChildByWid(event.GetId());
-       if(ctrl != NULL)break;
-   }
-   
-   };
-
-
-
-  if(ctrl!=NULL)
-#ifdef __UNICODE__
-   printf(">>>%06i Obj=%p Id=%i  Type=%i Name=%ls\n",ca++,event.GetEventObject(),event.GetId(), event.GetEventType(),ctrl->GetName().c_str());
-#else
-   printf(">>>%06i Obj=%p Id=%i  Type=%i Name=%s\n",ca++,event.GetEventObject(),event.GetId(), event.GetEventType(),ctrl->GetName().c_str());
-#endif 
-  else
-    printf(">>>%06i %p %i  %i\n",ca++,event.GetEventObject(),event.GetId(), event.GetEventType());
-  }
- 
-
-  if(Application->AEvent ((wxWindow * )event.GetEventObject(), &event, -1))
-  {
-     event.Skip();
-  }
-  return;
-};
-*/
-
-
-/*  //FIXME remove this
-void
-CApplication::wdelete_callback (wxCloseEvent& event)
-{
-
-       if(Application->ADestroyWindow (&event))
-       {
-         if (!event.CanVeto()) 
-         { 
-           event.Skip();
-         }
-         else
-         {
-           event.Veto(); 
-         };
-        }
-    
-};
-*/
-
-
 // CApplication__________________________________________________________
 
 /*
@@ -119,38 +46,6 @@ CApplication::CApplication (void)
 /*
 CApplication::~CApplication (void)
 {
-};
-*/
-
-/*
-void
-eventloop (GdkEvent * event)
-{
-  if ((event->type == GDK_BUTTON_PRESS) || (event->type == GDK_BUTTON_RELEASE) || (event->type == GDK_KEY_PRESS) || 
-      (event->type == GDK_KEY_RELEASE))
-    { 
-      if (Application.AEvent (gtk_get_event_widget (event), event, -1))
-	{
-	  gtk_main_do_event (event);
-	}
-    }
-  else
-    {
-      gtk_main_do_event (event);
-    };
-
-
-//   if(event->type != GDK_EXPOSE)
-//   {
-//   if(Application.AEvent (gtk_get_event_widget(event), event, -1))
-//     gtk_main_do_event(event);
-//   }
-//   else
-//   {
-//     gtk_main_do_event(event);
-//     Application.AEvent (gtk_get_event_widget(event), event, -1);
-//   };
- 
 };
 */
 
@@ -167,14 +62,6 @@ CApplication::Start ()
 #ifdef _DEBUG_
   mprint (wxT("Application init ...\n"));
 #endif
-//  g_thread_init (NULL);
-//  gdk_threads_init ();
-
-//  gtk_init (&argc, &argv);
-
-//  gdk_event_handler_set ((GdkEventFunc) eventloop, NULL, NULL);
-
-//  Tips = gtk_tooltips_new ();
 
 };
 
@@ -242,7 +129,6 @@ bool CApplication::ADestroyWindow (int w)
 	  mprint (wxT("...Application Finished\n"));
 #endif
 	  ExitMainLoop();	
-	  //gtk_main_quit ();
 	  return false;
 	}
       else
@@ -275,12 +161,6 @@ int
 CApplication::Load (void)
 {
   /* Enter the event loop */
-  //gdk_threads_enter ();
-  //gtk_main ();
-  //gdk_threads_leave ();
-
-
-  //gtk_object_destroy (GTK_OBJECT (Tips));
 #ifdef _DEBUG_
   printf("Application Run ...\n");
 #endif
@@ -309,52 +189,6 @@ CApplication::ProcessEvents (wxWindow *window)
       }
 };
 
-
-/*
-bool CApplication::AEvent (wxWindow * widget,wxEvent * event, int w)
-{
-//FIXME rip this code out
-
-  if ((w == -1)&&(AWindowList!= NULL))
-    {
-      for (int i = 0; i <= AWindowCount; i++)
-	{
-	  if ((AWindowList[i]->GetWWidget () == widget)
-	     ||(AWindowList[i]->GetWidget () == widget))
-	    {
-	      w = i;
-	      break;
-	    }
-	  else
-	    {
-	      if (AWindowList[i]->GetChildByWidget (widget) != NULL)
-		{
-		  w = i;
-		  break;
-		};
-	    };
-	};
-    };
-
-  if ((w >= 0) && (w <= AWindowCount))
-  {
-    //if(event->type == 4)	
-    //printf("Window=%i   widget=%s  event=%i\n",w,gtk_widget_get_name(widget),event->type);	  
-    return AWindowList[w]->WEvent (widget, event);
-  };
-
-  return true;
-};
-*/
-
-/*
-void
-CApplication::ASignal (GtkWidget * widget, int signal, int w)
-{
-  if (w <= AWindowCount)
-    AWindowList[w]->WSignal (widget, signal);
-};
-*/
 
 //propierties
 
@@ -403,7 +237,6 @@ String CApplication::GetTitle (void)
 void
 CApplication::SetTips (CControl * control)
 {
-  //gtk_tooltips_set_tip (Tips, control->GetWidget (), control->GetHint ().c_str (), "help");
 };
 
 
