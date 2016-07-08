@@ -54,7 +54,7 @@ class CPWindow2:public CPWindow
   CStringList linesbak;
 // void Draw(void);
   void Reset (void);
-  void MakeList (bool prompt);
+  void MakeOrUpdateFiles (bool prompt);
   bool testline(String line);
   void MakeProject (String basename);
   bool LoadProject (String dirname, String filename);

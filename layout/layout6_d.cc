@@ -1,5 +1,6 @@
 CPWindow6::CPWindow6(void)
 {
+//lxrad automatic generated block start, don't edit below!  
   SetFOwner(this);
   SetClass(wxT("CPWindow"));
   SetName(wxT("window6"));
@@ -31,4 +32,6 @@ CPWindow6::CPWindow6(void)
   combo1.SetItems(wxT(""));
   combo1.EvOnComboChange=EVONCOMBOCHANGE & CPWindow6::combo1_EvOnComboChange;
   CreateChild(&combo1);
+  /*#Others*/
+//lxrad automatic generated block end, don't edit above!
 };

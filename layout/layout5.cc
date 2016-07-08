@@ -143,7 +143,7 @@ CPWindow5::button3_EvMouseButtonRelease(CControl * control, uint button, uint x,
 		  Message (wxSysErrorMsg(wxSysErrorCode()));
 		  return;
 		};
-	      Window2.MakeList (false);
+	      Window2.MakeOrUpdateFiles (false);
 	      Save = true;
 	    }
 	  else

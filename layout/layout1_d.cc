@@ -1,5 +1,6 @@
 CPWindow1::CPWindow1(void)
 {
+//lxrad automatic generated block start, don't edit below!  
   SetFOwner(this);
   SetClass(wxT("CPWindow"));
   SetName(wxT("window1"));
@@ -45,7 +46,7 @@ CPWindow1::CPWindow1(void)
   menu1_Edit.SetName(wxT("menu1_Edit"));
   menu1_Edit.SetTag(0);
   menu1_Edit.SetText(wxT("Edit"));
-  menu1_Edit.SetMenuItems(wxT("Options,Clear,Delete Control,Include Files,"));
+  menu1_Edit.SetMenuItems(wxT("Options,Clear,Delete Control,Include Files,Include Libs,"));
   menu1.CreateChild(&menu1_Edit);
   //menu1_Project
   menu1_Project.SetFOwner(this);
@@ -224,4 +225,15 @@ CPWindow1::CPWindow1(void)
   menu1_Help_About.SetSubMenu(NULL);
   menu1_Help_About.EvMenuActive=EVMENUACTIVE & CPWindow1::menu1_Help_About_EvMenuActive;
   menu1_Help.CreateChild(&menu1_Help_About);
+  //menu1_Edit_IncludeLibs
+  menu1_Edit_IncludeLibs.SetFOwner(this);
+  menu1_Edit_IncludeLibs.SetClass(wxT("CItemMenu"));
+  menu1_Edit_IncludeLibs.SetName(wxT("menu1_Edit_IncludeLibs"));
+  menu1_Edit_IncludeLibs.SetTag(0);
+  menu1_Edit_IncludeLibs.SetText(wxT("Include Libs"));
+  menu1_Edit_IncludeLibs.SetSubMenu(NULL);
+  menu1_Edit_IncludeLibs.EvMenuActive=EVMENUACTIVE & CPWindow1::menu1_Edit_IncludeLibs_EvMenuActive;
+  menu1_Edit.CreateChild(&menu1_Edit_IncludeLibs);
+  /*#Others*/
+//lxrad automatic generated block end, don't edit above!  
 };

@@ -1,5 +1,6 @@
 CPWindow7::CPWindow7(void)
 {
+//lxrad automatic generated block start, don't edit below!  
   SetFOwner(this);
   SetClass(wxT("CPWindow"));
   SetName(wxT("window7"));
@@ -93,4 +94,6 @@ CPWindow7::CPWindow7(void)
   button4.EvMouseButtonPress=EVMOUSEBUTTONPRESS & CPWindow7::button4_EvMouseButtonPress;
   button4.SetText(wxT("Apply"));
   CreateChild(&button4);
+  /*#Others*/
+//lxrad automatic generated block end, don't edit above!
 };

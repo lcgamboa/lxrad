@@ -1,5 +1,6 @@
 CPWindow2::CPWindow2(void)
 {
+//lxrad automatic generated block start, don't edit below!  
   SetFOwner(this);
   SetClass(wxT("CPWindow"));
   SetName(wxT("window2"));
@@ -19,4 +20,6 @@ CPWindow2::CPWindow2(void)
   EvOnDraw=EVONDRAW & CPWindow2::_EvOnDraw;
   SetTitle(wxT("layout"));
   SetOverrideRedirect(0);
+  /*#Others*/
+//lxrad automatic generated block end, don't edit above!  
 };

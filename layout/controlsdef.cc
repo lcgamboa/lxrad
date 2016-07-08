@@ -679,6 +679,7 @@ drawcontrol(wxMemoryDC* NDC,CControl *ctrl)
     NDC->SetBrush(Brush);
 
     NDC->DrawRectangle(0,0,ctrl->GetWidth(),ctrl->GetHeight());
+    NDC->SetFont(wxFont(6, wxFONTFAMILY_DEFAULT,wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
     NDC->DrawLabel(ctrl->GetName(),ret,wxALIGN_CENTER | wxALIGN_CENTER_VERTICAL);
 
 

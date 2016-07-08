@@ -32,6 +32,7 @@ class CPWindow1:public CPWindow
   CItemMenu menu1_Help_Contents;
   CItemMenu menu1_Help_Reference;
   CItemMenu menu1_Help_About;
+  CItemMenu menu1_Edit_IncludeLibs;
   /*#Events*/
   void _EvOnCreate(CControl * control);
   void menu1_File_NewProject_EvMenuActive(CControl * control);
@@ -51,6 +52,7 @@ class CPWindow1:public CPWindow
   void menu1_Help_Contents_EvMenuActive(CControl * control);
   void menu1_Help_Reference_EvMenuActive(CControl * control);
   void menu1_Help_About_EvMenuActive(CControl * control);
+  void menu1_Edit_IncludeLibs_EvMenuActive(CControl * control);
 
   /*#Others*/
   void menu1_Windows_Windowx_EvMenuActive(CControl * control);
@@ -66,6 +68,7 @@ extern int PNW;
 extern String PName;
 extern String PDir;
 extern String POptions;
+extern String PLibs;
 extern String PIncludeFile;
 extern bool Save;
 extern bool Move;

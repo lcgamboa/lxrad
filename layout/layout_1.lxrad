@@ -55,7 +55,7 @@
   <Name type="String">menu1_Edit</Name>
   <Tag type="int">0</Tag>
   <Text type="String">Edit</Text>
-  <MenuItems type="MenuItems">Options,Clear,Delete Control,Include Files,</MenuItems>
+  <MenuItems type="MenuItems">Options,Clear,Delete Control,Include Files,Include Libs,</MenuItems>
 </menu1_Edit>
 <menu1_Project>
   <Class type="String">CPMenu</Class>
@@ -214,4 +214,12 @@
   <SubMenu type="SubMenu">NULL</SubMenu>
   <EvMenuActive type="Event">TRUE</EvMenuActive>
 </menu1_Help_About>
+<menu1_Edit_IncludeLibs>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_Edit_IncludeLibs</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Include Libs</Text>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_Edit_IncludeLibs>
 </window1>

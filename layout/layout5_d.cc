@@ -1,5 +1,6 @@
 CPWindow5::CPWindow5(void)
 {
+//lxrad automatic generated block start, don't edit below!  
   SetFOwner(this);
   SetClass(wxT("CPWindow"));
   SetName(wxT("window5"));
@@ -224,4 +225,6 @@ CPWindow5::CPWindow5(void)
   dirdialog1.SetName(wxT("dirdialog1"));
   dirdialog1.SetTag(0);
   CreateChild(&dirdialog1);
+  /*#Others*/
+//lxrad automatic generated block end, don't edit above!
 };

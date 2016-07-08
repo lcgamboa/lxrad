@@ -45,6 +45,7 @@ int PNW = 1;
 String PName = wxT("untitled");
 String PDir = wxT("~/");
 String POptions = wxT("-Wall -O2");
+String PLibs = wxT(" ");
 String PIncludeFile = wxT(" ");
 bool Save = false;
 bool Move;
@@ -67,7 +68,7 @@ CPWindow1::menu1_Windows_Windowx_EvMenuActive(CControl * control)
   if (Save)
     {
       Save = false;
-      Window2.MakeList (true);
+      Window2.MakeOrUpdateFiles (true);
     };
   WN = im->GetTag ();
   //Window2.ListPropierties (&Window2);
@@ -101,8 +102,11 @@ CPWindow1::_EvOnCreate(CControl * control)
    else
    {
      remove((char *)Home.char_str());
-
-     wxMkdir(Home,wxS_IWUSR| wxS_IRUSR | wxS_IXUSR | wxS_IRGRP | wxS_IROTH );
+#ifndef _WIN_
+     mkdir((char *)Home.char_str(), S_IWUSR| S_IRUSR | S_IXUSR | S_IRGRP | S_IROTH );
+#else
+     mkdir((char *)Home.char_str());
+#endif
    }
 
 
@@ -150,7 +154,7 @@ CPWindow1::menu1_File_NewProject_EvMenuActive(CControl * control)
   if (Save)
     {
       Save = false;
-      Window2.MakeList (true);
+      Window2.MakeOrUpdateFiles(true);
     };
 
   Window5.ShowExclusive ();
@@ -162,7 +166,7 @@ CPWindow1::menu1_File_NewWindow_EvMenuActive(CControl * control)
   if (Save)
     {
       Save = false;
-      Window2.MakeList (true);
+      Window2.MakeOrUpdateFiles (true);
     };
   PNW++;
   WN = PNW;
@@ -194,7 +198,7 @@ CPWindow1::menu1_File_NewWindow_EvMenuActive(CControl * control)
 void
 CPWindow1::menu1_File_Save_EvMenuActive(CControl * control)
 {
-  Window2.MakeList (false);
+  Window2.MakeOrUpdateFiles (false);
   Save = false;
 };
 
@@ -239,7 +243,7 @@ CPWindow1::menu1_File_Exit_EvMenuActive(CControl * control)
   if (Save)
     {
       Save = false;
-      Window2.MakeList (true);
+      Window2.MakeOrUpdateFiles (true);
     };
   Window1.WDestroy ();
 };
@@ -272,7 +276,7 @@ CPWindow1::menu1_Edit_DeleteControl_EvMenuActive(CControl * control)
   
   Window2.ListPropierties (&Window2);
   Window2.DestroyChild (dcontrol);
-  Window2.MakeList(false);
+  Window2.MakeOrUpdateFiles(false);
   WN = 1;
   Window2.SetAux(1);
   Window2.DestroyChilds ();
@@ -287,6 +291,15 @@ CPWindow1::menu1_Edit_IncludeFiles_EvMenuActive(CControl * control)
   Save = true;
 };
 
+
+void
+CPWindow1::menu1_Edit_IncludeLibs_EvMenuActive(CControl * control)
+{
+  Input (wxT("Libs:"), PLibs);
+  Save = true;
+};
+
+
 void
 CPWindow1::menu1_Project_Run_EvMenuActive(CControl * control)
 {
@@ -299,7 +312,7 @@ void
 CPWindow1::menu1_Project_Build_EvMenuActive(CControl * control)
 {
   wxSetWorkingDirectory(PDir);
-  Window2.MakeList (false);
+  Window2.MakeOrUpdateFiles (false);
   system ("make");
 };
 
@@ -315,7 +328,7 @@ void
 CPWindow1::menu1_Project_EditSource_EvMenuActive(CControl * control)
 {
   wxSetWorkingDirectory(PDir);
-  Window2.MakeList (false);
+  Window2.MakeOrUpdateFiles (false);
   wxExecute(Editor + wxT(" ") + PName + itoa (WN) + wxT(".cc"), wxEXEC_SYNC, NULL);
 };
 
@@ -326,13 +339,13 @@ CPWindow1::menu1_Project_Debug_EvMenuActive(CControl * control)
   wxSetWorkingDirectory(PDir);
   temp = POptions;
   POptions = wxT("-Wall -ggdb3");
-  Window2.MakeList (false);
+  Window2.MakeOrUpdateFiles (false);
   system ("make");
   wxExecute(Debuger + wxT(" ") + PName, wxEXEC_SYNC, NULL);
   //system ("make clean");
   wxExecute(wxT("make clean"), wxEXEC_SYNC, NULL);
   POptions = temp;
-  Window2.MakeList (false);
+  Window2.MakeOrUpdateFiles (false);
 };
 
 void
@@ -352,9 +365,6 @@ CPWindow1::menu1_Help_About_EvMenuActive(CControl * control)
 {
   Message (wxT("LXRAD-") + String(wxT(_VERSION)) + wxT(" Developed by LCGamboa <lcgamboa@yahoo.com>"));
 };
-
-
-
 
 
 

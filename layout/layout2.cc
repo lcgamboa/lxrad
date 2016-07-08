@@ -906,7 +906,7 @@ CPWindow2::testline (String line)
 //create or update project files
 
 void
-CPWindow2::MakeList (bool prompt)
+CPWindow2::MakeOrUpdateFiles (bool prompt)
 {
   wxTextFile fbak;
   String lbak;
@@ -954,44 +954,113 @@ CPWindow2::MakeList (bool prompt)
   //================================================================================================
   filename = dirname + wxT ("/Makefile");
 
+  int mfexist = wxFileExists (filename);
 
-  if (wxFileExists (filename) == true)
+  if (mfexist != true)
     {
-      file.Open (filename);
-      file.Clear ();
+      //new file 
+      file.Create (filename);
+
+      file.AddLine (wxT ("CC = g++\n"));
+      file.AddLine (wxT ("#lxrad automatic generated block start, don't edit below!\n"));
+      if (POptions.size () > 0)
+        {
+          file.AddLine (wxT ("FLAGS = ") + POptions + wxT (" `lxrad-config --cxxflags`\n"));
+        }
+      else
+        {
+          file.AddLine (wxT ("FLAGS = `lxrad-config --cxxflags`\n"));
+        };
+
+      if (PLibs.size () > 0)
+        {
+          file.AddLine (wxT ("LIBS = `lxrad-config --libs` " + PLibs + wxT ("\n")));
+        }
+      else
+        {
+          file.AddLine (wxT ("LIBS = `lxrad-config --libs` \n"));
+        }
+
+      line = wxT ("OBJS = p") + PName + wxT (".o");
+
+      for (int c = 1; c <= PNW; c++)
+        line += wxT (" ") + PName + itoa (c) + wxT (".o");
+
+      if (PIncludeFile.size () > 0)
+        line += wxT (" ") + PIncludeFile;
+
+      file.AddLine (line);
+
+      file.AddLine (wxT ("\n#lxrad automatic generated block end, don't edit above!"));
+
+      file.AddLine (wxT ("\n\nall: $(OBJS)"));
+      file.AddLine (wxT ("\t$(CC) $(FLAGS) $(OBJS) -o") + PName + wxT (" $(LIBS)\n"));
+      file.AddLine (wxT ("%.o: %.cc\n\t$(CC) -c $(FLAGS) $< \n"));
+      file.AddLine (wxT ("run: all\n\t./") + PName + wxT ("\n"));
+      file.AddLine (wxT ("install:\n\nclean:\n\trm -f ") + PName + wxT (" *.o core"));
+      file.Write ();
+      file.Close ();
     }
-  else
-    file.Create (filename);
-
-  file.AddLine (wxT ("#lxrad automatic generated file, don't edit!"));
-
-  if (POptions.size () > 0)
+  else //update makefile
     {
-      file.AddLine (wxT ("CC = g++\nFLAGS = ") + POptions + wxT (" `lxrad-config --cxxflags`\n"));
+      wxRenameFile (filename, filename + wxT (".bak"));
+      fbak.Open (filename + wxT (".bak"));
+      fbak.GoToLine (-1);
+      file.Create (filename);
+
+      while (fgetline (fbak, lbak))
+        {
+
+          if (lbak.Contains (wxT ("FLAGS =")))
+            {
+
+              if (POptions.size () > 0)
+                {
+                  lbak = (wxT ("FLAGS = ") + POptions + wxT (" `lxrad-config --cxxflags`"));
+                }
+              else
+                {
+                  lbak = (wxT ("FLAGS = `lxrad-config --cxxflags`"));
+                }
+            }
+          if (lbak.Contains (wxT ("LIBS =")))
+            {
+
+
+              if (PLibs.size () > 0)
+                {
+                  lbak = (wxT ("LIBS = `lxrad-config --libs` " + PLibs ));
+                }
+              else
+                {
+                  lbak = (wxT ("LIBS = `lxrad-config --libs` "));
+                }
+
+
+            }
+
+          if (lbak.Contains (wxT ("OBJS =")))
+            {
+              line = wxT ("OBJS = p") + PName + wxT (".o");
+
+              for (int c = 1; c <= PNW; c++)
+                line += wxT (" ") + PName + itoa (c) + wxT (".o");
+
+              if (PIncludeFile.size () > 0)
+                line += wxT (" ") + PIncludeFile;
+              
+              lbak = line;
+            }
+          file.AddLine (lbak);
+
+        }
+
+      file.Write ();
+      file.Close ();
+      fbak.Close ();
+      wxRemoveFile (filename + wxT (".bak"));
+
     }
-  else
-    {
-      file.AddLine (wxT ("CC = g++\nFLAGS = `lxrad-config --cxxflags`\n"));
-    };
-
-
-  line = wxT ("OBJS = p") + PName + wxT (".o");
-
-  for (int c = 1; c <= PNW; c++)
-    line += wxT (" ") + PName + itoa (c) + wxT (".o");
-
-  if (PIncludeFile.size () > 0)
-    line += wxT (" ") + PIncludeFile;
-
-
-  file.AddLine (line);
-  file.AddLine (wxT ("\n\nall: $(OBJS)"));
-  file.AddLine (wxT ("\t$(CC) $(FLAGS) $(OBJS) -o") + PName + wxT (" `lxrad-config --libs`\n"));
-  file.AddLine (wxT ("%.o: %.cc\n\t$(CC) -c $(FLAGS) $< \n"));
-  file.AddLine (wxT ("run: all\n\t./") + PName + wxT ("\n"));
-  file.AddLine (wxT ("install:\n\nclean:\n\trm -f ") + PName + wxT (" *.o core"));
-  file.Write ();
-  file.Close ();
 
   //================================================================================================
   //project        
@@ -1582,6 +1651,10 @@ CPWindow2::MakeProject (String basename)
     file.AddLine (xml_out (wxT ("POptions"), wxT ("String"), POptions));
   else
     file.AddLine (xml_out (wxT ("POptions"), wxT ("String"), wxT ("")));
+  if (PLibs.size () > 0)
+    file.AddLine (xml_out (wxT ("PLibs"), wxT ("String"), PLibs));
+  else
+    file.AddLine (xml_out (wxT ("PLibs"), wxT ("String"), wxT ("")));
   if (PIncludeFile.size () > 0)
     file.AddLine (xml_out (wxT ("PIncludeFile"), wxT ("String"), PIncludeFile));
   else
@@ -1739,6 +1812,8 @@ CPWindow2::LoadProject (String dirname, String filename)
             PName = value;
           if (oname.compare (wxT ("POptions")) == 0)
             POptions = value;
+          if (oname.compare (wxT ("PLibs")) == 0)
+            PLibs = value;
           if (oname.compare (wxT ("PIncludeFile")) == 0)
             PIncludeFile = value;
           if (oname.compare (wxT ("PNW")) == 0)

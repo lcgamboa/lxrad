@@ -1,5 +1,6 @@
 CPWindow9::CPWindow9(void)
 {
+//lxrad automatic generated block start, don't edit below!  
   SetFOwner(this);
   SetClass(wxT("CPWindow"));
   SetName(wxT("window9"));
@@ -61,4 +62,6 @@ CPWindow9::CPWindow9(void)
   button2.EvMouseButtonPress=EVMOUSEBUTTONPRESS & CPWindow9::button2_EvMouseButtonPress;
   button2.SetText(wxT("Cancel"));
   CreateChild(&button2);
+  /*#Others*/
+//lxrad automatic generated block end, don't edit above!  
 };
