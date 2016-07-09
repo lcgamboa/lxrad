@@ -40,6 +40,7 @@ class CPWindow2:public CPWindow
   void _EvMouseButtonRelease(CControl * control, uint button, uint x, uint y,uint state);
   void _EvKeyboardPress(CControl * control, uint key, uint x, uint y,uint mask);
   void _EvOnDraw(CControl * control);
+  void _EvOnShow(CControl * control);
 
   /*#Others*/
   CControl *Mcontrol;

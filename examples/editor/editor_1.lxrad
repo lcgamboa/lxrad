@@ -2539,7 +2539,7 @@
   <Class type="String">CFileDialog</Class>
   <Name type="String">filedialog1</Name>
   <Tag type="int">0</Tag>
-  <FileName type="String"></FileName>
+  <FileName type="String">untitled.txt</FileName>
   <Filter type="String">All Files (*.*)|*.*</Filter>
   <Type type="int">129</Type>
 </filedialog1>
@@ -2547,7 +2547,7 @@
   <Class type="String">CFileDialog</Class>
   <Name type="String">filedialog2</Name>
   <Tag type="int">0</Tag>
-  <FileName type="String"></FileName>
+  <FileName type="String">untitled.txt</FileName>
   <Filter type="String">All Files (*.*)|*.*</Filter>
   <Type type="int">130</Type>
 </filedialog2>

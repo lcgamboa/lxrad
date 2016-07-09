@@ -7,7 +7,7 @@ CPWindow1::CPWindow1(void)
   SetX(486);
   SetY(274);
   SetWidth(375);
-  SetHeight(388);
+  SetHeight(404);
   SetHint(wxT(""));
   SetEnable(1);
   SetVisible(1);
@@ -27,7 +27,7 @@ CPWindow1::CPWindow1(void)
   filedialog1.SetClass(wxT("CFileDialog"));
   filedialog1.SetName(wxT("filedialog1"));
   filedialog1.SetTag(0);
-  filedialog1.SetFileName(wxT(""));
+  filedialog1.SetFileName(wxT("untitled.txt"));
   filedialog1.SetFilter(wxT("All Files (*.*)|*.*"));
   filedialog1.SetType(129);
   CreateChild(&filedialog1);
@@ -36,7 +36,7 @@ CPWindow1::CPWindow1(void)
   filedialog2.SetClass(wxT("CFileDialog"));
   filedialog2.SetName(wxT("filedialog2"));
   filedialog2.SetTag(0);
-  filedialog2.SetFileName(wxT(""));
+  filedialog2.SetFileName(wxT("untitled.txt"));
   filedialog2.SetFilter(wxT("All Files (*.*)|*.*"));
   filedialog2.SetType(130);
   CreateChild(&filedialog2);
@@ -148,4 +148,5 @@ CPWindow1::CPWindow1(void)
   label1.SetText(wxT("Editor"));
   label1.SetAlign(1);
   CreateChild(&label1);
-};
+  /*#Others*/
+}

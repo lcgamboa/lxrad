@@ -7,7 +7,7 @@ CPWindow1::CPWindow1(void)
   SetX(351);
   SetY(196);
   SetWidth(401);
-  SetHeight(449);
+  SetHeight(522);
   SetHint(wxT(""));
   SetEnable(1);
   SetVisible(1);
@@ -19,7 +19,7 @@ CPWindow1::CPWindow1(void)
   filedialog1.SetClass(wxT("CFileDialog"));
   filedialog1.SetName(wxT("filedialog1"));
   filedialog1.SetTag(0);
-  filedialog1.SetFileName(wxT(""));
+  filedialog1.SetFileName(wxT("untitled.txt"));
   filedialog1.SetFilter(wxT("All Files (*.*)|*.*"));
   filedialog1.SetType(129);
   CreateChild(&filedialog1);
@@ -134,4 +134,5 @@ CPWindow1::CPWindow1(void)
   button4.EvMouseButtonClick=EVMOUSEBUTTONCLICK & CPWindow1::button4_EvMouseButtonClick;
   button4.SetText(wxT("Remove Selected"));
   CreateChild(&button4);
-};
+  /*#Others*/
+}

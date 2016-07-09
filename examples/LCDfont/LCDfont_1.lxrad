@@ -23,7 +23,7 @@
   <EvOnFocusOut type="Event">FALSE</EvOnFocusOut>
   <Title type="String">LCDfont</Title>
   <OverrideRedirect type="bool">0</OverrideRedirect>
-  <EvOnCreate type="Event">FALSE</EvOnCreate>
+  <EvOnCreate type="Event">TRUE</EvOnCreate>
   <EvOnDestroy type="Event">FALSE</EvOnDestroy>
   <EvOnShow type="Event">TRUE</EvOnShow>
   <EvOnHide type="Event">FALSE</EvOnHide>

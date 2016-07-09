@@ -40,4 +40,5 @@ CPWindow1::CPWindow1(void)
   label1.SetText(wxT("Time"));
   label1.SetAlign(1);
   CreateChild(&label1);
-};
+  /*#Others*/
+}

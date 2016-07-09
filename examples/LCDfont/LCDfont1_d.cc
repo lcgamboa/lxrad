@@ -14,6 +14,7 @@ CPWindow1::CPWindow1(void)
   SetPopupMenu(NULL);
   SetTitle(wxT("LCDfont"));
   SetOverrideRedirect(0);
+  EvOnCreate=EVONCREATE & CPWindow1::_EvOnCreate;
   EvOnShow=EVONSHOW & CPWindow1::_EvOnShow;
   //draw1
   draw1.SetFOwner(this);
@@ -121,4 +122,5 @@ CPWindow1::CPWindow1(void)
   filedialog1.SetFilter(wxT("All Files (*.*)|*.*"));
   filedialog1.SetType(129);
   CreateChild(&filedialog1);
-};
+  /*#Others*/
+}

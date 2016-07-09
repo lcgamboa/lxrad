@@ -15,6 +15,7 @@ class CPWindow1:public CPWindow
   CButton button3;
   CFileDialog filedialog1;
   /*#Events*/
+  void _EvOnCreate(CControl * control);
   void _EvOnShow(CControl * control);
   void draw1_EvMouseButtonPress(CControl * control, uint button, uint x, uint y,uint state);
   void draw1_EvOnDraw(CControl * control);

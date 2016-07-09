@@ -77,7 +77,6 @@ CPWindow1::menu1_Windows_Windowx_EvMenuActive(CControl * control)
   Window2.LoadProject (PDir, PName + wxT(".prj_lxrad"));
   Save = true;
 
-  printf("pmenu4_Window1_SigActivate\n");
 };
 
 

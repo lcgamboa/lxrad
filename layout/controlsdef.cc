@@ -671,15 +671,17 @@ drawcontrol(wxMemoryDC* NDC,CControl *ctrl)
       NDC->DrawLabel(((CCheckBox*)ctrl)->GetText(),ret,wxALIGN_LEFT | wxALIGN_CENTER_VERTICAL);
       return;   
     }
-
-    BgColor.Set(100,100,100);
+     
+    //generic control 
+    //BgColor.Set(100,100,100);
+    BgColor.Set(255,255,255); 
     Brush= wxBrush(NDC->GetBrush());
     NDC->SetTextBackground( BgColor);
     Brush.SetColour(BgColor);
     NDC->SetBrush(Brush);
 
     NDC->DrawRectangle(0,0,ctrl->GetWidth(),ctrl->GetHeight());
-    NDC->SetFont(wxFont(6, wxFONTFAMILY_DEFAULT,wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
+    //NDC->SetFont(wxFont(6, wxFONTFAMILY_DEFAULT,wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
     NDC->DrawLabel(ctrl->GetName(),ret,wxALIGN_CENTER | wxALIGN_CENTER_VERTICAL);
 
 

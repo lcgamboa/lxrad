@@ -5,7 +5,7 @@
   <X type="int">297</X>
   <Y type="int">125</Y>
   <Width type="uint">629</Width>
-  <Height type="uint">508</Height>
+  <Height type="uint">561</Height>
   <Hint type="String"></Hint>
   <Enable type="bool">1</Enable>
   <Visible type="bool">1</Visible>
@@ -55,4 +55,12 @@
   <Transparent type="bool">0</Transparent>
   <ImgFileName type="File"></ImgFileName>
 </draw1>
+<timer1>
+  <Class type="String">CTimer</Class>
+  <Name type="String">timer1</Name>
+  <Tag type="int">0</Tag>
+  <Time type="int">500</Time>
+  <RunState type="int">1</RunState>
+  <EvOnTime type="Event">TRUE</EvOnTime>
+</timer1>
 </window1>

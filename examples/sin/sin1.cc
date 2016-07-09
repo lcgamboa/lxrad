@@ -56,3 +56,11 @@ CPWindow1::draw1_EvMouseButtonPress(CControl * control, uint button, uint x, uin
 
 
 
+void
+CPWindow1::timer1_EvOnTime(CControl * control)
+{
+  
+  draw1_EvMouseButtonPress(control, 0, 0, 0, 0);
+};
+
+

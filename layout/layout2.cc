@@ -186,6 +186,17 @@ CPWindow2::_EvMouseButtonRelease (CControl * control, uint button, uint x, uint 
       itens[bc].ctrl = newcontrol (operation, &Window2);
       itens[bc].ctrl->SetX (x);
       itens[bc].ctrl->SetY (y);
+      
+           
+    //if control is not drawable, resize 
+    if((itens[bc].ctrl->GetWidth ()==10)&&
+      (itens[bc].ctrl->GetHeight () == 10))
+    {
+       itens[bc].ctrl->SetWidth (40);
+       itens[bc].ctrl->SetHeight (15);
+    }        
+
+      
       /*
       if (ncontrol->GetClass ().compare (wxT("CFileDialog")) != 0)
       {
@@ -287,7 +298,7 @@ CPWindow2::_EvOnDraw (CControl * control)
     }
   Canvas.End ();
   //code here:)
-  //  mprint(wxT("_EvOnDraw CPWindow2\n"));
+    //mprint(wxT("_EvOnDraw CPWindow2\n"));
 };
 
 //#define MINW 30
@@ -1848,9 +1859,24 @@ CPWindow2::LoadProject (String dirname, String filename)
 
   //SetVisible(true);
 
+  int ys=0;
   for (bc = 0; bc <= GetChildCount (); bc++)
     {
       itens[bc].ctrl = GetChild (bc);
+      
+      //if control is not drawable 
+      if(((itens[bc].ctrl->GetX() == 0)&&
+      (itens[bc].ctrl->GetY()==0)&&
+      (itens[bc].ctrl->GetWidth ()==10)&&
+      (itens[bc].ctrl->GetHeight () == 10))||(itens[bc].ctrl->GetClass () == wxT("CPMenu")))
+      {
+         itens[bc].ctrl->SetX(2);
+         itens[bc].ctrl->SetY(ys);
+         itens[bc].ctrl->SetWidth (40);
+         itens[bc].ctrl->SetHeight (15);
+         ys+=20;
+      }        
+      
       itens[bc].Bitmap = new wxBitmap (itens[bc].ctrl->GetWidth (), itens[bc].ctrl->GetHeight (), -1);
     }
 
@@ -2357,10 +2383,13 @@ CPWindow2::WriteControlEvents (String name, String event)
 };
 
 
-
-
-
-
-
+void
+CPWindow2::_EvOnShow(CControl * control)
+{
+  //FIXME control disaper on resize
+  //code here:)
+  //mprint(wxT("_EvOnShow\n"));
+  //_EvOnDraw(control);
+};
 
 

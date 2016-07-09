@@ -1627,7 +1627,7 @@ CPWindow1::CPWindow1(void)
   filedialog1.SetClass(wxT("CFileDialog"));
   filedialog1.SetName(wxT("filedialog1"));
   filedialog1.SetTag(0);
-  filedialog1.SetFileName(wxT(""));
+  filedialog1.SetFileName(wxT("untitled.txt"));
   filedialog1.SetFilter(wxT("All Files (*.*)|*.*"));
   filedialog1.SetType(129);
   CreateChild(&filedialog1);
@@ -1636,7 +1636,7 @@ CPWindow1::CPWindow1(void)
   filedialog2.SetClass(wxT("CFileDialog"));
   filedialog2.SetName(wxT("filedialog2"));
   filedialog2.SetTag(0);
-  filedialog2.SetFileName(wxT(""));
+  filedialog2.SetFileName(wxT("untitled.txt"));
   filedialog2.SetFilter(wxT("All Files (*.*)|*.*"));
   filedialog2.SetType(130);
   CreateChild(&filedialog2);
@@ -1709,4 +1709,5 @@ CPWindow1::CPWindow1(void)
   menu1_Ajuda_Sobre.SetSubMenu(NULL);
   menu1_Ajuda_Sobre.EvMenuActive=EVMENUACTIVE & CPWindow1::menu1_Ajuda_Sobre_EvMenuActive;
   menu1_Ajuda.CreateChild(&menu1_Ajuda_Sobre);
-};
+  /*#Others*/
+}

@@ -79,6 +79,8 @@ CTimer::Create (CControl * control)
 void
 CTimer::Destroy (void)
 {
+  Widget->Unbind(wxEVT_TIMER,&CTimer::Event,this,GetWid()); 
+  EvOnTime = NULL;
   SetRunState (false);
   CControl::Destroy ();
 };

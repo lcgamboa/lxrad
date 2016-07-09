@@ -7,7 +7,7 @@ CPWindow1::CPWindow1(void)
   SetX(311);
   SetY(212);
   SetWidth(367);
-  SetHeight(185);
+  SetHeight(242);
   SetHint(wxT(""));
   SetEnable(1);
   SetVisible(1);
@@ -216,4 +216,5 @@ CPWindow1::CPWindow1(void)
   menu1_Help_About.SetSubMenu(NULL);
   menu1_Help_About.EvMenuActive=EVMENUACTIVE & CPWindow1::menu1_Help_About_EvMenuActive;
   menu1_Help.CreateChild(&menu1_Help_About);
-};
+  /*#Others*/
+}

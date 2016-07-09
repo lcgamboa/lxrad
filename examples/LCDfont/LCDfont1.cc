@@ -1,4 +1,3 @@
-#include <wx-3.0/wx/string.h>
 
 #include"LCDfont1.h"
 #include"LCDfont1_d.cc"
@@ -18,6 +17,7 @@ CPWindow1::_EvOnShow(CControl * control)
   //code here:)
   mprint(wxT("_EvOnShow\n"));  
   
+    draw1_EvOnDraw(control);
 };
 
 
@@ -147,21 +147,12 @@ CPWindow1::draw1_EvOnDraw(CControl * control)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void
+CPWindow1::_EvOnCreate(CControl * control)
+{
+  //code here:)
+  mprint(wxT("_EvOnCreate\n"));
+  button3_EvMouseButtonClick(control, 0, 0, 0,0);
+};
 
 

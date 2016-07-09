@@ -270,4 +270,5 @@ CPWindow1::CPWindow1(void)
   button11.EvMouseButtonPress=EVMOUSEBUTTONPRESS & CPWindow1::button11_EvMouseButtonPress;
   button11.SetText(wxT("desce"));
   CreateChild(&button11);
-};
+  /*#Others*/
+}

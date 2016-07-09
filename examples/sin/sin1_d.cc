@@ -7,7 +7,7 @@ CPWindow1::CPWindow1(void)
   SetX(297);
   SetY(125);
   SetWidth(629);
-  SetHeight(508);
+  SetHeight(561);
   SetHint(wxT(""));
   SetEnable(1);
   SetVisible(1);
@@ -31,4 +31,14 @@ CPWindow1::CPWindow1(void)
   draw1.SetTransparent(0);
   draw1.SetImgFileName(wxT(""));
   CreateChild(&draw1);
-};
+  //timer1
+  timer1.SetFOwner(this);
+  timer1.SetClass(wxT("CTimer"));
+  timer1.SetName(wxT("timer1"));
+  timer1.SetTag(0);
+  timer1.SetTime(500);
+  timer1.SetRunState(1);
+  timer1.EvOnTime=EVONTIME & CPWindow1::timer1_EvOnTime;
+  CreateChild(&timer1);
+  /*#Others*/
+}
