@@ -4,7 +4,7 @@
   <Tag type="int">0</Tag>
   <X type="int">23</X>
   <Y type="int">31</Y>
-  <Width type="uint">595</Width>
+  <Width type="uint">647</Width>
   <Height type="uint">90</Height>
   <Hint type="String"></Hint>
   <Enable type="bool">1</Enable>

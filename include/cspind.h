@@ -4,7 +4,7 @@
 
    ########################################################################
 
-   Copyright (c) : 2001  Luis Claudio Gamboa Lopes
+   Copyright (c) : 2001-2016  Luis Claudio Gamboa Lopes
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -24,59 +24,51 @@
    ######################################################################## */
 
 /**
- * \file lxrad.h
+ * \file cspind.h
  * \author Luis Claudio Gamboa Lopes
- * \date 05-30-2008
+ * \date 07-10-2016
  */
 
-/*!\mainpage LXRAD Documentation
- *
- * \section  CLASSES REFERENCE
- *
- * Classes descriptions.
- *
- *  
- */
+#ifndef CSPIND
+#define CSPIND
 
-#ifndef LXRAD_H
-#define	LXRAD_H
-
-
-#include"clxrad.h"
-#include"cobject.h"
 #include"ccontrol.h"
 #include"cwindow.h"
-#include"capplication.h"
-#include"cpanel.h"
-#include"cpwindow.h"
-#include"cswindow.h"
-#include"clabel.h"
-#include"cbutton.h"
-#include"cedit.h"
-#include"cmessage.h"
-#include"cinput.h"
-#include"cdialog.h"
-#include"cscroll.h"
-#include"cmenu.h"
-#include"cpmenu.h"
-#include"cdraw.h"
-#include"cimage.h"
-#include"clist.h"
-#include"cfilelist.h"
-#include"ccombo.h"
-#include"ccheckbox.h"
-#include"ctoolbutton.h"
-#include"cxpmbutton.h"
-#include"ctext.h"
-#include"cfiledialog.h"
-#include"cdirdialog.h"
-#include"ctimer.h"
-#include"cgauge.h"
-#include"cgrid.h"
-#include"chtml.h"
-#include"cstatusbar.h"
-#include"cthread.h"
-#include"cspin.h"
-#include"cspind.h"
 
-#endif	/* LXRAD_H */
+/** \brief SPIND Control.
+ *
+ * Generic Spind Control Class.
+ */
+
+class CSpind:public CControl
+{
+protected:
+  double Value;				
+  double Min;
+  double Max;
+  double Inc;
+  int Digits;
+  int CEvent (int event);
+public:
+    CSpind (void);
+   ~CSpind (void);
+  int Create (CControl * control);
+  CStringList GetContext (void);
+  void SetContext (CStringList context);
+  void Event (wxEvent & event);
+  //propiedades
+  void SetValue(double v);
+  double GetValue (void);
+  void SetMin(double v);
+  double GetMin (void);
+  void SetMax(double v);
+  double GetMax (void);
+  void SetInc(double v);
+  double GetInc (void);
+  void SetDigits(int v);
+  int GetDigits(void);
+  //eventos
+  void (CControl::*EvOnChangeSpinDouble) (CControl * control);
+};
+
+#endif

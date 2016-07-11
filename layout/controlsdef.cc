@@ -4,7 +4,7 @@
 
    ########################################################################
 
-   Copyright (c) : 2010 Luis Claudio Gamboa Lopes
+   Copyright (c) : 2010-2016 Luis Claudio Gamboa Lopes
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -28,58 +28,46 @@
 #include"controlsdef.h"
 #include"layout1.h"
 
-uint tbuttonc = 1;
-uint ttoolbuttonc = 1;
-uint txpmbuttonc = 1;
-uint teditc = 1;
-uint tlabelc = 1;
-uint tcheckboxc = 1;
-uint tdrawc = 1;
-uint timagec = 1;
-uint tlistc = 1;
-uint tfilelistc = 1;
-uint tmenuc = 1;
-uint tpmenuc = 1;
-uint tscrollc = 1;
-uint tcomboc = 1;
-uint ttextc = 1;
-uint tfiledialogc = 1;
-uint tdirdialogc = 1;
-uint titemmenuc = 1;
-uint ttimerc = 1;
-uint tpanelc = 1;
-uint tgaugec = 1;
-uint tgridc = 1;
-uint thtmlc = 1;
-uint tstatusbarc = 1;
+enum ccont 
+{
+buttonc=0, 
+toolbuttonc,
+xpmbuttonc,
+editc,
+labelc, 
+checkboxc,
+drawc,
+imagec,
+listc,
+filelistc,
+menuc,
+pmenuc,
+scrollc,
+comboc,
+textc,
+filedialogc,
+dirdialogc,
+itemmenuc,
+timerc,
+panelc,
+gaugec,
+gridc,
+htmlc,
+statusbarc,
+spinc,
+spindc
+};
+
+//must be greater or equal classes in enum
+#define MAX 50
+
+uint cont[MAX];
 
 void
 resetcontrolscount (void)
 {
-  tbuttonc = 1;
-  ttoolbuttonc = 1;
-  txpmbuttonc = 1;
-  teditc = 1;
-  tlabelc = 1;
-  tcheckboxc = 1;
-  tdrawc = 1;
-  timagec = 1;
-  tlistc = 1;
-  tfilelistc = 1;
-  tmenuc = 1;
-  tpmenuc = 1;
-  tscrollc = 1;
-  tcomboc = 1;
-  ttextc = 1;
-  tfiledialogc = 1;
-  tdirdialogc = 1;
-  titemmenuc = 1;
-  ttimerc = 1;
-  tpanelc = 1;
-  tgaugec = 1;
-  tgridc = 1;
-  thtmlc = 1;
-  tstatusbarc = 1;
+  for(int i=0;i< MAX;i++)
+    cont[i]=1;
 };
 
 CControl *
@@ -90,35 +78,35 @@ newcontrol (String controltype, CControl * owner)
     {
       ncontrol = new CButton;
 //      ncontrol->Create (owner);
-      ncontrol->SetName (wxT("button") + itoa (tbuttonc++));
+      ncontrol->SetName (wxT("button") + itoa (cont[buttonc]++));
       return ncontrol;
     };
   if (controltype.compare (wxT("CToolButton")) == 0)
     {
       ncontrol = new CToolButton;
 //      ncontrol->Create (owner);
-      ncontrol->SetName (wxT("toolbutton") + itoa (ttoolbuttonc++));
+      ncontrol->SetName (wxT("toolbutton") + itoa (cont[toolbuttonc]++));
       return ncontrol;
     };
   if (controltype.compare (wxT("CXpmButton")) == 0)
     {
       ncontrol = new CXpmButton;
 //      ncontrol->Create (owner);
-      ncontrol->SetName (wxT("xpmbutton") + itoa (txpmbuttonc++));
+      ncontrol->SetName (wxT("xpmbutton") + itoa (cont[xpmbuttonc]++));
       return ncontrol;
     };
   if (controltype.compare (wxT("CEdit")) == 0)
     {
       ncontrol = new CEdit;
 //      ncontrol->Create (owner);
-      ncontrol->SetName (wxT("edit") + itoa (teditc++));
+      ncontrol->SetName (wxT("edit") + itoa (cont[editc]++));
       return ncontrol;
     };
   if (controltype.compare (wxT("CLabel")) == 0)
     {
       ncontrol = new CLabel;
 //      ncontrol->Create (owner);
-      ncontrol->SetName (wxT("label") + itoa (tlabelc++));
+      ncontrol->SetName (wxT("label") + itoa (cont[labelc]++));
       ncontrol->SetCanExecuteEvent (true);
       return ncontrol;
     };
@@ -126,133 +114,147 @@ newcontrol (String controltype, CControl * owner)
     {
       ncontrol = new CCheckBox;
 //      ncontrol->Create (owner);
-      ncontrol->SetName (wxT("checkbox") + itoa (tcheckboxc++));
+      ncontrol->SetName (wxT("checkbox") + itoa (cont[checkboxc]++));
       return ncontrol;
     };
   if (controltype.compare (wxT("CDraw")) == 0)
     {
       ncontrol = new CDraw;
 //      ncontrol->Create (owner);
-      ncontrol->SetName (wxT("draw") + itoa (tdrawc++));
+      ncontrol->SetName (wxT("draw") + itoa (cont[drawc]++));
       return ncontrol;
     };
   if (controltype.compare (wxT("CImage")) == 0)
     {
       ncontrol = new CImage;
 //      ncontrol->Create (owner);
-      ncontrol->SetName (wxT("image") + itoa (timagec++));
+      ncontrol->SetName (wxT("image") + itoa (cont[imagec]++));
       return ncontrol;
     };
   if (controltype.compare (wxT("CList")) == 0)
     {
       ncontrol = new CList;
 //      ncontrol->Create (owner);
-      ncontrol->SetName (wxT("list") + itoa (tlistc++));
+      ncontrol->SetName (wxT("list") + itoa (cont[listc]++));
       return ncontrol;
     };
   if (controltype.compare (wxT("CFileList")) == 0)
     {
       ncontrol = new CFileList;
 //      ncontrol->Create (owner);
-      ncontrol->SetName (wxT("filelist") + itoa (tfilelistc++));
+      ncontrol->SetName (wxT("filelist") + itoa (cont[filelistc]++));
       return ncontrol;
     };
   if (controltype.compare (wxT("CMenu")) == 0)
     {
       ncontrol = new CMenu;
 //      ncontrol->Create (owner);
-      ncontrol->SetName (wxT("menu") + itoa (tmenuc++));
+      ncontrol->SetName (wxT("menu") + itoa (cont[menuc]++));
       return ncontrol;
     };
   if (controltype.compare (wxT("CPMenu")) == 0)
     {
       ncontrol = new CPMenu;
 //      ncontrol->Create (owner);
-      ncontrol->SetName (wxT("pmenu") + itoa (tpmenuc++));
+      ncontrol->SetName (wxT("pmenu") + itoa (cont[pmenuc]++));
       return ncontrol;
     };
   if (controltype.compare (wxT("CScroll")) == 0)
     {
       ncontrol = new CScroll;
 //      ncontrol->Create (owner);
-      ncontrol->SetName (wxT("scroll") + itoa (tscrollc++));
+      ncontrol->SetName (wxT("scroll") + itoa (cont[scrollc]++));
       return ncontrol;
     };
   if (controltype.compare (wxT("CCombo")) == 0)
     {
       ncontrol = new CCombo;
 //      ncontrol->Create (owner);
-      ncontrol->SetName (wxT("combo") + itoa (tcomboc++));
+      ncontrol->SetName (wxT("combo") + itoa (cont[comboc]++));
       return ncontrol;
     };
   if (controltype.compare (wxT("CText")) == 0)
     {
       ncontrol = new CText;
 //      ncontrol->Create (owner);
-      ncontrol->SetName (wxT("text") + itoa (ttextc++));
+      ncontrol->SetName (wxT("text") + itoa (cont[textc]++));
       return ncontrol;
     };
   if (controltype.compare (wxT("CFileDialog")) == 0)
     {
       ncontrol = new CFileDialog;
 //      ncontrol->Create (owner);
-      ncontrol->SetName (wxT("filedialog") + itoa (tfiledialogc++));
+      ncontrol->SetName (wxT("filedialog") + itoa (cont[filedialogc]++));
       return ncontrol;
     };
   if (controltype.compare (wxT("CDirDialog")) == 0)
     {
       ncontrol = new CDirDialog;
 //      ncontrol->Create (owner);
-      ncontrol->SetName (wxT("dirdialog") + itoa (tdirdialogc++));
+      ncontrol->SetName (wxT("dirdialog") + itoa (cont[dirdialogc]++));
       return ncontrol;
     };
   if (controltype.compare (wxT("CItemMenu")) == 0)
     {
       ncontrol = new CItemMenu;
 //      ncontrol->Create (owner);
-      ncontrol->SetName (wxT("itemmenu") + itoa (titemmenuc++));
+      ncontrol->SetName (wxT("itemmenu") + itoa (cont[itemmenuc]++));
       return ncontrol;
     };
   if (controltype.compare (wxT("CTimer")) == 0)
     {
       ncontrol = new CTimer;
 //      ncontrol->Create (owner);
-      ncontrol->SetName (wxT("timer") + itoa (ttimerc++));
+      ncontrol->SetName (wxT("timer") + itoa (cont[timerc]++));
       return ncontrol;
     };
   if (controltype.compare (wxT("CPanel")) == 0)
     {
       ncontrol = new CPanel;
 //      ncontrol->Create (owner);
-      ncontrol->SetName (wxT("panel") + itoa (tpanelc++));
+      ncontrol->SetName (wxT("panel") + itoa (cont[panelc]++));
       return ncontrol;
     };
   if (controltype.compare (wxT("CGauge")) == 0)
     {
       ncontrol = new CGauge;
 //      ncontrol->Create (owner);
-      ncontrol->SetName (wxT("gauge") + itoa (tgaugec++));
+      ncontrol->SetName (wxT("gauge") + itoa (cont[gaugec]++));
       return ncontrol;
     };
   if (controltype.compare (wxT("CGrid")) == 0)
     {
       ncontrol = new CGrid;
 //      ncontrol->Create (owner);
-      ncontrol->SetName (wxT("grid") + itoa (tgridc++));
+      ncontrol->SetName (wxT("grid") + itoa (cont[gridc]++));
       return ncontrol;
     };
   if (controltype.compare (wxT("CHtml")) == 0)
     {
       ncontrol = new CHtml;
 //      ncontrol->Create (owner);
-      ncontrol->SetName (wxT("html") + itoa (thtmlc++));
+      ncontrol->SetName (wxT("html") + itoa (cont[htmlc]++));
       return ncontrol;
     };
   if (controltype.compare (wxT("CStatusbar")) == 0)
     {
       ncontrol = new CStatusbar;
 //      ncontrol->Create (owner);
-      ncontrol->SetName (wxT("statusbar") + itoa (tstatusbarc++));
+      ncontrol->SetName (wxT("statusbar") + itoa (cont[statusbarc]++));
+      return ncontrol;
+    };
+  if (controltype.compare (wxT("CSpin")) == 0)
+    {
+      ncontrol = new CSpin;
+//      ncontrol->Create (owner);
+      ncontrol->SetName (wxT("spin") + itoa (cont[spinc]++));
+      return ncontrol;
+    };
+  if (controltype.compare (wxT("CSpind")) == 0)
+    {
+      ncontrol = new CSpind;
+//      ncontrol->Create (owner);
+      ncontrol->SetName (wxT("spind") + itoa (cont[spindc]++));
       return ncontrol;
     };
 
@@ -516,6 +518,28 @@ getbuttons (CControl * owner)
   button->SetY (0);
   button->SetHint (button->GetName ());
   button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/statusbar.png"));
+  button->SetFOwner (&Window1);
+  button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
+  owner->CreateChild (button);
+//button19
+  button = new CToolButton;
+  button->SetName (wxT("CSpin"));
+  button->SetHint (wxT("CSpin"));
+  button->SetX (598);
+  button->SetY (0);
+  button->SetHint (button->GetName ());
+  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/spin.png"));
+  button->SetFOwner (&Window1);
+  button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
+  owner->CreateChild (button);
+//button20
+  button = new CToolButton;
+  button->SetName (wxT("CSpind"));
+  button->SetHint (wxT("CSpind"));
+  button->SetX (624);
+  button->SetY (0);
+  button->SetHint (button->GetName ());
+  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/spind.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);

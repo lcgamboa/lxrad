@@ -4,7 +4,7 @@
 
    ########################################################################
 
-   Copyright (c) : 2001  Luis Claudio Gamboa Lopes
+   Copyright (c) : 2001-2016  Luis Claudio Gamboa Lopes
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -24,59 +24,45 @@
    ######################################################################## */
 
 /**
- * \file lxrad.h
+ * \file cspin.h
  * \author Luis Claudio Gamboa Lopes
- * \date 05-30-2008
+ * \date 07-10-2016
  */
 
-/*!\mainpage LXRAD Documentation
- *
- * \section  CLASSES REFERENCE
- *
- * Classes descriptions.
- *
- *  
- */
+#ifndef CSPIN
+#define CSPIN
 
-#ifndef LXRAD_H
-#define	LXRAD_H
-
-
-#include"clxrad.h"
-#include"cobject.h"
 #include"ccontrol.h"
 #include"cwindow.h"
-#include"capplication.h"
-#include"cpanel.h"
-#include"cpwindow.h"
-#include"cswindow.h"
-#include"clabel.h"
-#include"cbutton.h"
-#include"cedit.h"
-#include"cmessage.h"
-#include"cinput.h"
-#include"cdialog.h"
-#include"cscroll.h"
-#include"cmenu.h"
-#include"cpmenu.h"
-#include"cdraw.h"
-#include"cimage.h"
-#include"clist.h"
-#include"cfilelist.h"
-#include"ccombo.h"
-#include"ccheckbox.h"
-#include"ctoolbutton.h"
-#include"cxpmbutton.h"
-#include"ctext.h"
-#include"cfiledialog.h"
-#include"cdirdialog.h"
-#include"ctimer.h"
-#include"cgauge.h"
-#include"cgrid.h"
-#include"chtml.h"
-#include"cstatusbar.h"
-#include"cthread.h"
-#include"cspin.h"
-#include"cspind.h"
 
-#endif	/* LXRAD_H */
+/** \brief SPIN Control.
+ *
+ * Generic Spin Control Class.
+ */
+
+class CSpin:public CControl
+{
+protected:
+  int Value;		///<Text		
+  int Min;
+  int Max;
+  int CEvent (int event);
+public:
+    CSpin (void);
+   ~CSpin (void);
+  int Create (CControl * control);
+  CStringList GetContext (void);
+  void SetContext (CStringList context);
+  void Event (wxEvent & event);
+  //propiedades
+  void SetValue(int v);
+  int GetValue (void);
+  void SetMin(int v);
+  int GetMin (void);
+  void SetMax(int v);
+  int GetMax (void);
+  //eventos
+  void (CControl::*EvOnChangeSpin) (CControl * control);
+};
+
+#endif
