@@ -13,7 +13,7 @@ AR = ar
 LN = ln -sfn
 CP = cp
 
-CFLAGS = @CFLAGS@ @LDFLAGS@
+CFLAGS = -Wall -O3 @CFLAGS@ @LDFLAGS@
 
 datarootdir = @datarootdir@
 prefix = @prefix@

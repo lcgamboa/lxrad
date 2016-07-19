@@ -1215,8 +1215,9 @@ CPWindow2::MakeOrUpdateFiles (bool prompt)
       file.AddLine (wxT ("  /*#Events*/"));
       file.AddLine (filec);
       file.AddLine (wxT ("  /*#Others*/"));
+      file.AddLine (wxT ("  CPWindow") + itoa (WN) + wxT ("(void);"));
       file.AddLine (wxT ("//lxrad automatic generated block end, don't edit above!"));
-      file.AddLine (wxT ("  CPWindow") + itoa (WN) + wxT ("(void);\n};\n\nextern CPWindow") + itoa (WN) + wxT (" Window") + itoa (WN) + wxT (" ;"));
+      file.AddLine (wxT("\n};\n\nextern CPWindow") + itoa (WN) + wxT (" Window") + itoa (WN) + wxT (" ;"));
       file.AddLine (wxT ("\n#endif /*#CPWINDOW") + itoa (WN) + wxT ("*/\n"));
       file.Write ();
       file.Close ();
@@ -1962,7 +1963,13 @@ CPWindow2::ListPropierties (CControl * control)
               control2->EvOnFocusOut = EVONFOCUSOUT & CPWindow3::editfocusout;
               control2->SetText (arg);
               Window3.CreateChild (control2);
-
+              
+              if((line.compare(wxT("Class")) == 0)||(line.compare(wxT("Name")) == 0))
+              {
+                //control2->SetReadOnly (1);
+                control2->SetEnable (0);
+              }
+              
               if (ctype.compare (wxT ("File")) == 0)
                 {
                   CToolButton *control3;
