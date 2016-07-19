@@ -58,8 +58,6 @@ protected:
   int X, Y;
   uint Width, Height;
   uint Border;
-  long Color;
-  long DisableColor;
   String ColorName;
   unsigned char ColorRGB[3];
   CControl **Child;
@@ -108,8 +106,10 @@ public:
   virtual uint GetHeight (void);
   void SetWid (int wid);
   long GetWid (void);
-  virtual void SetColor (const String name);
+  virtual void SetColorName (const String name);
   virtual void SetColor (unsigned r, unsigned g, unsigned b);
+  virtual void SetColor (wxColor color);
+  wxColor GetColor(void);
   virtual void SetEnable (bool enable);
   virtual bool GetEnable (void);
   void SetOwner (CControl * control);

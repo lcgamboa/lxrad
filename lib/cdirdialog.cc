@@ -90,14 +90,14 @@ CDirDialog::Run (void)
     {
     case wxID_OK :
       run= 1;
+      DirName=((wxDirDialog*)Widget)->GetPath();
       break;
     default:
       run= 0;
       break;
     };
      
-  DirName=((wxDirDialog*)Widget)->GetPath();
-   
+
   delete Widget;
   Widget=NULL;
 

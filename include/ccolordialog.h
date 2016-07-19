@@ -24,39 +24,39 @@
    ######################################################################## */
 
 /**
- * \file ctoolbutton.h
+ * \file ccolordialog.h
  * \author Luis Claudio Gamboa Lopes
- * \date 05-30-2008
+ * \date 07-17-2016
  */
 
-#ifndef CTOOLBUTTON
-#define CTOOLBUTTON
+#ifndef CCOLORDIALOG
+#define CCOLORDIALOG
 
 #include"ccontrol.h"
+#include"cwindow.h"
 
-/** \brief Image Control.
+/** \brief Color Dialog Control.
  *
- * Generic Tool Button Control Class.
+ * Generic Color Dialog Control Class.
  */
 
-class CToolButton:public CControl
+class CColorDialog:public CControl
 {
 private:
-  const char **Data;
-  String ImgFileName;
+  wxColor Color;
 public:
-    CToolButton (void);
-   ~CToolButton (void);
+  CColorDialog (void);
+   ~CColorDialog (void);
   int Create (CControl * control);
+  bool Run (void);
+  //propriedades
+  String GetColorName (void);
+  void SetColorName (String cname);
+  wxColor GetColor (void);
+  void SetColor (wxColor c);
+  void SetColor (uint r, uint g, uint b);
   CStringList GetContext (void);
   void SetContext (CStringList context);
-  //propiedades
-  void SetImgData (const char **data);
-  void SetImgFileName (String imgfilename);
-  String GetImgFileName (void);
-  //events
-  void key_press (wxKeyEvent* event);
-  void key_release (wxKeyEvent* event);
 };
 
 #endif

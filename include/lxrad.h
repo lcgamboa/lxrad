@@ -78,5 +78,7 @@
 #include"cthread.h"
 #include"cspin.h"
 #include"cspind.h"
+#include"ctogglebutton.h"
+#include"ccolordialog.h"
 
 #endif	/* LXRAD_H */

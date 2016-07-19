@@ -24,39 +24,44 @@
    ######################################################################## */
 
 /**
- * \file ctoolbutton.h
+ * \file ctogglebutton.h
  * \author Luis Claudio Gamboa Lopes
- * \date 05-30-2008
+ * \date 07-17-2016
  */
 
-#ifndef CTOOLBUTTON
-#define CTOOLBUTTON
+#ifndef CTOGGLEBUTTON
+#define CTOGGLEBUTTON
+
 
 #include"ccontrol.h"
+#include"cwindow.h"
 
-/** \brief Image Control.
+/** \brief Toggle Button Control
  *
- * Generic Tool Button Control Class.
+ * Toggle Button Control class
  */
 
-class CToolButton:public CControl
+class CToggleButton:public CControl
 {
 private:
-  const char **Data;
-  String ImgFileName;
+  String Text;
+  bool Check;	///<Is Checked ?
+  int CEvent (int event);
 public:
-    CToolButton (void);
-   ~CToolButton (void);
+    CToggleButton (void);
+   ~CToggleButton (void);
   int Create (CControl * control);
   CStringList GetContext (void);
   void SetContext (CStringList context);
   //propiedades
-  void SetImgData (const char **data);
-  void SetImgFileName (String imgfilename);
-  String GetImgFileName (void);
-  //events
-  void key_press (wxKeyEvent* event);
-  void key_release (wxKeyEvent* event);
+  void SetCheck (bool check);
+  bool GetCheck (void);
+  void SetText (String t);
+  String GetText (void);
+
+  void Event (wxEvent & event);
+  //Events
+  void (CControl::*EvOnToggleButton) (CControl * control);
 };
 
 #endif

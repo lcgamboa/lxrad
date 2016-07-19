@@ -174,7 +174,7 @@ CControl::Create (CControl * control)
   SetHint (Hint);
 
   if(ColorName.size() > 0)
-     SetColor(ColorName);
+     SetColorName(ColorName);
   
   if(ColorRGB[0]+ColorRGB[1]+ColorRGB[2] != 1)  
     SetColor(ColorRGB[0],ColorRGB[1],ColorRGB[2]);  
@@ -725,7 +725,7 @@ uint CControl::GetBorder (void)
 };
 
 void
-CControl::SetColor (const String name)
+CControl::SetColorName (const String name)
 {
   ColorName = name;
   
@@ -746,6 +746,26 @@ CControl::SetColor (uint r, uint g, uint b)
   if (Widget != NULL)
      Widget->SetOwnBackgroundColour(color);
 };
+
+void
+CControl::SetColor (wxColor color)
+{ 
+  ColorRGB[0]=color.Red ();
+  ColorRGB[1]=color.Green ();
+  ColorRGB[2]=color.Blue ();
+
+  if (Widget != NULL)
+     Widget->SetOwnBackgroundColour(color);
+
+};
+
+
+wxColor 
+CControl::GetColor(void)
+{
+  return wxColor(ColorRGB[0],ColorRGB[1],ColorRGB[2]);
+}
+
 
 void
 CControl::SetEnable (bool enable)

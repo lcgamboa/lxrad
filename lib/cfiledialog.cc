@@ -119,14 +119,14 @@ CFileDialog::Run (void)
     {
     case wxID_OK :
       run= 1;
+      FileName=((wxFileDialog*)Widget)->GetPath();
+      Dir=((wxFileDialog*)Widget)->GetDirectory();
       break;
     default:
       run= 0;
       break;
     };
 
-  FileName=((wxFileDialog*)Widget)->GetPath();
-  Dir=((wxFileDialog*)Widget)->GetDirectory();
   delete Widget;
 
   Widget=NULL; 

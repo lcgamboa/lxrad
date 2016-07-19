@@ -55,7 +55,9 @@ gridc,
 htmlc,
 statusbarc,
 spinc,
-spindc
+spindc,
+togglebuttonc,
+colordialogc
 };
 
 //must be greater or equal classes in enum
@@ -257,8 +259,21 @@ newcontrol (String controltype, CControl * owner)
       ncontrol->SetName (wxT("spind") + itoa (cont[spindc]++));
       return ncontrol;
     };
-
-
+  if (controltype.compare (wxT("CToggleButton")) == 0)
+    {
+      ncontrol = new CToggleButton;
+//      ncontrol->Create (owner);
+      ncontrol->SetName (wxT("togglebutton") + itoa (cont[togglebuttonc]++));
+      return ncontrol;
+    };
+  if (controltype.compare (wxT("CColorDialog")) == 0)
+    {
+      ncontrol = new CColorDialog;
+//      ncontrol->Create (owner);
+      ncontrol->SetName (wxT("colordialog") + itoa (cont[colordialogc]++));
+      return ncontrol;
+    };
+    
   eprint (wxT("Unknown Controltype \"") + controltype + wxT("\"!\n"));
   exit (-1);
   return NULL;
@@ -540,6 +555,28 @@ getbuttons (CControl * owner)
   button->SetY (0);
   button->SetHint (button->GetName ());
   button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/spind.png"));
+  button->SetFOwner (&Window1);
+  button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
+  owner->CreateChild (button);
+//button21
+  button = new CToolButton;
+  button->SetName (wxT("CToggleButton"));
+  button->SetHint (wxT("CToggleButton"));
+  button->SetX (650);
+  button->SetY (0);
+  button->SetHint (button->GetName ());
+  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/tgbutton.png"));
+  button->SetFOwner (&Window1);
+  button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
+  owner->CreateChild (button);
+//button22
+  button = new CToolButton;
+  button->SetName (wxT("CColorDialog"));
+  button->SetHint (wxT("CColorDialog"));
+  button->SetX (676);
+  button->SetY (0);
+  button->SetHint (button->GetName ());
+  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/cdialog.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);

@@ -119,7 +119,8 @@ lxEVT_GRID_CELL_LEFT_CLICK,
 lxEVT_GRID_CELL_RIGHT_CLICK,
 lxEVT_THREAD_END,
 lxEVT_SPINCTRL,
-lxEVT_SPINCTRLDOUBLE
+lxEVT_SPINCTRLDOUBLE,
+lxEVT_TOGGLEBUTTON
 };
 
 #define Parent 99999
@@ -159,6 +160,7 @@ lxEVT_SPINCTRLDOUBLE
 #define EVONCHANGESPIN		   (void(CControl::*)(CControl*))
 #define EVONCHANGESPINDOUBLE 	   (void(CControl::*)(CControl*))
 
+#define EVONTOGGLEBUTTON	   (void(CControl::*)(CControl*))
 
 #define CA_LEFT   1
 #define CA_RIGHT  2
