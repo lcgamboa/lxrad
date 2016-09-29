@@ -106,10 +106,10 @@ CGauge::SetRange (int range)
   if (range <= 0)
     range = 1;
 
-    Range = range;
+  Range = range;
   	
-    if(Widget)
-       ((wxGauge*)Widget)->SetRange(Range);
+  if(Widget)
+    ((wxGauge*)Widget)->SetRange(Range);
 };
 
 int

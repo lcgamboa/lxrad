@@ -732,6 +732,20 @@ drawcontrol(wxMemoryDC* NDC,CControl *ctrl)
       NDC->DrawLabel(((CCheckBox*)ctrl)->GetText(),ret,wxALIGN_LEFT | wxALIGN_CENTER_VERTICAL);
       return;   
     }
+
+    if (ctrl->GetClass().compare (wxT("CToggleButton")) == 0)
+    {
+      BgColor.Set(150,150,150);
+      Brush= wxBrush(NDC->GetBrush());
+      NDC->SetTextBackground( BgColor);
+      Brush.SetColour(BgColor);
+      NDC->SetBrush(Brush);
+     
+      NDC->DrawRectangle(0,0,ctrl->GetWidth(),ctrl->GetHeight());
+      NDC->DrawLabel(((CToggleButton*)ctrl)->GetText(),ret,wxALIGN_CENTER | wxALIGN_CENTER_VERTICAL);
+      return;   
+    }
+
      
     //generic control 
     //BgColor.Set(100,100,100);

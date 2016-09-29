@@ -146,10 +146,10 @@ CScroll::SetRange (int range)
   if (range <= 0)
     range = 1;
 
-    Range = range;
+  Range = range;
   	
-    if(Widget)
-       ((wxScrollBar*)Widget)->SetScrollbar(Position,1,Range,1);
+  if(Widget)
+    ((wxScrollBar*)Widget)->SetScrollbar(Position,1,Range,1);
 };
 
 int

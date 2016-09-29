@@ -144,14 +144,14 @@ void
 CToggleButton::SetText (String t)
 {
   Text = t;
-//  if (Label != NULL)
-//    gtk_label_set_text (GTK_LABEL (Label), Text.c_str ());
+  if (Widget != NULL)
+     Widget->SetLabel(t);
 };
 
 String
 CToggleButton::GetText (void)
 {
-//  if (Label != NULL)
-//    Text = gtk_label_get_text (GTK_LABEL (Label));
+  if (Widget != NULL)
+    Text = Widget->GetLabel();
   return Text;
 };

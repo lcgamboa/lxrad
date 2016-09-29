@@ -997,17 +997,17 @@ CStringList::SaveToFile (String fname)
   if (file.Create (fname) == true)
     {
       for (int c = 0; c < LinesCount; c++)
-	file.AddLine( GetLine (c));
+        file.AddLine( GetLine (c));
 	
-	file.Write();
-	file.Close();
-        return true;
+      file.Write();
+      file.Close();
+      return true;
     }
   else if (file.Open(fname) == true)
     {
       file.Clear();
       for (int c = 0; c < LinesCount; c++)
-	file.AddLine( GetLine (c));
+ 	file.AddLine( GetLine (c));
       file.Write();
       file.Close();
       return true;
