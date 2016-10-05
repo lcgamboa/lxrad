@@ -168,8 +168,10 @@ CLabel::SetColorName (const String name)
   
   wxColour color(name);
   if (Widget != NULL)
+  {
      ((wxStaticText*)Widget)->SetForegroundColour(color);
-
+     ((wxStaticText*)Widget)->Refresh();
+  }
 };
 
 void 
@@ -181,8 +183,10 @@ CLabel::SetColor (unsigned r, unsigned g, unsigned b)
 
   wxColour color(r,g,b);
   if (Widget != NULL)
+  {
      ((wxStaticText*)Widget)->SetForegroundColour(color);
-
+     ((wxStaticText*)Widget)->Refresh();
+  }
 };
 
 void
@@ -193,8 +197,10 @@ CLabel::SetColor (wxColor color)
   ColorRGB[2]=color.Blue ();
 
   if (Widget != NULL)
+  {
      ((wxStaticText*)Widget)->SetForegroundColour(color);
-
+     ((wxStaticText*)Widget)->Refresh();
+  }
 };
 
 
