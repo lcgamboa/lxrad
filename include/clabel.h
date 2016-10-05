@@ -59,8 +59,9 @@ public:
   String GetText (void);
   void SetAlign (CAlign align);
   CAlign GetAlign (void);
-  void SetColor (const String name);
+  void SetColorName (const String name);
   void SetColor (unsigned r, unsigned g, unsigned b);
+  void SetColor (wxColor color);
 };
 
 #endif

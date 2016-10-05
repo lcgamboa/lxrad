@@ -101,7 +101,7 @@ CPWindow1::_EvOnCreate(CControl * control)
    else
    {
      remove((char *)Home.char_str());
-#ifndef _WIN_
+#ifndef __WXMSW__
      mkdir((char *)Home.char_str(), S_IWUSR| S_IRUSR | S_IXUSR | S_IRGRP | S_IROTH );
 #else
      mkdir((char *)Home.char_str());
