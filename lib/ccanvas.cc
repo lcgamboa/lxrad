@@ -407,6 +407,12 @@ CCanvas::Lines (wxPoint * points, int npoints)
   if (DC != NULL)  DC->DrawLines(npoints, points);
 };
 
+void
+CCanvas::Spline (wxPoint * points, int npoints)
+{
+  if (DC != NULL)  DC->DrawSpline(npoints, points);
+};
+
 /*
 void
 CCanvas::Segments (GdkSegment * segs, int nsegs)

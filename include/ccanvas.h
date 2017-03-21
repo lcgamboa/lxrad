@@ -4,7 +4,7 @@
 
    ########################################################################
 
-   Copyright (c) : 2001  Luis Claudio Gamboa Lopes
+   Copyright (c) : 2001-2017  Luis Claudio Gamboa Lopes
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -115,6 +115,7 @@ public:
   void Points (wxPoint * points, int npoints);
   void Line (int x1_, int y1_, int x2_, int y2_);
   void Lines (wxPoint * points, int npoints);
+  void Spline (wxPoint * points, int npoints);
   //void Segments (wxSegment * segs, int nsegs);
   void Rectangle (bool filled, int x, int y, int width, int height);
   void Arc (bool filled, int x, int y, int x1, int y1, int x2, int y2);
