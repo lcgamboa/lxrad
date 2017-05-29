@@ -141,7 +141,7 @@ CPWindow2::_EvKeyboardPress (CControl * control, uint key, uint x, uint y, uint 
       itens[i].ctrl->SetVisible (0); //FIXME
       Application->ProcessEvents (GetWidget ());
 
-      Canvas.Create (this, 1);
+      Canvas.Create (this->GetWidget(), 1);
       Canvas.Init ();
       org = ((wxFrame*) GetWidget ())->GetClientAreaOrigin ();
       GetWidget ()->ClientToScreen (&org.x, &org.y);
@@ -227,7 +227,7 @@ CPWindow2::_EvMouseButtonRelease (CControl * control, uint button, uint x, uint 
       itens[bc].ctrl->SetVisible (0);
 
 
-      Canvas.Create (this, 1);
+      Canvas.Create (this->GetWidget(), 1);
       Canvas.Init ();
       org = ((wxFrame*) GetWidget ())->GetClientAreaOrigin ();
       GetWidget ()->ClientToScreen (&org.x, &org.y);
@@ -288,7 +288,7 @@ CPWindow2::_EvOnDraw (CControl * control)
   int i;
   CCanvas Canvas;
   wxMemoryDC NDC;
-  Canvas.Create (this, 1);
+  Canvas.Create (this->GetWidget(), 1);
   Canvas.Init ();
 
   for (i = 0; i < bc; i++)
@@ -502,7 +502,7 @@ CPWindow2::_EvMouseMove (CControl * control, uint button, uint x, uint y, uint s
           Application->ProcessEvents (GetWidget ());
           delete itens[xitem].Bitmap;
           itens[xitem].Bitmap = new wxBitmap (itens[xitem].ctrl->GetWidth (), itens[xitem].ctrl->GetHeight (), -1);
-          Canvas.Create (this, 1);
+          Canvas.Create (this->GetWidget(), 1);
           Canvas.Init ();
 
 

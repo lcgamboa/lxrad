@@ -47,7 +47,6 @@ class CCanvas:public CObject
 {
 private:
   uint LWidth;
-  CControl *DControl;
   wxWindow *Drawable;
   wxColor FgColor, BgColor;
   wxClientDC* WDC;	///<Window Draw Context
@@ -62,7 +61,7 @@ private:
 public:
     CCanvas (void);
    ~CCanvas (void);
-  int Create (CControl * dcontrol,int directdraw);
+  int Create (wxWindow * drawable,int directdraw);
   void Init(void);
   void Init(double sx,double sy);
   void End(void);

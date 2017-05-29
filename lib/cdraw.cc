@@ -57,7 +57,7 @@ CDraw::Create (CControl * control)
   
    Widget->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW));
 
-  Canvas.Create(this,0);
+  Canvas.Create(Widget,0);
 
   Canvas.Init();
   Canvas.SetBgColor (255,255,255);

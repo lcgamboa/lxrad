@@ -57,7 +57,7 @@ public:
   CStringList GetContext (void);
   void SetName (const String name);
   void SetContext (CStringList context);
-//  void PopUp (GdkEventButton * event);
+//  void PopUp (wxEvent * event);
   void SetText (String t);
   String GetText (void);
   void Destroy (void);

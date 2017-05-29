@@ -38,7 +38,6 @@ CCanvas::CCanvas (void)
   Brush=NULL;
   Bitmap=NULL;
   Drawable=NULL;
-  DControl=NULL;
   DirectDraw=true;
   Font= wxNullFont;  
 };
@@ -53,19 +52,16 @@ CCanvas::~CCanvas (void)
 };
 
 int
-CCanvas::Create (CControl * dcontrol,int directdraw=1)
+CCanvas::Create (wxWindow * drawable,int directdraw=1)
 {
   DirectDraw=directdraw;
-  DControl=dcontrol;
-  Drawable = DControl->GetWidget();
+  Drawable = drawable;
    
   SetBgColor (0, 0, 0);
   SetFgColor (255, 255, 255);
   SetLineWidth (LWidth);
 
-  Width=DControl->GetWidth();
-  Height=DControl->GetHeight();
- 
+  Drawable->GetSize(&Width,&Height);
   
   if(!DirectDraw)
      Bitmap= new  wxBitmap(Width, Height,  -1);
@@ -122,8 +118,7 @@ CCanvas::Init(void)
 {
   int width,height;
 
-  Width=DControl->GetWidth();
-  Height=DControl->GetHeight();
+  Drawable->GetSize(&Width,&Height);
 
   if(!DirectDraw)
   {
@@ -164,9 +159,9 @@ CCanvas::Init(double sx,double sy)
 {
   int width,height;
 
-  Width=DControl->GetWidth();
-  Height=DControl->GetHeight();
 
+  Drawable->GetSize(&Width,&Height);
+ 
   if(!DirectDraw)
   {
     width=Bitmap->GetWidth();
@@ -207,8 +202,8 @@ void
 CCanvas::End(void)
 {
   int width,height;
-  width=DControl->GetWidth();
-  height=DControl->GetHeight();
+  
+  Drawable->GetSize(&width,&height);
   
   if(!DirectDraw)
   {

@@ -485,9 +485,9 @@ CControl::SetContext (CStringList context)
 	SetVisible (!(atoi (value)),false);
 	SetVisible (atoi (value));
       }
-//      if (name.compare ("PopupMenu") == 0)
-//	if (value.compare ("NULL") != 0)
-//	  SetPopupMenu (dynamic_cast < CPMenu * >(Win->GetChildByName (value)));
+      if (name.compare ("PopupMenu") == 0)
+	if (value.compare ("NULL") != 0)
+	  SetPopupMenu (dynamic_cast < CPMenu * >(Win->GetChildByName (value)));
       if (name.compare (wxT("EvMouseMove")) == 0)
 	SetEv (atob (value), true);
       if (name.compare (wxT("EvMouseButtonPress")) == 0)
@@ -1016,8 +1016,8 @@ CControl::button_press (wxMouseEvent * event)
   BTimePress = event->GetTimestamp();
 
 
-//  if ((PopupMenu != NULL) && (event->button == 3))
-//    PopupMenu->PopUp (event);
+  if ((PopupMenu != NULL) && (event->GetButton() == 3))
+    Widget->PopupMenu((wxMenu*)(PopupMenu->GetWidget()),event->m_x,event->m_y);
     
 };
 
