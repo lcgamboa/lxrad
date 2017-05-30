@@ -36,18 +36,19 @@ CCanvas::CCanvas (void)
   WDC=NULL;
   Pen=NULL;
   Brush=NULL;
-  Bitmap=NULL;
+  BitmapBuffer=NULL;
   Drawable=NULL;
+  Bitmap=NULL;
   DirectDraw=true;
   Font= wxNullFont;  
 };
 
 CCanvas::~CCanvas (void)
 {
-  if(Bitmap != NULL)
+  if(BitmapBuffer != NULL)
   {
-    delete Bitmap;
-    Bitmap = NULL;
+    delete BitmapBuffer;
+    BitmapBuffer = NULL;
   }
 };
 
@@ -64,15 +65,31 @@ CCanvas::Create (wxWindow * drawable,int directdraw=1)
   Drawable->GetSize(&Width,&Height);
   
   if(!DirectDraw)
-     Bitmap= new  wxBitmap(Width, Height,  -1);
+     BitmapBuffer= new  wxBitmap(Width, Height,  -1);
   
   return 1;
 };
 
-wxClientDC * 
+int
+CCanvas::Create (wxBitmap * bitmap)
+{
+  DirectDraw=1;
+  Bitmap=bitmap; 
+
+  SetBgColor (0, 0, 0);
+  SetFgColor (255, 255, 255);
+  SetLineWidth (LWidth);
+
+  Width=Bitmap->GetWidth();
+  Height=Bitmap->GetHeight();
+  
+  return 1;
+};
+
+wxDC * 
 CCanvas::GetDC(void)
 {
-  return (wxClientDC *) DC;
+  return  DC;
 };
 
 wxClientDC * 
@@ -83,10 +100,10 @@ CCanvas::GetWDC(void)
   
   
 wxBitmap * 
-CCanvas::GetBitmap(void)
+CCanvas::GetBitmapBuffer(void)
 {
   if(!DirectDraw) 
-    return Bitmap;
+    return BitmapBuffer;
   else
     return NULL;
 };
@@ -102,14 +119,14 @@ CCanvas::SetBitmap(wxBitmap * bitmap,double xs, double ys)
 {
   wxMemoryDC NDC;
 
-  if((Bitmap != NULL) && (bitmap != NULL) && (!DirectDraw))
+  if(((BitmapBuffer != NULL) && (bitmap != NULL) && !DirectDraw )||(Bitmap != NULL))
   {
-  Init();
-  NDC.SelectObject(*bitmap);
-  DC->SetUserScale(xs,ys);
-  DC->Blit(0, 0, bitmap->GetWidth(),bitmap->GetHeight(),&NDC, 0, 0);
-  DC->SetUserScale(1,1);
-  End();
+    Init();
+    NDC.SelectObject(*bitmap);
+    DC->SetUserScale(xs,ys);
+    DC->Blit(0, 0, bitmap->GetWidth(),bitmap->GetHeight(),&NDC, 0, 0);
+    DC->SetUserScale(1,1);
+    End();
   }
 };
 
@@ -118,30 +135,36 @@ CCanvas::Init(void)
 {
   int width,height;
 
-  Drawable->GetSize(&Width,&Height);
 
   if(!DirectDraw)
   {
-    width=Bitmap->GetWidth();
-    height=Bitmap->GetHeight();
+    Drawable->GetSize(&Width,&Height);
+    width=BitmapBuffer->GetWidth();
+    height=BitmapBuffer->GetHeight();
 
     if((Width != width)||(Height != height))
     {
       //copy content ?
-      delete Bitmap;
-      Bitmap= new  wxBitmap(Width, Height,  -1);
+      delete BitmapBuffer;
+      BitmapBuffer= new  wxBitmap(Width, Height,  -1);
     }
   }
   
   if(DirectDraw)
   {
-    DC =(wxMemoryDC *) new wxClientDC(Drawable);
+    if(Drawable != NULL)	  
+      DC = new wxClientDC(Drawable);
+    else if(Bitmap != NULL)
+    {	    
+      DC = new wxMemoryDC();
+      ((wxMemoryDC *)DC)->SelectObject(*Bitmap);
+    }
   }
   else
   {
     WDC =new  wxClientDC(Drawable);
     DC =new  wxMemoryDC();
-    DC->SelectObject(*Bitmap);
+    ((wxMemoryDC *)DC)->SelectObject(*BitmapBuffer);
   };
 
   Pen =new wxPen(DC->GetPen());
@@ -160,30 +183,36 @@ CCanvas::Init(double sx,double sy)
   int width,height;
 
 
-  Drawable->GetSize(&Width,&Height);
  
   if(!DirectDraw)
   {
-    width=Bitmap->GetWidth();
-    height=Bitmap->GetHeight();
+    Drawable->GetSize(&Width,&Height);
+    width=BitmapBuffer->GetWidth();
+    height=BitmapBuffer->GetHeight();
 
     if((Width != width)||(Height != height))
     {
       //copy content ?
-      delete Bitmap;
-      Bitmap= new  wxBitmap(Width, Height,  -1);
+      delete BitmapBuffer;
+      BitmapBuffer= new  wxBitmap(Width, Height,  -1);
     }
   }
   
   if(DirectDraw)
   {
-    DC =(wxMemoryDC *) new wxClientDC(Drawable);
+    if(Drawable != NULL)	  
+      DC = new wxClientDC(Drawable);
+    else if(Bitmap != NULL)	
+    {  
+      DC = new wxMemoryDC();
+      ((wxMemoryDC *)DC)->SelectObject(*Bitmap);
+    }
   }
   else
   {
     WDC =new  wxClientDC(Drawable);
     DC =new  wxMemoryDC();
-    DC->SelectObject(*Bitmap);
+    ((wxMemoryDC *)DC)->SelectObject(*BitmapBuffer);
   };
 
   Pen =new wxPen(DC->GetPen());
@@ -203,10 +232,10 @@ CCanvas::End(void)
 {
   int width,height;
   
-  Drawable->GetSize(&width,&height);
   
   if(!DirectDraw)
   {
+    Drawable->GetSize(&width,&height);
     if (WDC != NULL)
     {
        if(DC != NULL)

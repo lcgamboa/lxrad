@@ -48,10 +48,11 @@ class CCanvas:public CObject
 private:
   uint LWidth;
   wxWindow *Drawable;
+  wxBitmap *Bitmap;  
   wxColor FgColor, BgColor;
   wxClientDC* WDC;	///<Window Draw Context
-  wxMemoryDC* DC;	///<Memory Draw Context
-  wxBitmap * Bitmap;
+  wxDC* DC;	///<Memory Draw Context
+  wxBitmap * BitmapBuffer;
   wxPen  *Pen;		///<Pen
   wxBrush *Brush;	///<Brush
   wxFont Font;
@@ -62,12 +63,13 @@ public:
     CCanvas (void);
    ~CCanvas (void);
   int Create (wxWindow * drawable,int directdraw);
+  int Create (wxBitmap * bitmap);
   void Init(void);
   void Init(double sx,double sy);
   void End(void);
-  wxClientDC* GetDC (void);
+  wxDC* GetDC (void);
   wxClientDC* GetWDC (void);
-  wxBitmap * GetBitmap(void);
+  wxBitmap * GetBitmapBuffer(void);
   wxWindow * GetDrawable(void);
   void SetBitmap(wxBitmap * bitmap,double xs, double ys);
   void SetFunction (wxRasterOperationMode   function);

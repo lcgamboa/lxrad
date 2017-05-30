@@ -207,7 +207,7 @@ CDraw::WriteImgToFile (String filename)
 {
   if (Widget != NULL)
     {
-	Canvas.GetBitmap()->SaveFile(filename, wxBITMAP_TYPE_PNG, NULL);
+	Canvas.GetBitmapBuffer()->SaveFile(filename, wxBITMAP_TYPE_PNG, NULL);
     };
 };
 
