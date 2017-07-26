@@ -80,5 +80,6 @@
 #include"cspind.h"
 #include"ctogglebutton.h"
 #include"ccolordialog.h"
+#include"newcontrolbycname.h"
 
 #endif	/* LXRAD_H */

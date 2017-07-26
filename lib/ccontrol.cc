@@ -426,6 +426,7 @@ CControl::GetContext (void)
   Context.AddLine (xml_out (wxT("Hint"), wxT("String"), GetHint ()));
   Context.AddLine (xml_out (wxT("Enable"), wxT("bool"), itoa (GetEnable ())));
   Context.AddLine (xml_out (wxT("Visible"), wxT("bool"), itoa (GetVisible ())));
+  Context.AddLine (xml_out (wxT("Color"), wxT("String"), GetColor ().GetAsString (wxC2S_HTML_SYNTAX) ));
 
   if (PopupMenu)
     Context.AddLine (xml_out (wxT("PopupMenu"), wxT("PopupMenu"), PopupMenu->GetName ()));
@@ -485,6 +486,9 @@ CControl::SetContext (CStringList context)
 	SetVisible (!(atoi (value)),false);
 	SetVisible (atoi (value));
       }
+      if (name.compare (wxT("Color")) == 0)
+	if(value.compare(wxT("#000001")) != 0 )//color not defined      
+	   SetColor (wxColor(value));
       if (name.compare ("PopupMenu") == 0)
 	if (value.compare ("NULL") != 0)
 	  SetPopupMenu (dynamic_cast < CPMenu * >(Win->GetChildByName (value)));

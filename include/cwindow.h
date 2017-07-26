@@ -59,6 +59,7 @@ protected:
   float VScale;
   float HScale;
   int CEvent (int event);
+  wxWindowDisabler * modalmode;
 public:
     CWindow (void);
    ~CWindow (void);
@@ -77,6 +78,7 @@ public:
   int GetWNumber (void);
   CStringList GetContext (void);
   void SetContext (CStringList context);
+  void LoadXMLContextAndCreateChilds (String filename, CControl * ctrl = NULL);
   void SetFocus (void);
   void SetControlOnFocus (CControl * control);
   CControl *GetControlOnFocus (void);

@@ -28,6 +28,7 @@
 #include"../include/cwindow.h"
 #include"../include/cmenu.h"
 #include"../include/capplication.h"
+#include"../include/newcontrolbycname.h"
 
 
 //CWindow _______________________________________________________________
@@ -53,6 +54,7 @@ CWindow::CWindow (void)
   EvOnEnter = NULL;
   EvOnLeave = NULL;
 //  CanDestroy= true;
+  modalmode=NULL;
 };
 
 CWindow::~CWindow (void)
@@ -204,18 +206,10 @@ CWindow::Show (void)
 void
 CWindow::ShowExclusive (void)
 {
-  /*FIXME*/
-  //((wxFrame*)GetWWidget())->MakeModal(true);
   Show ();
   CanExitExclusive = true;
+  modalmode = new wxWindowDisabler(GetWWidget()); 
 
-/*
-  while (CanExitExclusive)
-  {
-    Application->ProcessEvents(GetWidget());
-    wxMilliSleep(100);
-  }
-*/
 };
 
 void
@@ -231,8 +225,11 @@ CWindow::Hide (void)
 void
 CWindow::HideExclusive (void)
 {
-  /*FIXME*/
-  //((wxFrame*)GetWWidget())->MakeModal(false);
+  if(modalmode)
+  {
+    delete modalmode;
+    modalmode=NULL;
+  }
   Hide ();
   CanExitExclusive = false;
 };
@@ -381,6 +378,89 @@ CWindow::SetContext (CStringList context)
       if (name.compare (wxT("EvOnLeave")) == 0)
 	SetEv (atob (value));
     };
+};
+
+void
+CWindow::LoadXMLContextAndCreateChilds (String filename, CControl* ctrl)
+{
+  wxTextFile file2;
+  CStringList list;
+  String line;
+
+  file2.Open (filename);
+  file2.GoToLine (-1);
+
+  
+
+  if (file2.IsOpened ())
+    {
+
+      if(ctrl == NULL)//for owner window
+      {
+        if(fgetline (file2, line))
+        {
+          ctrl = this;
+          ctrl->SetName(line.substr (1, line.size () - 2));//Get Window name
+          file2.GoToLine (-1);
+        }
+      }
+
+      list.Clear ();
+      while (fgetline (file2, line))
+        {
+          if (line.compare (wxT ("<") + ctrl->GetName () + wxT (">")) == 0)
+            {
+              fgetline (file2, line);
+              do
+                {
+                  list.AddLine (line);
+                  fgetline (file2, line);
+                }
+              while (line[0] == ' ');
+              ctrl->SetContext (list);
+
+              while (line.compare (wxT ("</") + ctrl->GetName () + wxT (">")) != 0)
+                {
+                  String controlclass, ctype, name, cname;
+
+                  cname = line.substr (1, line.size () - 2);
+                  fgetline (file2, line);
+                  xml_in (line, name, ctype, controlclass);
+
+                  CControl *ch = newcontrolbycname (controlclass);
+                  ch->SetName (cname);
+                  ch->SetFOwner (ctrl);
+                 
+		  /* 
+		  if (ch->GetClass ().compare (wxT ("CItemMenu")) == 0)
+                    {
+                      ch->SetVisible (false, false);
+                    };
+                  */
+                  ctrl->CreateChild (ch);
+
+                  if (ch != NULL)
+                    LoadXMLContextAndCreateChilds (filename, ch);
+                  else
+                    printf ("Child Not Found! %s \n", (char*) name.char_str ());
+
+                  do
+                    {
+                      fgetline (file2, line);
+                    }
+                  while ((line.compare (wxT ("</") + cname + wxT (">")) != 0));
+                  fgetline (file2, line);
+                };
+
+            };
+
+        };
+
+      file2.Close ();
+    }
+  else
+    printf ("File not found!\n");
+
 };
 
 
