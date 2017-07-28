@@ -78,7 +78,7 @@ public:
   int GetWNumber (void);
   CStringList GetContext (void);
   void SetContext (CStringList context);
-  void LoadXMLContextAndCreateChilds (String filename, CControl * ctrl = NULL);
+  int  LoadXMLContextAndCreateChilds (String filename, CControl * ctrl = NULL);
   void SetFocus (void);
   void SetControlOnFocus (CControl * control);
   CControl *GetControlOnFocus (void);

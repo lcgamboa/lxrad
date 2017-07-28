@@ -380,7 +380,7 @@ CWindow::SetContext (CStringList context)
     };
 };
 
-void
+int
 CWindow::LoadXMLContextAndCreateChilds (String filename, CControl* ctrl)
 {
   wxTextFile file2;
@@ -457,10 +457,12 @@ CWindow::LoadXMLContextAndCreateChilds (String filename, CControl* ctrl)
         };
 
       file2.Close ();
+      return 1;
     }
   else
-    printf ("File not found!\n");
+    printf ("File (%s) not found!\n",(char *)filename.char_str());
 
+  return 0;
 };
 
 
