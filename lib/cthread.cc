@@ -64,7 +64,7 @@ void* lxThread::Entry()
     //evt.SetClientData(data); 
     wxPostEvent(m_pParent, evt);
     
-    thread->runstate=0;
+    thread->SetRunState(0);
     return 0;
 }
 
@@ -123,6 +123,19 @@ CThread::Kill (void)
 {
   if(Thread) Thread->Kill();
 };
+
+bool
+CThread::GetRunState (void)
+{
+  return runstate;
+}
+
+void
+CThread::SetRunState (bool rs)
+{
+  runstate=rs;
+}
+
 
 bool
 CThread::TestDestroy (void)

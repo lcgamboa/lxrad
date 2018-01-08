@@ -41,9 +41,9 @@ class CThread:public CControl
 protected:
   int CEvent (int event);
    wxThread *Thread;
-public:
   bool runstate;
   bool tdestroy;
+public:
     CThread (void);
    ~CThread (void);
   int Create (CControl * control);
@@ -55,6 +55,7 @@ public:
   void SetContext (CStringList context);
   int  Run (void);
   bool GetRunState (void);
+  void SetRunState (bool rs);
   void SetName (const String name);
   void Event (wxCommandEvent & te);
 //Events
