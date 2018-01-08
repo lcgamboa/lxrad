@@ -40,12 +40,16 @@ class CThread:public CControl
 {
 protected:
   int CEvent (int event);
+   wxThread *Thread;
 public:
   bool runstate;
+  bool tdestroy;
     CThread (void);
    ~CThread (void);
   int Create (CControl * control);
   void Destroy (void);
+  void Kill (void);
+  bool TestDestroy (void);
 //propiedades
   CStringList GetContext (void);
   void SetContext (CStringList context);

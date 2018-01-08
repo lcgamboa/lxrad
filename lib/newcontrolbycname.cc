@@ -114,10 +114,12 @@ newcontrolbycname (String controltype)
     {
       ncontrol = new CToggleButton;
     };
+#ifndef __WXX11__ 	    
   if (controltype.compare (wxT("CColorDialog")) == 0)
     {
       ncontrol = new CColorDialog;
     };
+#endif
   if (controltype.compare (wxT("CThread")) == 0)
     {
       ncontrol = new CThread;

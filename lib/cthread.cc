@@ -34,6 +34,7 @@ class lxThread : public wxThread
 {
     public:
         lxThread(wxEvtHandler* pParent, CThread * th);
+	~lxThread();
     private:
         CThread * thread;
         void* Entry();
@@ -48,6 +49,11 @@ lxThread::lxThread(wxEvtHandler* pParent, CThread * th) : wxThread(wxTHREAD_DETA
   thread = th;
 }
 
+lxThread::~lxThread()
+{
+  thread = NULL;
+}
+
 void* lxThread::Entry()
 {   
     ((thread->GetFOwner())->*thread->EvThreadRun) (thread); 
@@ -59,7 +65,6 @@ void* lxThread::Entry()
     wxPostEvent(m_pParent, evt);
     
     thread->runstate=0;
-        
     return 0;
 }
 
@@ -68,6 +73,7 @@ void* lxThread::Entry()
 
 CThread::CThread (void)
 {
+  Thread=NULL;	
   CanFocus = false;
   CanVisible = false;
   SetClass (wxT("CThread"));
@@ -98,7 +104,9 @@ CThread::Create (CControl * control)
 void
 CThread::Destroy (void)
 {
-  while(runstate)
+  //if(Thread) Thread->Delete();
+  tdestroy=1;
+  while(runstate) 
   {
 #ifndef __WXMSW__
       usleep(100);
@@ -107,6 +115,25 @@ CThread::Destroy (void)
 #endif 
   }      
   CControl::Destroy ();
+  Thread=NULL;
+};
+
+void
+CThread::Kill (void)
+{
+  if(Thread) Thread->Kill();
+};
+
+bool
+CThread::TestDestroy (void)
+{
+/*	
+  if(Thread) 
+    return Thread->TestDestroy();
+  else
+    return 1;	  
+*/
+  return tdestroy;	
 };
 
 int CThread::CEvent (int event)
@@ -123,10 +150,11 @@ int CThread::Run (void)
        if(!runstate)
        {
        //create the thread
-         wxThread *thread = new lxThread(this->GetWin()->GetWWidget(), this);
-         thread->Create();
-         thread->Run();
+         Thread = new lxThread(this->GetWin()->GetWWidget(), this);
+         Thread->Create();
+         Thread->Run();
          runstate=1;
+	 tdestroy=0;
          return 0;  
        }
        else
@@ -143,7 +171,8 @@ CThread::Event (wxCommandEvent & te)
   te.Skip();
   if ((FOwner) && (EvThreadEnd)&&(Application->GetRun()))
      { 
-     (FOwner->*EvThreadEnd) (this);
+       (FOwner->*EvThreadEnd) (this);
+       Thread=NULL;
      }
 };
 

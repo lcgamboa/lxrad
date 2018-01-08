@@ -57,7 +57,9 @@ statusbarc,
 spinc,
 spindc,
 togglebuttonc,
+#ifndef __WXX11__ 
 colordialogc
+#endif	
 };
 
 //must be greater or equal classes in enum
@@ -266,6 +268,7 @@ newcontrol (String controltype, CControl * owner)
       ncontrol->SetName (wxT("togglebutton") + itoa (cont[togglebuttonc]++));
       return ncontrol;
     };
+#ifndef __WXX11__ 
   if (controltype.compare (wxT("CColorDialog")) == 0)
     {
       ncontrol = new CColorDialog;
@@ -273,7 +276,7 @@ newcontrol (String controltype, CControl * owner)
       ncontrol->SetName (wxT("colordialog") + itoa (cont[colordialogc]++));
       return ncontrol;
     };
-    
+#endif    
   eprint (wxT("Unknown Controltype \"") + controltype + wxT("\"!\n"));
   exit (-1);
   return NULL;
@@ -569,6 +572,7 @@ getbuttons (CControl * owner)
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
+#ifndef __WXX11__ 
 //button22
   button = new CToolButton;
   button->SetName (wxT("CColorDialog"));
@@ -580,6 +584,7 @@ getbuttons (CControl * owner)
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
+#endif
 };
 
 
