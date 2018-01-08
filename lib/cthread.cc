@@ -158,7 +158,8 @@ int CThread::CEvent (int event)
 int CThread::Run (void)
 {
  
-  if ((FOwner) && (EvThreadRun)&&(Application->GetRun()))
+  //if ((FOwner) && (EvThreadRun)&&(Application->GetRun()))
+  if ((FOwner) && (EvThreadRun))
      { 
        if(!runstate)
        {
