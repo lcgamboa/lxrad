@@ -51,6 +51,7 @@ lxThread::lxThread(wxEvtHandler* pParent, CThread * th) : wxThread(wxTHREAD_DETA
 
 lxThread::~lxThread()
 {
+  thread->SetRunState(0);
   thread = NULL;
 }
 
@@ -64,7 +65,6 @@ void* lxThread::Entry()
     //evt.SetClientData(data); 
     wxPostEvent(m_pParent, evt);
     
-    thread->SetRunState(0);
     return 0;
 }
 
@@ -164,11 +164,11 @@ int CThread::Run (void)
        if(!runstate)
        {
        //create the thread
+         runstate=1;
+	 tdestroy=0;
          Thread = new lxThread(this->GetWin()->GetWWidget(), this);
          Thread->Create();
          Thread->Run();
-         runstate=1;
-	 tdestroy=0;
          return 0;  
        }
        else
