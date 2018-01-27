@@ -195,9 +195,9 @@ CWindow::WDestroy (void)
 void
 CWindow::Show (void)
 {
+  SetVisible (true);
   if (GetWWidget() != NULL)
     {
-      SetVisible (true);
       ((wxFrame*)GetWWidget())->Show(true);
       ((wxFrame*)GetWWidget())->Raise();
     };

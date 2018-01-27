@@ -59,6 +59,7 @@ public:
   void SetText (String t);
   String GetText (void);
   void Destroy (void);
+  void SetEnable (bool enable);
   
   void Event (wxEvent & event);
   //Events 

@@ -63,6 +63,7 @@ CItemMenu::Create (CControl * control)
   CanExecuteEvent = false;
   ret= CControl::Create (control);
   CanExecuteEvent = true;
+  SetEnable(Enable);
   return ret;
 };
 
@@ -120,6 +121,7 @@ CStringList CItemMenu::GetContext (void)
   CObject::GetContext ();
 
   Context.AddLine (xml_out (wxT("Text"), wxT("String"), GetText ()));
+  Context.AddLine (xml_out (wxT("Enable"), wxT("bool"), itoa (GetEnable ())));
 
   if (SubMenu)
     Context.AddLine (xml_out (wxT("SubMenu"), wxT("SubMenu"), SubMenu->GetName ()));
@@ -159,6 +161,9 @@ CItemMenu::SetContext (CStringList context)
       
       if (name.compare (wxT("EvMenuActive")) == 0)
 	SetEv (atob (value),true);
+      
+      if (name.compare (wxT("Enable")) == 0)
+	SetEnable (atoi (value));
 /*  
      if (name.compare ("SigActivate") == 0)
 	SetSig (atob (value), true);
@@ -193,4 +198,16 @@ void CItemMenu::Destroy (void)
   Widget=NULL; 
   CControl::Destroy();	
   return;
+};
+
+	
+void
+CItemMenu::SetEnable (bool enable)
+{
+  Enable = enable;
+
+  if (Widget != NULL)
+  {
+    ((wxMenuItem *) Widget)->Enable(enable);
+  }
 };

@@ -114,7 +114,7 @@ CFileDialog::Run (void)
   Widget =  new wxFileDialog(((CWindow *)GetOwner())->GetWWidget (), wxT("Choose a file"),Dir,basename(FileName), Filter, Type);
   //SetFileName (FileName);
   //((wxFileDialog*)Widget)->SetDirectory(wxGetCwd());
-
+  
   switch(((wxFileDialog*)Widget)->ShowModal())
     {
     case wxID_OK :
