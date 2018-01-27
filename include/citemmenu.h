@@ -48,6 +48,7 @@ protected:
   CPMenu * SubMenu;
   String Text;
   int CEvent (int event);
+  int doenable;
 public:
     CItemMenu (void);
 //propiedades;
@@ -60,6 +61,7 @@ public:
   String GetText (void);
   void Destroy (void);
   void SetEnable (bool enable);
+  void SetDoEnable (bool enable);
   
   void Event (wxEvent & event);
   //Events 

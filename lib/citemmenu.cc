@@ -40,6 +40,7 @@ CItemMenu::CItemMenu (void)
   SetClass (wxT("CItemMenu"));
   SubMenu = NULL;
   EvMenuActive = NULL;
+  doenable=1;
 };
 
 int
@@ -206,8 +207,14 @@ CItemMenu::SetEnable (bool enable)
 {
   Enable = enable;
 
-  if (Widget != NULL)
+  if ((Widget != NULL)&& (doenable == true))
   {
     ((wxMenuItem *) Widget)->Enable(enable);
   }
+};
+
+void
+CItemMenu::SetDoEnable (bool denable)
+{
+  doenable = denable;
 };

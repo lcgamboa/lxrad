@@ -158,7 +158,7 @@ CFileDialog::SetContext (CStringList context)
 	SetFilter (value);
       if (name.compare (wxT("Type")) == 0)
 	SetType (atoi(value));
-      if (name.compare (wxT("Filename")) == 0)
+      if (name.compare (wxT("FileName")) == 0)
 	SetFileName (value);
     };
 };

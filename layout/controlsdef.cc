@@ -203,6 +203,7 @@ newcontrol (String controltype, CControl * owner)
       ncontrol = new CItemMenu;
 //      ncontrol->Create (owner);
       ncontrol->SetName (wxT("itemmenu") + itoa (cont[itemmenuc]++));
+      ((CItemMenu *)ncontrol)->SetDoEnable(false);
       return ncontrol;
     };
   if (controltype.compare (wxT("CTimer")) == 0)
