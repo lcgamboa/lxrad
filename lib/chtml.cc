@@ -99,7 +99,8 @@ CHtml::Event (wxEvent & event)
 	case lxEVT_HTML_LINK_CLICKED:
 	  if ((FOwner) && (EvOnLinkClicked))
 	    (FOwner->*EvOnLinkClicked) (this);
-	 if(((wxHtmlLinkEvent*) &event)->GetLinkInfo().GetHref().StartsWith(_T("http://")))
+	 if(((wxHtmlLinkEvent*) &event)->GetLinkInfo().GetHref().StartsWith(_T("http://"))||
+	 ((wxHtmlLinkEvent*) &event)->GetLinkInfo().GetHref().StartsWith(_T("https://")))
          {
 	    wxLaunchDefaultBrowser(((wxHtmlLinkEvent*)&event)->GetLinkInfo().GetHref());
             return; 
