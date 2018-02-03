@@ -148,9 +148,12 @@ CCanvas::Init(void)
       delete BitmapBuffer;
       BitmapBuffer= new  wxBitmap(Width, Height,  -1);
     }
+
+    WDC =new  wxClientDC(Drawable);
+    DC =new  wxMemoryDC();
+    ((wxMemoryDC *)DC)->SelectObject(*BitmapBuffer);
   }
-  
-  if(DirectDraw)
+  else 
   {
     if(Drawable != NULL)	  
       DC = new wxClientDC(Drawable);
@@ -160,12 +163,6 @@ CCanvas::Init(void)
       ((wxMemoryDC *)DC)->SelectObject(*Bitmap);
     }
   }
-  else
-  {
-    WDC =new  wxClientDC(Drawable);
-    DC =new  wxMemoryDC();
-    ((wxMemoryDC *)DC)->SelectObject(*BitmapBuffer);
-  };
 
   Pen =new wxPen(DC->GetPen());
   Brush =new wxBrush(DC->GetBrush());
@@ -180,50 +177,10 @@ CCanvas::Init(void)
 void 
 CCanvas::Init(double sx,double sy)
 {
-  int width,height;
 
-
- 
-  if(!DirectDraw)
-  {
-    Drawable->GetSize(&Width,&Height);
-    width=BitmapBuffer->GetWidth();
-    height=BitmapBuffer->GetHeight();
-
-    if((Width != width)||(Height != height))
-    {
-      //copy content ?
-      delete BitmapBuffer;
-      BitmapBuffer= new  wxBitmap(Width, Height,  -1);
-    }
-  }
-  
-  if(DirectDraw)
-  {
-    if(Drawable != NULL)	  
-      DC = new wxClientDC(Drawable);
-    else if(Bitmap != NULL)	
-    {  
-      DC = new wxMemoryDC();
-      ((wxMemoryDC *)DC)->SelectObject(*Bitmap);
-    }
-  }
-  else
-  {
-    WDC =new  wxClientDC(Drawable);
-    DC =new  wxMemoryDC();
-    ((wxMemoryDC *)DC)->SelectObject(*BitmapBuffer);
-  };
-
-  Pen =new wxPen(DC->GetPen());
-  Brush =new wxBrush(DC->GetBrush());
-         
+  Init();
 
   DC->SetUserScale(sx,sy);
-
-//  Font=wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT); 
-  if(Font !=  wxNullFont)
-     DC->SetFont (Font);
   
 }
 
