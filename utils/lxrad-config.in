@@ -58,12 +58,12 @@ while test $# -gt 0; do
       ;;
     --libs|--plugin-libs|--library-libs)
       libdirs="-L${exec_prefix}/lib "
-      echo $libdirs -llxrad `wx-config --libs` 
+      echo $libdirs -llxrad @LIBS@ 
       ;;
     --static-libs)
 #    --libs|--static-libs)
       libdirs="-L${exec_prefix}/lib "
-      echo $libdirs -llxrad @LIBS@ `wx-config --libs`
+      echo $libdirs -llxrad @LIBS@ 
       ;;
     *)
       echo "${usage}" 1>&2
