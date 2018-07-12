@@ -13,7 +13,7 @@ CPWindow1::button1_EvMouseButtonClick(CControl * control, uint button, uint x, u
 {
   if(filedialog1.Run())
   {
-  wxTextFile fin;
+  lxTextFile fin;
   String line1,line2,line3,line4;
   int i,f,s;
 
@@ -27,17 +27,17 @@ CPWindow1::button1_EvMouseButtonClick(CControl * control, uint button, uint x, u
     while(fgetline(fin,line1))
     {
       list1.SetVisible(false,false);
-      i=line1.find(wxT("href=\""));
-      if(i <= 0)i=line1.find(wxT("HREF=\""));
-      if(i <= 0)i=line1.find(wxT("Href=\""));
+      i=line1.find(lxT("href=\""));
+      if(i <= 0)i=line1.find(lxT("HREF=\""));
+      if(i <= 0)i=line1.find(lxT("Href=\""));
       if(i >= 0)
       {
       line2=line1.substr(i+6,line1.size());
-      line3=wxT("");
+      line3=lxT("");
       f=-1; 
       while(f<0)
       {
-        f=line2.find(wxT("\""));
+        f=line2.find(lxT("\""));
         if(f<0)
         {
           fgetline(fin,line3);
@@ -45,14 +45,14 @@ CPWindow1::button1_EvMouseButtonClick(CControl * control, uint button, uint x, u
 	}
       };
       //cout<<"-"<<line2.substr(0,f)<<endl;
-      line4=wxT("\"")+edit1.GetText()+line2.substr(0,f)+wxT("\"");
+      line4=lxT("\"")+edit1.GetText()+line2.substr(0,f)+lxT("\"");
       s=-1;      
-      s=line4.find(wxT(" "));
+      s=line4.find(lxT(" "));
       while(s>=0)
       {
         line4[s]='%';
-        line4=line4.substr(0,s+1)+wxT("20")+line4.substr(s+1,line4.size());
-        s=line4.find(wxT(" "));
+        line4=line4.substr(0,s+1)+lxT("20")+line4.substr(s+1,line4.size());
+        s=line4.find(lxT(" "));
       };
       list1.AddItem(line4);
       };
@@ -85,18 +85,18 @@ CPWindow1::button3_EvMouseButtonClick(CControl * control, uint button, uint x, u
     {
       if(d >=50)
       {
-         Message(wxT("More 50?"));
+         Message(lxT("More 50?"));
 	 d=0;
       };	     
       file=list1.GetItem(c);
       g=-1;
-      g=file.rfind(wxT("/"));
+      g=file.rfind(lxT("/"));
       if(g<0)g=0;
       file=file.substr(g+1,file.size()-1);
       
       if((stat((char *)file.char_str(),&statf) == -1)&&(file.size() > 0))
       {
-        cmd=wxT("xterm -e wget ")+list1.GetItem(c)+wxT(" &");	    
+        cmd=lxT("xterm -e wget ")+list1.GetItem(c)+lxT(" &");	    
         //cout<<cmd<<endl;
         system((char *)cmd.char_str());
         d++;

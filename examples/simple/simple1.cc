@@ -34,7 +34,7 @@ void
 CPWindow1::button1_EvMouseButtonPress(CControl * control, uint button, uint x, uint y,uint state)
 {
 //Add
-  label1.SetText(wxT("+"));
+  label1.SetText(lxT("+"));
   edit3.SetText(ftoa(atof(edit1.GetText())+atof((edit2.GetText()))));
 };
 
@@ -42,7 +42,7 @@ void
 CPWindow1::button2_EvMouseButtonPress(CControl * control, uint button, uint x, uint y,uint state)
 {
 //Sub
-  label1.SetText(wxT("-"));
+  label1.SetText(lxT("-"));
   edit3.SetText(ftoa(atof(edit1.GetText())-atof((edit2.GetText()))));
 };
 
@@ -50,7 +50,7 @@ void
 CPWindow1::button3_EvMouseButtonPress(CControl * control, uint button, uint x, uint y,uint state)
 {
 //Mul
-  label1.SetText(wxT("*"));
+  label1.SetText(lxT("*"));
   edit3.SetText(ftoa(atof(edit1.GetText())*atof((edit2.GetText()))));
 };
 
@@ -58,7 +58,7 @@ void
 CPWindow1::button4_EvMouseButtonPress(CControl * control, uint button, uint x, uint y,uint state)
 {
 //Div
-  label1.SetText(wxT("/"));
+  label1.SetText(lxT("/"));
   edit3.SetText(ftoa(atof(edit1.GetText())/atof((edit2.GetText()))));
 };
 
@@ -71,7 +71,7 @@ CPWindow1::button5_EvMouseButtonPress(CControl * control, uint button, uint x, u
 void
 CPWindow1::_EvMouseButtonPress(CControl * control, uint button, uint x, uint y,uint state)
 {
- Message(wxT("You clicked in the Window!"));
+ Message(lxT("You clicked in the Window!"));
 };
 
 
@@ -84,7 +84,7 @@ CPWindow1::menu1_File_Exit_EvMenuActive(CControl * control)
 void
 CPWindow1::menu1_Help_About_EvMenuActive(CControl * control)
 {
-   Message(wxT("LXRAD Simple Program by LCGamboa"));
+   Message(lxT("LXRAD Simple Program by LCGamboa"));
 };
 
 

@@ -15,7 +15,7 @@ void
 CPWindow1::_EvOnShow(CControl * control)
 {
   //code here:)
-  mprint(wxT("_EvOnShow\n"));  
+  mprint(lxT("_EvOnShow\n"));  
   
     draw1_EvOnDraw(control);
 };
@@ -26,7 +26,7 @@ void
 CPWindow1::draw1_EvMouseButtonPress(CControl * control, uint button, uint x, uint y,uint state)
 {
   //code here:)
-  mprint(wxT("draw1_EvMouseButtonPress ")+itoa(x)+"  "+itoa(y)+"\n" );
+  mprint(lxT("draw1_EvMouseButtonPress ")+itoa(x)+"  "+itoa(y)+"\n" );
   
     font[x/(w/5)][y/(h/8)]^=0x01;
   
@@ -39,7 +39,7 @@ void
 CPWindow1::button1_EvMouseButtonClick(CControl * control, uint button, uint x, uint y,uint state)
 {
   //code here:)
-  mprint(wxT("button1_EvMouseButtonClick\n"));
+  mprint(lxT("button1_EvMouseButtonClick\n"));
   
   text1.AddLine(edit1.GetText());
   
@@ -51,7 +51,7 @@ void
 CPWindow1::button2_EvMouseButtonClick(CControl * control, uint button, uint x, uint y,uint state)
 {
   //code here:)
-  mprint(wxT("button2_EvMouseButtonClick\n"));
+  mprint(lxT("button2_EvMouseButtonClick\n"));
   
   if(filedialog1.Run())
   {
@@ -67,7 +67,7 @@ void
 CPWindow1::button3_EvMouseButtonClick(CControl * control, uint button, uint x, uint y,uint state)
 {
   //code here:)
-  mprint(wxT("button3_EvMouseButtonClick\n"));
+  mprint(lxT("button3_EvMouseButtonClick\n"));
   
   for(int i=0;i<5;i++)
   {
@@ -87,7 +87,7 @@ void
 CPWindow1::draw1_EvOnDraw(CControl * control)
 {
   //code here:)
-  mprint(wxT("draw1_EvOnDraw\n"));
+  mprint(lxT("draw1_EvOnDraw\n"));
   
  w= draw1.GetWidth();
  h= draw1.GetHeight();
@@ -96,7 +96,7 @@ CPWindow1::draw1_EvOnDraw(CControl * control)
   
   
   //limpa tela
-  draw1.Canvas.SetBgColor(String(wxT("green")));
+  draw1.Canvas.SetBgColor(String(lxT("green")));
   draw1.Canvas.Rectangle(1,0,0,w,h);
   
   //desenha linhas
@@ -113,7 +113,7 @@ CPWindow1::draw1_EvOnDraw(CControl * control)
 
   
   //Draw box
-  draw1.Canvas.SetBgColor(String(wxT("black")));
+  draw1.Canvas.SetBgColor(String(lxT("black")));
   for(int i=0;i<5;i++)
   {
     for(int j=0;j<8;j++)
@@ -125,7 +125,7 @@ CPWindow1::draw1_EvOnDraw(CControl * control)
   
   
   draw1.Canvas.End();
-  String t=wxT("{");
+  String t=lxT("{");
   
   unsigned char x[6];
   
@@ -137,9 +137,9 @@ CPWindow1::draw1_EvOnDraw(CControl * control)
       x[i]|=font[i][j]<<j;  
     }  
     if(i< 4)
-      t+=String().Format(wxT("0x%02X%"),x[i])+wxT(" ,");
+      t+=String().Format(lxT("0x%02X%"),x[i])+lxT(" ,");
     else
-      t+=String().Format(wxT("0x%02X%"),x[i])+wxT("},\n");     
+      t+=String().Format(lxT("0x%02X%"),x[i])+lxT("},\n");     
   }
   
   edit1.SetText(t);
@@ -151,7 +151,7 @@ void
 CPWindow1::_EvOnCreate(CControl * control)
 {
   //code here:)
-  mprint(wxT("_EvOnCreate\n"));
+  mprint(lxT("_EvOnCreate\n"));
   button3_EvMouseButtonClick(control, 0, 0, 0,0);
 };
 

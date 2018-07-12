@@ -38,6 +38,7 @@
 #define lxPoint wxPoint
 #define lxCursor wxCursor 
 #define lxFileName wxFileName
+#define lxTextFile wxTextFile
 
 #define lxSetCursor wxSetCursor 
 #define lxMilliSleep wxMilliSleep
@@ -45,6 +46,8 @@
 #define lxExecute wxExecute
 #define lxGetCwd wxGetCwd 
 
+#define lxRED wxRED
+#define lxBLUE wxBLUE
 
 #define lxCURSOR_CROSS wxCURSOR_CROSS
 #define lxCURSOR_ARROW wxCURSOR_ARROW

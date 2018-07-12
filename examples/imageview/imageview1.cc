@@ -12,22 +12,22 @@ CPWindow1::filelist1_EvFileListSelectFile(CControl * control)
 { 
   String file=filelist1.GetSelectedFile();
 	
-  if((file.find(wxT(".gif")) >0)||
-     (file.find(wxT(".jpg")) >0)||
-     (file.find(wxT(".png")) >0)||
-     (file.find(wxT(".tiff"))>0)||
-     (file.find(wxT(".ps"))  >0)||
-     (file.find(wxT(".bmp")) >0)||
-     (file.find(wxT(".xpm")) >0)||
-     (file.find(wxT(".ppm")) >0)||
-     (file.find(wxT(".GIF")) >0)||
-     (file.find(wxT(".JPG")) >0)||
-     (file.find(wxT(".PNG")) >0)||
-     (file.find(wxT(".TIFF"))>0)||
-     (file.find(wxT(".PS"))  >0)||
-     (file.find(wxT(".BMP")) >0)||
-     (file.find(wxT(".XPM")) >0)||
-     (file.find(wxT(".PPM")) >0))
+  if((file.find(lxT(".gif")) >0)||
+     (file.find(lxT(".jpg")) >0)||
+     (file.find(lxT(".png")) >0)||
+     (file.find(lxT(".tiff"))>0)||
+     (file.find(lxT(".ps"))  >0)||
+     (file.find(lxT(".bmp")) >0)||
+     (file.find(lxT(".xpm")) >0)||
+     (file.find(lxT(".ppm")) >0)||
+     (file.find(lxT(".GIF")) >0)||
+     (file.find(lxT(".JPG")) >0)||
+     (file.find(lxT(".PNG")) >0)||
+     (file.find(lxT(".TIFF"))>0)||
+     (file.find(lxT(".PS"))  >0)||
+     (file.find(lxT(".BMP")) >0)||
+     (file.find(lxT(".XPM")) >0)||
+     (file.find(lxT(".PPM")) >0))
        draw1.SetImgFileName(filelist1.GetSelectedFile());
 };
 
@@ -40,7 +40,7 @@ CPWindow1::menu1_File_Exit_EvMenuActive(CControl * control)
 void
 CPWindow1::menu1_Help_About_EvMenuActive(CControl * control)
 {
-  Message(wxT("Create By LCGamboa"));
+  Message(lxT("Create By LCGamboa"));
 };
 
 

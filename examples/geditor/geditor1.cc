@@ -16,7 +16,7 @@ CPWindow1::_EvOnCreate(CControl * control)
   {      
     for(int d=0;d<=9;d++)
     {	
-      grid1.SetCellBgColor(c,d,*wxRED);
+      grid1.SetCellBgColor(c,d,*lxRED);
       fig[c][d]=false;
     }
   };
@@ -31,7 +31,7 @@ CPWindow1::menu1_Editar_Limpar_EvMenuActive(CControl * control)
   {      
     for(int d=0;d<=9;d++)
     {	
-      grid1.SetCellBgColor(c,d,*wxRED);
+      grid1.SetCellBgColor(c,d,*lxRED);
       fig[c][d]=false;
     }
   };
@@ -41,7 +41,7 @@ CPWindow1::menu1_Editar_Limpar_EvMenuActive(CControl * control)
 void
 CPWindow1::menu1_Ajuda_Sobre_EvMenuActive(CControl * control)
 {
-  Message(wxT("Desenvolvido por LCGamboa"));	
+  Message(lxT("Desenvolvido por LCGamboa"));	
 };
 
 void
@@ -64,12 +64,12 @@ CPWindow1::menu1_Arquivo_Abrir_EvMenuActive(CControl * control)
           ch=fgetc(file);
           if(ch == '-')
 	    {	  
-            grid1.SetCellBgColor(c,d,*wxBLUE);
+            grid1.SetCellBgColor(c,d,*lxBLUE);
             fig[c][d]=true;
 	    }
           else 
 	    {	  
-            grid1.SetCellBgColor(c,d,*wxRED);
+            grid1.SetCellBgColor(c,d,*lxRED);
             fig[c][d]=false;
 	    };
           ch=fgetc(file);
@@ -81,7 +81,7 @@ CPWindow1::menu1_Arquivo_Abrir_EvMenuActive(CControl * control)
     grid1.Draw();
     }
     else
-     Message(wxT("Error Open File!"));
+     Message(lxT("Error Open File!"));
   };
 };
 
@@ -125,12 +125,12 @@ CPWindow1::grid1_EvOnGridCellLeftClick(CControl * control)
   
     if(fig[c][d])
     {	  
-      grid1.SetCellBgColor(c,d,*wxRED);
+      grid1.SetCellBgColor(c,d,*lxRED);
       fig[c][d]=false;
     }  
     else 
     {	    
-      grid1.SetCellBgColor(c,d,*wxBLUE);
+      grid1.SetCellBgColor(c,d,*lxBLUE);
       fig[c][d]=true;
     };
 

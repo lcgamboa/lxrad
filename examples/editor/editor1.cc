@@ -99,7 +99,7 @@ CPWindow1::_EvOnCreate(CControl * control)
   CToolButton* tbutton;
   for(int i=1;i<=100;i++)
   {
-    tbutton=dynamic_cast<CToolButton*>(Window1.GetChildByName(wxT("toolbutton")+itoa(i)));
+    tbutton=dynamic_cast<CToolButton*>(Window1.GetChildByName(lxT("toolbutton")+itoa(i)));
     tbutton->SetImgData(red_xpm);
     tbutton->SetBorder(0);
     fig[tbutton->GetTag()]=false;
@@ -113,7 +113,7 @@ CPWindow1::menu1_Editar_Limpar_EvMenuActive(CControl * control)
   CToolButton* tbutton;
   for(int i=1;i<=100;i++)
   {
-    tbutton=dynamic_cast<CToolButton*>(Window1.GetChildByName(wxT("toolbutton")+itoa(i)));
+    tbutton=dynamic_cast<CToolButton*>(Window1.GetChildByName(lxT("toolbutton")+itoa(i)));
     tbutton->SetImgData(red_xpm);
     fig[tbutton->GetTag()]=false;
     tbutton->Draw();
@@ -123,7 +123,7 @@ CPWindow1::menu1_Editar_Limpar_EvMenuActive(CControl * control)
 void
 CPWindow1::menu1_Ajuda_Sobre_EvMenuActive(CControl * control)
 {
-  Message(wxT("Desenvolvido por LCGamboa"));	
+  Message(lxT("Desenvolvido por LCGamboa"));	
 };
 
 void
@@ -146,7 +146,7 @@ CPWindow1::menu1_Arquivo_Abrir_EvMenuActive(CControl * control)
 	  {	
           g=(c*10)+d;
           ch=fgetc(file);
-          tbutton=dynamic_cast<CToolButton*>(Window1.GetChildByName(wxT("toolbutton")+itoa(g+1)));
+          tbutton=dynamic_cast<CToolButton*>(Window1.GetChildByName(lxT("toolbutton")+itoa(g+1)));
           if(ch == '-')
 	    {	  
             tbutton->SetImgData(blue_xpm);
@@ -167,7 +167,7 @@ CPWindow1::menu1_Arquivo_Abrir_EvMenuActive(CControl * control)
     fclose(file);
     }
     else
-     Message(wxT("Error Open File!"));
+     Message(lxT("Error Open File!"));
   };
 };
 
