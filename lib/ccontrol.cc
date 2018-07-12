@@ -841,6 +841,11 @@ void
 CControl::SetPopupMenu (CPMenu * popupmenu)
 {
   PopupMenu = popupmenu;
+
+  if (Widget != NULL)
+  {
+    Widget->PopupMenu ((wxMenu*) (PopupMenu->GetWidget ()),PopupMenu->GetX() , PopupMenu->GetY());
+  }
 };
 
 void

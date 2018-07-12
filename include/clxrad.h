@@ -74,6 +74,8 @@ using namespace std;
 #ifndef WX_PRECOMP
    #include "wx/wx.h"
    #include "wx/textfile.h"
+   #include "wx/sound.h"
+   #include "wx/filename.h"
 #endif
 
 #ifndef uint

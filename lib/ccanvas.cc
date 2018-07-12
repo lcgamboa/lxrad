@@ -142,6 +142,7 @@ CCanvas::Init(void)
     width=BitmapBuffer->GetWidth();
     height=BitmapBuffer->GetHeight();
 
+
     if((Width != width)||(Height != height))
     {
       //copy content ?

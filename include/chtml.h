@@ -61,6 +61,8 @@ public:
   String GetLoadUrl (void);
   void SetLoadFile (String url);
   String GetLoadFile (void);
+  void HistoryBack(void);
+  void HistoryForward(void);
   //events
   void (CControl::*EvOnLinkClicked) (CControl * control);
 };

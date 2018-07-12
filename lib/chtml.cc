@@ -243,3 +243,18 @@ CHtml::GetLoadFile (void)
 {
   return File;
 };
+  
+void 
+CHtml::HistoryBack(void)
+{
+  if (Widget != NULL)
+    ((wxHtmlWindow*)Widget)->HistoryBack();
+}
+
+void 
+CHtml::HistoryForward(void)
+{
+  if (Widget != NULL)
+    ((wxHtmlWindow*)Widget)->HistoryForward();
+
+}

@@ -67,7 +67,7 @@ CPWindow::Create (CControl * control)
     Window_->Bind(wxEVT_CLOSE_WINDOW,&CWindow::Event,this,GetWid()); 
 
     
-  Widget = new wxPanel(Window_,GetWid(),wxDefaultPosition,wxDefaultSize,wxTAB_TRAVERSAL|wxMAXIMIZE_BOX,GetName()+wxT("p_"));
+  Widget = new wxPanel(Window_,GetWid(),wxDefaultPosition,wxDefaultSize,wxTAB_TRAVERSAL|wxFULL_REPAINT_ON_RESIZE,GetName()+wxT("p_"));
 
   //Widget->SetOwnBackgroundColour(*wxRED);
 
