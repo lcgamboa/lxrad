@@ -66,6 +66,7 @@ public:
   int Create (wxBitmap * bitmap);
   void Init(void);
   void Init(double sx,double sy);
+  void ChangeScale(double sx,double sy);
   void End(void);
   wxDC* GetDC (void);
   wxClientDC* GetWDC (void);

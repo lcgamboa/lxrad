@@ -185,6 +185,14 @@ CCanvas::Init(double sx,double sy)
   
 }
 
+void 
+CCanvas::ChangeScale(double sx,double sy)
+{
+
+  DC->SetUserScale(sx,sy);
+  
+}
+
 void
 CCanvas::End(void)
 {
