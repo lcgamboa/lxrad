@@ -1,4 +1,4 @@
-#include<lxrad/lxrad.h>
+#include<lxrad.h>
 #include"getlinks1.h"
 //Program____________________________________________________________
 Initialize

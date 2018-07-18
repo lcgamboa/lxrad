@@ -1,4 +1,4 @@
-#include<lxrad/lxrad.h>
+#include<lxrad.h>
 #include"imageview1.h"
 //Program____________________________________________________________
 Initialize

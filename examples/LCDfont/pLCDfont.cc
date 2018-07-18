@@ -1,4 +1,4 @@
-#include<lxrad/lxrad.h>
+#include<lxrad.h>
 #include"LCDfont1.h"
 
 //Program____________________________________________________________

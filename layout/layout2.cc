@@ -1086,7 +1086,7 @@ CPWindow2::MakeOrUpdateFiles (bool prompt)
     {
       //new file              
       file.Create (filename);
-      file.AddLine (wxT ("#include<lxrad/lxrad.h>"));
+      file.AddLine (wxT ("#include<lxrad.h>"));
       for (int c = 1; c <= PNW; c++)
         file.AddLine (wxT ("#include\"") + PName + itoa (c) + wxT (".h\"\n"));
       file.AddLine (wxT ("//Program____________________________________________________________\n"));
@@ -1173,7 +1173,7 @@ CPWindow2::MakeOrUpdateFiles (bool prompt)
       //new file              
       file.Create (filename);
 
-      file.AddLine (wxT ("#ifndef CPWINDOW") + itoa (WN) + wxT (" \n#define CPWINDOW") + itoa (WN) + wxT ("\n\n#include<lxrad/lxrad.h>\n\nclass CPWindow") + itoa (WN) + wxT (":public CPWindow\n{\n  public:"));
+      file.AddLine (wxT ("#ifndef CPWINDOW") + itoa (WN) + wxT (" \n#define CPWINDOW") + itoa (WN) + wxT ("\n\n#include<lxrad.h>\n\nclass CPWindow") + itoa (WN) + wxT (":public CPWindow\n{\n  public:"));
       List = GetContext ();
       for (uint a = 0; a < List.GetLinesCount (); a++)
         {
