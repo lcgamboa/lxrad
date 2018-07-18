@@ -45,7 +45,7 @@ while test $# -gt 0; do
 
           includes=-I${prefix}/include
       fi
-      echo $includes -I${prefix}/include @CFLAGS@
+      echo $includes -I${prefix}/include/lxrad @CFLAGS@
       ;;
     --cxxflags)
       if test ${prefix}/include != /usr/include ; then
@@ -54,7 +54,7 @@ while test $# -gt 0; do
 
           includes=-I${prefix}/include
       fi
-      echo $includes -I${prefix}/include @CFLAGS@
+      echo $includes -I${prefix}/include/lxrad @CFLAGS@
       ;;
     --libs|--plugin-libs|--library-libs)
       libdirs="-L${exec_prefix}/lib "
