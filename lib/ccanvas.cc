@@ -71,7 +71,7 @@ CCanvas::Create (wxWindow * drawable,int directdraw=1)
 };
 
 int
-CCanvas::Create (wxBitmap * bitmap)
+CCanvas::Create (wxWindow * drawable, wxBitmap * bitmap)
 {
   DirectDraw=1;
   Bitmap=bitmap; 

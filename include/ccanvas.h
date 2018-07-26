@@ -63,7 +63,7 @@ public:
     CCanvas (void);
    ~CCanvas (void);
   int Create (wxWindow * drawable,int directdraw);
-  int Create (wxBitmap * bitmap);
+  int Create (wxWindow *drawable, wxBitmap * bitmap);
   void Init(void);
   void Init(double sx,double sy);
   void ChangeScale(double sx,double sy);
