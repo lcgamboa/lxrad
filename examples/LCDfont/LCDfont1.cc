@@ -137,9 +137,9 @@ CPWindow1::draw1_EvOnDraw(CControl * control)
       x[i]|=font[i][j]<<j;  
     }  
     if(i< 4)
-      t+=String().Format(lxT("0x#02X%"),x[i])+lxT(" ,");
+      t+=String().Format(lxT("0x%02X"),x[i])+lxT(" ,");
     else
-      t+=String().Format(lxT("0x#02X%"),x[i])+lxT("},\n");     
+      t+=String().Format(lxT("0x%02X"),x[i])+lxT("},\n");     
   }
   
   edit1.SetText(t);
