@@ -28,6 +28,7 @@
 #include"layout2.h"
 #include"layout2_d.cc"
 
+#undef wxBitmap
 
 #include"math.h"
 

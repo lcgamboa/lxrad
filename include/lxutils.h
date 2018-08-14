@@ -32,6 +32,7 @@
 #define lxT wxT
 #define lxImage wxImage
 #define lxBitmap wxBitmap 
+#define wxBitmap(x,y) wxBitmap(x)
 #define lxFont wxFont
 #define lxSound wxSound
 #define lxColor wxColor
