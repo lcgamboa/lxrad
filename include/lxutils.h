@@ -72,9 +72,9 @@
 #define lxConvUTF8 wxConvUTF8
 
 
-String lxGetUserDataDir(String appname);
-String lxGetTempDir(String appname);
-String lxGetExecutablePath(String appname);
+String lxGetUserDataDir(String appname="");
+String lxGetTempDir(String appname="");
+String lxGetExecutablePath(String appname="");
 
 bool lxZipDir(const String &in_dirname, const String &out_filename);
 bool lxUnzipDir(const String &in_filename, const String &out_dirname);
