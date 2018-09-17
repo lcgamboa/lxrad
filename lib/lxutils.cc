@@ -215,7 +215,7 @@ lxCreateDir(const char * dirname)
    }
    else
    {
-#ifndef _WIN_
+#ifndef __WXMSW__
      return mkdir(dirname, S_IWUSR| S_IRUSR | S_IXUSR | S_IRGRP | S_IROTH ); 
 #else     
      return mkdir(dirname);
