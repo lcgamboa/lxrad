@@ -84,6 +84,7 @@ CWindow::Create (CControl * control)
     Widget->Bind(wxEVT_MAXIMIZE,&CWindow::Event,this,GetWid()); 
 //    Widget->Bind(wxEVT_DESTROY,&CWindow::Event,this,GetWid()); 
     Widget->Bind(wxEVT_CLOSE_WINDOW,&CWindow::Event,this,GetWid()); 
+    Widget->Bind(wxEVT_SHOW,&CWindow::Event,this,GetWid()); 
 
 
 
@@ -100,6 +101,7 @@ if(event == wxEVT_DESTROY)return lxEVT_DESTROY;
 if(event == wxEVT_MAXIMIZE)return lxEVT_MAXIMIZE;
 if(event == wxEVT_SIZE)return lxEVT_SIZE;
 if(event == wxEVT_CLOSE_WINDOW)return lxEVT_CLOSE_WINDOW;
+if(event == wxEVT_SHOW)return lxEVT_SHOW;
 
 return CControl::CEvent(event);
 };
@@ -284,7 +286,10 @@ CWindow::Event (wxEvent & event)
       break;
     case lxEVT_MAXIMIZE:
 //    case lxEVT_PAINT:
+    case lxEVT_SHOW:
     case lxEVT_SIZE:
+      if (GetWWidget() != NULL)
+        ((wxFrame*)GetWWidget())->GetSize((int*)&Width,(int*)&Height);
       on_show ();
       break;
     case lxEVT_CLOSE_WINDOW:

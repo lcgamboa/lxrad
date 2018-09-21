@@ -65,6 +65,7 @@ CPWindow::Create (CControl * control)
     Window_->Bind(wxEVT_SIZE,&CWindow::Event,this,GetWid()); 
     Window_->Bind(wxEVT_MAXIMIZE,&CWindow::Event,this,GetWid()); 
     Window_->Bind(wxEVT_CLOSE_WINDOW,&CWindow::Event,this,GetWid()); 
+    Window_->Bind(wxEVT_SHOW,&CWindow::Event,this,GetWid()); 
 
     
   Widget = new wxPanel(Window_,GetWid(),wxDefaultPosition,wxDefaultSize,wxTAB_TRAVERSAL|wxFULL_REPAINT_ON_RESIZE,GetName()+wxT("p_"));
@@ -111,6 +112,29 @@ CPWindow::GetWWidget (void)
   else
     return NULL;
 };
+
+void
+CPWindow::SetWidth (uint width)
+{
+  Width = width;
+  if (GetWWidget() != NULL)
+  {
+    ((wxFrame*)GetWWidget())->SetSize(X,Y,Width,Height,wxSIZE_AUTO);
+    GetWidget()->SetSize(0,0,Width,Height,wxSIZE_AUTO);
+  }
+}
+  
+
+void
+CPWindow::SetHeight (uint height)
+{
+  Height = height;
+  if (GetWWidget() != NULL)
+  {
+    ((wxFrame*)GetWWidget())->SetSize(X,Y,Width,Height,wxSIZE_AUTO);
+    GetWidget()->SetSize(0,0,Width,Height,wxSIZE_AUTO);
+  }
+}
 
 //eventos
 
