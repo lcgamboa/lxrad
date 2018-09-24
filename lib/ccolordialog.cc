@@ -29,28 +29,25 @@
 
 // CColorDialog__________________________________________________________
 
-
 CColorDialog::CColorDialog (void)
 {
-//  CanFocus = false;
+  //  CanFocus = false;
   CanVisible = false;
   Color.SetRGB (0);
   SetVisible (false);
-  SetName (wxT("ColorDialog"));
-  SetClass (wxT("CColorDialog"));
-  CanExecuteEvent=false;
+  SetName (wxT ("ColorDialog"));
+  SetClass (wxT ("CColorDialog"));
+  CanExecuteEvent = false;
+  EvOnClose = NULL;
 };
 
-
-CColorDialog::~CColorDialog (void)
-{
-};
+CColorDialog::~CColorDialog (void) { };
 
 int
 CColorDialog::Create (CControl * control)
 {
-    
-  Widget=NULL; 
+
+  Widget = NULL;
 
   return CControl::Create (control);
 };
@@ -58,57 +55,56 @@ CColorDialog::Create (CControl * control)
 String
 CColorDialog::GetColorName (void)
 {
-   wxColourDatabase CB;
-   return CB.FindName (Color);
+  wxColourDatabase CB;
+  return CB.FindName (Color);
 };
-
 
 void
 CColorDialog::SetColorName (String cname)
 {
   wxColourDatabase CB;
-  
-  Color=CB.Find(cname.c_str ());
+
+  Color = CB.Find (cname.c_str ());
 };
 
-
-
-bool
+void
 CColorDialog::Run (void)
 {
   int run;
-  
-   wxColourData cdata;
-   
-   cdata.SetColour (Color);
 
-  Widget =  new wxColourDialog(((CWindow *)GetOwner())->GetWWidget (), &cdata);
+  wxColourData cdata;
+
+  cdata.SetColour (Color);
+
+  Widget = new wxColourDialog (((CWindow *) GetOwner ())->GetWWidget (), &cdata);
 
 
-  switch(((wxColourDialog*)Widget)->ShowModal())
+  switch (((wxColourDialog*) Widget)->ShowModal ())
     {
-    case wxID_OK :
-      run= 1;
-      Color=((wxColourDialog*)Widget)->GetColourData().GetColour ();	
+    case wxID_OK:
+      run = 1;
+      Color = ((wxColourDialog*) Widget)->GetColourData ().GetColour ();
       break;
     default:
-      run= 0;
+      run = 0;
       break;
     };
-    
+
   delete Widget;
 
-  Widget=NULL; 
+  Widget = NULL;
 
-return run;
+  if ((FOwner) && (EvOnClose))
+    (FOwner->*EvOnClose) (run);
 };
 
-
-CStringList CColorDialog::GetContext (void)
+CStringList
+CColorDialog::GetContext (void)
 {
-//  CControl::GetContext ();
+  //  CControl::GetContext ();
   CObject::GetContext ();
-  Context.AddLine (xml_out (wxT("ColorName"), wxT("String"), GetColorName()));
+  Context.AddLine (xml_out (wxT ("ColorName"), wxT ("String"), GetColorName ()));
+  Context.AddLine (xml_out (wxT ("EvOnClose"), wxT ("Event"), btoa (GetEv (true))));
   return Context;
 };
 
@@ -116,35 +112,34 @@ void
 CColorDialog::SetContext (CStringList context)
 {
   String name, type, value;
-//  CControl::SetContext (context);
+  //  CControl::SetContext (context);
   CObject::SetContext (context);
   for (uint i = 0; i < context.GetLinesCount (); i++)
     {
       xml_in (Context.GetLine (i), name, type, value);
-      if (name.compare (wxT("ColorName")) == 0)
-      	SetColorName(value);
-    };
-};
-  
-  
-wxColor 
-CColorDialog::GetColor(void)
+      if (name.compare (wxT ("ColorName")) == 0)
+        SetColorName (value);
+      if (name.compare (wxT ("EvOnClose")) == 0)
+        SetEv (atob (value), true);
+    }
+}
+
+wxColor
+CColorDialog::GetColor (void)
 {
   return Color;
 };
 
-
-void 
-CColorDialog::SetColor(wxColor c)
+void
+CColorDialog::SetColor (wxColor c)
 {
-  Color=c;
+  Color = c;
 };
-  
 
 void
 CColorDialog::SetColor (uint r, uint g, uint b)
 {
- Color.Set(r,g,b);
+  Color.Set (r, g, b);
 
 }
 

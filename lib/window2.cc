@@ -41,7 +41,7 @@ CJanela2::MouseButtonPress (CControl * control, uint button, uint x, uint y, uin
 {
   if(canvas.GetDrawable() == NULL)
   {
-    canvas.Create(this,1);
+    canvas.Create(this->GetWidget(),1);
   }
   
   canvas.Init();

@@ -51,7 +51,7 @@ public:
   CFileDialog (void);
    ~CFileDialog (void);
   int Create (CControl * control);
-  bool Run (void);
+  void Run (void);
   //propriedades
   String GetFileName (void);
   void SetFileName (String filename);
@@ -63,6 +63,8 @@ public:
   void SetFilter(String filter);
   CStringList GetContext (void);
   void SetContext (CStringList context);
+  //events
+  void (CControl::*EvOnClose) (int retId);
 };
 
 #endif

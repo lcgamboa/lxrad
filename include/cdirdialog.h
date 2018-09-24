@@ -4,7 +4,7 @@
 
    ########################################################################
 
-   Copyright (c) : 2001  Luis Claudio Gamboa Lopes
+   Copyright (c) : 2001-2018  Luis Claudio Gamboa Lopes
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -49,7 +49,7 @@ public:
   CDirDialog (void);
    ~CDirDialog (void);
   int Create (CControl * control);
-  bool Run (void);
+  void Run (void);
   //propriedades
   String GetDirName (void);
   void SetDirName (String dirname);
@@ -57,6 +57,8 @@ public:
   void SetType(long type);
   CStringList GetContext (void);
   void SetContext (CStringList context);
+  //events
+  void (CControl::*EvOnClose) (int retId);  
 };
 
 #endif

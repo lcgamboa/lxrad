@@ -4,7 +4,7 @@
 
    ########################################################################
 
-   Copyright (c) : Luis Claudio Gambôa Lopes
+   Copyright (c) : Luis Claudio Gamboa Lopes
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -28,12 +28,12 @@ CJanela1::CJanela1 (void)
 //window
   SetName (wxT("Janela1"));
   SetTitle (wxT("Hoo!"));
-  SetX (50);
-  SetY (50);
+  SetX (10);
+  SetY (10);
   SetVisible (0);
-  SetWidth (800);
-  SetHeight (500);
-//  SetPopupMenu (&pmenu1);
+  SetWidth (1200);
+  SetHeight (1000);
+  SetPopupMenu (&pmenu2);
 
 
 //timer1
@@ -43,6 +43,11 @@ CJanela1::CJanela1 (void)
   timer1.SetFOwner (this);
   timer1.EvOnTime = EVONTIME & CJanela1::timer1OnTime;
 
+//thread1
+  thread1.SetName (wxT("thread1"));
+  thread1.SetFOwner (this);
+  thread1.EvThreadRun = EVTHREADRUN & CJanela1::Thread1Run;
+  thread1.EvThreadEnd = EVTHREADEND & CJanela1::Thread1End;
 
 //button1
   button1.SetName (wxT("button1"));
@@ -201,6 +206,7 @@ CJanela1::CJanela1 (void)
 //menu1
   menu1.SetName (wxT("menu1"));
 //  menu1.SetColor (150, 20, 25);
+
   menui1.SetText (wxT("_File"));
   menui1.SetName (wxT("File"));
   
@@ -230,13 +236,13 @@ CJanela1::CJanela1 (void)
 //filedialog1
   filedialog1.SetName (wxT("filedialog1"));
   filedialog1.SetFileName (wxT("teste.png"));
-  filedialog1.SetType (wxOPEN);
+  filedialog1.SetType (wxFD_OPEN);
   filedialog1.SetFilter (wxT("Image Files (*.png)|*.png"));
 
 //dirdialog1
   dirdialog1.SetName (wxT("dirdialog1"));
   dirdialog1.SetDirName (wxT("~/"));
-  dirdialog1.SetType (wxOPEN);
+  dirdialog1.SetType (wxFD_OPEN);
 
 //list1
   list1.SetName (wxT("list1"));
@@ -280,8 +286,41 @@ CJanela1::CJanela1 (void)
   scroll1.SetName (wxT("scrol1"));
   scroll1.SetX (100);
   scroll1.SetY (200);
+  scroll1.SetWidth (120);
   scroll1.SetType (st_horizontal);
   scroll1.SetRange (100);
+  scroll1.SetPosition (30);
+
+//gauge1
+  gauge1.SetName (wxT("gauge1"));
+  gauge1.SetX (80);
+  gauge1.SetY (450);
+  gauge1.SetWidth (120);
+  gauge1.SetRange (60);
+  gauge1.SetValue (0);
+
+//grid1
+  grid1.SetName (wxT("grid1"));
+  grid1.SetX (5);
+  grid1.SetY (500);
+  grid1.SetWidth (250);
+  grid1.SetHeight (250);
+  grid1.SetRowsCount(10);
+  grid1.SetColsCount(10);
+
+
+//html1
+  html1.SetName (wxT("html11"));
+  html1.SetX (500);
+  html1.SetY (540);
+  html1.SetWidth (250);
+  html1.SetHeight (250);
+  html1.SetLoadFile(wxT("sample.html")); 
+
+//statusbar1
+  statusbar1.SetName (wxT("statusbar1"));
+  statusbar1.SetFields (wxT("first,second,third,"));
+//  statusbar1.AddField (wxT("second"));
 
 //combo1
   combo1.SetName (wxT("combo1"));
@@ -289,19 +328,20 @@ CJanela1::CJanela1 (void)
   combo1.SetY (50);
   combo1.SetWidth (120);
   combo1.SetFOwner (this);
-  combo1.EvOnComboChange = EVONCOMBOCHANGE & CJanela1::ComboChange;
-  combo1.AddItem (wxT("um"));
-  combo1.AddItem (wxT("dois"));
-  combo1.AddItem (wxT("tres"));
-  combo1.AddItem (wxT("quatro"));
-  combo1.AddItem (wxT("cinco"));
-  combo1.AddItem (wxT("seis"));
-  combo1.AddItem (wxT("sete"));
-  combo1.AddItem (wxT("oito"));
-  combo1.AddItem (wxT("nove"));
-  combo1.AddItem (wxT("dez"));
-  combo1.AddItem (wxT("penultimo"));
-  combo1.AddItem (wxT("ultimo"));
+  combo1.SetText("ola");
+  combo1.EvOnComboChange = EVONCOMBOCHANGE & CJanela1::Combo1Change;
+  combo1.SetItems(wxT("um,dois,tres,quatro,cinco,seis,sete,oito,nove,dez,penultimo,ultimo,"));
+
+//combo2
+  combo2.SetName (wxT("combo2"));
+  combo2.SetX (110);
+  combo2.SetY (750);
+  combo2.SetWidth (120);
+  combo2.SetFOwner (this);
+  combo2.EvOnComboChange = EVONCOMBOCHANGE & CJanela1::Combo2Change;
+  combo2.AddItem (wxT("um"));
+  combo2.AddItem (wxT("dois"));
+  combo2.SetReadOnly(1);
 
 //image1
   image1.SetName (wxT("image1"));
@@ -309,7 +349,7 @@ CJanela1::CJanela1 (void)
   image1.SetY (100);
   image1.SetWidth (100);
   image1.SetHeight (60);
-  image1.SetImgFileName(wxT("../share/icons/splash.xpm"));
+  image1.SetImgFileName(wxT("../share/icons/splash.png"));
   //image1.SetImgFileName(wxT("/home/gamboa/MyDownloads/meus/LXRAD_WX/share/icons/splash.xpm"));
 
 
@@ -320,6 +360,37 @@ CJanela1::CJanela1 (void)
   draw1.SetWidth (60);
   draw1.SetHeight (60);
 
+//spin1
+  spin1.SetName (wxT("spin1"));
+  spin1.SetX (30);
+  spin1.SetY (475);
+  spin1.SetValue (15);
+  spin1.SetFOwner (this);
+  spin1.EvOnChangeSpin = EVONCHANGESPIN & CJanela1::Edit1Focus;
+
+//spind1
+  spind1.SetName (wxT("spind1"));
+  spind1.SetX (30);
+  spind1.SetY (500);
+  spind1.SetValue (15.0);
+  spind1.SetFOwner (this);
+  spind1.EvOnChangeSpinDouble = EVONCHANGESPINDOUBLE & CJanela1::Edit1Focus;
+  
+  
+//togglebutton1
+  togglebutton1.SetName (wxT("togglebutton1"));
+  togglebutton1.SetX (130);
+  togglebutton1.SetY (500);
+  togglebutton1.SetText (wxT("Check"));
+  togglebutton1.SetCheck(0);
+  togglebutton1.SetFOwner (this);
+  togglebutton1.EvOnToggleButton = EVONTOGGLEBUTTON & CJanela1::Edit1Focus;
+    
+//colordialog1
+#ifndef __WXX11__ 	    
+  colordialog1.SetName (wxT("colordialog1"));
+  colordialog1.SetColorName(wxT("red"));
+#endif 
 
   CreateChild (&timer1);
 
@@ -350,6 +421,7 @@ CJanela1::CJanela1 (void)
   CreateChild (&menu1);
   
   menu1.CreateChild (&menui1);
+
   menu1.CreateChild (&menui2);
   menu1.CreateChild (&menui3);
   
@@ -358,11 +430,11 @@ CJanela1::CJanela1 (void)
   pmenu1.CreateChild (&pmenuitem1_2);
   pmenu1.CreateChild (&pmenuitem1_3);
   
-  menu1.CreateChild (&pmenu2);
+  CreateChild (&pmenu2);
+  //menu1.CreateChild (&pmenu2);
   pmenu2.CreateChild (&pmenuitem2_1);
   pmenu2.CreateChild (&pmenuitem2_2);
   pmenu2.CreateChild (&pmenuitem2_3);
-
 
 
   CreateChild (&toolbutton1);
@@ -373,12 +445,35 @@ CJanela1::CJanela1 (void)
   CreateChild (&filelist1);
   
   CreateChild (&scroll1);
+  
+  CreateChild (&gauge1);
+
+  /*FIX*/  
+  //CreateChild (&grid1);
+
+  CreateChild (&html1);
+
+  CreateChild (&statusbar1);
 
   CreateChild (&combo1);
+  
+  CreateChild (&combo2);
 
 
   CreateChild (&image1);
 
   CreateChild (&draw1);
+  
+  CreateChild (&spin1);
+  
+  CreateChild (&spind1);
+  
+  CreateChild (&togglebutton1);
+    
+#ifndef __WXX11__ 	    
+  CreateChild (&colordialog1);
+#endif
+
+  CreateChild (&thread1);
 
 };

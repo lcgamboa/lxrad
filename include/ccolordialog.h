@@ -48,7 +48,7 @@ public:
   CColorDialog (void);
    ~CColorDialog (void);
   int Create (CControl * control);
-  bool Run (void);
+  void Run (void);
   //propriedades
   String GetColorName (void);
   void SetColorName (String cname);
@@ -57,6 +57,8 @@ public:
   void SetColor (uint r, uint g, uint b);
   CStringList GetContext (void);
   void SetContext (CStringList context);
+  //events
+  void (CControl::*EvOnClose) (int retId);  
 };
 
 #endif

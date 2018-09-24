@@ -29,34 +29,31 @@
 
 // CDirDialog__________________________________________________________
 
-
 CDirDialog::CDirDialog (void)
 {
   CanVisible = false;
-  DirName = wxT("");
+  DirName = wxT ("");
   SetVisible (false);
-  SetName (wxT("DirDialog"));
-  SetClass (wxT("CDirDialog"));
-  Type= wxFD_OPEN;
-  CanExecuteEvent=false;
+  SetName (wxT ("DirDialog"));
+  SetClass (wxT ("CDirDialog"));
+  Type = wxFD_OPEN;
+  CanExecuteEvent = false;
+  EvOnClose = NULL;
 };
 
-
-CDirDialog::~CDirDialog (void)
-{
-};
+CDirDialog::~CDirDialog (void) { };
 
 int
 CDirDialog::Create (CControl * control)
 {
-  Widget=NULL;
+  Widget = NULL;
 
   //disabled because gtk bug
-/*
-  Widget = new wxDirDialog(((CWindow *)control)->GetWWidget (),wxT("Choose a directory"),wxGetCwd(), wxDD_DEFAULT_STYLE, wxDefaultPosition, wxDefaultSize, Name);
-  if(DirName.length() > 0 )
-    SetDirName (DirName);
-*/
+  /*
+    Widget = new wxDirDialog(((CWindow *)control)->GetWWidget (),wxT("Choose a directory"),wxGetCwd(), wxDD_DEFAULT_STYLE, wxDefaultPosition, wxDefaultSize, Name);
+    if(DirName.length() > 0 )
+      SetDirName (DirName);
+   */
   return CControl::Create (control);
 };
 
@@ -64,7 +61,7 @@ String
 CDirDialog::GetDirName (void)
 {
   if (Widget != NULL)
-     DirName=((wxDirDialog*)Widget)->GetPath();
+    DirName = ((wxDirDialog*) Widget)->GetPath ();
 
   return DirName;
 };
@@ -74,73 +71,72 @@ CDirDialog::SetDirName (String dirname)
 {
   DirName = dirname;
   if (Widget != NULL)
-      ((wxDirDialog*)Widget)->SetPath(DirName);
+    ((wxDirDialog*) Widget)->SetPath (DirName);
 };
 
-bool
+void
 CDirDialog::Run (void)
 {
   int run;
 
-  Widget = new wxDirDialog(((CWindow *)GetOwner())->GetWWidget (),wxT("Choose a directory"),wxGetCwd(), wxDD_DEFAULT_STYLE, wxDefaultPosition, wxDefaultSize, Name);
-  if(DirName.length() > 0 )
+  Widget = new wxDirDialog (((CWindow *) GetOwner ())->GetWWidget (), wxT ("Choose a directory"), wxGetCwd (), wxDD_DEFAULT_STYLE, wxDefaultPosition, wxDefaultSize, Name);
+  if (DirName.length () > 0)
     SetDirName (DirName);
 
-  switch(((wxFileDialog*)Widget)->ShowModal())
+  switch (((wxFileDialog*) Widget)->ShowModal ())
     {
-    case wxID_OK :
-      run= 1;
-      DirName=((wxDirDialog*)Widget)->GetPath();
+    case wxID_OK:
+      run = 1;
+      DirName = ((wxDirDialog*) Widget)->GetPath ();
       break;
     default:
-      run= 0;
+      run = 0;
       break;
     };
-     
+
 
   delete Widget;
-  Widget=NULL;
+  Widget = NULL;
 
-return run;
-};
+  if ((FOwner) && (EvOnClose))
+    (FOwner->*EvOnClose) (run);
+}
 
-
-CStringList CDirDialog::GetContext (void)
+CStringList
+CDirDialog::GetContext (void)
 {
-//  CControl::GetContext ();
+  //  CControl::GetContext ();
   CObject::GetContext ();
+  Context.AddLine (xml_out (wxT ("EvOnClose"), wxT ("Event"), btoa (GetEv (true))));
   return Context;
 };
 
 void
 CDirDialog::SetContext (CStringList context)
 {
-//  CControl::SetContext (context);
+  String name, type, value;  
+  //  CControl::SetContext (context);
   CObject::SetContext (context);
-  /*
-     for (uint i = 0; i < context.GetLinesCount (); i++)
-     {
-     String line = Context.GetLine (i);
-     String arg;
-     eqparse (line, arg);
-     };
-   */
+  for (uint i = 0; i < context.GetLinesCount (); i++)
+    {
+      xml_in (Context.GetLine (i), name, type, value);
+      if (name.compare (wxT ("EvOnClose")) == 0)
+        SetEv (atob (value), true);
+    }
 };
-  
-  
-long 
-CDirDialog::GetType(void)
+
+long
+CDirDialog::GetType (void)
 {
   return Type;
 };
 
-
-void 
-CDirDialog::SetType(long type)
+void
+CDirDialog::SetType (long type)
 {
-  Type =type;
-  
-  if(Widget)
-    ((wxDirDialog*)Widget)->SetWindowStyle(Type);
-//    ((wxDirDialog*)Widget)->SetStyle(Type);
+  Type = type;
+
+  if (Widget)
+    ((wxDirDialog*) Widget)->SetWindowStyle (Type);
+  //    ((wxDirDialog*)Widget)->SetStyle(Type);
 };

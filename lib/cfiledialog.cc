@@ -4,7 +4,7 @@
 
    ########################################################################
 
-   Copyright (c) : 2001  Luis Claudio Gamboa Lopes
+   Copyright (c) : 2001-2018  Luis Claudio Gamboa Lopes
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -29,25 +29,22 @@
 
 // CFileDialog__________________________________________________________
 
-
 CFileDialog::CFileDialog (void)
 {
-//  CanFocus = false;
+  //  CanFocus = false;
   CanVisible = false;
-  FileName = wxT("untitled.txt");
-  Dir = wxGetCwd();
+  FileName = wxT ("untitled.txt");
+  Dir = wxGetCwd ();
   SetVisible (false);
-  SetName (wxT("FileDialog"));
-  SetClass (wxT("CFileDialog"));
-  Type= wxFD_OPEN|wxFD_CHANGE_DIR;
-  CanExecuteEvent=false;
-  SetFilter(wxT("All Files (*.*)|*.*"));
+  SetName (wxT ("FileDialog"));
+  SetClass (wxT ("CFileDialog"));
+  Type = wxFD_OPEN | wxFD_CHANGE_DIR;
+  CanExecuteEvent = false;
+  SetFilter (wxT ("All Files (*.*)|*.*"));
+  EvOnClose = NULL;
 };
 
-
-CFileDialog::~CFileDialog (void)
-{
-};
+CFileDialog::~CFileDialog (void) { };
 
 int
 CFileDialog::Create (CControl * control)
@@ -57,10 +54,10 @@ CFileDialog::Create (CControl * control)
   //Widget =  new wxFileDialog(((CWindow *)control)->GetWWidget (), wxT("Choose a file"),Dir,wxT(""), Filter, Type);
   //SetFileName (FileName);
   //((wxFileDialog*)Widget)->SetDirectory(wxGetCwd());
-  
+
   //return 0;
-    
-  Widget=NULL; 
+
+  Widget = NULL;
 
   return CControl::Create (control);
 };
@@ -69,8 +66,8 @@ String
 CFileDialog::GetFileName (void)
 {
   if (Widget != NULL)
-     FileName=((wxFileDialog*)Widget)->GetPath();
-//     FileName=((wxFileDialog*)Widget)->GetFilename();
+    FileName = ((wxFileDialog*) Widget)->GetPath ();
+  //     FileName=((wxFileDialog*)Widget)->GetFilename();
 
   return FileName;
 };
@@ -79,69 +76,66 @@ String
 CFileDialog::GetDir (void)
 {
   if (Widget != NULL)
-     Dir=((wxFileDialog*)Widget)->GetDirectory();
+    Dir = ((wxFileDialog*) Widget)->GetDirectory ();
 
   return Dir;
 };
-
 
 void
 CFileDialog::SetFileName (String filename)
 {
   FileName = filename;
-  SetDir(dirname(filename));
+  SetDir (dirname (filename));
   if (Widget != NULL)
-      ((wxFileDialog*)Widget)->SetFilename(basename(filename));
+    ((wxFileDialog*) Widget)->SetFilename (basename (filename));
 };
 
 void
 CFileDialog::SetDir (String dir)
 {
   Dir = dir;
-  if(wxDirExists(dir))
-    wxSetWorkingDirectory(dir);
+  if (wxDirExists (dir))
+    wxSetWorkingDirectory (dir);
   if (Widget != NULL)
-      ((wxFileDialog*)Widget)->SetDirectory(dir);
+    ((wxFileDialog*) Widget)->SetDirectory (dir);
 
 };
 
-
-bool
+void
 CFileDialog::Run (void)
 {
-  int run;
+  int run = 0;
 
-  Widget =  new wxFileDialog(((CWindow *)GetOwner())->GetWWidget (), wxT("Choose a file"),Dir,basename(FileName), Filter, Type);
+  Widget = new wxFileDialog (((CWindow *) GetOwner ())->GetWWidget (), wxT ("Choose a file"), Dir, basename (FileName), Filter, Type);
   //SetFileName (FileName);
   //((wxFileDialog*)Widget)->SetDirectory(wxGetCwd());
-  
-  switch(((wxFileDialog*)Widget)->ShowModal())
+  //((wxFileDialog*)Widget)->Bind(wxEVT_CLOSE_WINDOW,&CFileDialog::on_close,this,GetWid());
+
+  if (((wxFileDialog*) Widget)->ShowModal () == wxID_OK)
     {
-    case wxID_OK :
-      run= 1;
-      FileName=((wxFileDialog*)Widget)->GetPath();
-      Dir=((wxFileDialog*)Widget)->GetDirectory();
-      break;
-    default:
-      run= 0;
-      break;
-    };
+      run = 1;
+      FileName = ((wxFileDialog*) Widget)->GetPath ();
+      Dir = ((wxFileDialog*) Widget)->GetDirectory ();
+    }
 
   delete Widget;
 
-  Widget=NULL; 
-
-return run;
-};
+  Widget = NULL;
 
 
-CStringList CFileDialog::GetContext (void)
+  if ((FOwner) && (EvOnClose))
+    (FOwner->*EvOnClose) (run);
+}
+
+CStringList
+CFileDialog::GetContext (void)
 {
-//  CControl::GetContext ();
+  //  CControl::GetContext ();
   CObject::GetContext ();
-  Context.AddLine (xml_out (wxT("FileName"), wxT("String"), GetFileName ()));
-  Context.AddLine (xml_out (wxT("Filter"), wxT("String"), GetFilter ()));
-  Context.AddLine (xml_out (wxT("Type"), wxT("int"), itoa(GetType ())));
+  Context.AddLine (xml_out (wxT ("FileName"), wxT ("String"), GetFileName ()));
+  Context.AddLine (xml_out (wxT ("Filter"), wxT ("String"), GetFilter ()));
+  Context.AddLine (xml_out (wxT ("Type"), wxT ("int"), itoa (GetType ())));
+  Context.AddLine (xml_out (wxT ("EvOnClose"), wxT ("Event"), btoa (GetEv (true))));
   return Context;
 };
 
@@ -149,51 +143,51 @@ void
 CFileDialog::SetContext (CStringList context)
 {
   String name, type, value;
-//  CControl::SetContext (context);
+  //  CControl::SetContext (context);
   CObject::SetContext (context);
   for (uint i = 0; i < context.GetLinesCount (); i++)
     {
       xml_in (Context.GetLine (i), name, type, value);
-      if (name.compare (wxT("Filter")) == 0)
-	SetFilter (value);
-      if (name.compare (wxT("Type")) == 0)
-	SetType (atoi(value));
-      if (name.compare (wxT("FileName")) == 0)
-	SetFileName (value);
+      if (name.compare (wxT ("Filter")) == 0)
+        SetFilter (value);
+      if (name.compare (wxT ("Type")) == 0)
+        SetType (atoi (value));
+      if (name.compare (wxT ("FileName")) == 0)
+        SetFileName (value);
+      if (name.compare (wxT ("EvOnClose")) == 0)
+        SetEv (atob (value), true);
     };
 };
-  
-  
-long 
-CFileDialog::GetType(void)
+
+long
+CFileDialog::GetType (void)
 {
   return Type;
 };
 
-
-void 
-CFileDialog::SetType(long type)
+void
+CFileDialog::SetType (long type)
 {
-  Type =type;
-  
-  if(Widget)
-    ((wxFileDialog*)Widget)->SetWindowStyle(Type);
-//    ((wxFileDialog*)Widget)->SetStyle(Type);
+  Type = type;
+
+  if (Widget)
+    ((wxFileDialog*) Widget)->SetWindowStyle (Type);
+  //    ((wxFileDialog*)Widget)->SetStyle(Type);
 };
-  
-  
+
 String
-CFileDialog::GetFilter(void)
+CFileDialog::GetFilter (void)
 {
   return Filter;
 };
 
-
-void 
-CFileDialog::SetFilter(String filter)
+void
+CFileDialog::SetFilter (String filter)
 {
-  Filter= filter;
-  
-  if(Widget)
-    ((wxFileDialog*)Widget)->SetWildcard(Filter);
+  Filter = filter;
+
+  if (Widget)
+    ((wxFileDialog*) Widget)->SetWildcard (Filter);
 };
+
+

@@ -166,6 +166,8 @@ lxEVT_TOGGLEBUTTON
 
 #define EVONTOGGLEBUTTON	   (void(CControl::*)(CControl*))
 
+#define EVONCLOSE        (void(CControl::*)(int))
+
 #define CA_LEFT   1
 #define CA_RIGHT  2
 #define CA_CENTER 3

@@ -294,7 +294,7 @@ CWindow::Event (wxEvent & event)
       break;
     case lxEVT_CLOSE_WINDOW:
       on_hide ();
-      //FIXME call applicatina::wdelete callback!!!!!!!!
+      //FIXME call application::wdelete callback!!!!!!!!
        if(Application->ADestroyWindow ((wxCloseEvent*) &event)) 
        {
 /*

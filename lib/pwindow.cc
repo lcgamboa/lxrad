@@ -4,7 +4,7 @@
 
    ########################################################################
 
-   Copyright (c) : Luis Claudio Gambôa Lopes
+   Copyright (c) : Luis Claudio Gamboa Lopes
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -50,6 +50,11 @@ Initialize
   Application->ACreateWindow (&Janela2);
  
 
+  /*
+  Janela1.WriteXMLContext (wxT("teste/window_1.lxrad"));
+  Janela2.WriteXMLContext (wxT("teste/window_2.lxrad"));
+  Janela3.WriteXMLContext (wxT("teste/window_3.lxrad"));
+*/
   Janela3.WDestroy();
 
   return Application->Load ();
