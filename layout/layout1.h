@@ -9,7 +9,6 @@ class CPWindow1:public CPWindow
   public:
   /*#Controls*/
   CMenu menu1;
-  CFileDialog filedialog1;
   CPMenu menu1_File;
   CPMenu menu1_Edit;
   CPMenu menu1_Project;

@@ -4,7 +4,7 @@
 
    ########################################################################
 
-   Copyright (c) : 2010 Luis Claudio Gamboa Lopes
+   Copyright (c) : 2010-2018 Luis Claudio Gamboa Lopes
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -364,6 +364,9 @@ CPWindow1::menu1_Help_About_EvMenuActive(CControl * control)
 {
   Message (wxT("LXRAD-") + String(wxT(_VERSION)) + wxT(" Developed by LCGamboa <lcgamboa@yahoo.com>"));
 };
+
+
+
 
 
 

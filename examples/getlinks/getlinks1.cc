@@ -11,7 +11,63 @@ CPWindow1 Window1;
 void
 CPWindow1::button1_EvMouseButtonClick(CControl * control, uint button, uint x, uint y,uint state)
 {
-  if(filedialog1.Run())
+  Op=1;	
+  filedialog1.Run();
+};
+
+void
+CPWindow1::button2_EvMouseButtonClick(CControl * control, uint button, uint x, uint y,uint state)
+{
+  Op=2;	
+  filedialog1.Run();
+}
+
+void
+CPWindow1::button3_EvMouseButtonClick(CControl * control, uint button, uint x, uint y,uint state)
+{
+    String cmd;	
+    String file;
+    struct stat statf;
+    
+    int g,d=0;
+    for(int c=0;c < list1.GetItemsCount() ;c++)
+    {
+      if(d >=50)
+      {
+         Message(lxT("More 50?"));
+	 d=0;
+      };	     
+      file=list1.GetItem(c);
+      g=-1;
+      g=file.rfind(lxT("/"));
+      if(g<0)g=0;
+      file=file.substr(g+1,file.size()-1);
+      
+      if((stat((char *)file.char_str(),&statf) == -1)&&(file.size() > 0))
+      {
+        cmd=lxT("xterm -e wget ")+list1.GetItem(c)+lxT(" &");	    
+        //cout<<cmd<<endl;
+        system((char *)cmd.char_str());
+        d++;
+      }
+      else
+      {
+       if(file.size() > 2)printf("%s OK!\n",(char *)file.char_str());
+      };
+    };
+};
+
+void
+CPWindow1::button4_EvMouseButtonClick(CControl * control, uint button, uint x, uint y,uint state)
+{
+  list1.DeleteItem(list1.GetSelectedItemN());
+};
+
+
+void
+CPWindow1::filedialog1_EvOnClose(int retId)
+{
+  if(retId && (Op ==1))
   {
   lxTextFile fin;
   String line1,line2,line3,line4;
@@ -60,65 +116,14 @@ CPWindow1::button1_EvMouseButtonClick(CControl * control, uint button, uint x, u
     list1.SetVisible(true);
     list1.Draw();
     fin.Close();
-  };
-  };
-};
+  }
+  }
 
-void
-CPWindow1::button2_EvMouseButtonClick(CControl * control, uint button, uint x, uint y,uint state)
-{
-  if(filedialog1.Run())
+
+  if(retId && (Op ==2))
   {
-  list1.SaveItemsToFile(filedialog1.GetFileName());
-  };  
-};
-
-void
-CPWindow1::button3_EvMouseButtonClick(CControl * control, uint button, uint x, uint y,uint state)
-{
-    String cmd;	
-    String file;
-    struct stat statf;
-    
-    int g,d=0;
-    for(int c=0;c < list1.GetItemsCount() ;c++)
-    {
-      if(d >=50)
-      {
-         Message(lxT("More 50?"));
-	 d=0;
-      };	     
-      file=list1.GetItem(c);
-      g=-1;
-      g=file.rfind(lxT("/"));
-      if(g<0)g=0;
-      file=file.substr(g+1,file.size()-1);
-      
-      if((stat((char *)file.char_str(),&statf) == -1)&&(file.size() > 0))
-      {
-        cmd=lxT("xterm -e wget ")+list1.GetItem(c)+lxT(" &");	    
-        //cout<<cmd<<endl;
-        system((char *)cmd.char_str());
-        d++;
-      }
-      else
-      {
-       if(file.size() > 2)printf("%s OK!\n",(char *)file.char_str());
-      };
-    };
-};
-
-void
-CPWindow1::button4_EvMouseButtonClick(CControl * control, uint button, uint x, uint y,uint state)
-{
-  list1.DeleteItem(list1.GetSelectedItemN());
-};
-
-
-
-
-
-
-
+    list1.SaveItemsToFile(filedialog1.GetFileName());
+  }
+}
 
 

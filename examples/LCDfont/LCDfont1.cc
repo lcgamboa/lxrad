@@ -53,12 +53,8 @@ CPWindow1::button2_EvMouseButtonClick(CControl * control, uint button, uint x, u
   //code here:)
   mprint(lxT("button2_EvMouseButtonClick\n"));
   
-  if(filedialog1.Run())
-  {
-      text1.SaveToFile(filedialog1.GetFileName());
-  }
-  
-};
+  filedialog1.Run();
+}
 
 
 
@@ -154,5 +150,12 @@ CPWindow1::_EvOnCreate(CControl * control)
   mprint(lxT("_EvOnCreate\n"));
   button3_EvMouseButtonClick(control, 0, 0, 0,0);
 };
+
+
+void
+CPWindow1::filedialog1_EvOnClose(int retId)
+{
+   text1.SaveToFile(filedialog1.GetFileName());
+}
 
 

@@ -58,28 +58,30 @@ void
 CPWindow3::FileMouseButtonRelease (CControl * control, uint button, uint x, uint y, uint state)
 {
   CToolButton *tb;
-  CEdit *ed;
+  ctrl=control;
   tb = dynamic_cast < CToolButton * >(control);
   if (tb)
     {
-      if (Window1.filedialog1.Run ())
+      filedialog1.Run ();
+    }
+}
+
+
+void
+CPWindow3::Filedialog1OnClose (int retId)
+{
+    CEdit *ed;
+    CToolButton *tb;
+  
+    if (retId)
 	{
+          tb = dynamic_cast < CToolButton * >(ctrl);
 	  ed = dynamic_cast < CEdit * >(GetChildByName (wxT("cedit") + itoa (tb->GetTag ())));
 	  if (ed)
 	    {
-	      ed->SetText (Window1.filedialog1.GetFileName ());
-	      editfocusout (control);
-	    };
-	};
-
-    };
-};
-
-
-
-
-
-
-
-
+	      ed->SetText (filedialog1.GetFileName ());
+	      editfocusout (ctrl);
+	    }
+	}
+}
 

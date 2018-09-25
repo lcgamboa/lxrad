@@ -16,6 +16,7 @@ class CPWindow1:public CWindow
   CButton button3;
   CButton button4;
   /*#Events*/
+  void filedialog1_EvOnClose(int retId);
   void button1_EvMouseButtonClick(CControl * control, uint button, uint x, uint y,uint state);
   void button2_EvMouseButtonClick(CControl * control, uint button, uint x, uint y,uint state);
   void button3_EvMouseButtonClick(CControl * control, uint button, uint x, uint y,uint state);
@@ -23,6 +24,7 @@ class CPWindow1:public CWindow
 
   /*#Others*/
   CPWindow1(void);
+  int Op;
 };
  extern CPWindow1 Window1 ;
 

@@ -22,6 +22,8 @@ class CPWindow1:public CWindow
   CLabel label1;
   /*#Events*/
   void _EvOnCreate(CControl * control);
+  void filedialog1_EvOnClose(int retId);
+  void filedialog2_EvOnClose(int retId);
   void menu1_Arquivo_Abrir_EvMenuActive(CControl * control);
   void menu1_Arquivo_Salvar_EvMenuActive(CControl * control);
   void menu1_Arquivo_Sair_EvMenuActive(CControl * control);

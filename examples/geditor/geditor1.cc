@@ -36,21 +36,64 @@ CPWindow1::menu1_Editar_Limpar_EvMenuActive(CControl * control)
     }
   };
   grid1.Draw();
-};
+}
 
 void
 CPWindow1::menu1_Ajuda_Sobre_EvMenuActive(CControl * control)
 {
   Message(lxT("Desenvolvido por LCGamboa"));	
-};
+}
 
 void
 CPWindow1::menu1_Arquivo_Abrir_EvMenuActive(CControl * control)
 {
+  Window1.filedialog1.Run();
+}
+
+void
+CPWindow1::menu1_Arquivo_Salvar_EvMenuActive(CControl * control)
+{
+  Window1.filedialog2.Run();
+}
+
+void
+CPWindow1::menu1_Arquivo_Sair_EvMenuActive(CControl * control)
+{
+  Window1.WDestroy();
+}
+
+
+
+void
+CPWindow1::grid1_EvOnGridCellLeftClick(CControl * control)
+{
+     
+    int c=grid1.GetActiveRow();
+    int d=grid1.GetActiveCol();
+  
+    if(fig[c][d])
+    {	  
+      grid1.SetCellBgColor(c,d,*lxRED);
+      fig[c][d]=false;
+    }  
+    else 
+    {	    
+      grid1.SetCellBgColor(c,d,*lxBLUE);
+      fig[c][d]=true;
+    };
+
+   grid1.Draw();
+};
+
+
+void
+CPWindow1::filedialog1_EvOnClose(int retId)
+{
   char ch;
   FILE* file;
   int c,d;
-  if(Window1.filedialog1.Run())
+
+  if(retId)
     {	
     Window1.filedialog2.SetFileName(Window1.filedialog1.GetFileName());	    
     file=fopen((char*)Window1.filedialog1.GetFileName().char_str(),"r");
@@ -83,14 +126,15 @@ CPWindow1::menu1_Arquivo_Abrir_EvMenuActive(CControl * control)
     else
      Message(lxT("Error Open File!"));
   };
-};
+}
 
 void
-CPWindow1::menu1_Arquivo_Salvar_EvMenuActive(CControl * control)
+CPWindow1::filedialog2_EvOnClose(int retId)
 {
   int c,d;
   FILE* file;
-  if(Window1.filedialog2.Run())
+  
+  if(retId)
     {	  
     file = fopen((char *)Window1.filedialog2.GetFileName().char_str(),"w");
       for(c=0;c<= 9;c++)
@@ -106,44 +150,6 @@ CPWindow1::menu1_Arquivo_Salvar_EvMenuActive(CControl * control)
         };
     fclose(file);
   };
-};
-
-void
-CPWindow1::menu1_Arquivo_Sair_EvMenuActive(CControl * control)
-{
-  Window1.WDestroy();
-};
-
-
-
-void
-CPWindow1::grid1_EvOnGridCellLeftClick(CControl * control)
-{
-     
-    int c=grid1.GetActiveRow();
-    int d=grid1.GetActiveCol();
-  
-    if(fig[c][d])
-    {	  
-      grid1.SetCellBgColor(c,d,*lxRED);
-      fig[c][d]=false;
-    }  
-    else 
-    {	    
-      grid1.SetCellBgColor(c,d,*lxBLUE);
-      fig[c][d]=true;
-    };
-
-   grid1.Draw();
-};
-
-
-
-
-
-
-
-
-
+}
 
 

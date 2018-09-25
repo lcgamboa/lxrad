@@ -23,15 +23,6 @@ CPWindow1::CPWindow1(void)
   menu1.SetTag(0);
   menu1.SetMenuItems(wxT("File,Edit,Project,Windows,Help,"));
   CreateChild(&menu1);
-  //filedialog1
-  filedialog1.SetFOwner(this);
-  filedialog1.SetClass(wxT("CFileDialog"));
-  filedialog1.SetName(wxT("filedialog1"));
-  filedialog1.SetTag(0);
-  filedialog1.SetFileName(wxT("untitled.txt"));
-  filedialog1.SetFilter(wxT("All Files (*.*)|*.*"));
-  filedialog1.SetType(129);
-  CreateChild(&filedialog1);
   //menu1_File
   menu1_File.SetFOwner(this);
   menu1_File.SetClass(wxT("CPMenu"));

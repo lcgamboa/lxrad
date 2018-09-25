@@ -218,12 +218,14 @@ CPWindow5::CPWindow5(void)
   filedialog1.SetFileName(wxT("untitled.txt"));
   filedialog1.SetFilter(wxT("LXRAD Project (*.prj_lxrad)|*.prj_lxrad|All Files (*.*)|*.*"));
   filedialog1.SetType(129);
+  filedialog1.EvOnClose = EVONCLOSE &CPWindow5::Filedialog1OnClose;
   CreateChild(&filedialog1);
   //dirdialog1
   dirdialog1.SetFOwner(this);
   dirdialog1.SetClass(wxT("CDirDialog"));
   dirdialog1.SetName(wxT("dirdialog1"));
   dirdialog1.SetTag(0);
+  dirdialog1.EvOnClose = EVONCLOSE &CPWindow5::Dirdialog1OnClose;
   CreateChild(&dirdialog1);
   /*#Others*/
 //lxrad automatic generated block end, don't edit above!

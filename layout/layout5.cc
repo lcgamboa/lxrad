@@ -62,20 +62,32 @@ CPWindow5::checkbox2_EvOnCheckBox(CControl * control)
 void
 CPWindow5::button1_EvMouseButtonRelease(CControl * control, uint button, uint x, uint y,uint state)
 {
-  if (filedialog1.Run ())
-    {
-      edit1.SetText (filedialog1.GetFileName ());
-    };
-};
+  filedialog1.Run ();
+}
+  
+void 
+CPWindow5::Filedialog1OnClose (int retId)
+{
+  if(retId)
+  {
+     edit1.SetText (filedialog1.GetFileName ());
+  }
+}
 
 void
 CPWindow5::button2_EvMouseButtonRelease(CControl * control, uint button, uint x, uint y,uint state)
 {
-  if (dirdialog1.Run ())
-    {
+  dirdialog1.Run ();
+}
+
+void 
+CPWindow5::Dirdialog1OnClose (int retId)
+{
+  if(retId)
+  {
       edit2.SetText (dirdialog1.GetDirName ());
-    };
-};
+  }
+}
 
 void
 CPWindow5::button3_EvMouseButtonRelease(CControl * control, uint button, uint x, uint y,uint state)

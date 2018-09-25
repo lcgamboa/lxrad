@@ -9,6 +9,7 @@
   <Hint type="String"></Hint>
   <Enable type="bool">1</Enable>
   <Visible type="bool">1</Visible>
+  <Color type="String">#000001</Color>
   <PopupMenu type="PopupMenu">NULL</PopupMenu>
   <EvMouseMove type="Event">FALSE</EvMouseMove>
   <EvMouseButtonPress type="Event">FALSE</EvMouseButtonPress>
@@ -42,6 +43,7 @@
   <FileName type="String">untitled.txt</FileName>
   <Filter type="String">All Files (*.*)|*.*</Filter>
   <Type type="int">129</Type>
+  <EvOnClose type="Event">TRUE</EvOnClose>
 </filedialog1>
 <filedialog2>
   <Class type="String">CFileDialog</Class>
@@ -50,6 +52,7 @@
   <FileName type="String">untitled.txt</FileName>
   <Filter type="String">All Files (*.*)|*.*</Filter>
   <Type type="int">130</Type>
+  <EvOnClose type="Event">TRUE</EvOnClose>
 </filedialog2>
 <menu1_Arquivo>
   <Class type="String">CPMenu</Class>
@@ -63,6 +66,7 @@
   <Name type="String">menu1_Arquivo_Abrir</Name>
   <Tag type="int">0</Tag>
   <Text type="String">Abrir</Text>
+  <Enable type="bool">1</Enable>
   <SubMenu type="SubMenu">NULL</SubMenu>
   <EvMenuActive type="Event">TRUE</EvMenuActive>
 </menu1_Arquivo_Abrir>
@@ -71,6 +75,7 @@
   <Name type="String">menu1_Arquivo_Salvar</Name>
   <Tag type="int">0</Tag>
   <Text type="String">Salvar</Text>
+  <Enable type="bool">1</Enable>
   <SubMenu type="SubMenu">NULL</SubMenu>
   <EvMenuActive type="Event">TRUE</EvMenuActive>
 </menu1_Arquivo_Salvar>
@@ -79,6 +84,7 @@
   <Name type="String">menu1_Arquivo_Sair</Name>
   <Tag type="int">0</Tag>
   <Text type="String">Sair</Text>
+  <Enable type="bool">1</Enable>
   <SubMenu type="SubMenu">NULL</SubMenu>
   <EvMenuActive type="Event">TRUE</EvMenuActive>
 </menu1_Arquivo_Sair>
@@ -93,6 +99,7 @@
   <Hint type="String"></Hint>
   <Enable type="bool">1</Enable>
   <Visible type="bool">1</Visible>
+  <Color type="String">#000001</Color>
   <PopupMenu type="PopupMenu">NULL</PopupMenu>
   <EvMouseMove type="Event">FALSE</EvMouseMove>
   <EvMouseButtonPress type="Event">FALSE</EvMouseButtonPress>
@@ -136,6 +143,7 @@
   <Name type="String">menu1_Editar_Limpar</Name>
   <Tag type="int">0</Tag>
   <Text type="String">Limpar</Text>
+  <Enable type="bool">1</Enable>
   <SubMenu type="SubMenu">NULL</SubMenu>
   <EvMenuActive type="Event">TRUE</EvMenuActive>
 </menu1_Editar_Limpar>
@@ -144,6 +152,7 @@
   <Name type="String">menu1_Ajuda_Sobre</Name>
   <Tag type="int">0</Tag>
   <Text type="String">Sobre</Text>
+  <Enable type="bool">1</Enable>
   <SubMenu type="SubMenu">NULL</SubMenu>
   <EvMenuActive type="Event">TRUE</EvMenuActive>
 </menu1_Ajuda_Sobre>
@@ -158,6 +167,7 @@
   <Hint type="String"></Hint>
   <Enable type="bool">1</Enable>
   <Visible type="bool">1</Visible>
+  <Color type="String">#000001</Color>
   <PopupMenu type="PopupMenu">NULL</PopupMenu>
   <EvMouseMove type="Event">FALSE</EvMouseMove>
   <EvMouseButtonPress type="Event">FALSE</EvMouseButtonPress>

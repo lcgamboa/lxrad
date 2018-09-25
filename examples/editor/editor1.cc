@@ -129,70 +129,13 @@ CPWindow1::menu1_Ajuda_Sobre_EvMenuActive(CControl * control)
 void
 CPWindow1::menu1_Arquivo_Abrir_EvMenuActive(CControl * control)
 {
-  char ch;
-  FILE* file;
-  int c,d,g;
-  CToolButton* tbutton;
-  if(Window1.filedialog1.Run())
-    {	
-    Window1.filedialog2.SetFileName(Window1.filedialog1.GetFileName());	    
-    file=fopen((char*)Window1.filedialog1.GetFileName().char_str(),"r");
-     
-    if(file)
-    { 
-      for(c=0;c<=9;c++)
-        {      
-        for(d=0;d<=9;d++)
-	  {	
-          g=(c*10)+d;
-          ch=fgetc(file);
-          tbutton=dynamic_cast<CToolButton*>(Window1.GetChildByName(lxT("toolbutton")+itoa(g+1)));
-          if(ch == '-')
-	    {	  
-            tbutton->SetImgData(blue_xpm);
-            tbutton->Draw();
-            fig[g]=true;
-	    }
-          else 
-	    {	  
-            tbutton->SetImgData(red_xpm);
-            tbutton->Draw();
-            fig[g]=false;
-	    };
-          ch=fgetc(file);
-	  };
-       ch=fgetc(file);
-       ch=fgetc(file);
-       };
-    fclose(file);
-    }
-    else
-     Message(lxT("Error Open File!"));
-  };
-};
+  Window1.filedialog1.Run();
+}
 
 void
 CPWindow1::menu1_Arquivo_Salvar_EvMenuActive(CControl * control)
 {
-  int c,d,g;
-  FILE* file;
-  if(Window1.filedialog2.Run())
-    {	  
-    file = fopen((char *)Window1.filedialog2.GetFileName().char_str(),"w");
-      for(c=0;c<= 9;c++)
-        {
-        for(d=0;d<=9;d++)
-	  {	
-          g=(c*10)+d;
-          if(fig[g])
-            fprintf(file,"-1");
-          else
-            fprintf(file," 1");
-	  };
-          fprintf(file," \n");
-        };
-    fclose(file);
-  };
+  Window1.filedialog2.Run();
 };
 
 void
@@ -800,11 +743,76 @@ void
 CPWindow1::toolbutton100_EvMouseButtonPress(CControl * control, uint button, uint x, uint y,uint state)
 {
   toolbuttonMouseButtonPress(control,button,x,y,state);
-};
+}
 
 
+void
+CPWindow1::filedialog1_EvOnClose(int retId)
+{
+  char ch;
+  FILE* file;
+  int c,d,g;
+  CToolButton* tbutton;
+  if(retId)
+    {	
+    Window1.filedialog2.SetFileName(Window1.filedialog1.GetFileName());	    
+    file=fopen((char*)Window1.filedialog1.GetFileName().char_str(),"r");
+     
+    if(file)
+    { 
+      for(c=0;c<=9;c++)
+        {      
+        for(d=0;d<=9;d++)
+	  {	
+          g=(c*10)+d;
+          ch=fgetc(file);
+          tbutton=dynamic_cast<CToolButton*>(Window1.GetChildByName(lxT("toolbutton")+itoa(g+1)));
+          if(ch == '-')
+	    {	  
+            tbutton->SetImgData(blue_xpm);
+            tbutton->Draw();
+            fig[g]=true;
+	    }
+          else 
+	    {	  
+            tbutton->SetImgData(red_xpm);
+            tbutton->Draw();
+            fig[g]=false;
+	    };
+          ch=fgetc(file);
+	  };
+       ch=fgetc(file);
+       ch=fgetc(file);
+       };
+    fclose(file);
+    }
+    else
+     Message(lxT("Error Open File!"));
+  };
+}
 
-
-
+void
+CPWindow1::filedialog2_EvOnClose(int retId)
+{
+  int c,d,g;
+  FILE* file;
+  if(retId)
+    {	  
+    file = fopen((char *)Window1.filedialog2.GetFileName().char_str(),"w");
+      for(c=0;c<= 9;c++)
+        {
+        for(d=0;d<=9;d++)
+	  {	
+          g=(c*10)+d;
+          if(fig[g])
+            fprintf(file,"-1");
+          else
+            fprintf(file," 1");
+	  };
+          fprintf(file," \n");
+        };
+    fclose(file);
+  };
+}
 
 

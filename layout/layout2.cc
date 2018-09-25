@@ -4,7 +4,7 @@
 
    ########################################################################
 
-   Copyright (c) : 2010 Luis Claudio Gamboa Lopes
+   Copyright (c) : 2010-2018 Luis Claudio Gamboa Lopes
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -170,7 +170,7 @@ CPWindow2::_EvKeyboardPress (CControl * control, uint key, uint x, uint y, uint 
   //  mprint(wxT("_EvKeyboardPress\n"));
 
 
-  this->SetColor (wxT ("darkgray"));
+  //this->SetColor (wxT ("darkgray"));
 };
 
 void
@@ -1316,7 +1316,7 @@ CPWindow2::MakeOrUpdateFiles (bool prompt)
             {
               if (atob (arg))
                 {
-                  filec2 += wxT ("void\nCPWindow") + itoa (WN) + wxT ("::") + WriteEvents (wxT (""), line) + wxT ("\n{\n  //code here:)\n  mprint(wxT(\"_") + line + wxT ("\\n\"));\n};\n\n");
+                  filec2 += wxT ("void\nCPWindow") + itoa (WN) + wxT ("::") + WriteEvents (wxT (""), line) + wxT ("\n{\n  //code here:)\n  mprint(wxT(\"_") + line + wxT ("\\n\"));\n}\n\n");
                 };
             };
         };
@@ -1337,7 +1337,7 @@ CPWindow2::MakeOrUpdateFiles (bool prompt)
                 {
                   if (atob (arg))
                     {
-                      filec2 += wxT ("void\nCPWindow") + itoa (WN) + wxT ("::") + WriteEvents (ctname, line) + wxT ("\n{\n  //code here:)\n  mprint(wxT(\"") + ctname + wxT ("_") + line + wxT ("\\n\"));\n};\n\n");
+                      filec2 += wxT ("void\nCPWindow") + itoa (WN) + wxT ("::") + WriteEvents (ctname, line) + wxT ("\n{\n  //code here:)\n  mprint(wxT(\"") + ctname + wxT ("_") + line + wxT ("\\n\"));\n}\n\n");
                     };
                 };
             };
@@ -1380,7 +1380,7 @@ CPWindow2::MakeOrUpdateFiles (bool prompt)
                         {
                           if (!testline (wxT ("CPWindow") + itoa (WN) + wxT ("::") + WriteEvents (wxT (""), line)))
                             {
-                              filec2 += wxT ("void\nCPWindow") + itoa (WN) + wxT ("::") + WriteEvents (wxT (""), line) + wxT ("\n{\n  //code here:)\n  mprint(wxT(\"_") + line + wxT ("\\n\"));\n};\n\n");
+                              filec2 += wxT ("void\nCPWindow") + itoa (WN) + wxT ("::") + WriteEvents (wxT (""), line) + wxT ("\n{\n  //code here:)\n  mprint(wxT(\"_") + line + wxT ("\\n\"));\n}\n\n");
                             };
                         };
                     };
@@ -1401,7 +1401,7 @@ CPWindow2::MakeOrUpdateFiles (bool prompt)
                             {
                               if (!testline (wxT ("CPWindow") + itoa (WN) + wxT ("::") + WriteEvents (ctname, line)))
                                 {
-                                  filec2 += wxT ("void\nCPWindow") + itoa (WN) + wxT ("::") + WriteEvents (ctname, line) + wxT ("\n{\n  //code here:)\n  mprint(wxT(\"") + ctname + wxT ("_") + line + wxT ("\\n\"));\n};\n\n");
+                                  filec2 += wxT ("void\nCPWindow") + itoa (WN) + wxT ("::") + WriteEvents (ctname, line) + wxT ("\n{\n  //code here:)\n  mprint(wxT(\"") + ctname + wxT ("_") + line + wxT ("\\n\"));\n}\n\n");
                                 };
                             };
                         };
@@ -2375,7 +2375,13 @@ CPWindow2::WriteEvents (String name, String event)
       if (pos >= 0)
         out += wxT ("(CControl * control, uint key, uint x, uint y,uint mask)");
       else
-        out += wxT ("(CControl * control)");
+      {
+        pos = event.find (wxT ("OnClose"));
+	if(pos >= 0)
+           out += wxT ("(int retId)");
+	else	
+           out += wxT ("(CControl * control)");
+      }
     };
   return out;
 };

@@ -220,6 +220,8 @@ class CPWindow1:public CWindow
   void toolbutton98_EvMouseButtonPress(CControl * control, uint button, uint x, uint y,uint state);
   void toolbutton99_EvMouseButtonPress(CControl * control, uint button, uint x, uint y,uint state);
   void toolbutton100_EvMouseButtonPress(CControl * control, uint button, uint x, uint y,uint state);
+  void filedialog1_EvOnClose(int retId);
+  void filedialog2_EvOnClose(int retId);
   void menu1_Arquivo_Abrir_EvMenuActive(CControl * control);
   void menu1_Arquivo_Salvar_EvMenuActive(CControl * control);
   void menu1_Arquivo_Sair_EvMenuActive(CControl * control);

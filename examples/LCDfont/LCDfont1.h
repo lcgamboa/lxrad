@@ -22,6 +22,7 @@ class CPWindow1:public CPWindow
   void button1_EvMouseButtonClick(CControl * control, uint button, uint x, uint y,uint state);
   void button2_EvMouseButtonClick(CControl * control, uint button, uint x, uint y,uint state);
   void button3_EvMouseButtonClick(CControl * control, uint button, uint x, uint y,uint state);
+  void filedialog1_EvOnClose(int retId);
 
   /*#Others*/
   CPWindow1(void);

@@ -29,6 +29,8 @@ class CPWindow5:public CPWindow
   void button2_EvMouseButtonRelease(CControl * control, uint button, uint x, uint y,uint state);
   void button3_EvMouseButtonRelease(CControl * control, uint button, uint x, uint y,uint state);
   void button4_EvMouseButtonRelease(CControl * control, uint button, uint x, uint y,uint state);
+  void Filedialog1OnClose (int retId);
+  void Dirdialog1OnClose (int retId);
 
   /*#Others*/
   CPWindow5(void);
