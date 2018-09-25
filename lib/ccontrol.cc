@@ -71,7 +71,6 @@ CControl::CControl (void)
   EvMouseButtonDoubleClick = NULL;
   EvKeyboardPress = NULL;
   EvKeyboardRelease = NULL;
-  EvKeyboardKey = NULL;
   EvOnDraw = NULL;
   EvOnFocusIn = NULL;
   EvOnFocusOut = NULL;
@@ -441,7 +440,6 @@ CControl::GetContext (void)
   Context.AddLine (xml_out (wxT("EvMouseButtonDoubleClick"), wxT("Event"), btoa (GetEv ())));
   Context.AddLine (xml_out (wxT("EvKeyboardPress"), wxT("Event"), btoa (GetEv ())));
   Context.AddLine (xml_out (wxT("EvKeyboardRelease"), wxT("Event"), btoa (GetEv ())));
-  Context.AddLine (xml_out (wxT("EvKeyboardKey"), wxT("Event"), btoa (GetEv ())));
   Context.AddLine (xml_out (wxT("EvOnDraw"), wxT("Event"), btoa (GetEv ())));
   Context.AddLine (xml_out (wxT("EvOnFocusIn"), wxT("Event"), btoa (GetEv ())));
   Context.AddLine (xml_out (wxT("EvOnFocusOut"), wxT("Event"), btoa (GetEv ())));
@@ -505,8 +503,6 @@ CControl::SetContext (CStringList context)
       if (name.compare (wxT("EvKeyboardPress")) == 0)
 	SetEv (atob (value));
       if (name.compare (wxT("EvKeyboardRelease")) == 0)
-	SetEv (atob (value));
-      if (name.compare (wxT("EvKeyboardKey")) == 0)
 	SetEv (atob (value));
       if (name.compare (wxT("EvOnDraw")) == 0)
 	SetEv (atob (value));

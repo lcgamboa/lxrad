@@ -2367,18 +2367,18 @@ CPWindow2::WriteEvents (String name, String event)
   pos = event.find (wxT ("Mouse"));
   if (pos >= 0)
     {
-      out += wxT ("(CControl * control, uint button, uint x, uint y,uint state)");
+      out += wxT ("(CControl * control, const uint button, const uint x,const  uint y, const uint state)");
     }
   else
     {
       pos = event.find (wxT ("Keyboard"));
       if (pos >= 0)
-        out += wxT ("(CControl * control, uint key, uint x, uint y,uint mask)");
+        out += wxT ("(CControl * control,const uint key, const uint hkey, const uint mask)");
       else
       {
         pos = event.find (wxT ("OnClose"));
 	if(pos >= 0)
-           out += wxT ("(int retId)");
+           out += wxT ("(const int retId)");
 	else	
            out += wxT ("(CControl * control)");
       }

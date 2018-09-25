@@ -161,7 +161,6 @@ public:
   void (CControl::*EvMouseButtonDoubleClick) (CControl * control,const uint button,const uint x,const uint y,const uint mask);
   void (CControl::*EvKeyboardPress) (CControl * control,const uint keyval,const uint hardware_keycode,const  uint state);
   void (CControl::*EvKeyboardRelease) (CControl * control,const uint keyval,const uint hardware_keycode,const uint state);
-  void (CControl::*EvKeyboardKey) (CControl * control,const uint key,const uint x,const uint y,const uint mask);
   void (CControl::*EvOnDraw) (CControl * control);
   void (CControl::*EvOnFocusIn) (CControl * control);
   void (CControl::*EvOnFocusOut) (CControl * control);
