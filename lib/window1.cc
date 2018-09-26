@@ -95,18 +95,9 @@ void
 CJanela1::button3MouseButtonRelease (CControl * control, uint button, uint x, uint y, uint state)
 {
 
-  if (filedialog1.Run ())
-    {
-      Janela2.draw1.WriteImgToFile (filedialog1.GetFileName ());
-      mprint (wxT("tudo=")+filedialog1.GetFileName ()+wxT("  d=\"") + dirname (filedialog1.GetFileName ()) + wxT("\"   f=\"") + basename (filedialog1.GetFileName ()) + wxT("\"\n"));
-    }
-  else
-    mprint (wxT("Dialog canceled\n"));
+  filedialog1.Run ();
 
-  if (dirdialog1.Run ())
-    mprint (wxT("Dir Dialog Ok\n"));
-  else  
-    mprint (wxT("Dir Dialog canceled\n"));
+  dirdialog1.Run ();
 
 
   button1.SetEnable (!button1.GetEnable ());
@@ -114,8 +105,28 @@ CJanela1::button3MouseButtonRelease (CControl * control, uint button, uint x, ui
   toolbutton1.SetEnable (!toolbutton1.GetEnable ());
 
   printf("CJanela1::button3MouseButtonRelease (save window2 in png, dir dialog test, enable buttons)\n");
-};
+}
 
+void 
+CJanela1::Filedialog1Close (int retId)
+{
+  if(retId)
+    {
+      Janela2.draw1.WriteImgToFile (filedialog1.GetFileName ());
+      mprint (wxT("tudo=")+filedialog1.GetFileName ()+wxT("  d=\"") + dirname (filedialog1.GetFileName ()) + wxT("\"   f=\"") + basename (filedialog1.GetFileName ()) + wxT("\"\n"));
+    }
+  else
+    mprint (wxT("Dialog canceled\n"));
+}
+
+void 
+CJanela1::Dirdialog1Close (int retId)
+{
+if (retId)
+    mprint (wxT("Dir Dialog Ok\n"));
+  else  
+    mprint (wxT("Dir Dialog canceled\n"));
+}
 
 void
 CJanela1::pmenuitem2_3MouseButtonPress (CControl * control, uint button, uint x, uint y, uint state)
@@ -255,16 +266,21 @@ CJanela1::Edit1Focus (CControl * control)
   if(togglebutton1.GetCheck ())
     {
 #ifndef __WXX11__ 	    
-      if(colordialog1.Run())
+      colordialog1.Run();
+#endif      
+    }
+    
+ }
+
+void 
+CJanela1::Colordialog1Close (int retId)
+{
+      if(retId)
         {
            togglebutton1.SetColor (colordialog1.GetColor());
            label1.SetColor (colordialog1.GetColor());
         }
-#endif      
-    }
-    
- };
-
+}
 
 void
 CJanela1::Thread1Run (CControl * control)

@@ -231,19 +231,21 @@ CJanela1::CJanela1 (void)
   xpmbutton1.SetText (wxT("Ok"));
   xpmbutton1.SetImgFileName (wxT("ok.png"));
   xpmbutton1.SetFOwner (this);
-  xpmbutton1.EvMouseButtonPress = EVMOUSEBUTTONPRESS & CJanela1::button1MouseButtonRelease;
+  xpmbutton1.EvMouseButtonPress = EVMOUSEBUTTONPRESS &CJanela1::button1MouseButtonRelease;
 
 //filedialog1
   filedialog1.SetName (wxT("filedialog1"));
   filedialog1.SetFileName (wxT("teste.png"));
   filedialog1.SetType (wxFD_OPEN);
   filedialog1.SetFilter (wxT("Image Files (*.png)|*.png"));
+  filedialog1.EvOnClose = EVONCLOSE &CJanela1::Filedialog1Close;
 
 //dirdialog1
   dirdialog1.SetName (wxT("dirdialog1"));
   dirdialog1.SetDirName (wxT("~/"));
   dirdialog1.SetType (wxFD_OPEN);
-
+  dirdialog1.EvOnClose = EVONCLOSE &CJanela1::Dirdialog1Close;
+  
 //list1
   list1.SetName (wxT("list1"));
   list1.SetX (300);
@@ -390,6 +392,7 @@ CJanela1::CJanela1 (void)
 #ifndef __WXX11__ 	    
   colordialog1.SetName (wxT("colordialog1"));
   colordialog1.SetColorName(wxT("red"));
+  colordialog1.EvOnClose = EVONCLOSE &CJanela1::Colordialog1Close;
 #endif 
 
   CreateChild (&timer1);

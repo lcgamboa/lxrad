@@ -85,21 +85,28 @@ void
 CFileDialog::SetFileName (String filename)
 {
   FileName = filename;
-  SetDir (dirname (filename));
-  if (Widget != NULL)
-    ((wxFileDialog*) Widget)->SetFilename (basename (filename));
-};
+  if(SetDir (dirname (filename)))
+  {
+    if (Widget != NULL)
+      ((wxFileDialog*) Widget)->SetFilename (basename (filename));
+  }
+}
 
-void
+bool
 CFileDialog::SetDir (String dir)
 {
+  bool ret=false;
+
   Dir = dir;
   if (wxDirExists (dir))
-    wxSetWorkingDirectory (dir);
-  if (Widget != NULL)
-    ((wxFileDialog*) Widget)->SetDirectory (dir);
-
-};
+    if(wxSetWorkingDirectory (dir))
+    {
+     ret=true;	    
+     if (Widget != NULL)
+       ((wxFileDialog*) Widget)->SetDirectory (dir);
+    }
+  return ret;
+}
 
 void
 CFileDialog::Run (void)

@@ -56,7 +56,7 @@ public:
   String GetFileName (void);
   void SetFileName (String filename);
   String GetDir (void);
-  void SetDir(String dir);
+  bool SetDir(String dir);
   long GetType(void);
   void SetType(long type);
   String GetFilter(void);

@@ -82,6 +82,12 @@ CTimer::Destroy (void)
   Widget->Unbind(wxEVT_TIMER,&CTimer::Event,this,GetWid()); 
   EvOnTime = NULL;
   SetRunState (false);
+#ifdef __WXMSW__
+#ifdef __i386__  
+  //FIXME win32 crash with optmization
+  Widget=NULL;
+#endif	  
+#endif  
   CControl::Destroy ();
 };
 
