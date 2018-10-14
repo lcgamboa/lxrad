@@ -46,6 +46,7 @@
 #define lxFileExists wxFileExists
 #define lxExecute wxExecute
 #define lxGetCwd wxGetCwd 
+#define lxLaunchDefaultBrowser wxLaunchDefaultBrowser
 
 #define lxRED wxRED
 #define lxBLUE wxBLUE
