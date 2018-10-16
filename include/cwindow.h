@@ -34,12 +34,12 @@
 
 #include"ccontrol.h"
 
-#define EVONCREATE        (void(CControl::*)(CWindow*))
-#define EVONDESTROY       (void(CControl::*)(CWindow*))
-#define EVONSHOW          (void(CControl::*)(CWindow*))
-#define EVONHIDE          (void(CControl::*)(CWindow*))
-#define EVONENTER         (void(CControl::*)(CWindow*))
-#define EVONLEAVE         (void(CControl::*)(CWindow*))
+#define EVONCREATE        (void(CControl::*)(CControl*))
+#define EVONDESTROY       (void(CControl::*)(CControl*))
+#define EVONSHOW          (void(CControl::*)(CControl*))
+#define EVONHIDE          (void(CControl::*)(CControl*))
+#define EVONENTER         (void(CControl::*)(CControl*))
+#define EVONLEAVE         (void(CControl::*)(CControl*))
 
 /** \brief Image Control.
  *
@@ -114,12 +114,12 @@ public:
   virtual void on_enter (void);
   virtual void on_leave (void);
 
-  void (CControl::*EvOnCreate) (CWindow * win);
-  void (CControl::*EvOnDestroy) (CWindow * win);
-  void (CControl::*EvOnShow) (CWindow * win);
-  void (CControl::*EvOnHide) (CWindow * win);
-  void (CControl::*EvOnEnter) (CWindow * win);
-  void (CControl::*EvOnLeave) (CWindow * win);
+  void (CControl::*EvOnCreate) (CControl * win);
+  void (CControl::*EvOnDestroy) (CControl * win);
+  void (CControl::*EvOnShow) (CControl * win);
+  void (CControl::*EvOnHide) (CControl * win);
+  void (CControl::*EvOnEnter) (CControl * win);
+  void (CControl::*EvOnLeave) (CControl * win);
 };
 
 
