@@ -12,9 +12,9 @@ wxwidgets      http://www.wxwidgets.org
 
 Installation:
 
+autoconf
 ./configure
 make           - Compile the liblxrad  and layout 
 make install   - Install liblxrad and headers
 make uninstall - Uninstall liblxrad and headers
 examples/make  - Compile the examples
-layout/make    - Compile layout
