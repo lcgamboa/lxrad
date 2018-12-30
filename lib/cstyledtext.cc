@@ -88,7 +88,7 @@ CStyledText::Clear (void)
 
   if (Widget != NULL)
     {
-      ((wxStyledTextCtrl*)Widget)->Clear();
+      ((wxStyledTextCtrl*)Widget)->ClearAll();
     };
 
 };
@@ -109,7 +109,7 @@ CStyledText::InsertLine (String line, int ln)
   Lines.InsertLine (line, ln);
   if (Widget != NULL)
   {
-       ((wxStyledTextCtrl*)Widget)->Clear();
+       ((wxStyledTextCtrl*)Widget)->ClearAll();
        ((wxStyledTextCtrl*)Widget)->WriteText (Lines.GetBuffer ().c_str ());
   };
   Draw ();
@@ -121,7 +121,7 @@ CStyledText::DelLine (int ln)
   Lines.DelLine (ln);
   if (Widget != NULL)
   {
-       ((wxStyledTextCtrl*)Widget)->Clear();
+       ((wxStyledTextCtrl*)Widget)->ClearAll();
        ((wxStyledTextCtrl*)Widget)->WriteText (Lines.GetBuffer ().c_str ());
   }
   Draw ();
@@ -134,7 +134,7 @@ CStyledText::LoadFromFile (String fname)
     {
       Clear ();
       Lines.LoadFromFile (fname);
-       ((wxStyledTextCtrl*)Widget)->Clear();
+       ((wxStyledTextCtrl*)Widget)->ClearAll();
        ((wxStyledTextCtrl*)Widget)->WriteText (Lines.GetBuffer ().c_str ());
     }
   else
