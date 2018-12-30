@@ -4,7 +4,7 @@
 
    ########################################################################
 
-   Copyright (c) : 2010-2016 Luis Claudio Gamboa Lopes
+   Copyright (c) : 2010-2018 Luis Claudio Gamboa Lopes
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -45,6 +45,7 @@ pmenuc,
 scrollc,
 comboc,
 textc,
+styledtextc,
 filedialogc,
 dirdialogc,
 itemmenuc,
@@ -184,6 +185,13 @@ newcontrol (String controltype, CControl * owner)
       ncontrol->SetName (wxT("text") + itoa (cont[textc]++));
       return ncontrol;
     };
+  if (controltype.compare (wxT("CStyledText")) == 0)
+    {
+      ncontrol = new CStyledText;
+//      ncontrol->Create (owner);
+      ncontrol->SetName (wxT("styledtext") + itoa (cont[styledtextc]++));
+      return ncontrol;
+    };
   if (controltype.compare (wxT("CFileDialog")) == 0)
     {
       ncontrol = new CFileDialog;
@@ -313,7 +321,7 @@ getbuttons (CControl * owner)
   button = new CToolButton;
   button->SetName (wxT("CEdit"));
   button->SetHint (wxT("CEdit"));
-  button->SetX (52);
+  button->SetX (26*2);
   button->SetY (0);
   button->SetHint (button->GetName ());
   button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/edit.png"));
@@ -324,7 +332,7 @@ getbuttons (CControl * owner)
   button = new CToolButton;
   button->SetName (wxT("CCheckBox"));
   button->SetHint (wxT("CCheckBox"));
-  button->SetX (78);
+  button->SetX (26*3);
   button->SetY (0);
   button->SetHint (button->GetName ());
   button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/checkbox.png"));
@@ -335,7 +343,7 @@ getbuttons (CControl * owner)
   button = new CToolButton;
   button->SetName (wxT("CDraw"));
   button->SetHint (wxT("CDraw"));
-  button->SetX (104);
+  button->SetX (26*4);
   button->SetY (0);
   button->SetHint (button->GetName ());
   button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/draw.png"));
@@ -346,7 +354,7 @@ getbuttons (CControl * owner)
   button = new CToolButton;
   button->SetName (wxT("CToolButton"));
   button->SetHint (wxT("CToolButton"));
-  button->SetX (130);
+  button->SetX (26*5);
   button->SetY (0);
   button->SetHint (button->GetName ());
   button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/toolbutton.png"));
@@ -357,7 +365,7 @@ getbuttons (CControl * owner)
   button = new CToolButton;
   button->SetName (wxT("CXpmButton"));
   button->SetHint (wxT("CXpmButton"));
-  button->SetX (156);
+  button->SetX (26*6);
   button->SetY (0);
   button->SetHint (button->GetName ());
   button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/xpmbutton.png"));
@@ -368,7 +376,7 @@ getbuttons (CControl * owner)
   button = new CToolButton;
   button->SetName (wxT("CList"));
   button->SetHint (wxT("CList"));
-  button->SetX (182);
+  button->SetX (26*7);
   button->SetY (0);
   button->SetHint (button->GetName ());
   button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/list.png"));
@@ -379,7 +387,7 @@ getbuttons (CControl * owner)
   button = new CToolButton;
   button->SetName (wxT("CFileList"));
   button->SetHint (wxT("CFileList"));
-  button->SetX (208);
+  button->SetX (26*8);
   button->SetY (0);
   button->SetHint (button->GetName ());
   button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/filelist.png"));
@@ -390,7 +398,7 @@ getbuttons (CControl * owner)
   button = new CToolButton;
   button->SetName (wxT("CMenu"));
   button->SetHint (wxT("CMenu"));
-  button->SetX (234);
+  button->SetX (26*9);
   button->SetY (0);
   button->SetHint (button->GetName ());
   button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/menu.png"));
@@ -401,7 +409,7 @@ getbuttons (CControl * owner)
   button = new CToolButton;
   button->SetName (wxT("CPMenu"));
   button->SetHint (wxT("CPMenu"));
-  button->SetX (260);
+  button->SetX (26*10);
   button->SetY (0);
   button->SetHint (button->GetName ());
   button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/pmenu.png"));
@@ -412,7 +420,7 @@ getbuttons (CControl * owner)
   button = new CToolButton;
   button->SetName (wxT("CScroll"));
   button->SetHint (wxT("CScroll"));
-  button->SetX (286);
+  button->SetX (26*11);
   button->SetY (0);
   button->SetHint (button->GetName ());
   button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/scroll.png"));
@@ -423,7 +431,7 @@ getbuttons (CControl * owner)
   button = new CToolButton;
   button->SetName (wxT("CCombo"));
   button->SetHint (wxT("CCombo"));
-  button->SetX (312);
+  button->SetX (26*12);
   button->SetY (0);
   button->SetHint (button->GetName ());
   button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/combo.png"));
@@ -434,7 +442,7 @@ getbuttons (CControl * owner)
   button = new CToolButton;
   button->SetName (wxT("CFileDialog"));
   button->SetHint (wxT("CFileDialog"));
-  button->SetX (338);
+  button->SetX (26*13);
   button->SetY (0);
   button->SetHint (button->GetName ());
   button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/filedialog.png"));
@@ -445,7 +453,7 @@ getbuttons (CControl * owner)
   button = new CToolButton;
   button->SetName (wxT("CTimer"));
   button->SetHint (wxT("CTimer"));
-  button->SetX (364);
+  button->SetX (26*14);
   button->SetY (0);
   button->SetHint (button->GetName ());
   button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/timer.png"));
@@ -456,7 +464,7 @@ getbuttons (CControl * owner)
   button = new CToolButton;
   button->SetName (wxT("CImage"));
   button->SetHint (wxT("CImage"));
-  button->SetX (390);
+  button->SetX (26*15);
   button->SetY (0);
   button->SetHint (button->GetName ());
   button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/image.png"));
@@ -467,7 +475,7 @@ getbuttons (CControl * owner)
   button = new CToolButton;
   button->SetName (wxT("CText"));
   button->SetHint (wxT("CText"));
-  button->SetX (416);
+  button->SetX (26*16);
   button->SetY (0);
   button->SetHint (button->GetName ());
   button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/text.png"));
@@ -476,20 +484,31 @@ getbuttons (CControl * owner)
   owner->CreateChild (button);
 //button18 
   button = new CToolButton;
+  button->SetName (wxT("CStyledText"));
+  button->SetHint (wxT("CStyledText"));
+  button->SetX (26*17);
+  button->SetY (0);
+  button->SetHint (button->GetName ());
+  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/styledtext.png"));
+  button->SetFOwner (&Window1);
+  button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
+  owner->CreateChild (button);
+//button19 
+  button = new CToolButton;
   button->SetName (wxT("CPanel"));
   button->SetHint (wxT("CPanel"));
-  button->SetX (442);
+  button->SetX (26*18);
   button->SetY (0);
   button->SetHint (button->GetName ());
   button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/panel.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
-//button14 
+//button20 
   button = new CToolButton;
   button->SetName (wxT("CDirDialog"));
   button->SetHint (wxT("CDirDialog"));
-  button->SetX (468);
+  button->SetX (26*19);
   button->SetY (0);
   button->SetHint (button->GetName ());
   button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/dirdialog.png"));
@@ -500,7 +519,7 @@ getbuttons (CControl * owner)
   button = new CToolButton;
   button->SetName (wxT("CGauge"));
   button->SetHint (wxT("CGauge"));
-  button->SetX (494);
+  button->SetX (26*20);
   button->SetY (0);
   button->SetHint (button->GetName ());
   button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/gauge.png"));
@@ -511,7 +530,7 @@ getbuttons (CControl * owner)
   button = new CToolButton;
   button->SetName (wxT("CGrid"));
   button->SetHint (wxT("CGrid"));
-  button->SetX (520);
+  button->SetX (26*21);
   button->SetY (0);
   button->SetHint (button->GetName ());
   button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/grid.png"));
@@ -522,7 +541,7 @@ getbuttons (CControl * owner)
   button = new CToolButton;
   button->SetName (wxT("CHtml"));
   button->SetHint (wxT("CHtml"));
-  button->SetX (546);
+  button->SetX (26*22);
   button->SetY (0);
   button->SetHint (button->GetName ());
   button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/html.png"));
@@ -533,7 +552,7 @@ getbuttons (CControl * owner)
   button = new CToolButton;
   button->SetName (wxT("CStatusbar"));
   button->SetHint (wxT("CStatusbar"));
-  button->SetX (572);
+  button->SetX (26*23);
   button->SetY (0);
   button->SetHint (button->GetName ());
   button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/statusbar.png"));
@@ -544,7 +563,7 @@ getbuttons (CControl * owner)
   button = new CToolButton;
   button->SetName (wxT("CSpin"));
   button->SetHint (wxT("CSpin"));
-  button->SetX (598);
+  button->SetX (26*24);
   button->SetY (0);
   button->SetHint (button->GetName ());
   button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/spin.png"));
@@ -555,7 +574,7 @@ getbuttons (CControl * owner)
   button = new CToolButton;
   button->SetName (wxT("CSpind"));
   button->SetHint (wxT("CSpind"));
-  button->SetX (624);
+  button->SetX (26*25);
   button->SetY (0);
   button->SetHint (button->GetName ());
   button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/spind.png"));
@@ -566,7 +585,7 @@ getbuttons (CControl * owner)
   button = new CToolButton;
   button->SetName (wxT("CToggleButton"));
   button->SetHint (wxT("CToggleButton"));
-  button->SetX (650);
+  button->SetX (26*26);
   button->SetY (0);
   button->SetHint (button->GetName ());
   button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/tgbutton.png"));
@@ -578,7 +597,7 @@ getbuttons (CControl * owner)
   button = new CToolButton;
   button->SetName (wxT("CColorDialog"));
   button->SetHint (wxT("CColorDialog"));
-  button->SetX (676);
+  button->SetX (26*27);
   button->SetY (0);
   button->SetHint (button->GetName ());
   button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/cdialog.png"));
@@ -586,6 +605,7 @@ getbuttons (CControl * owner)
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
 #endif
+  owner->SetWidth(26*28);
 };
 
 

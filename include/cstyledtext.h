@@ -24,63 +24,44 @@
    ######################################################################## */
 
 /**
- * \file lxrad.h
+ * \file cstyledtext.h
  * \author Luis Claudio Gamboa Lopes
- * \date 05-30-2008
+ * \date 12-30-2018
  */
 
-/*!\mainpage LXRAD Documentation
- *
- * \section  CLASSES REFERENCE
- *
- * Classes descriptions.
- *
- *  
- */
+#ifndef CSTYLEDTEXT
+#define CSTYLEDTEXT
 
-#ifndef LXRAD_H
-#define	LXRAD_H
-
-
-#include"clxrad.h"
-#include"cobject.h"
 #include"ccontrol.h"
-#include"cwindow.h"
-#include"capplication.h"
-#include"cpanel.h"
-#include"cpwindow.h"
-#include"cswindow.h"
-#include"clabel.h"
-#include"cbutton.h"
-#include"cedit.h"
-#include"cmessage.h"
-#include"cinput.h"
-#include"cdialog.h"
-#include"cscroll.h"
-#include"cmenu.h"
-#include"cpmenu.h"
-#include"cdraw.h"
-#include"cimage.h"
-#include"clist.h"
-#include"cfilelist.h"
-#include"ccombo.h"
-#include"ccheckbox.h"
-#include"ctoolbutton.h"
-#include"cxpmbutton.h"
-#include"ctext.h"
-#include"cstyledtext.h"
-#include"cfiledialog.h"
-#include"cdirdialog.h"
-#include"ctimer.h"
-#include"cgauge.h"
-#include"cgrid.h"
-#include"chtml.h"
-#include"cstatusbar.h"
-#include"cthread.h"
-#include"cspin.h"
-#include"cspind.h"
-#include"ctogglebutton.h"
-#include"ccolordialog.h"
-#include"newcontrolbycname.h"
-#include"lxutils.h" 
-#endif	/* LXRAD_H */
+
+/** \brief Image Control.
+ *
+ * Generic Text Control Class.
+ */
+
+class CStyledText:public CControl
+{
+protected:
+  CStringList Lines;
+  bool ReadOnly;
+public:
+    CStyledText (void);
+   ~CStyledText (void);
+  int Create (CControl * control);
+  CStringList GetContext (void);
+  void SetContext (CStringList context);
+  void Clear ();
+  void AddLine (String line);
+  void InsertLine (String line, int ln);
+  void DelLine (int ln);
+  void LoadFromFile (String fname);
+  void SaveToFile (String fname);
+  //propriedades
+  void SetReadOnly(bool r);
+  bool GetReadOnly(void);
+  //void SetAlign(CAlign align);
+  //CAlign GetAlign(void);
+  uint GetCountLines (void);
+};
+
+#endif

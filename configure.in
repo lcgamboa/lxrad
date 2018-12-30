@@ -33,7 +33,7 @@ else
 fi
 
 WX_CXXFLAGS="`$WXCONFIG --cxxflags`"
-WX_LIBS="`$WXCONFIG --libs`"
+WX_LIBS="`$WXCONFIG --libs std stc`"
 
 
 AC_SUBST(WX_LIBS)

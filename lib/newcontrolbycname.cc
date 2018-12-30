@@ -66,6 +66,10 @@ newcontrolbycname (String controltype)
     {
       ncontrol = new CText;
     };
+  if (controltype.compare (wxT("CSyledText")) == 0)
+    {
+      ncontrol = new CStyledText;
+    };
   if (controltype.compare (wxT("CFileDialog")) == 0)
     {
       ncontrol = new CFileDialog;
