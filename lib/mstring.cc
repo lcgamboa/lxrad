@@ -241,9 +241,10 @@ dirname (const String & str)
 #ifndef __WXMSW__
   int pos = str.rfind (wxT("/"));
 #else
-  int pos = str.rfind (wxT("\\"));
-  if(pos == -1) 
-     pos = str.rfind (wxT("/"));
+  int pos = str.rfind (wxT("/"));
+  int pos2 = str.rfind (wxT("\\"));
+  if(pos2 > pos) 
+     pos = pos2;
 #endif
   return str.substr (0, pos + 1);
 };
