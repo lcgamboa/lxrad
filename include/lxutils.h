@@ -4,7 +4,7 @@
 
    ########################################################################
 
-   Copyright (c) : 2001-2018  Luis Claudio Gamboa Lopes
+   Copyright (c) : 2001-2019  Luis Claudio Gamboa Lopes
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -58,6 +58,7 @@
 #define lxFONTFAMILY_TELETYPE wxFONTFAMILY_TELETYPE
 #define lxFONTSTYLE_NORMAL wxFONTSTYLE_NORMAL
 #define lxFONTWEIGHT_BOLD wxFONTWEIGHT_BOLD 
+#define lxFONTWEIGHT_NORMAL wxFONTWEIGHT_NORMAL 
 
 #define lxSOUND_ASYNC wxSOUND_ASYNC
 #define lxSOUND_LOOP wxSOUND_LOOP
