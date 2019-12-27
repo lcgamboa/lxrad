@@ -68,7 +68,7 @@ CCanvas::Create (wxWindow * drawable,int directdraw=1)
      BitmapBuffer= new  wxBitmap(Width, Height,  -1);
   
   return 1;
-};
+}
 
 int
 CCanvas::Create (wxWindow * drawable, wxBitmap * bitmap)
@@ -84,7 +84,12 @@ CCanvas::Create (wxWindow * drawable, wxBitmap * bitmap)
   Height=Bitmap->GetHeight();
   
   return 1;
-};
+}
+
+void
+CCanvas::Destroy(void)
+{
+}
 
 wxDC * 
 CCanvas::GetDC(void)
