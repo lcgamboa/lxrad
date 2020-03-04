@@ -47,6 +47,10 @@
 #define lxExecute wxExecute
 #define lxGetCwd wxGetCwd 
 #define lxLaunchDefaultBrowser wxLaunchDefaultBrowser
+#define lxSetWorkingDirectory wxSetWorkingDirectory
+
+#define lxEXEC_SYNC wxEXEC_SYNC
+#define lxEXEC_ASYNC wxEXEC_ASYNC
 
 #define lxRED wxRED
 #define lxBLUE wxBLUE
