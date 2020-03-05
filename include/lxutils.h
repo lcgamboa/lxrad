@@ -48,6 +48,9 @@
 #define lxGetCwd wxGetCwd 
 #define lxLaunchDefaultBrowser wxLaunchDefaultBrowser
 #define lxSetWorkingDirectory wxSetWorkingDirectory
+#define lxRenameFile wxRenameFile
+
+#define lxMOUSE_BTN_LEFT wxMOUSE_BTN_LEFT
 
 #define lxEXEC_SYNC wxEXEC_SYNC
 #define lxEXEC_ASYNC wxEXEC_ASYNC
