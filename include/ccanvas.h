@@ -125,6 +125,7 @@ public:
   void Circle (bool filled, int x, int y, int radius);
   void Text (String str, int x, int y);
   void RotatedText (String str, int x, int y, int angle);
+  void TextOnRect (String str, wxRect, unsigned int align );
   void Polygon (bool filled, wxPoint * points, int npoints);
   void Ellipse(bool filled,int x, int y, int width, int height);
   void EllipticArc(bool filled,int x, int y, int width, int height, double start, double end);

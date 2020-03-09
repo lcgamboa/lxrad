@@ -41,11 +41,11 @@ CDraw::CDraw (void)
   SetTransparent (false);
   Sx=1;
   Sy=1;
-};
+}
 
 CDraw::~CDraw (void)
 {
-};
+}
 
 int
 CDraw::Create (CControl * control)
@@ -75,7 +75,7 @@ CDraw::Create (CControl * control)
 
 
   return CControl::Create (control);
-};
+}
 
 void
 CDraw::Draw (void)
@@ -93,18 +93,18 @@ CDraw::Draw (void)
   //gtk_widget_draw (Widget, &update_rect);
 
   
-};
+}
 
 bool CDraw::GetTransparent (void)
 {
   return Transparent;
-};
+}
 
 void
 CDraw::SetTransparent (bool transparent)
 {
   Transparent = transparent;
-};
+}
 
 CStringList
 CDraw::GetContext (void)
@@ -113,7 +113,7 @@ CDraw::GetContext (void)
   Context.AddLine (xml_out (wxT("Transparent"), wxT("bool"), itoa (GetTransparent ())));
   Context.AddLine (xml_out (wxT("ImgFileName"), wxT("File"), GetImgFileName ()));
   return Context;
-};
+}
 
 void
 CDraw::SetContext (CStringList context)
@@ -134,7 +134,7 @@ CDraw::SetContext (CStringList context)
 	    SetImgFileName (wxT(""));
 	};
     };
-};
+}
 
 String CDraw::GetImgFileName (void)
 {
@@ -184,7 +184,7 @@ CDraw::SetImgFileName (String filename)
     }
   else  
       return false;
-};
+}
 
 
 bool CDraw::SetImgData (const char **data)
@@ -221,6 +221,8 @@ CDraw::on_draw (wxPaintEvent * event)
   Canvas.Init();
   Canvas.End();
   CControl::on_draw(event);
-};
+
+  
+}
 
 

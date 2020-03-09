@@ -503,7 +503,7 @@ CCanvas::SetFont (wxFont font)
 {
   Font=font;
   if (DC != NULL)DC->SetFont (font);
-};
+}
 
 
 void 
@@ -511,12 +511,19 @@ CCanvas::Text (String str, int x, int y)
 {
   if (DC != NULL)DC->DrawText (str,x,y);
 };
+  
+void 
+CCanvas::TextOnRect (String str, wxRect ret, unsigned int align )
+{
+  if (DC != NULL)
+     DC->DrawLabel(str,ret, align);
+}
 
 void 
 CCanvas::RotatedText (String str, int x, int y, int angle)
 {
   if (DC != NULL)DC->DrawRotatedText (str,x,y,angle);
-};
+}
 
 
 void 

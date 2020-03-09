@@ -82,6 +82,10 @@
 
 #define lxConvUTF8 wxConvUTF8
 
+#define lxRect wxRect
+#define lxALIGN_LEFT wxALIGN_LEFT
+#define lxALIGN_RIGHT wxALIGN_RIGHT
+#define lxALIGN_CENTER_VERTICAL wxALIGN_CENTER_VERTICAL
 
 String lxGetUserDataDir(String appname="");
 String lxGetTempDir(String appname="");

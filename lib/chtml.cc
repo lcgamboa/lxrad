@@ -74,7 +74,11 @@ CHtml::Create (CControl * control)
     SetLoadText(Text);
   }
  
-  return CControl::Create (control);
+  int ret= CControl::Create (control);
+    
+  Widget->Unbind(wxEVT_PAINT,&CControl::Event,this,GetWid());
+
+  return ret;
 };
 
 

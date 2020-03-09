@@ -131,7 +131,7 @@ CControl::Create (CControl * control)
     {
 
     //TODO map event direct to the handle
-    //Widget->Bind(wxEVT_PAINT,&CControl::Event,this,GetWid()); //FIXME dissabled because chtml  
+    Widget->Bind(wxEVT_PAINT,&CControl::Event,this,GetWid());
     Widget->Bind(wxEVT_KEY_DOWN,&CControl::Event,this,GetWid()); 
     Widget->Bind(wxEVT_KEY_UP,&CControl::Event,this,GetWid()); 
     Widget->Bind(wxEVT_LEFT_DOWN,&CControl::Event,this,GetWid()); 
@@ -248,15 +248,15 @@ CControl::Draw (void)
   if (Widget != NULL)
       Widget->Refresh();
 
-  /*
+/*  
      if (ChildCount != -1)
      for (int i = 0; i <= ChildCount; i++)
      {
-     Child[i]->Draw ();
-     };
+        Child[i]->Draw ();
+     }
      Update ();
-   */
-};
+  */ 
+}
 
 void
 CControl::Update (void)
