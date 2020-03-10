@@ -1061,17 +1061,16 @@ void
 CControl::key_press (wxKeyEvent * event)
 {
   if ((FOwner) && (EvKeyboardPress))
-    (FOwner->*EvKeyboardPress) (this, event->GetKeyCode(), event->GetRawKeyCode(), event->GetRawKeyFlags());
-};
-
+   (FOwner->*EvKeyboardPress) (this, event->GetKeyCode(), event->GetUnicodeKey (), event->GetModifiers ()); 
+}
 
 
 void
 CControl::key_release (wxKeyEvent * event)
 {
   if ((FOwner) && (EvKeyboardRelease))
-    (FOwner->*EvKeyboardRelease) (this, event->GetKeyCode(),event->GetRawKeyCode(), event->GetRawKeyFlags());
-};
+    (FOwner->*EvKeyboardRelease) (this, event->GetKeyCode(),event->GetUnicodeKey (), event->GetModifiers ());
+}
 
 
 
