@@ -83,4 +83,5 @@
 #include"ccolordialog.h"
 #include"newcontrolbycname.h"
 #include"lxutils.h" 
+#include"lxaudio.h" 
 #endif	/* LXRAD_H */

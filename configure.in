@@ -13,6 +13,13 @@ AC_PROG_CC
 AC_PROG_CXX
 
 
+# Checks for libraries.
+AC_CHECK_LIB([openal], [alGenSources],
+cat >>confdefs.h <<_ACEOF
+#define HAVE_OPENAL 1
+_ACEOF
+LIBS="-lopenal $LIBS",
+AC_MSG_WARN([libopenal Not Found!]))
 
 #check for wxwidget
 WXCONFIG=wx-config

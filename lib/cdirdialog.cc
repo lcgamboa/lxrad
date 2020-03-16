@@ -64,7 +64,7 @@ CDirDialog::GetDirName (void)
     DirName = ((wxDirDialog*) Widget)->GetPath ();
 
   return DirName;
-};
+}
 
 void
 CDirDialog::SetDirName (String dirname)
@@ -72,7 +72,7 @@ CDirDialog::SetDirName (String dirname)
   DirName = dirname;
   if (Widget != NULL)
     ((wxDirDialog*) Widget)->SetPath (DirName);
-};
+}
 
 void
 CDirDialog::Run (void)
@@ -92,7 +92,7 @@ CDirDialog::Run (void)
     default:
       run = 0;
       break;
-    };
+    }
 
 
   delete Widget;
