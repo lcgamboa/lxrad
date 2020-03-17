@@ -3,119 +3,121 @@
 #include <math.h>
 #include <unistd.h>
 #include "../include/lxaudio.h"
-
-#include <AL/al.h> 
 #include <AL/alc.h>
 
 #define  SAMPLE_RATE  10000
 #define  MAX_VALUE 32760
 
-static ALuint buf[2];
-static ALuint src;
+int lxaudio::open = 0;
 
 void
-lxaudio_Init(void)
+lxaudio::Init(void)
 {
- const char* defname = alcGetString (NULL, ALC_DEFAULT_DEVICE_SPECIFIER);
- ALCdevice* dev = alcOpenDevice (defname);
- ALCcontext* ctx = alcCreateContext (dev, NULL);
- alcMakeContextCurrent (ctx);
+ if (!lxaudio::open)
+  {
+   const char* defname = alcGetString (NULL, ALC_DEFAULT_DEVICE_SPECIFIER);
+   ALCdevice* dev = alcOpenDevice (defname);
+   ALCcontext* ctx = alcCreateContext (dev, NULL);
+   alcMakeContextCurrent (ctx);
+   printf ("open real\n");
+  }
+ lxaudio::open++;
+ printf ("open %i\n", lxaudio::open);
 
  alGenBuffers (2, buf);
  alGenSources (1, &src);
-
 }
 
 void
-lxaudio_End(void)
+lxaudio::End(void)
 {
  alDeleteSources (1, &src);
  alDeleteBuffers (2, buf);
 
- ALCcontext* ctx = alcGetCurrentContext ();
- ALCdevice* dev = alcGetContextsDevice (ctx);
- alcMakeContextCurrent (0);
- alcDestroyContext (ctx);
- alcCloseDevice (dev);
+ printf ("close %i\n", lxaudio::open);
+ lxaudio::open--;
+
+ if (!lxaudio::open)
+  {
+   ALCcontext* ctx = alcGetCurrentContext ();
+   ALCdevice* dev = alcGetContextsDevice (ctx);
+   alcMakeContextCurrent (0);
+   alcDestroyContext (ctx);
+   alcCloseDevice (dev);
+   printf ("close real\n");
+  }
 }
 
 unsigned int
-lxaudio_GetSampleRate(void)
+lxaudio::GetSampleRate(void)
 {
  return SAMPLE_RATE;
 }
 
 unsigned int
-lxaudio_GetMax(void)
+lxaudio::GetMax(void)
 {
  return MAX_VALUE;
 }
 
 void
-lxaudio_BeepStart(float freq, float volume)
+lxaudio::BeepStart(float freq, float volume)
 {
- ALint queue; 
+ ALint queue;
  alGetSourcei (src, AL_BUFFERS_QUEUED, &queue);
- 
- if(queue == 0)
- {
- short* samples;
 
- size_t buf_size = SAMPLE_RATE;
-
- samples = new short[buf_size];
-
- if (samples == 0)
+ if (queue == 0)
   {
-   printf ("It seems there is no more heap memory. Sorry we cannot make a beep!");
+   short* samples;
+
+   size_t buf_size = SAMPLE_RATE;
+
+   samples = new short[buf_size];
+
+   if (samples == 0)
+    {
+     printf ("It seems there is no more heap memory. Sorry we cannot make a beep!");
+    }
+   for (unsigned i = 0; i < buf_size; i++)
+    samples[i] = volume * 32760 * sin (2 * M_PI * i * freq / SAMPLE_RATE);
+
+   alBufferData (buf[0], AL_FORMAT_MONO16, samples, buf_size, SAMPLE_RATE);
+   delete[] samples;
+
+   alSourceQueueBuffers (src, 1, buf);
+
+   alSourcei (src, AL_LOOPING, AL_TRUE);
+
+   alSourcePlay (src);
   }
- for (unsigned i = 0; i < buf_size; i++)
-  samples[i] = volume * 32760 * sin (2 * M_PI * i * freq / SAMPLE_RATE);
-
- alBufferData (buf[0], AL_FORMAT_MONO16, samples, buf_size, SAMPLE_RATE);
- delete[] samples;
-
- alSourceQueueBuffers (src, 1, buf);
-     
- alSourcei (src, AL_LOOPING, AL_TRUE);
-
- alSourcePlay (src);
- }
 }
 
 void
-lxaudio_BeepStop(void)
+lxaudio::BeepStop(void)
 {
  ALint proc;
- ALint queue; 
+ ALint queue;
  ALuint buffer;
- 
+
  alGetSourcei (src, AL_BUFFERS_QUEUED, &queue);
- if(queue)
- {
+ if (queue)
+  {
    alSourcei (src, AL_LOOPING, AL_FALSE);
- 
+
    alSourceStop (src);
- 
+
    alGetSourcei (src, AL_BUFFERS_PROCESSED, &proc);
    while (proc == 0)
     {
-       alGetSourcei (src, AL_BUFFERS_PROCESSED, &proc);
+     alGetSourcei (src, AL_BUFFERS_PROCESSED, &proc);
     }
- 
+
    alSourceUnqueueBuffers (src, 1, &buffer);
   }
 }
 
-
-
-
-
-static short * int_samples;
-static size_t int_buf_size = 0;
-
 int
-lxaudio_SoundProcess(void)
+lxaudio::SoundProcess(void)
 {
 
  ALint status;
@@ -145,7 +147,7 @@ lxaudio_SoundProcess(void)
 }
 
 void
-lxaudio_SoundPlay(short * samples, size_t buf_size)
+lxaudio::SoundPlay(short * samples, size_t buf_size)
 {
  ALint queue;
  alGetSourcei (src, AL_BUFFERS_QUEUED, &queue);
@@ -160,6 +162,6 @@ lxaudio_SoundPlay(short * samples, size_t buf_size)
   {
    int_samples = samples;
    int_buf_size = buf_size;
-   lxaudio_SoundProcess ();
+   SoundProcess ();
   }
 }
