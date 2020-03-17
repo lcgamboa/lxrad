@@ -22,15 +22,16 @@ lxaudio::Init(void)
   }
  lxaudio::open++;
 
- alGenBuffers (2, buf);
+ alGenBuffers (4, buf);
  alGenSources (1, &src);
+ int_buf_size = 0;
 }
 
 void
 lxaudio::End(void)
 {
  alDeleteSources (1, &src);
- alDeleteBuffers (2, buf);
+ alDeleteBuffers (4, buf);
 
  lxaudio::open--;
 
@@ -118,18 +119,21 @@ lxaudio::SoundProcess(void)
 
  ALint status;
  ALint proc;
- ALuint buffer;
+ ALuint buffer[4];
 
  if (!int_buf_size)return 1;
 
 
  alGetSourcei (src, AL_BUFFERS_PROCESSED, &proc);
-
+ 
  if (proc == 0) return 0;
 
- alSourceUnqueueBuffers (src, 1, &buffer);
- alBufferData (buffer, AL_FORMAT_MONO16, int_samples, int_buf_size, SAMPLE_RATE);
- alSourceQueueBuffers (src, 1, &buffer);
+ alSourceUnqueueBuffers (src, proc, buffer);
+ for(int i=0; i < proc; i++)
+  {
+   alBufferData (buffer[i], AL_FORMAT_MONO16, int_samples, int_buf_size, SAMPLE_RATE);
+  }
+ alSourceQueueBuffers (src, proc, buffer);
 
  alGetSourcei (src, AL_SOURCE_STATE, &status);
 
@@ -151,13 +155,18 @@ lxaudio::SoundPlay(short * samples, size_t buf_size)
   {
    alBufferData (buf[0], AL_FORMAT_MONO16, samples, buf_size, SAMPLE_RATE);
    alBufferData (buf[1], AL_FORMAT_MONO16, samples, buf_size, SAMPLE_RATE);
-   alSourceQueueBuffers (src, 2, buf);
+   alBufferData (buf[2], AL_FORMAT_MONO16, samples, buf_size, SAMPLE_RATE);
+   alBufferData (buf[3], AL_FORMAT_MONO16, samples, buf_size, SAMPLE_RATE);
+   alSourceQueueBuffers (src, 4, buf);
    alSourcePlay (src);
+   int_buf_size = 0;
   }
  else
   {
-   int_samples = samples;
-   int_buf_size = buf_size;
+   if (!int_buf_size){
+     int_samples = samples;
+     int_buf_size = buf_size;
+   }
    SoundProcess ();
   }
 }

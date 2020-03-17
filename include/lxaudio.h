@@ -6,7 +6,7 @@
 
 class lxaudio {
 private:
-    ALuint buf[2];
+    ALuint buf[4];
     ALuint src;
     short * int_samples;
     size_t int_buf_size = 0;
