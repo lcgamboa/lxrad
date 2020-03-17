@@ -19,10 +19,8 @@ lxaudio::Init(void)
    ALCdevice* dev = alcOpenDevice (defname);
    ALCcontext* ctx = alcCreateContext (dev, NULL);
    alcMakeContextCurrent (ctx);
-   printf ("open real\n");
   }
  lxaudio::open++;
- printf ("open %i\n", lxaudio::open);
 
  alGenBuffers (2, buf);
  alGenSources (1, &src);
@@ -34,7 +32,6 @@ lxaudio::End(void)
  alDeleteSources (1, &src);
  alDeleteBuffers (2, buf);
 
- printf ("close %i\n", lxaudio::open);
  lxaudio::open--;
 
  if (!lxaudio::open)
@@ -44,7 +41,6 @@ lxaudio::End(void)
    alcMakeContextCurrent (0);
    alcDestroyContext (ctx);
    alcCloseDevice (dev);
-   printf ("close real\n");
   }
 }
 
