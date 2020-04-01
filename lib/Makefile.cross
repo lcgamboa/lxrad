@@ -30,19 +30,21 @@ LIBSHOBJECTS := capplication.lo cbutton.lo cedit.lo cdraw.lo cimage.lo cdialog.l
 		citemmenu.lo cmenu.lo cpmenu.lo clabel.lo ctext.lo cwindow.lo cmessage.lo cinput.lo ccheckbox.lo \
 		ctoolbutton.lo cxpmbutton.lo ctimer.lo clist.lo cfilelist.lo cscroll.lo ccombo.lo mstring.lo ccanvas.lo \
 		cpanel.lo cpwindow.lo cswindow.lo cdirdialog.lo cgauge.lo cgrid.lo chtml.lo cstatusbar.lo cthread.lo \
-		cspin.lo cspind.lo ctogglebutton.lo ccolordialog.lo cstyledtext.lo newcontrolbycname.lo lxutils.lo
+		cspin.lo cspind.lo ctogglebutton.lo ccolordialog.lo cstyledtext.lo newcontrolbycname.lo lxutils.lo \
+		lxaudio.lo
 
 LIBSTOBJECTS := capplication.ao cbutton.ao cedit.ao cdraw.ao cimage.ao cdialog.ao cfiledialog.ao cobject.ao ccontrol.ao \
 		citemmenu.ao cmenu.ao cpmenu.ao clabel.ao ctext.ao cwindow.ao cmessage.ao cinput.ao ccheckbox.ao \
 		ctoolbutton.ao cxpmbutton.ao ctimer.ao clist.ao cfilelist.ao cscroll.ao ccombo.ao mstring.ao ccanvas.ao \
 		cpanel.ao cpwindow.ao cswindow.ao cdirdialog.ao cgauge.ao cgrid.ao chtml.lo cstatusbar.lo cthread.ao \
-		cspin.ao cspind.ao ctogglebutton.ao ccolordialog.ao cstyledtext.ao newcontrolbycname.ao lxutils.ao
+		cspin.ao cspind.ao ctogglebutton.ao ccolordialog.ao cstyledtext.ao newcontrolbycname.ao lxutils.ao \
+		lxaudio.ao
 
 #LIBHEADERFILES := ../include/class.h ../include/controls.h 
 
 # How to create the shared library
 $(LIBSHLIBNAME): $(LIBSHOBJECTS)
-	$(CXX) -shared -Wl,--out-implib,lxrad.dll.a -Wl,--no-undefined -Wl,--enable-runtime-pseudo-reloc -o $@  $^ `x86_64-w64-mingw32-msw-unicode-3.1 --libs std,stc`
+	$(CXX) -shared -Wl,--out-implib,lxrad.dll.a -Wl,--no-undefined -Wl,--enable-runtime-pseudo-reloc -o $@  $^ `x86_64-w64-mingw32-msw-unicode-3.1 --libs std,stc` -lOpenAL32
 
 
 # And the static library
