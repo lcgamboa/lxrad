@@ -986,11 +986,11 @@ CPWindow2::MakeOrUpdateFiles (bool prompt)
 
       if (PLibs.size () > 0)
         {
-          file.AddLine (wxT ("LIBS = `lxrad-config --libs` " + PLibs + wxT ("\n")));
+          file.AddLine (wxT ("LIBS = `lxrad-config --libs` -lopenal " + PLibs + wxT ("\n")));
         }
       else
         {
-          file.AddLine (wxT ("LIBS = `lxrad-config --libs` \n"));
+          file.AddLine (wxT ("LIBS = `lxrad-config --libs` -lopenal  \n"));
         }
 
       line = wxT ("OBJS = p") + PName + wxT (".o");
