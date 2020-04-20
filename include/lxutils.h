@@ -30,6 +30,7 @@
 #include"clxrad.h"
 
 #include<wx/bitmap.h>
+#include"cwindow.h"
 
 class xBitmap:public wxBitmap
 {
