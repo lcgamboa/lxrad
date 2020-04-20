@@ -9,7 +9,7 @@ private:
     ALuint buf[4];
     ALuint src;
     short * int_samples;
-    size_t int_buf_size = 0;
+    size_t int_buf_size;
 public:
     static int open;
     void Init(void);

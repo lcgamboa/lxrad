@@ -31,7 +31,7 @@
 
 #define lxT wxT
 #define lxImage wxImage
-#define lxBitmap wxBitmap 
+#define lxBitmap wxBitmap
 #define wxBitmap(x,y) wxBitmap(x)
 #define lxFont wxFont
 #define lxSound wxSound
@@ -49,6 +49,11 @@
 #define lxLaunchDefaultBrowser wxLaunchDefaultBrowser
 #define lxSetWorkingDirectory wxSetWorkingDirectory
 #define lxRenameFile wxRenameFile
+#define lxLaunchDefaultApplication wxLaunchDefaultApplication
+
+
+#define lxSysErrorMsg wxSysErrorMsg
+#define lxSysErrorCode wxSysErrorCode
 
 #define lxMOUSE_BTN_LEFT wxMOUSE_BTN_LEFT
 
@@ -61,6 +66,9 @@
 #define lxCURSOR_CROSS wxCURSOR_CROSS
 #define lxCURSOR_ARROW wxCURSOR_ARROW
 #define lxCURSOR_SIZENWSE wxCURSOR_SIZENWSE
+#define lxCURSOR_SIZING wxCURSOR_SIZING
+#define lxCURSOR_SIZEWE wxCURSOR_SIZEWE
+#define lxCURSOR_SIZENS wxCURSOR_SIZENS
 
 #define lxSize wxSize
 
@@ -68,6 +76,8 @@
 #define lxFONTSTYLE_NORMAL wxFONTSTYLE_NORMAL
 #define lxFONTWEIGHT_BOLD wxFONTWEIGHT_BOLD 
 #define lxFONTWEIGHT_NORMAL wxFONTWEIGHT_NORMAL 
+#define lxFONTFAMILY_DEFAULT wxFONTFAMILY_DEFAULT
+
 
 #define lxSOUND_ASYNC wxSOUND_ASYNC
 #define lxSOUND_LOOP wxSOUND_LOOP
@@ -86,6 +96,14 @@
 #define lxALIGN_LEFT wxALIGN_LEFT
 #define lxALIGN_RIGHT wxALIGN_RIGHT
 #define lxALIGN_CENTER_VERTICAL wxALIGN_CENTER_VERTICAL
+#define lxALIGN_CENTER wxALIGN_CENTER
+
+#define LXK_SHIFT WXK_SHIFT
+#define LXK_CONTROL WXK_CONTROL
+#define LXK_RIGHT WXK_RIGHT
+#define LXK_LEFT WXK_LEFT
+#define LXK_DOWN WXK_DOWN
+#define LXK_UP WXK_UP
 
 String lxGetUserDataDir(String appname="");
 String lxGetTempDir(String appname="");
