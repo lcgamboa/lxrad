@@ -475,7 +475,7 @@ void
 CWindow::SetFocus (void)
 {
   GetWWidget()->SetFocus();
-};
+}
 
 void
 CWindow::SetControlOnFocus (CControl * control)
@@ -493,7 +493,7 @@ CWindow::SetControlOnFocus (CControl * control)
       ControlOnFocus=NULL;
   };
 
-};
+}
 
 CControl *
 CWindow::GetControlOnFocus (void)
