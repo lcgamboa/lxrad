@@ -29,10 +29,19 @@
 
 #include"clxrad.h"
 
+#include<wx/bitmap.h>
+
+class xBitmap:public wxBitmap
+{
+   public:	
+    xBitmap(wxImage img, CWindow * win):wxBitmap(img){};
+    xBitmap(unsigned int x, unsigned int y, int depth):wxBitmap(x,y,depth){};
+};
+
+
 #define lxT wxT
 #define lxImage wxImage
-#define lxBitmap wxBitmap
-#define wxBitmap(x,y) wxBitmap(x)
+#define lxBitmap xBitmap
 #define lxFont wxFont
 #define lxSound wxSound
 #define lxColor wxColor
