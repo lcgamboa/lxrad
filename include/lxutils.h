@@ -36,7 +36,7 @@ class xBitmap:public wxBitmap
 {
    public:	
     xBitmap(wxImage img, CWindow * win):wxBitmap(img){};
-    xBitmap(unsigned int x, unsigned int y, int depth):wxBitmap(x,y,depth){};
+    xBitmap(unsigned int x, unsigned int y):wxBitmap(x,y){};
 };
 
 
