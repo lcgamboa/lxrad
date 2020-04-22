@@ -47,6 +47,8 @@ LIBSTOBJECTS := capplication.ao cbutton.ao cedit.ao cdraw.ao cimage.ao cdialog.a
 # How to create the shared library
 $(LIBSHLIBNAME): $(LIBSHOBJECTS)
 	$(CXX) -shared -Wl,-soname,$(LIBSHSONAME) -o $@  $^  @LIBS@
+	$(RM) $(LIBSTLIBNAME)
+	$(AR) rcvs $(LIBSTLIBNAME) $^
 
 $(LIBSHSONAME): $(LIBSHLIBNAME)
 	$(RM) $@
