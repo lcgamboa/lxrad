@@ -15,7 +15,7 @@ private:
     int bcount; 
 public:
     static int open;
-    void Init(int bcount_);
+    void Init(int bcount_ = 1);
     void End(void);
 
     unsigned int GetSampleRate(void);
