@@ -5,16 +5,18 @@
 #include "../include/lxaudio.h"
 #include <AL/alc.h>
 
-#define  SAMPLE_RATE  10000
+#define  SAMPLE_RATE  16000
 #define  MAX_VALUE 32760
 
 int lxaudio::open = 0;
 
 void
-lxaudio::Init(void)
+lxaudio::Init(int bcount_)
 {
  if (!lxaudio::open)
   {
+   bcount = bcount_;
+   if(bcount > MAXBUFF)bcount=MAXBUFF;
    const char* defname = alcGetString (NULL, ALC_DEFAULT_DEVICE_SPECIFIER);
    ALCdevice* dev = alcOpenDevice (defname);
    ALCcontext* ctx = alcCreateContext (dev, NULL);
@@ -22,7 +24,7 @@ lxaudio::Init(void)
   }
  lxaudio::open++;
 
- alGenBuffers (4, buf);
+ alGenBuffers (bcount, buf);
  alGenSources (1, &src);
  int_buf_size = 0;
 }
@@ -31,7 +33,7 @@ void
 lxaudio::End(void)
 {
  alDeleteSources (1, &src);
- alDeleteBuffers (4, buf);
+ alDeleteBuffers (bcount, buf);
 
  lxaudio::open--;
 
@@ -119,7 +121,7 @@ lxaudio::SoundProcess(void)
 
  ALint status;
  ALint proc;
- ALuint buffer[4];
+ ALuint buffer[MAXBUFF];
 
  if (!int_buf_size)return 1;
 
@@ -153,11 +155,9 @@ lxaudio::SoundPlay(short * samples, size_t buf_size)
  alGetSourcei (src, AL_BUFFERS_QUEUED, &queue);
  if (queue == 0)
   {
-   alBufferData (buf[0], AL_FORMAT_MONO16, samples, buf_size, SAMPLE_RATE);
-   alBufferData (buf[1], AL_FORMAT_MONO16, samples, buf_size, SAMPLE_RATE);
-   alBufferData (buf[2], AL_FORMAT_MONO16, samples, buf_size, SAMPLE_RATE);
-   alBufferData (buf[3], AL_FORMAT_MONO16, samples, buf_size, SAMPLE_RATE);
-   alSourceQueueBuffers (src, 4, buf);
+   for(int i=0; i < bcount;i++)
+     alBufferData (buf[i], AL_FORMAT_MONO16, samples, buf_size, SAMPLE_RATE);
+   alSourceQueueBuffers (src, bcount, buf);
    alSourcePlay (src);
    int_buf_size = 0;
   }

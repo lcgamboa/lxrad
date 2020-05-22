@@ -4,15 +4,18 @@
 
 #include <AL/al.h> 
 
+#define MAXBUFF 8
+
 class lxaudio {
 private:
-    ALuint buf[4];
+    ALuint buf[MAXBUFF];
     ALuint src;
     short * int_samples;
     size_t int_buf_size;
+    int bcount; 
 public:
     static int open;
-    void Init(void);
+    void Init(int bcount_);
     void End(void);
 
     unsigned int GetSampleRate(void);
