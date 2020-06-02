@@ -26,7 +26,13 @@ lxaudio::Init(int bcount_)
 
  alGenBuffers (bcount, buf);
  alGenSources (1, &src);
- int_buf_size = 0;
+ for(int i =0; i< MAXBUFF; i++)
+ {
+   if(i < bcount)	 
+     bstatus[i]=1;
+   else
+     bstatus[i]=0;
+ }
 }
 
 void
@@ -45,6 +51,46 @@ lxaudio::End(void)
    alcDestroyContext (ctx);
    alcCloseDevice (dev);
   }
+}
+
+void 
+lxaudio::CleanBuffers(void)
+{
+ ALint proc;
+ ALuint buffer[MAXBUFF];
+ alGetSourcei (src, AL_BUFFERS_PROCESSED, &proc);
+ alSourceUnqueueBuffers (src, proc , buffer);
+ 
+ for(int i =0; i< MAXBUFF; i++)
+ {
+   for(int b=0; b < proc; b++)
+   {
+     if(buf[i] == buffer[b])
+     {
+       bstatus[i]=1;
+     }
+   } 
+ }
+
+}
+
+int 
+lxaudio::GetFreeBuffer(void)
+{
+  int ret=-1;
+
+  CleanBuffers();
+  
+  for(int i =0; i< MAXBUFF; i++)
+  {
+     if(bstatus[i])
+     {
+        bstatus[i]=0;
+        ret = i;
+        break; 	
+     }	  
+  }
+  return ret;
 }
 
 unsigned int
@@ -116,57 +162,35 @@ lxaudio::BeepStop(void)
 }
 
 int
-lxaudio::SoundProcess(void)
+lxaudio::IsPlaying(void)
 {
-
  ALint status;
- ALint proc;
- ALuint buffer[MAXBUFF];
-
- if (!int_buf_size)return 1;
-
-
- alGetSourcei (src, AL_BUFFERS_PROCESSED, &proc);
- 
- if (proc == 0) return 0;
-
- alSourceUnqueueBuffers (src, proc, buffer);
- for(int i=0; i < proc; i++)
-  {
-   alBufferData (buffer[i], AL_FORMAT_MONO16, int_samples, int_buf_size, SAMPLE_RATE);
-  }
- alSourceQueueBuffers (src, proc, buffer);
-
  alGetSourcei (src, AL_SOURCE_STATE, &status);
-
- if (status != AL_PLAYING)
-  {
-   alSourcePlay (src);
-  }
-
- int_buf_size = 0;
- return 1;
+ if (status == AL_PLAYING)
+  return 1;
+ else
+  return 0;
 }
 
-void
+int
 lxaudio::SoundPlay(short * samples, size_t buf_size)
 {
- ALint queue;
- alGetSourcei (src, AL_BUFFERS_QUEUED, &queue);
- if (queue == 0)
+ ALint status;
+ 
+ int BID =GetFreeBuffer();
+ if (BID >= 0)
   {
-   for(int i=0; i < bcount;i++)
-     alBufferData (buf[i], AL_FORMAT_MONO16, samples, buf_size, SAMPLE_RATE);
-   alSourceQueueBuffers (src, bcount, buf);
-   alSourcePlay (src);
-   int_buf_size = 0;
+   alBufferData (buf[BID], AL_FORMAT_MONO16, samples, buf_size, SAMPLE_RATE);
+   alSourceQueueBuffers (src, 1, &buf[BID]);
+   alGetSourcei (src, AL_SOURCE_STATE, &status);
+   if (status != AL_PLAYING)
+   {
+     alSourcePlay (src);
+   }
+   return 1;
   }
  else
   {
-   if (!int_buf_size){
-     int_samples = samples;
-     int_buf_size = buf_size;
-   }
-   SoundProcess ();
+   return 0;
   }
 }

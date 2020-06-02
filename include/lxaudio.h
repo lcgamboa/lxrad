@@ -8,14 +8,15 @@
 
 class lxaudio {
 private:
+    int bstatus[MAXBUFF];
     ALuint buf[MAXBUFF];
     ALuint src;
-    short * int_samples;
-    size_t int_buf_size;
     int bcount; 
+    void CleanBuffers(void);
+    int GetFreeBuffer(void);
 public:
     static int open;
-    void Init(int bcount_ = 1);
+    void Init(int bcount_ = 4);
     void End(void);
 
     unsigned int GetSampleRate(void);
@@ -23,9 +24,9 @@ public:
 
     void BeepStart(float freq = 440, float volume = 1.0);
     void BeepStop(void);
-
-    void SoundPlay(short * samples, size_t buf_size);
-    int SoundProcess(void);
+  
+    int IsPlaying(void);
+    int SoundPlay(short * samples, size_t buf_size);
 };
 
 
