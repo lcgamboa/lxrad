@@ -36,59 +36,59 @@ CObject::CObject (void)
   Aux = 0;	
   for (int a = 0; a < EVMAX; a++)
     Ev[a] = false;
-};
+}
 
 CObject::~CObject (void)
 {
-};
+}
 
 void
 CObject::SetName (const String name)
 {
   Name = name;
-};
+}
 
 String
 CObject::GetName (void)
 {
   return Name;
-};
+}
 
 void
 CObject::SetClass (const String classn)
 {
   Class = classn;
-};
+}
 
 String
 CObject::GetClass (void)
 {
   return Class;
-};
+}
 
 void
 CObject::SetTag (uint tag)
 {
   Tag = tag;
-};
+}
 
 uint
 CObject::GetTag (void)
 {
   return Tag;
-};
+}
 
 void
 CObject::SetAux (int aux)
 {
   Aux = aux;
-};
+}
 
 int
 CObject::GetAux (void)
 {
   return Aux;
-};
+}
 
 
 
@@ -100,7 +100,7 @@ CObject::GetContext (void)
   Context.AddLine (xml_out (wxT("Name"), wxT("String"), GetName ()));
   Context.AddLine (xml_out (wxT("Tag"), wxT("int"), itoa (GetTag ())));
   return Context;
-};
+}
 
 void
 CObject::SetContext (CStringList context)
@@ -116,8 +116,8 @@ CObject::SetContext (CStringList context)
 	SetName (value);
       if (name.compare (wxT("Tag")) == 0)
 	SetTag (atoi (value));
-    };
-};
+    }
+}
 
 bool
 CObject::GetEv (bool reset)
@@ -127,7 +127,7 @@ CObject::GetEv (bool reset)
   else
     Evcount++;
   return Ev[Evcount];
-};
+}
 
 
 void
@@ -138,6 +138,6 @@ CObject::SetEv (bool value, bool reset)
   else
     Evcount++;
   Ev[Evcount] = value;
-};
+}
 
 
