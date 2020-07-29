@@ -180,7 +180,11 @@ CItemMenu::SetText (String t)
   Text = t;
 //  if (Label != NULL)
 //    gtk_label_set_text (GTK_LABEL (Label), LocaleToUtf8 (Text).c_str ());
-};
+  if (Widget != NULL)
+  {
+    ((wxMenuItem *) Widget)->SetItemLabel(Text);
+  }
+}
 
 String
 CItemMenu::GetText (void)
@@ -190,7 +194,7 @@ CItemMenu::GetText (void)
 
 
   return Text;
-};
+}
 
 void CItemMenu::Destroy (void)
 {
@@ -199,7 +203,7 @@ void CItemMenu::Destroy (void)
   Widget=NULL; 
   CControl::Destroy();	
   return;
-};
+}
 
 	
 void
@@ -211,10 +215,10 @@ CItemMenu::SetEnable (bool enable)
   {
     ((wxMenuItem *) Widget)->Enable(enable);
   }
-};
+}
 
 void
 CItemMenu::SetDoEnable (bool denable)
 {
   doenable = denable;
-};
+}
