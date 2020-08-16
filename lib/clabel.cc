@@ -27,6 +27,39 @@
 
 // CLabel _________________________________________________________________
 
+class wxClickText : public wxStaticText
+{
+public:
+wxClickText(wxWindow *parent, wxWindowID id, const wxString &label,
+const wxPoint &pos = wxDefaultPosition, const wxSize
+&size = wxDefaultSize, int style = 0, const wxString& name =
+"staticText");
+virtual ~wxClickText();
+void OnMouseEvent( wxMouseEvent& event );
+DECLARE_EVENT_TABLE()
+
+};
+
+BEGIN_EVENT_TABLE( wxClickText, wxStaticText )
+EVT_LEFT_DOWN(wxClickText::OnMouseEvent)
+END_EVENT_TABLE()
+
+wxClickText::wxClickText(wxWindow *parent, wxWindowID id, const
+wxString &label, const wxPoint &pos , const wxSize &size , int style , const wxString& name): 
+wxStaticText(parent, id, label, pos, size, style/*|wxPOPUP_WINDOW*/, name)
+{}
+
+wxClickText::~wxClickText(){}
+
+void wxClickText::OnMouseEvent( wxMouseEvent& event )
+{
+  wxCommandEvent myevent(wxEVT_COMMAND_BUTTON_CLICKED, GetId());
+  wxPostEvent(this, myevent);
+}
+
+//CLabel
+
+
 CLabel::CLabel (void)
 {
   CanFocus = false;
@@ -66,8 +99,10 @@ unsigned int flags=0;
         break;
     } 
 
-  Widget = new wxStaticText(control->GetWidget (),GetWid(),Text,wxPoint(GetX(),GetY()),wxSize(GetWidth(),GetHeight()),flags,GetName());
+  Widget = new wxClickText(control->GetWidget (),GetWid(),Text,wxPoint(GetX(),GetY()),wxSize(GetWidth(),GetHeight()),flags,GetName());
 
+  Widget->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &CControl::Event,this,GetWid()); 
+  
   SetAlign (Align);
   return CControl::Create (control);
 };
@@ -105,7 +140,7 @@ CLabel::SetText (String text)
 {
   Text = text;
   if (Widget != NULL)
-   ((wxStaticText*)Widget)->SetLabel(Text);
+   ((wxClickText*)Widget)->SetLabel(Text);
 };
 
 String
@@ -125,16 +160,16 @@ CLabel::SetAlign (CAlign align)
     switch(Align)
     {
       case CA_RIGHT:
-        ((wxStaticText*)Widget)->SetWindowStyle(wxST_NO_AUTORESIZE | wxALIGN_RIGHT);
+        ((wxClickText*)Widget)->SetWindowStyle(wxST_NO_AUTORESIZE | wxALIGN_RIGHT);
         break;
       case CA_LEFT:
-        ((wxStaticText*)Widget)->SetWindowStyle(wxST_NO_AUTORESIZE | wxALIGN_LEFT);
+        ((wxClickText*)Widget)->SetWindowStyle(wxST_NO_AUTORESIZE | wxALIGN_LEFT);
         break;
       case CA_CENTER:
-        ((wxStaticText*)Widget)->SetWindowStyle(wxST_NO_AUTORESIZE | wxALIGN_CENTRE);
+        ((wxClickText*)Widget)->SetWindowStyle(wxST_NO_AUTORESIZE | wxALIGN_CENTRE);
         break;
       case CA_FILL:
-        ((wxStaticText*)Widget)->SetWindowStyle(wxST_NO_AUTORESIZE | wxALIGN_CENTRE);
+        ((wxClickText*)Widget)->SetWindowStyle(wxST_NO_AUTORESIZE | wxALIGN_CENTRE);
         break;
     } 
   }
@@ -156,7 +191,7 @@ CLabel::SetWidth (uint w)
   if ((Widget != NULL)&& (CanVisible == true))
   {
        Widget->SetSize(X,Y,Width,Height,wxSIZE_USE_EXISTING);
-       ((wxStaticText*)Widget)->Wrap(Width);
+       ((wxClickText*)Widget)->Wrap(Width);
   }
 };
 
@@ -169,8 +204,8 @@ CLabel::SetColorName (const String name)
   wxColour color(name);
   if (Widget != NULL)
   {
-     ((wxStaticText*)Widget)->SetForegroundColour(color);
-     ((wxStaticText*)Widget)->Refresh();
+     ((wxClickText*)Widget)->SetForegroundColour(color);
+     ((wxClickText*)Widget)->Refresh();
   }
 };
 
@@ -184,8 +219,8 @@ CLabel::SetColor (unsigned r, unsigned g, unsigned b)
   wxColour color(r,g,b);
   if (Widget != NULL)
   {
-     ((wxStaticText*)Widget)->SetForegroundColour(color);
-     ((wxStaticText*)Widget)->Refresh();
+     ((wxClickText*)Widget)->SetForegroundColour(color);
+     ((wxClickText*)Widget)->Refresh();
   }
 };
 
@@ -198,8 +233,8 @@ CLabel::SetColor (wxColor color)
 
   if (Widget != NULL)
   {
-     ((wxStaticText*)Widget)->SetForegroundColour(color);
-     ((wxStaticText*)Widget)->Refresh();
+     ((wxClickText*)Widget)->SetForegroundColour(color);
+     ((wxClickText*)Widget)->Refresh();
   }
 };
 
