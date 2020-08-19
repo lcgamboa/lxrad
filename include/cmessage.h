@@ -47,10 +47,11 @@ class CMessage:public CPWindow
 public:
   CButton button1;
   CLabel  label1;
-    CMessage (void);
+  CMessage (void);
   void ButtonRelease1 (CControl * control, uint button, uint x, uint y, uint state);
 };
 
 void Message (String str);
+void Message_sz (String str, int Width, int Height);
 
 #endif

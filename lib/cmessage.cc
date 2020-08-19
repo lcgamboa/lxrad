@@ -42,7 +42,7 @@ CMessage::CMessage (void)
   //button1
   button1.SetText (wxT("OK"));
   button1.SetX (110);
-  button1.SetY (75);
+  button1.SetY (70);
   button1.SetFOwner (this);
   button1.EvMouseButtonRelease = EVMOUSEBUTTONRELEASE & CMessage::ButtonRelease1;
   CreateChild (&button1);
@@ -68,6 +68,13 @@ void
 Message (String str)
 {
   CMessage *wmessage = new CMessage;
+  int width, height;  
+
+  wxDisplaySize (&width,&height);  
+  
+  wmessage->SetX ((width  - wmessage->GetWidth  ())/2);
+  wmessage->SetY ((height - wmessage->GetHeight ())/2);
+
   wmessage->label1.SetText (str);
   Application->ACreateWindow (wmessage);
   wmessage->SetCanDestroy (false);
@@ -80,4 +87,36 @@ Message (String str)
   }
   wmessage->SetCanDestroy (true);
   wmessage->WDestroy ();
-};
+}
+
+void
+Message_sz (String str, int Width, int Height)
+{
+  CMessage *wmessage = new CMessage;
+  int width, height;  
+  
+  wmessage->SetWidth (Width);
+  wmessage->SetHeight (Height);
+  wmessage->button1.SetX ((Width- wmessage->button1.GetWidth())/2);
+  wmessage->button1.SetY (Height-65);
+  wmessage->label1.SetWidth (Width-5);
+  wmessage->label1.SetHeight (Height-80);
+
+  wxDisplaySize (&width,&height);  
+  
+  wmessage->SetX ((width  - wmessage->GetWidth  ())/2);
+  wmessage->SetY ((height - wmessage->GetHeight ())/2);
+
+  wmessage->label1.SetText (str);
+  Application->ACreateWindow (wmessage);
+  wmessage->SetCanDestroy (false);
+  wmessage->Draw ();
+  wmessage->ShowExclusive ();
+  while (wmessage->GetCanExitExclusive())
+  {
+    Application->ProcessEvents(wmessage->GetWWidget());
+    wxMilliSleep(100);
+  }
+  wmessage->SetCanDestroy (true);
+  wmessage->WDestroy ();
+}
