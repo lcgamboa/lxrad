@@ -43,9 +43,9 @@
 class CFileDialog:public CControl
 {
 private:
-  String FileName;
-  String Dir;
-  String Filter;
+  lxString FileName;
+  lxString Dir;
+  lxString Filter;
   long Type;
 public:
   CFileDialog (void);
@@ -53,16 +53,16 @@ public:
   int Create (CControl * control);
   void Run (void);
   //propriedades
-  String GetFileName (void);
-  void SetFileName (String filename);
-  String GetDir (void);
-  bool SetDir(String dir);
+  lxString GetFileName (void);
+  void SetFileName (lxString filename);
+  lxString GetDir (void);
+  bool SetDir(lxString dir);
   long GetType(void);
   void SetType(long type);
-  String GetFilter(void);
-  void SetFilter(String filter);
-  CStringList GetContext (void);
-  void SetContext (CStringList context);
+  lxString GetFilter(void);
+  void SetFilter(lxString filter);
+  lxStringList GetContext (void);
+  void SetContext (lxStringList context);
   //events
   void (CControl::*EvOnClose) (int retId);
 };

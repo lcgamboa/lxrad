@@ -48,13 +48,13 @@ public:
   int Create (CControl * control);
   void Destroy (void);
 //propiedades
-  CStringList GetContext (void);
-  void SetContext (CStringList context);
+  lxStringList GetContext (void);
+  void SetContext (lxStringList context);
   void SetRunState (bool run);
   bool GetRunState ();
   void SetTime (uint time);
   uint GetTime (void);
-  void SetName (const String name);
+  void SetName (const lxString name);
   void Event (wxTimerEvent & te);
 //Events
   void (CControl::*EvOnTime) (CControl * control);

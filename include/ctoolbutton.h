@@ -43,17 +43,17 @@ class CToolButton:public CControl
 {
 private:
   const char **Data;
-  String ImgFileName;
+  lxString ImgFileName;
 public:
     CToolButton (void);
    ~CToolButton (void);
   int Create (CControl * control);
-  CStringList GetContext (void);
-  void SetContext (CStringList context);
+  lxStringList GetContext (void);
+  void SetContext (lxStringList context);
   //propiedades
   void SetImgData (const char **data);
-  void SetImgFileName (String imgfilename);
-  String GetImgFileName (void);
+  void SetImgFileName (lxString imgfilename);
+  lxString GetImgFileName (void);
   //events
   void key_press (wxKeyEvent* event);
   void key_release (wxKeyEvent* event);

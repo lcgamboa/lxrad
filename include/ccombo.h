@@ -43,31 +43,31 @@
 class CCombo:public CControl
 {
 protected:
-  String Text;
+  lxString Text;
   int Index;
-  CStringList Items;
+  lxStringList Items;
   bool ReadOnly;
   int CEvent (int event);
 public:
     CCombo (void);
    ~CCombo (void);
   int Create (CControl * control);
-  void SetItems (String litens);
-  String GetItems (void);
-  void AddItem (String text);
-  void LoadItemsFromFile (String fname);
-  void SaveItemsToFile (String fname);
-  String GetItem (int item);
-  void SetSelectedItem (String item);
-  String GetSelectedItem (void);
+  void SetItems (lxString litens);
+  lxString GetItems (void);
+  void AddItem (lxString text);
+  void LoadItemsFromFile (lxString fname);
+  void SaveItemsToFile (lxString fname);
+  lxString GetItem (int item);
+  void SetSelectedItem (lxString item);
+  lxString GetSelectedItem (void);
   int GetSelectedItemIndex (void);
   int GetItemsCount (void);
   void DeleteItem (int item);
   void DeleteItems (bool clean =true);
-  CStringList GetContext (void);
-  void SetContext (CStringList context);
-  void SetText (String text);
-  String GetText (void);
+  lxStringList GetContext (void);
+  void SetContext (lxStringList context);
+  void SetText (lxString text);
+  lxString GetText (void);
   void Event (wxEvent & event);
   void SetReadOnly (bool r);
   bool GetReadOnly (void);

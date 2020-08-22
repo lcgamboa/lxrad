@@ -48,17 +48,17 @@ class CPWindow2:public CPWindow
   CControl *GetControlOnFocus (void);
 //  CCanvas Canvas;
 //  virtual bool WEvent (wxWindow *widget, wxEvent *event);
-  String getalign (CAlign align);
-  CControl *NewControl (String cclass, uint x, uint y);
-  String WriteEvents (String name, String event);
-  String WriteControlEvents (String name, String event);
-  CStringList linesbak;
+  lxString getalign (CAlign align);
+  CControl *NewControl (lxString cclass, uint x, uint y);
+  lxString WriteEvents (lxString name, lxString event);
+  lxString WriteControlEvents (lxString name, lxString event);
+  lxStringList linesbak;
 // void Draw(void);
   void Reset (void);
   void MakeOrUpdateFiles (bool prompt);
-  bool testline(String line);
-  void MakeProject (String basename);
-  bool LoadProject (String dirname, String filename);
+  bool testline(lxString line);
+  void MakeProject (lxString basename);
+  bool LoadProject (lxString dirname, lxString filename);
   bool ReLoadProject (void);
   void ListPropierties (CControl * control);
   void SCreateChild(CControl * control);
@@ -69,7 +69,7 @@ class CPWindow2:public CPWindow
 
 extern CPWindow2 Window2 ;
 
-String spacestrip(String sstr);
+lxString spacestrip(lxString sstr);
 
 #endif /*#CPWINDOW2*/
 

@@ -112,16 +112,16 @@ CItemMenu::SetSubMenu (CPMenu * submenu)
 };
 
 void
-CItemMenu::SetName (const String name)
+CItemMenu::SetName (const lxString name)
 {
   Name = name;
 };
 
-CStringList CItemMenu::GetContext (void)
+lxStringList CItemMenu::GetContext (void)
 {
   CObject::GetContext ();
 
-  Context.AddLine (xml_out (wxT("Text"), wxT("String"), GetText ()));
+  Context.AddLine (xml_out (wxT("Text"), wxT("lxString"), GetText ()));
   Context.AddLine (xml_out (wxT("Enable"), wxT("bool"), itoa (GetEnable ())));
 
   if (SubMenu)
@@ -146,9 +146,9 @@ CStringList CItemMenu::GetContext (void)
 };
 
 void
-CItemMenu::SetContext (CStringList context)
+CItemMenu::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
 
   CObject::SetContext (context);
   for (uint i = 0; i < context.GetLinesCount (); i++)
@@ -175,7 +175,7 @@ CItemMenu::SetContext (CStringList context)
 };
 
 void
-CItemMenu::SetText (String t)
+CItemMenu::SetText (lxString t)
 {
   Text = t;
 //  if (Label != NULL)
@@ -186,7 +186,7 @@ CItemMenu::SetText (String t)
   }
 }
 
-String
+lxString
 CItemMenu::GetText (void)
 {
 //  if (Label != NULL)

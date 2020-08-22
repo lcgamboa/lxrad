@@ -41,7 +41,7 @@
 #define xauto_ptr  std::auto_ptr
 #endif
 
-bool lxUnzipDir(const String &in_filename, const String &out_dirname)
+bool lxUnzipDir(const lxString &in_filename, const lxString &out_dirname)
 {
     bool ret = true;
 
@@ -63,7 +63,7 @@ bool lxUnzipDir(const String &in_filename, const String &out_dirname)
             while (entry.reset(zip.GetNextEntry()), entry.get() != NULL)
             {
                 // access meta-data
-                wxString name = entry->GetName();
+                lxString name = entry->GetName();
                 
                 if(dirname(name).Length() > 0)
                 {
@@ -106,9 +106,9 @@ bool lxUnzipDir(const String &in_filename, const String &out_dirname)
 
 
 bool 
-lxZipDir(const String &in_dirname, const String &out_filename)
+lxZipDir(const lxString &in_dirname, const lxString &out_filename)
 {
-   wxString sep(wxFileName::GetPathSeparator());
+   lxString sep(wxFileName::GetPathSeparator());
 
    wxArrayString files;
 
@@ -225,24 +225,24 @@ lxCreateDir(const char * dirname)
 }
 
 
-String 
-lxGetUserDataDir(String appname)
+lxString 
+lxGetUserDataDir(lxString appname)
 {
   wxTheApp->SetAppName (appname);
   wxStandardPathsBase& stdp = wxStandardPaths::Get ();
   return stdp.GetUserDataDir ();
 }
 
-String 
-lxGetTempDir(String appname)
+lxString 
+lxGetTempDir(lxString appname)
 {
   wxTheApp->SetAppName (appname);
   wxStandardPathsBase& stdp = wxStandardPaths::Get ();
   return stdp.GetTempDir ();
 }
 
-String 
-lxGetExecutablePath(String appname)
+lxString 
+lxGetExecutablePath(lxString appname)
 {
   wxTheApp->SetAppName (appname);
   wxStandardPathsBase& stdp = wxStandardPaths::Get ();

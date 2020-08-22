@@ -92,11 +92,11 @@ CCheckBox::Event (wxEvent &  event)
 
 
 
-CStringList
+lxStringList
 CCheckBox::GetContext (void)
 {
   CControl::GetContext ();
-  Context.AddLine (xml_out (wxT("Text"), wxT("String"), GetText ()));
+  Context.AddLine (xml_out (wxT("Text"), wxT("lxString"), GetText ()));
   Context.AddLine (xml_out (wxT("Check"), wxT("Int"), itoa(GetCheck ())));
 
   Context.AddLine (xml_out (wxT("EvOnCheckBox"), wxT("Event"), btoa (GetEv ())));
@@ -104,9 +104,9 @@ CCheckBox::GetContext (void)
 };
 
 void
-CCheckBox::SetContext (CStringList context)
+CCheckBox::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
 
   CControl::SetContext (context);
   for (uint i = 0; i < context.GetLinesCount (); i++)
@@ -140,14 +140,14 @@ bool CCheckBox::GetCheck (void)
 };
 
 void
-CCheckBox::SetText (String t)
+CCheckBox::SetText (lxString t)
 {
   Text = t;
 //  if (Label != NULL)
 //    gtk_label_set_text (GTK_LABEL (Label), Text.c_str ());
 };
 
-String
+lxString
 CCheckBox::GetText (void)
 {
 //  if (Label != NULL)

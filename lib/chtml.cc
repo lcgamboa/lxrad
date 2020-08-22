@@ -113,7 +113,7 @@ CHtml::Event (wxEvent & event)
          {
 #ifdef __WXMSW__
   //FIXME testing on windows           
-  wxString url(dirname(((wxHtmlWindow *)Widget)->GetOpenedPage())+(((wxHtmlLinkEvent*)&event)->GetLinkInfo().GetHref()));
+  wxlxString url(dirname(((wxHtmlWindow *)Widget)->GetOpenedPage())+(((wxHtmlLinkEvent*)&event)->GetLinkInfo().GetHref()));
 
      
    url.Replace("%3A",":");
@@ -124,7 +124,7 @@ CHtml::Event (wxEvent & event)
 
    if(val > 0)
    {
-     wxString url2,url3;
+     wxlxString url2,url3;
      int val2=url.rfind("/",val-2);
 
      url3=(((wxHtmlLinkEvent*)&event)->GetLinkInfo().GetHref());
@@ -159,12 +159,12 @@ CHtml::Event (wxEvent & event)
 };
 
 
-CStringList
+lxStringList
 CHtml::GetContext (void)
 {
   CControl::GetContext ();
-  Context.AddLine (xml_out (wxT("LoadText"), wxT("String"), GetLoadText ()));
-  Context.AddLine (xml_out (wxT("LoadUrl"), wxT("String"), GetLoadUrl ()));
+  Context.AddLine (xml_out (wxT("LoadText"), wxT("lxString"), GetLoadText ()));
+  Context.AddLine (xml_out (wxT("LoadUrl"), wxT("lxString"), GetLoadUrl ()));
   Context.AddLine (xml_out (wxT("LoadFile"), wxT("File"), GetLoadFile ()));
   Context.AddLine (xml_out (wxT("EvOnLinkClicked"), wxT("Event"), btoa (GetEv ())));
 
@@ -172,9 +172,9 @@ CHtml::GetContext (void)
 };
 
 void
-CHtml::SetContext (CStringList context)
+CHtml::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
   CControl::SetContext (context);
   for (uint i = 0; i < context.GetLinesCount (); i++)
     {
@@ -192,7 +192,7 @@ CHtml::SetContext (CStringList context)
 
 //propiedades
 void
-CHtml::SetLoadText (String t)
+CHtml::SetLoadText (lxString t)
 {
   if(t.size() > 0)
   {
@@ -204,14 +204,14 @@ CHtml::SetLoadText (String t)
   }  
 };
 
-String
+lxString
 CHtml::GetLoadText (void)
 {
   return Text;
 };
 
 void
-CHtml::SetLoadUrl (String t)
+CHtml::SetLoadUrl (lxString t)
 {
   if(t.size() > 0)
   {
@@ -223,14 +223,14 @@ CHtml::SetLoadUrl (String t)
   }
 };
 
-String
+lxString
 CHtml::GetLoadUrl (void)
 {
   return Url;
 };
 
 void
-CHtml::SetLoadFile (String t)
+CHtml::SetLoadFile (lxString t)
 {
   if(t.size() > 0)
   {
@@ -242,7 +242,7 @@ CHtml::SetLoadFile (String t)
   }
 };
 
-String
+lxString
 CHtml::GetLoadFile (void)
 {
   return File;

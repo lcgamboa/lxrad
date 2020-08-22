@@ -22,7 +22,7 @@ class CPWindow7:public CPWindow
   CList *cl;
   CCombo *cc;
   CStatusbar *cs;
-  void  StringListMouseButtonRelease(CControl * control, uint button, uint x, uint y,uint state);
+  void  lxStringListMouseButtonRelease(CControl * control, uint button, uint x, uint y,uint state);
   CPWindow7(void);
 };
  extern CPWindow7 Window7 ;

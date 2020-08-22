@@ -44,7 +44,7 @@
 
 #undef _MSTRING
 
-#define String wxString
+#define lxString wxString
 
 
 //c++ headers

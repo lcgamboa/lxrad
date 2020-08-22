@@ -115,12 +115,12 @@ class xBitmap:public wxBitmap
 #define LXK_DOWN WXK_DOWN
 #define LXK_UP WXK_UP
 
-String lxGetUserDataDir(String appname="");
-String lxGetTempDir(String appname="");
-String lxGetExecutablePath(String appname="");
+lxString lxGetUserDataDir(lxString appname="");
+lxString lxGetTempDir(lxString appname="");
+lxString lxGetExecutablePath(lxString appname="");
 
-bool lxZipDir(const String &in_dirname, const String &out_filename);
-bool lxUnzipDir(const String &in_filename, const String &out_dirname);
+bool lxZipDir(const lxString &in_dirname, const lxString &out_filename);
+bool lxUnzipDir(const lxString &in_filename, const lxString &out_dirname);
 
 bool lxRemoveFile(const char* fname);
 bool lxRemoveDir(const char* dirname);

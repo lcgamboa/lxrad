@@ -27,6 +27,6 @@
 #ifndef NEWCONTROLBYCNAME
 #define NEWCONTROLBYCNAME
 
-CControl * newcontrolbycname (String controltype);
+CControl * newcontrolbycname (lxString controltype);
 #endif
 

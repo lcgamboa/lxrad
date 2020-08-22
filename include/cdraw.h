@@ -45,7 +45,7 @@ class CDraw:public CControl
 {
 private:
   const char **Data;
-  String FileName;
+  lxString FileName;
   bool Transparent;
   uint LWidth;
   double Sx;
@@ -57,16 +57,16 @@ public:
    ~CDraw (void);
   CCanvas Canvas;
   void Draw (void);
-  bool SetImgFileName (String filename);
-  bool SetImgFileName (String filename, double sx, double sy);
+  bool SetImgFileName (lxString filename);
+  bool SetImgFileName (lxString filename, double sx, double sy);
   bool SetImgData (const char **data);
-  String GetImgFileName (void);
-  void WriteImgToFile (String filename);
+  lxString GetImgFileName (void);
+  void WriteImgToFile (lxString filename);
   int Create (CControl * control);
   bool GetTransparent (void);
   void SetTransparent (bool);
-  CStringList GetContext (void);
-  void SetContext (CStringList context);
+  lxStringList GetContext (void);
+  void SetContext (lxStringList context);
 
 //events  
   void on_draw (wxPaintEvent* event);

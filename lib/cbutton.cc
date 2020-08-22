@@ -56,19 +56,19 @@ Widget = new wxButton(control->GetWidget (),GetWid(),Text,wxPoint(GetX(),GetY())
 };
 
 
-CStringList
+lxStringList
 CButton::GetContext (void)
 {
   CControl::GetContext ();
-  Context.AddLine (xml_out (wxT("Text"), wxT("String"), GetText ()));
+  Context.AddLine (xml_out (wxT("Text"), wxT("lxString"), GetText ()));
 
   return Context;
 };
 
 void
-CButton::SetContext (CStringList context)
+CButton::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
   CControl::SetContext (context);
   for (uint i = 0; i < context.GetLinesCount (); i++)
     {
@@ -81,14 +81,14 @@ CButton::SetContext (CStringList context)
 //propiedades
 
 void
-CButton::SetText (String t)
+CButton::SetText (lxString t)
 {
   Text = t;
   if (Widget != NULL)
      Widget->SetLabel(t);
 };
 
-String
+lxString
 CButton::GetText (void)
 {
   if (Widget != NULL)

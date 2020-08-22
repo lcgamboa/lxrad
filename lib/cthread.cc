@@ -191,7 +191,7 @@ CThread::Event (wxCommandEvent & te)
 };
 
 
-CStringList
+lxStringList
 CThread::GetContext (void)
 {
   CObject::GetContext ();
@@ -201,9 +201,9 @@ CThread::GetContext (void)
 };
 
 void
-CThread::SetContext (CStringList context)
+CThread::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
 
 //  CControl::SetContext (context);
   CObject::SetContext (context);
@@ -219,7 +219,7 @@ CThread::SetContext (CStringList context)
 };
 
 void
-CThread::SetName (const String name)
+CThread::SetName (const lxString name)
 {
   Name = name;
 };

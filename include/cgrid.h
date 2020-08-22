@@ -58,8 +58,8 @@ public:
   CGrid (void);
    ~CGrid (void);
   int Create (CControl * control);
-  CStringList GetContext (void);
-  void SetContext (CStringList context);
+  lxStringList GetContext (void);
+  void SetContext (lxStringList context);
   void Event (wxEvent & event);
   //propiedades
   void SetRowsCount (int rows);
@@ -79,8 +79,8 @@ public:
   void SetEnableDragGridSize(int enable);
   int GetEnableDragGridSize(void);
   //runtime 
-  void SetCell (int row, int col, String val);
-  String GetCell (int row, int col);
+  void SetCell (int row, int col, lxString val);
+  lxString GetCell (int row, int col);
   void SetCellBgColor(int row, int col, const wxColour& color);
   void SetRowSize(int row, int height);
   void SetColSize(int col, int height);

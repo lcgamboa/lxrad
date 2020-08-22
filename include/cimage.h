@@ -45,21 +45,21 @@ class CImage:public CControl
 {
 private:
   const char **Data;
-  String FileName;
+  lxString FileName;
   bool Transparent;
 //  GtkWidget *Image;
 public:
     CImage (void);
    ~CImage (void);
-  bool SetImgFileName (String filename);
+  bool SetImgFileName (lxString filename);
   bool SetImgData (const char **data);
-  String GetImgFileName (void);
-  void WriteImgToFile (String filename);
+  lxString GetImgFileName (void);
+  void WriteImgToFile (lxString filename);
   int Create (CControl * control);
   bool GetTransparent (void);
   void SetTransparent (bool);
-  CStringList GetContext (void);
-  void SetContext (CStringList context);
+  lxStringList GetContext (void);
+  void SetContext (lxStringList context);
 };
 
 #endif

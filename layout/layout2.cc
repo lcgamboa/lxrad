@@ -23,7 +23,7 @@
    For e-mail suggestions :  lcgamboa@yahoo.com
    ######################################################################## */
 
-
+/* Project Window*/
 
 #include"layout2.h"
 #include"layout2_d.cc"
@@ -87,16 +87,18 @@ int op = 0;
 
 //Implementation
 
-#define OP_NONE		0
-#define OP_MOVE		1
-#define OP_RESL		2
-#define OP_RESR		3
-#define OP_REST		4
-#define OP_RESB		5
-#define OP_RESTL	6
-#define OP_RESTR	7
-#define OP_RESBL	8
-#define OP_RESBR	9
+enum{
+OP_NONE,
+OP_MOVE,		
+OP_RESL,		
+OP_RESR,		
+OP_REST,		
+OP_RESB,		
+OP_RESTL,	
+OP_RESTR,	
+OP_RESBL,	
+OP_RESBR,
+};
 
 
 int xo = -1, yo = -1, xp, yp;
@@ -108,10 +110,10 @@ CPWindow2::~CPWindow2 (void)
   Window2.DestroyChilds ();
 };
 
-String
-spacestrip (String sstr)
+lxString
+spacestrip (lxString sstr)
 {
-  String out;
+  lxString out;
   int j;
 
   while ((j = sstr.find (wxT (" "))) >= 0)
@@ -786,7 +788,7 @@ bool CPWindow2::WEvent (wxWindow * widget, wxEvent * event)
                 return false;
                 break;
               case lxEVT_KEY_DOWN:
-//		   XXLookupString (NULL, &WEvent.xkey, text, 10, &key, &status);
+//		   XXLookuplxString (NULL, &WEvent.xkey, text, 10, &key, &status);
 //		   if (key == XK_Tab)
 //		   {
 //		   Win->CirculateFocus (true);
@@ -871,10 +873,10 @@ CPWindow2::Reset (void)
   resetcontrolscount ();
 };
 
-String
+lxString
 CPWindow2::getalign (CAlign align)
 {
-  String
+  lxString
   a;
   switch (align)
     {
@@ -895,12 +897,12 @@ CPWindow2::getalign (CAlign align)
 };
 
 bool
-CPWindow2::testline (String line)
+CPWindow2::testline (lxString line)
 {
   int
   pos;
 
-  String
+  lxString
   temp;
 
   for (uint a = 0; a < linesbak.GetLinesCount (); a++)
@@ -921,13 +923,13 @@ void
 CPWindow2::MakeOrUpdateFiles (bool prompt)
 {
   wxTextFile fbak;
-  String lbak;
+  lxString lbak;
   wxTextFile file;
-  String filename, filec = wxT (""), filec2 = wxT ("");
+  lxString filename, filec = wxT (""), filec2 = wxT ("");
   CControl *controle;
-  String ctname;
-  CStringList List;
-  String line, arg, ctype;
+  lxString ctname;
+  lxStringList List;
+  lxString line, arg, ctype;
 
 
   if (prompt)
@@ -939,8 +941,8 @@ CPWindow2::MakeOrUpdateFiles (bool prompt)
     };
 
 
-  String dirname = PDir;
-  String basename = PName;
+  lxString dirname = PDir;
+  lxString basename = PName;
 
   //dirname += "/" + basename;
   //PName = basename;
@@ -1441,7 +1443,7 @@ CPWindow2::MakeOrUpdateFiles (bool prompt)
           xml_in (line, line, ctype, arg);
           if (ctype.compare (wxT ("Event")) != 0)
             {
-              if ((ctype.compare (wxT ("String")) == 0) || (ctype.compare (wxT ("StringList")) == 0) || (ctype.compare (wxT ("File")) == 0))
+              if ((ctype.compare (wxT ("lxString")) == 0) || (ctype.compare (wxT ("lxStringList")) == 0) || (ctype.compare (wxT ("File")) == 0))
                 {
                   if (arg.size () > 0)
                     file.AddLine (wxT ("  Set") + line + wxT ("(wxT(\"") + arg + wxT ("\"));"));
@@ -1484,7 +1486,7 @@ CPWindow2::MakeOrUpdateFiles (bool prompt)
               xml_in (line, line, ctype, arg);
               if (ctype.compare (wxT ("Event")) != 0)
                 {
-                  if ((ctype.compare (wxT ("String")) == 0) || (ctype.compare (wxT ("StringList")) == 0) || (ctype.compare (wxT ("File")) == 0) || (ctype.compare (wxT ("MenuItems")) == 0))
+                  if ((ctype.compare (wxT ("lxString")) == 0) || (ctype.compare (wxT ("lxStringList")) == 0) || (ctype.compare (wxT ("File")) == 0) || (ctype.compare (wxT ("MenuItems")) == 0))
                     {
                       if (arg.size () > 0)
                         file.AddLine (wxT ("  ") + ctname + wxT (".Set") + line + wxT ("(wxT(\"") + arg + wxT ("\"));"));
@@ -1553,7 +1555,7 @@ CPWindow2::MakeOrUpdateFiles (bool prompt)
                   xml_in (line, line, ctype, arg);
                   if (ctype.compare (wxT ("Event")) != 0)
                     {
-                      if ((ctype.compare (wxT ("String")) == 0) || (ctype.compare (wxT ("StringList")) == 0) || (ctype.compare (wxT ("File")) == 0))
+                      if ((ctype.compare (wxT ("lxString")) == 0) || (ctype.compare (wxT ("lxStringList")) == 0) || (ctype.compare (wxT ("File")) == 0))
                         {
                           if (arg.size () > 0)
                             file.AddLine (wxT ("  Set") + line + wxT ("(wxT(\"") + arg + wxT ("\"));"));
@@ -1596,7 +1598,7 @@ CPWindow2::MakeOrUpdateFiles (bool prompt)
                       xml_in (line, line, ctype, arg);
                       if (ctype.compare (wxT ("Event")) != 0)
                         {
-                          if ((ctype.compare (wxT ("String")) == 0) || (ctype.compare (wxT ("StringList")) == 0) || (ctype.compare (wxT ("File")) == 0) || (ctype.compare (wxT ("MenuItems")) == 0))
+                          if ((ctype.compare (wxT ("lxString")) == 0) || (ctype.compare (wxT ("lxStringList")) == 0) || (ctype.compare (wxT ("File")) == 0) || (ctype.compare (wxT ("MenuItems")) == 0))
                             {
                               if (arg.size () > 0)
                                 file.AddLine (wxT ("  ") + ctname + wxT (".Set") + line + wxT ("(wxT(\"") + arg + wxT ("\"));"));
@@ -1646,11 +1648,11 @@ CPWindow2::MakeOrUpdateFiles (bool prompt)
 }
 
 void
-CPWindow2::MakeProject (String basename)
+CPWindow2::MakeProject (lxString basename)
 {
-  String filename, ctname;
+  lxString filename, ctname;
   wxTextFile file;
-  CStringList List;
+  lxStringList List;
   int i;
 
 
@@ -1658,21 +1660,21 @@ CPWindow2::MakeProject (String basename)
   filename = basename + wxT (".prj_lxrad");
   file.Create (filename);
   file.AddLine (wxT ("<LXRAD_Project>"));
-  file.AddLine (xml_out (wxT ("Version"), wxT ("String"), Version));
-  file.AddLine (xml_out (wxT ("PName"), wxT ("String"), PName));
+  file.AddLine (xml_out (wxT ("Version"), wxT ("lxString"), Version));
+  file.AddLine (xml_out (wxT ("PName"), wxT ("lxString"), PName));
   if (POptions.size () > 0)
-    file.AddLine (xml_out (wxT ("POptions"), wxT ("String"), POptions));
+    file.AddLine (xml_out (wxT ("POptions"), wxT ("lxString"), POptions));
   else
-    file.AddLine (xml_out (wxT ("POptions"), wxT ("String"), wxT ("")));
+    file.AddLine (xml_out (wxT ("POptions"), wxT ("lxString"), wxT ("")));
   if (PLibs.size () > 0)
-    file.AddLine (xml_out (wxT ("PLibs"), wxT ("String"), PLibs));
+    file.AddLine (xml_out (wxT ("PLibs"), wxT ("lxString"), PLibs));
   else
-    file.AddLine (xml_out (wxT ("PLibs"), wxT ("String"), wxT ("")));
+    file.AddLine (xml_out (wxT ("PLibs"), wxT ("lxString"), wxT ("")));
   if (PIncludeFile.size () > 0)
-    file.AddLine (xml_out (wxT ("PIncludeFile"), wxT ("String"), PIncludeFile));
+    file.AddLine (xml_out (wxT ("PIncludeFile"), wxT ("lxString"), PIncludeFile));
   else
-    file.AddLine (xml_out (wxT ("PIncludeFile"), wxT ("String"), wxT ("")));
-  file.AddLine (xml_out (wxT ("PNW"), wxT ("String"), itoa (PNW)));
+    file.AddLine (xml_out (wxT ("PIncludeFile"), wxT ("lxString"), wxT ("")));
+  file.AddLine (xml_out (wxT ("PNW"), wxT ("lxString"), itoa (PNW)));
   file.AddLine (wxT ("</LXRAD_Project>"));
   file.Write ();
   file.Close ();
@@ -1691,11 +1693,11 @@ CPWindow2::MakeProject (String basename)
 };
 
 void
-ControlLoadXMLContext (CControl * ctrl, String filename)
+ControlLoadXMLContext (CControl * ctrl, lxString filename)
 {
   wxTextFile file2;
-  CStringList list;
-  String line;
+  lxStringList list;
+  lxString line;
 
   file2.Open (filename);
   file2.GoToLine (-1);
@@ -1719,7 +1721,7 @@ ControlLoadXMLContext (CControl * ctrl, String filename)
 
               while (line.compare (wxT ("</") + ctrl->GetName () + wxT (">")) != 0)
                 {
-                  String controlclass, ctype, name, cname;
+                  lxString controlclass, ctype, name, cname;
 
                   cname = line.substr (1, line.size () - 2);
                   fgetline (file2, line);
@@ -1777,17 +1779,17 @@ CPWindow2::ReLoadProject (void)
 }
 
 bool
-CPWindow2::LoadProject (String dirname, String filename)
+CPWindow2::LoadProject (lxString dirname, lxString filename)
 {
   /*
-    String dirname ="./"+filename.substr(0,filename.find(".lxrad"));
+    lxString dirname ="./"+filename.substr(0,filename.find(".lxrad"));
     cout<<"file= "<<filename<<endl;
     cout<<"dir = "<<dirname<<endl;
    */
-  String basename, name;
+  lxString basename, name;
   wxTextFile file1;
-  String line, oname, type, value;
-  CStringList list;
+  lxString line, oname, type, value;
+  lxStringList list;
   int pos;
 
   /*
@@ -1892,8 +1894,8 @@ CPWindow2::LoadProject (String dirname, String filename)
 void
 CPWindow2::ListPropierties (CControl * control)
 {
-  String line, arg, ctype;
-  CStringList cList;
+  lxString line, arg, ctype;
+  lxStringList cList;
   cList.Clear ();
 
   if (control == NULL)control = &Window2;
@@ -1987,7 +1989,7 @@ CPWindow2::ListPropierties (CControl * control)
                   control3->EvOnFocusOut = EVONFOCUSOUT & CPWindow3::editfocusout;
                   Window3.CreateChild (control3);
                 };
-              if (ctype.compare (wxT ("StringList")) == 0)
+              if (ctype.compare (wxT ("lxStringList")) == 0)
                 {
                   control2->SetText (wxT ("CList"));
                   control2->SetReadOnly (true);
@@ -2001,7 +2003,7 @@ CPWindow2::ListPropierties (CControl * control)
                   control3->SetTag (c + 1);
                   control3->SetImgData (b_xpm);
                   control3->SetFOwner (&Window3);
-                  control3->EvMouseButtonRelease = EVMOUSEBUTTONRELEASE & CPWindow7::StringListMouseButtonRelease;
+                  control3->EvMouseButtonRelease = EVMOUSEBUTTONRELEASE & CPWindow7::lxStringListMouseButtonRelease;
                   control3->EvOnFocusOut = EVONFOCUSOUT & CPWindow3::editfocusout;
                   Window3.CreateChild (control3);
                 };
@@ -2358,11 +2360,11 @@ if(control != NULL)
  */
 
 
-String
-CPWindow2::WriteEvents (String name, String event)
+lxString
+CPWindow2::WriteEvents (lxString name, lxString event)
 {
   int pos = 0;
-  String out = name + wxT ("_") + event;
+  lxString out = name + wxT ("_") + event;
 
   pos = event.find (wxT ("Mouse"));
   if (pos >= 0)
@@ -2386,13 +2388,13 @@ CPWindow2::WriteEvents (String name, String event)
   return out;
 };
 
-String
-CPWindow2::WriteControlEvents (String name, String event)
+lxString
+CPWindow2::WriteControlEvents (lxString name, lxString event)
 {
-  String
+  lxString
   SWN =
           itoa (WN);
-  String out = event + wxT ("=") + uppercase (event) + wxT (" & CPWindow") + SWN + wxT ("::") + name + wxT ("_") + event + wxT (";");
+  lxString out = event + wxT ("=") + uppercase (event) + wxT (" & CPWindow") + SWN + wxT ("::") + name + wxT ("_") + event + wxT (";");
   return out;
 };
 

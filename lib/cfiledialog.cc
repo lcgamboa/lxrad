@@ -62,7 +62,7 @@ CFileDialog::Create (CControl * control)
   return CControl::Create (control);
 };
 
-String
+lxString
 CFileDialog::GetFileName (void)
 {
   if (Widget != NULL)
@@ -72,7 +72,7 @@ CFileDialog::GetFileName (void)
   return FileName;
 };
 
-String
+lxString
 CFileDialog::GetDir (void)
 {
   if (Widget != NULL)
@@ -82,7 +82,7 @@ CFileDialog::GetDir (void)
 };
 
 void
-CFileDialog::SetFileName (String filename)
+CFileDialog::SetFileName (lxString filename)
 {
   FileName = filename;
   if(SetDir (dirname (filename)))
@@ -93,7 +93,7 @@ CFileDialog::SetFileName (String filename)
 }
 
 bool
-CFileDialog::SetDir (String dir)
+CFileDialog::SetDir (lxString dir)
 {
   bool ret=false;
 
@@ -134,22 +134,22 @@ CFileDialog::Run (void)
     (FOwner->*EvOnClose) (run);
 }
 
-CStringList
+lxStringList
 CFileDialog::GetContext (void)
 {
   //  CControl::GetContext ();
   CObject::GetContext ();
-  Context.AddLine (xml_out (wxT ("FileName"), wxT ("String"), GetFileName ()));
-  Context.AddLine (xml_out (wxT ("Filter"), wxT ("String"), GetFilter ()));
+  Context.AddLine (xml_out (wxT ("FileName"), wxT ("lxString"), GetFileName ()));
+  Context.AddLine (xml_out (wxT ("Filter"), wxT ("lxString"), GetFilter ()));
   Context.AddLine (xml_out (wxT ("Type"), wxT ("int"), itoa (GetType ())));
   Context.AddLine (xml_out (wxT ("EvOnClose"), wxT ("Event"), btoa (GetEv (true))));
   return Context;
 };
 
 void
-CFileDialog::SetContext (CStringList context)
+CFileDialog::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
   //  CControl::SetContext (context);
   CObject::SetContext (context);
   for (uint i = 0; i < context.GetLinesCount (); i++)
@@ -182,14 +182,14 @@ CFileDialog::SetType (long type)
   //    ((wxFileDialog*)Widget)->SetStyle(Type);
 };
 
-String
+lxString
 CFileDialog::GetFilter (void)
 {
   return Filter;
 };
 
 void
-CFileDialog::SetFilter (String filter)
+CFileDialog::SetFilter (lxString filter)
 {
   Filter = filter;
 

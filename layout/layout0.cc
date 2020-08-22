@@ -6,6 +6,8 @@ CSWindow0 Window0;
 
 //Implementation
 
+/*Splash screen*/
+
 
 
 

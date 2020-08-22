@@ -224,12 +224,12 @@ CApplication::GetRun ()
 
 
 void
-CApplication::SetTitle (String title)
+CApplication::SetTitle (lxString title)
 {
   Title = title;
 };
 
-String CApplication::GetTitle (void)
+lxString CApplication::GetTitle (void)
 {
   return Title;
 };

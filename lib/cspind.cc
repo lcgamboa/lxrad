@@ -62,7 +62,7 @@ return CControl::Create (control);
 };
 
 
-CStringList
+lxStringList
 CSpind::GetContext (void)
 {
   CControl::GetContext ();
@@ -76,9 +76,9 @@ CSpind::GetContext (void)
 };
 
 void
-CSpind::SetContext (CStringList context)
+CSpind::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
 
   CControl::SetContext (context);
   for (uint i = 0; i < context.GetLinesCount (); i++)

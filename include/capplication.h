@@ -52,7 +52,7 @@ private:
   int AWindowCount;
   int Tag;
   int Run;
-  String Title;
+  lxString Title;
    bool OnInit_();
 public:
    virtual bool OnInit();
@@ -73,8 +73,8 @@ public:
   void SetTag (int x);
   int GetTag (void);
   int GetRun (void);
-  void SetTitle (String title);
-  String GetTitle ();
+  void SetTitle (lxString title);
+  lxString GetTitle ();
   void SetTips (CControl * control);
 
 };

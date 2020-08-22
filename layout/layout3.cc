@@ -1,4 +1,6 @@
 
+/* Propierty Window */
+
 #include"layout3.h"
 #include"layout3_d.cc"
 
@@ -13,7 +15,7 @@ CPWindow3 Window3;
 void
 CPWindow3::editfocusout (CControl * control)
 {
-  CStringList List;
+  lxStringList List;
   CEdit *ed;
   CLabel *st;
   CControl *ctrl;

@@ -62,20 +62,20 @@ class CPWindow1:public CPWindow
 extern CPWindow1 Window1 ;
 
 extern int WN;
-extern String Version;
+extern lxString Version;
 extern int PNW;
-extern String PName;
-extern String PDir;
-extern String POptions;
-extern String PLibs;
-extern String PIncludeFile;
+extern lxString PName;
+extern lxString PDir;
+extern lxString POptions;
+extern lxString PLibs;
+extern lxString PIncludeFile;
 extern bool Save;
 extern bool Move;
-extern String operation;
-extern String Browser;
-extern String Editor;
-extern String Debuger;
-extern String Home;
+extern lxString operation;
+extern lxString Browser;
+extern lxString Editor;
+extern lxString Debuger;
+extern lxString Home;
 
 
 #endif /*#CPWINDOW1*/

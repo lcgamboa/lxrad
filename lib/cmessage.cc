@@ -65,7 +65,7 @@ CMessage::ButtonRelease1 (CControl * control, uint button, uint x, uint y, uint 
 //extern int wdelete_callback (GtkWidget * widget, GdkEvent * event, gpointer data);
 
 void
-Message (String str)
+Message (lxString str)
 {
   CMessage *wmessage = new CMessage;
   int width, height;  
@@ -90,7 +90,7 @@ Message (String str)
 }
 
 void
-Message_sz (String str, int Width, int Height)
+Message_sz (lxString str, int Width, int Height)
 {
   CMessage *wmessage = new CMessage;
   int width, height;  

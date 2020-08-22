@@ -44,16 +44,16 @@
 class CPanel:public CControl
 {
 protected:
-  String Text;
+  lxString Text;
 public:
   CPanel (void);
    ~CPanel (void);
   int Create (CControl * control);
-  CStringList GetContext (void);
-  void SetContext (CStringList context);
+  lxStringList GetContext (void);
+  void SetContext (lxStringList context);
   //propiedades
-  void SetText (String t);
-  String GetText (void);
+  void SetText (lxString t);
+  lxString GetText (void);
 
 //  bool Signal (GtkWidget * widget, int signal);
 

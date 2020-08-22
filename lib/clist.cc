@@ -123,19 +123,19 @@ bool CList::GetSort (void)
   return Sort;
 };
 
-CStringList CList::GetContext (void)
+lxStringList CList::GetContext (void)
 {
   CControl::GetContext ();
-  Context.AddLine (xml_out (wxT("Items"), wxT("StringList"), GetItems ()));
+  Context.AddLine (xml_out (wxT("Items"), wxT("lxStringList"), GetItems ()));
   Context.AddLine (xml_out (wxT("EvListSelect"), wxT("Event"), btoa (GetEv ())));
   Context.AddLine (xml_out (wxT("EvListDoubleClick"), wxT("Event"), btoa (GetEv ())));
   return Context;
 };
 
 void
-CList::SetContext (CStringList context)
+CList::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
 
   CControl::SetContext (context);
   for (uint i = 0; i < context.GetLinesCount (); i++)
@@ -155,7 +155,7 @@ CList::SetContext (CStringList context)
 //propriedades
 
 void
-CList::SetItems (String litems)
+CList::SetItems (lxString litems)
 {
   int f = 0;
   DeleteItems (1);
@@ -169,9 +169,9 @@ CList::SetItems (String litems)
   Draw ();
 };
 
-String CList::GetItems (void)
+lxString CList::GetItems (void)
 {
-  String list = wxT("");
+  lxString list = wxT("");
   for (uint c = 0; c < ItemsList.GetLinesCount (); c++)
     {
       list += ItemsList.GetLine (c) + wxT(",");
@@ -180,7 +180,7 @@ String CList::GetItems (void)
 };
 
 void
-CList::AddItem (String text)
+CList::AddItem (lxString text)
 {
   if (Widget != NULL)
     {
@@ -190,7 +190,7 @@ CList::AddItem (String text)
   ItemsList.AddLine (text);
 };
 
-String
+lxString
 CList::GetItem (int item)
 {
   if (item < (int) ItemsList.GetLinesCount ())
@@ -200,7 +200,7 @@ CList::GetItem (int item)
 };
 
 void
-CList::SetItem (int item, String sitem)
+CList::SetItem (int item, lxString sitem)
 {
   if (item < (int) ItemsList.GetLinesCount ())
     ItemsList.SetLine (sitem, item);
@@ -218,7 +218,7 @@ CList::SetSelectedItemN (int item)
 };
 
 void
-CList::SetSelectedItem (String item)
+CList::SetSelectedItem (lxString item)
 {
 
   for (uint c = 0; c < ItemsList.GetLinesCount (); c++)
@@ -248,7 +248,7 @@ CList::GetSelectedItemN (void)
   return wxNOT_FOUND;
 };
 
-String
+lxString
 CList::GetSelectedItem (void)
 {
 int i ;
@@ -293,7 +293,7 @@ CList::DeleteItems (bool clean)
 };
 
 void
-CList::LoadItemsFromFile (String fname)
+CList::LoadItemsFromFile (lxString fname)
 {
   DeleteItems ();
   ItemsList.LoadFromFile (fname);
@@ -307,7 +307,7 @@ CList::LoadItemsFromFile (String fname)
 };
 
 void
-CList::SaveItemsToFile (String fname)
+CList::SaveItemsToFile (lxString fname)
 {
   ItemsList.SaveToFile (fname);
 };

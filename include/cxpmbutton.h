@@ -42,20 +42,20 @@
 class CXpmButton:public CControl
 {
 private:
-  String ImgFileName;
-  String Text;
+  lxString ImgFileName;
+  lxString Text;
 public:
     CXpmButton (void);
    ~CXpmButton (void);
   int Create (CControl * control);
-  CStringList GetContext (void);
-  void SetContext (CStringList context);
+  lxStringList GetContext (void);
+  void SetContext (lxStringList context);
   //propiedades
   void SetImgData (const char **data);
-  void SetImgFileName (String imgfilename);
-  String GetImgFileName (void);
-  void SetText (String t);
-  String GetText (void);
+  void SetImgFileName (lxString imgfilename);
+  lxString GetImgFileName (void);
+  void SetText (lxString t);
+  lxString GetText (void);
   //events
   void key_press (wxKeyEvent* event);
   void key_release (wxKeyEvent* event);

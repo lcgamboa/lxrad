@@ -76,10 +76,10 @@ public:
   void SetBitmap(wxBitmap * bitmap,double xs, double ys);
   void SetFunction (wxRasterOperationMode   function);
   void SetColor (wxColor color);
-  void SetColor (String color);
+  void SetColor (lxString color);
   void SetColor (uint r, uint g, uint b);
   void SetFgColor (wxColor color);
-  void SetFgColor (String color);
+  void SetFgColor (lxString color);
   void SetFgColor (uint r, uint g, uint b);
   void SetFont (wxFont font);
   wxColor GetFgColor (void);
@@ -96,7 +96,7 @@ public:
   * \param  color name.
   * \return void.
   */
-  void SetBgColor (String color);
+  void SetBgColor (lxString color);
  /**
   * Set Background Color by rgb.
   *
@@ -123,9 +123,9 @@ public:
   void Rectangle (bool filled, int x, int y, int width, int height);
   void Arc (bool filled, int x, int y, int x1, int y1, int x2, int y2);
   void Circle (bool filled, int x, int y, int radius);
-  void Text (String str, int x, int y);
-  void RotatedText (String str, int x, int y, int angle);
-  void TextOnRect (String str, wxRect, unsigned int align );
+  void Text (lxString str, int x, int y);
+  void RotatedText (lxString str, int x, int y, int angle);
+  void TextOnRect (lxString str, wxRect, unsigned int align );
   void Polygon (bool filled, wxPoint * points, int npoints);
   void Ellipse(bool filled,int x, int y, int width, int height);
   void EllipticArc(bool filled,int x, int y, int width, int height, double start, double end);

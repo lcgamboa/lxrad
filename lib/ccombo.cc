@@ -100,7 +100,7 @@ CCombo::Event (wxEvent & event)
 
 
 void
-CCombo::AddItem (String text)
+CCombo::AddItem (lxString text)
 {
   Items.AddLine (text);
 
@@ -111,7 +111,7 @@ CCombo::AddItem (String text)
 };
 
 void
-CCombo::LoadItemsFromFile (String fname)
+CCombo::LoadItemsFromFile (lxString fname)
 {
   DeleteItems ();
   Items.LoadFromFile (fname);
@@ -125,18 +125,18 @@ CCombo::LoadItemsFromFile (String fname)
 };
 
 void
-CCombo::SaveItemsToFile (String fname)
+CCombo::SaveItemsToFile (lxString fname)
 {
   Items.SaveToFile (fname);
 };
 
-String CCombo::GetItem (int item)
+lxString CCombo::GetItem (int item)
 {
   return Items.GetLine (item);
 };
 
 void
-CCombo::SetSelectedItem (String item)
+CCombo::SetSelectedItem (lxString item)
 {
   if (Widget != NULL)
   {
@@ -144,7 +144,7 @@ CCombo::SetSelectedItem (String item)
   }
 };
 
-String CCombo::GetSelectedItem (void)
+lxString CCombo::GetSelectedItem (void)
 {
   if (Widget != NULL)
   {
@@ -198,20 +198,20 @@ CCombo::DeleteItems (bool clean)
   };
 };
 
-CStringList CCombo::GetContext (void)
+lxStringList CCombo::GetContext (void)
 {
   CControl::GetContext ();
-  Context.AddLine (xml_out (wxT("Items"), wxT("StringList"), GetItems ()));
-  Context.AddLine (xml_out (wxT("Text"), wxT("String"), GetText ()));
+  Context.AddLine (xml_out (wxT("Items"), wxT("lxStringList"), GetItems ()));
+  Context.AddLine (xml_out (wxT("Text"), wxT("lxString"), GetText ()));
   Context.AddLine (xml_out (wxT("ReadOnly"), wxT("bool"), itoa(GetReadOnly ())));
   Context.AddLine (xml_out (wxT("EvOnComboChange"), wxT("Event"), btoa (GetEv ())));
   return Context;
 };
 
 void
-CCombo::SetContext (CStringList context)
+CCombo::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
 
   CControl::SetContext (context);
   for (uint i = 0; i < context.GetLinesCount (); i++)
@@ -229,14 +229,14 @@ CCombo::SetContext (CStringList context)
 };
 
 void
-CCombo::SetText (String text)
+CCombo::SetText (lxString text)
 {
   Text = text;
   if (Widget != NULL)
    ((wxComboBox*)Widget)->SetValue(text);
 };
 
-String CCombo::GetText (void)
+lxString CCombo::GetText (void)
 {
   if (Widget != NULL)
     Text =    ((wxComboBox*)Widget)->GetValue();
@@ -245,7 +245,7 @@ String CCombo::GetText (void)
 };
 
 void
-CCombo::SetItems (String litems)
+CCombo::SetItems (lxString litems)
 {
   int f = 0;
   DeleteItems (1);
@@ -259,9 +259,9 @@ CCombo::SetItems (String litems)
   Draw ();
 };
 
-String CCombo::GetItems (void)
+lxString CCombo::GetItems (void)
 {
-  String list = wxT("");
+  lxString list = wxT("");
   for (uint c = 0; c < Items.GetLinesCount (); c++)
     {
       list += Items.GetLine (c) + wxT(",");

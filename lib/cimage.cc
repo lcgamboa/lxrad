@@ -81,7 +81,7 @@ CImage::SetTransparent (bool transparent)
   Transparent = transparent;
 };
 
-CStringList
+lxStringList
 CImage::GetContext (void)
 {
   CControl::GetContext ();
@@ -91,9 +91,9 @@ CImage::GetContext (void)
 };
 
 void
-CImage::SetContext (CStringList context)
+CImage::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
 
   CControl::SetContext (context);
   for (uint i = 0; i < context.GetLinesCount (); i++)
@@ -111,14 +111,14 @@ CImage::SetContext (CStringList context)
     };
 };
 
-String CImage::GetImgFileName (void)
+lxString CImage::GetImgFileName (void)
 {
   return FileName;
 };
 
 
 bool
-CImage::SetImgFileName (String filename)
+CImage::SetImgFileName (lxString filename)
 {
   FileName = filename;
   if ((Widget != NULL)&&(FileName.size() > 0))
@@ -138,7 +138,7 @@ bool CImage::SetImgData (const char **data)
 };
 
 void
-CImage::WriteImgToFile (String filename)
+CImage::WriteImgToFile (lxString filename)
 {
  /*FIX*/
  printf("CImage::WriteImgToFile  Not implemented yet!\n");

@@ -107,30 +107,30 @@ CPMenu::Event (wxWindow * widget, wxEvent * event)
 
 
 void
-CPMenu::SetName (const String name)
+CPMenu::SetName (const lxString name)
 {
   Name = name;
 };
 
 
 void
-CPMenu::SetMenuItems (String menuitems)
+CPMenu::SetMenuItems (lxString menuitems)
 {
   MenuItems = menuitems;
 };
 
-String CPMenu::GetMenuItems (void)
+lxString CPMenu::GetMenuItems (void)
 {
   return MenuItems;
 };
 
 
-CStringList CPMenu::GetContext (void)
+lxStringList CPMenu::GetContext (void)
 {
   //CControl::GetContext ();
   CObject::GetContext ();
 
-  Context.AddLine (xml_out (wxT("Text"), wxT("String"),GetText() ));
+  Context.AddLine (xml_out (wxT("Text"), wxT("lxString"),GetText() ));
   Context.AddLine (xml_out (wxT("MenuItems"), wxT("MenuItems"), GetMenuItems ()));
 
   for (uint i = 0; i < Context.GetLinesCount (); i++)
@@ -143,9 +143,9 @@ CStringList CPMenu::GetContext (void)
 };
 
 void
-CPMenu::SetContext (CStringList context)
+CPMenu::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
 
 //  CControl::SetContext (context);
   CObject::SetContext (context);
@@ -170,14 +170,14 @@ CPMenu::PopUp (GdkEventButton * event)
 */
 
 void
-CPMenu::SetText (String t)
+CPMenu::SetText (lxString t)
 {
   Text = t;
 //  if (Label != NULL)
 //    gtk_label_set_text (GTK_LABEL (Label), LocaleToUtf8 (Text).c_str ());
 };
 
-String
+lxString
 CPMenu::GetText (void)
 {
 //  if (Label != NULL)

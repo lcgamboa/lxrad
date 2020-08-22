@@ -102,7 +102,7 @@ CSWindow::Create (CControl * control)
 
 
 void 
-CSWindow::SetImgFileName(String fname)
+CSWindow::SetImgFileName(lxString fname)
 {
   ImgFileName=fname;
 };

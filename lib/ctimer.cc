@@ -110,7 +110,7 @@ CTimer::Event (wxTimerEvent & te)
 };
 
 
-CStringList
+lxStringList
 CTimer::GetContext (void)
 {
 //  CControl::GetContext ();
@@ -122,9 +122,9 @@ CTimer::GetContext (void)
 };
 
 void
-CTimer::SetContext (CStringList context)
+CTimer::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
 
 //  CControl::SetContext (context);
   CObject::SetContext (context);
@@ -182,7 +182,7 @@ bool CTimer::GetRunState (void)
 };
 
 void
-CTimer::SetName (const String name)
+CTimer::SetName (const lxString name)
 {
   Name = name;
 };

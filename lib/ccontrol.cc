@@ -227,14 +227,14 @@ CControl::SetWin (CWindow * win)
 };
 
 void
-CControl::SetName (const String name)
+CControl::SetName (const lxString name)
 {
   Name = name;
   if (Widget != NULL)
     Widget->SetName(Name.c_str ());
 };
 
-String CControl::GetName (void)
+lxString CControl::GetName (void)
 {
   return Name;
 };
@@ -414,7 +414,7 @@ CControl::DestroyChild (CControl * control)
 };
 
 
-CStringList
+lxStringList
 CControl::GetContext (void)
 {
   CObject::GetContext ();
@@ -423,10 +423,10 @@ CControl::GetContext (void)
   Context.AddLine (xml_out (wxT("Y"), wxT("int"), itoa (GetY ())));
   Context.AddLine (xml_out (wxT("Width"), wxT("uint"), itoa (GetWidth ())));
   Context.AddLine (xml_out (wxT("Height"), wxT("uint"), itoa (GetHeight ())));
-  Context.AddLine (xml_out (wxT("Hint"), wxT("String"), GetHint ()));
+  Context.AddLine (xml_out (wxT("Hint"), wxT("lxString"), GetHint ()));
   Context.AddLine (xml_out (wxT("Enable"), wxT("bool"), itoa (GetEnable ())));
   Context.AddLine (xml_out (wxT("Visible"), wxT("bool"), itoa (GetVisible ())));
-  Context.AddLine (xml_out (wxT("Color"), wxT("String"), GetColor ().GetAsString (wxC2S_HTML_SYNTAX) ));
+  Context.AddLine (xml_out (wxT("Color"), wxT("lxString"), GetColor ().GetAsString (wxC2S_HTML_SYNTAX) ));
 
   if (PopupMenu)
     Context.AddLine (xml_out (wxT("PopupMenu"), wxT("PopupMenu"), PopupMenu->GetName ()));
@@ -450,9 +450,9 @@ CControl::GetContext (void)
 };
 
 void
-CControl::SetContext (CStringList context)
+CControl::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
 
 #ifdef _DEBUG_
 #ifdef __UNICODE__
@@ -515,9 +515,9 @@ CControl::SetContext (CStringList context)
 };
 
 void
-CControl::WriteXMLContext (String filename, bool first)
+CControl::WriteXMLContext (lxString filename, bool first)
 {
-  CStringList list;
+  lxStringList list;
   list = GetContext ();
   list.InsertLine (wxT("<") + Name + wxT(">"), 0);
   if (first)
@@ -541,11 +541,11 @@ CControl::WriteXMLContext (String filename, bool first)
 };
 
 void
-CControl::LoadXMLContext (String filename)
+CControl::LoadXMLContext (lxString filename)
 {
   wxTextFile fin;
-  CStringList list;
-  String line, name;
+  lxStringList list;
+  lxString line, name;
 
   fin.Open(filename);
   fin.GoToLine(0);
@@ -605,7 +605,7 @@ CControl::LoadXMLContext (String filename)
 
 };
 
-String
+lxString
 CControl::GetFontName (void)
 {
   return FontName;
@@ -613,7 +613,7 @@ CControl::GetFontName (void)
   
 
 void 
-CControl::SetFont (const String font)
+CControl::SetFont (const lxString font)
 {
   FontName=font;
 };
@@ -630,7 +630,7 @@ uint CControl::GetFontSize (void)
 };
 
 void
-CControl::SetHint (String hint)
+CControl::SetHint (lxString hint)
 {
   Hint = hint;
 /*
@@ -639,7 +639,7 @@ if ((Widget != NULL) && (Hint.size () > 0))
 */
 };
 
-String CControl::GetHint (void)
+lxString CControl::GetHint (void)
 {
   return Hint;
 };
@@ -726,7 +726,7 @@ uint CControl::GetBorder (void)
 };
 
 void
-CControl::SetColorName (const String name)
+CControl::SetColorName (const lxString name)
 {
   ColorName = name;
   
@@ -936,7 +936,7 @@ CControl *ch;
 
 
 CControl *
-CControl::GetChildByName (const String child)
+CControl::GetChildByName (const lxString child)
 {
 CControl *ch;
 

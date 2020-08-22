@@ -45,21 +45,21 @@ class CLabel:public CControl
 {
 protected:
 //  GtkWidget* Label;
-  String Text;
+  lxString Text;
   CAlign Align;
 public:
     CLabel (void);
    ~CLabel (void);
   int Create (CControl * control);
-  CStringList GetContext (void);
-  void SetContext (CStringList context);
+  lxStringList GetContext (void);
+  void SetContext (lxStringList context);
 //propierties  
   void SetWidth (uint w);
-  void SetText (String text);
-  String GetText (void);
+  void SetText (lxString text);
+  lxString GetText (void);
   void SetAlign (CAlign align);
   CAlign GetAlign (void);
-  void SetColorName (const String name);
+  void SetColorName (const lxString name);
   void SetColor (unsigned r, unsigned g, unsigned b);
   void SetColor (wxColor color);
 };

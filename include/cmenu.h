@@ -45,14 +45,14 @@
 class CMenu:public CControl
 {
 private:
-  String MenuItems;
+  lxString MenuItems;
 public:
   CMenu (void);
   int Create (CControl * control);
-  void SetMenuItems (String mitems);
-  String GetMenuItems (void);
-  CStringList GetContext (void);
-  void SetContext (CStringList context);
+  void SetMenuItems (lxString mitems);
+  lxString GetMenuItems (void);
+  lxStringList GetContext (void);
+  void SetContext (lxStringList context);
   void Destroy (void);
 };
 

@@ -43,24 +43,24 @@
 class CHtml:public CControl
 {
 protected:
-  String Text;
-  String Url;
-  String File;
+  lxString Text;
+  lxString Url;
+  lxString File;
   int CEvent (int event);
 public:
   CHtml (void);
    ~CHtml (void);
   int Create (CControl * control);
-  CStringList GetContext (void);
-  void SetContext (CStringList context);
+  lxStringList GetContext (void);
+  void SetContext (lxStringList context);
   void Event (wxEvent & event);
   //propiedades
-  void SetLoadText (String t);
-  String GetLoadText (void);
-  void SetLoadUrl (String url);
-  String GetLoadUrl (void);
-  void SetLoadFile (String url);
-  String GetLoadFile (void);
+  void SetLoadText (lxString t);
+  lxString GetLoadText (void);
+  void SetLoadUrl (lxString url);
+  lxString GetLoadUrl (void);
+  void SetLoadFile (lxString url);
+  lxString GetLoadFile (void);
   void HistoryBack(void);
   void HistoryForward(void);
   //events

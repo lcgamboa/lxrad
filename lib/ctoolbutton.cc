@@ -77,7 +77,7 @@ CToolButton::Create (CControl * control)
 
 
 
-CStringList
+lxStringList
 CToolButton::GetContext (void)
 {
   CControl::GetContext ();
@@ -86,9 +86,9 @@ CToolButton::GetContext (void)
 };
 
 void
-CToolButton::SetContext (CStringList context)
+CToolButton::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
 
   CControl::SetContext (context);
   for (uint i = 0; i < context.GetLinesCount (); i++)
@@ -118,7 +118,7 @@ CToolButton::SetImgData (const char **data)
 };
 
 void
-CToolButton::SetImgFileName (String imgfilename)
+CToolButton::SetImgFileName (lxString imgfilename)
 {
   ImgFileName = imgfilename;
   if ((Widget != NULL) && (ImgFileName.size() > 0))
@@ -129,7 +129,7 @@ CToolButton::SetImgFileName (String imgfilename)
     };
 };
 
-String CToolButton::GetImgFileName (void)
+lxString CToolButton::GetImgFileName (void)
 {
   return ImgFileName;
 };

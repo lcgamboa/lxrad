@@ -44,20 +44,20 @@
 class CCheckBox:public CControl
 {
 private:
-  String Text;
+  lxString Text;
   bool Check;	///<Is Checked ?
   int CEvent (int event);
 public:
     CCheckBox (void);
    ~CCheckBox (void);
   int Create (CControl * control);
-  CStringList GetContext (void);
-  void SetContext (CStringList context);
+  lxStringList GetContext (void);
+  void SetContext (lxStringList context);
   //propiedades
   void SetCheck (bool check);
   bool GetCheck (void);
-  void SetText (String t);
-  String GetText (void);
+  void SetText (lxString t);
+  lxString GetText (void);
 
   void Event (wxEvent & event);
   //Events

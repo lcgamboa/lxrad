@@ -58,17 +58,17 @@ protected:
   int X, Y;
   uint Width, Height;
   uint Border;
-  String ColorName;
+  lxString ColorName;
   unsigned char ColorRGB[3];
   CControl **Child;
   int ChildCount;
-  String FontName;
+  lxString FontName;
   uint FontSize;
   CControl *Owner;
   bool Visible;
   CPMenu *PopupMenu;
   CWindow *Win;
-  String Hint;
+  lxString Hint;
   unsigned long int BTimePress;
   unsigned long int BTimeRelease;
   unsigned long int BTimeClick;
@@ -76,8 +76,8 @@ protected:
 public:
     CControl (void);
    ~CControl (void);
-  virtual void SetName (const String name);
-  String GetName (void);
+  virtual void SetName (const lxString name);
+  lxString GetName (void);
   CWindow *GetWin (void);
   void SetWin (CWindow * win);
   virtual wxWindow *GetWidget (void);
@@ -87,11 +87,11 @@ public:
   virtual void Erase (void);
   virtual void Draw (void);
   virtual void Update (void);
-  CStringList GetContext (void);
-  void SetContext (CStringList context);
+  lxStringList GetContext (void);
+  void SetContext (lxStringList context);
 //propiedades
-  void SetFont (const String font);
-  String GetFontName (void);
+  void SetFont (const lxString font);
+  lxString GetFontName (void);
   void SetFontSize (uint size);
   uint GetFontSize (void);
   virtual void SetX (int x);
@@ -106,7 +106,7 @@ public:
   virtual uint GetHeight (void);
   void SetWid (int wid);
   long GetWid (void);
-  virtual void SetColorName (const String name);
+  virtual void SetColorName (const lxString name);
   virtual void SetColor (unsigned r, unsigned g, unsigned b);
   virtual void SetColor (wxColor color);
   wxColor GetColor(void);
@@ -124,17 +124,17 @@ public:
   bool GetCanFocus (void);
   bool GetDynamic (void);
   int GetChildCount (void);
-  void SetHint (String hint);
-  String GetHint (void);
+  void SetHint (lxString hint);
+  lxString GetHint (void);
   CControl *GetChild (uint child);
   virtual CControl *GetChildByWidget (wxWindow * widget);
   CControl *GetChildByWid (long wid);
-  CControl *GetChildByName (const String child);
+  CControl *GetChildByName (const lxString child);
   virtual void CreateChild (CControl * control, bool onlyput = false);
   virtual void DestroyChild (CControl * control);
   virtual void DestroyChilds (void);
-  virtual void WriteXMLContext (String filename, bool first = true);
-  virtual void LoadXMLContext (String filename);
+  virtual void WriteXMLContext (lxString filename, bool first = true);
+  virtual void LoadXMLContext (lxString filename);
   void SetCanExecuteEvent (bool can);
   bool GetCanExecuteEvent (void);
 //operators

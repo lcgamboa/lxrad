@@ -46,19 +46,19 @@ class CItemMenu:public CControl
 {
 protected:
   CPMenu * SubMenu;
-  String Text;
+  lxString Text;
   int CEvent (int event);
   int doenable;
 public:
     CItemMenu (void);
 //propiedades;
   int Create (CControl * control);
-  void SetName (const String name);
-  CStringList GetContext (void);
-  void SetContext (CStringList context);
+  void SetName (const lxString name);
+  lxStringList GetContext (void);
+  void SetContext (lxStringList context);
   void SetSubMenu (CPMenu * submenu);
-  void SetText (String t);
-  String GetText (void);
+  void SetText (lxString t);
+  lxString GetText (void);
   void Destroy (void);
   void SetEnable (bool enable);
   void SetDoEnable (bool enable);

@@ -51,7 +51,7 @@ public:
   void ButtonRelease1 (CControl * control, uint button, uint x, uint y, uint state);
 };
 
-void Message (String str);
-void Message_sz (String str, int Width, int Height);
+void Message (lxString str);
+void Message_sz (lxString str, int Width, int Height);
 
 #endif

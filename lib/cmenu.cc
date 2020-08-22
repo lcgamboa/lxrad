@@ -61,7 +61,7 @@ CMenu::Create (CControl * control)
   return 0;
 };
 
-CStringList CMenu::GetContext (void)
+lxStringList CMenu::GetContext (void)
 {
   //CControl::GetContext ();
   CObject::GetContext ();
@@ -77,9 +77,9 @@ CStringList CMenu::GetContext (void)
 };
 
 void
-CMenu::SetContext (CStringList context)
+CMenu::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
 
 //  CControl::SetContext (context);
   CObject::SetContext (context);
@@ -93,12 +93,12 @@ CMenu::SetContext (CStringList context)
 };
 
 void
-CMenu::SetMenuItems (String menuitems)
+CMenu::SetMenuItems (lxString menuitems)
 {
   MenuItems = menuitems;
 };
 
-String CMenu::GetMenuItems (void)
+lxString CMenu::GetMenuItems (void)
 {
   return MenuItems;
 };

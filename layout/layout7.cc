@@ -1,4 +1,6 @@
 
+/* Menu Itens Edit Window*/
+
 #include"layout7.h"
 #include"layout7_d.cc"
 
@@ -10,7 +12,7 @@ CPWindow7 Window7;
 #include"layout6.h"
 
 void
-CPWindow7::StringListMouseButtonRelease(CControl * control, uint button, uint x, uint y,uint state)
+CPWindow7::lxStringListMouseButtonRelease(CControl * control, uint button, uint x, uint y,uint state)
 {
 
   Window7.cl = dynamic_cast < CList * >(Window2.GetChildByName(Window6.combo1.GetText()));
@@ -41,8 +43,8 @@ CPWindow7::StringListMouseButtonRelease(CControl * control, uint button, uint x,
 void
 CPWindow7::button1_EvMouseButtonPress(CControl * control, uint button, uint x, uint y,uint state)
 {
-  String item;
-  if (Input (wxT("Add String: "), item))
+  lxString item;
+  if (Input (wxT("Add lxString: "), item))
     {
       list1.AddItem (item);
     };

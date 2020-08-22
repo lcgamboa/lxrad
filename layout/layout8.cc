@@ -1,4 +1,6 @@
 
+/* Menu Itens Edit Window*/
+
 #include"layout8.h"
 #include"layout8_d.cc"
 
@@ -20,7 +22,7 @@ CPWindow8::MenuItensMouseButtonRelease (CControl * control, uint button, uint x,
       if((Window8.menu != NULL)||(Window8.pmenu != NULL))
       {
       int f;
-      String litems;
+      lxString litems;
 
       if (Window8.menu)
 	litems = Window8.menu->GetMenuItems ();
@@ -47,7 +49,7 @@ CPWindow8::MenuItensMouseButtonRelease (CControl * control, uint button, uint x,
 void
 CPWindow8::button1_EvMouseButtonPress(CControl * control, uint button, uint x, uint y,uint state)
 {
-  String item;
+  lxString item;
 
   if (Input (wxT("Item Text"), item))
     {
@@ -94,7 +96,7 @@ void
 CPWindow8::button3_EvMouseButtonPress(CControl * control, uint button, uint x, uint y,uint state)
 {
   int ii;
-  String item;
+  lxString item;
 
   ii = list1.GetSelectedItemN ();
   if (ii > 0)
@@ -111,7 +113,7 @@ void
 CPWindow8::button4_EvMouseButtonPress(CControl * control, uint button, uint x, uint y,uint state)
 {
   int ii;
-  String item;
+  lxString item;
   ii = list1.GetSelectedItemN ();
   if (ii < (list1.GetItemsCount () - 1))
     {
@@ -126,7 +128,7 @@ CPWindow8::button4_EvMouseButtonPress(CControl * control, uint button, uint x, u
 void
 CPWindow8::button5_EvMouseButtonPress(CControl * control, uint button, uint x, uint y,uint state)
 {
-  String items = wxT("");
+  lxString items = wxT("");
   for (int c = 0; c < list1.GetItemsCount (); c++)
     {
       items += list1.GetItem (c) + wxT(",");

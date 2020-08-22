@@ -53,19 +53,19 @@ CText::Create (CControl * control)
   return CControl::Create (control);
 };
 
-CStringList
+lxStringList
 CText::GetContext (void)
 {
   CControl::GetContext ();
-//  Context.AddLine (xml_out (wxT("Text"), wxT("String"), GetText ()));
+//  Context.AddLine (xml_out (wxT("Text"), wxT("lxString"), GetText ()));
   Context.AddLine (xml_out (wxT("ReadOnly"), wxT("int"), itoa(GetReadOnly ())));
   return Context;
 };
 
 void
-CText::SetContext (CStringList context)
+CText::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
 
   CControl::SetContext (context);
   for (uint i = 0; i < context.GetLinesCount (); i++)
@@ -92,7 +92,7 @@ CText::Clear (void)
 };
 
 void
-CText::AddLine (String line)
+CText::AddLine (lxString line)
 {
   Lines.AddLine (line);
   if (Widget != NULL)
@@ -102,7 +102,7 @@ CText::AddLine (String line)
 };
 
 void
-CText::InsertLine (String line, int ln)
+CText::InsertLine (lxString line, int ln)
 {
   Lines.InsertLine (line, ln);
   if (Widget != NULL)
@@ -126,7 +126,7 @@ CText::DelLine (int ln)
 };
 
 void
-CText::LoadFromFile (String fname)
+CText::LoadFromFile (lxString fname)
 {
   if (Widget != NULL)
     {
@@ -142,7 +142,7 @@ CText::LoadFromFile (String fname)
 };
 
 void
-CText::SaveToFile (String fname)
+CText::SaveToFile (lxString fname)
 {
   if (Widget != NULL)
     {

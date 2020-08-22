@@ -76,7 +76,7 @@ resetcontrolscount (void)
 };
 
 CControl *
-newcontrol (String controltype, CControl * owner)
+newcontrol (lxString controltype, CControl * owner)
 {
   CControl *ncontrol;
   if (controltype.compare (wxT("CButton")) == 0)
@@ -302,7 +302,7 @@ getbuttons (CControl * owner)
   button->SetX (0);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/button.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/button.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
@@ -313,7 +313,7 @@ getbuttons (CControl * owner)
   button->SetX (26);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/label.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/label.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
@@ -324,7 +324,7 @@ getbuttons (CControl * owner)
   button->SetX (26*2);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/edit.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/edit.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
@@ -335,7 +335,7 @@ getbuttons (CControl * owner)
   button->SetX (26*3);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/checkbox.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/checkbox.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
@@ -346,7 +346,7 @@ getbuttons (CControl * owner)
   button->SetX (26*4);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/draw.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/draw.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
@@ -357,7 +357,7 @@ getbuttons (CControl * owner)
   button->SetX (26*5);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/toolbutton.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/toolbutton.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
@@ -368,7 +368,7 @@ getbuttons (CControl * owner)
   button->SetX (26*6);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/xpmbutton.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/xpmbutton.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
@@ -379,7 +379,7 @@ getbuttons (CControl * owner)
   button->SetX (26*7);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/list.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/list.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
@@ -390,7 +390,7 @@ getbuttons (CControl * owner)
   button->SetX (26*8);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/filelist.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/filelist.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
@@ -401,7 +401,7 @@ getbuttons (CControl * owner)
   button->SetX (26*9);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/menu.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/menu.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
@@ -412,7 +412,7 @@ getbuttons (CControl * owner)
   button->SetX (26*10);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/pmenu.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/pmenu.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
@@ -423,7 +423,7 @@ getbuttons (CControl * owner)
   button->SetX (26*11);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/scroll.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/scroll.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
@@ -434,7 +434,7 @@ getbuttons (CControl * owner)
   button->SetX (26*12);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/combo.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/combo.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
@@ -445,7 +445,7 @@ getbuttons (CControl * owner)
   button->SetX (26*13);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/filedialog.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/filedialog.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
@@ -456,7 +456,7 @@ getbuttons (CControl * owner)
   button->SetX (26*14);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/timer.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/timer.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
@@ -467,7 +467,7 @@ getbuttons (CControl * owner)
   button->SetX (26*15);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/image.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/image.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
@@ -478,7 +478,7 @@ getbuttons (CControl * owner)
   button->SetX (26*16);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/text.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/text.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
@@ -489,7 +489,7 @@ getbuttons (CControl * owner)
   button->SetX (26*17);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/styledtext.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/styledtext.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
@@ -500,7 +500,7 @@ getbuttons (CControl * owner)
   button->SetX (26*18);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/panel.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/panel.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
@@ -511,7 +511,7 @@ getbuttons (CControl * owner)
   button->SetX (26*19);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/dirdialog.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/dirdialog.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
@@ -522,7 +522,7 @@ getbuttons (CControl * owner)
   button->SetX (26*20);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/gauge.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/gauge.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
@@ -533,7 +533,7 @@ getbuttons (CControl * owner)
   button->SetX (26*21);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/grid.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/grid.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
@@ -544,7 +544,7 @@ getbuttons (CControl * owner)
   button->SetX (26*22);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/html.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/html.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
@@ -555,7 +555,7 @@ getbuttons (CControl * owner)
   button->SetX (26*23);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/statusbar.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/statusbar.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
@@ -566,7 +566,7 @@ getbuttons (CControl * owner)
   button->SetX (26*24);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/spin.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/spin.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
@@ -577,7 +577,7 @@ getbuttons (CControl * owner)
   button->SetX (26*25);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/spind.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/spind.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
@@ -588,7 +588,7 @@ getbuttons (CControl * owner)
   button->SetX (26*26);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/tgbutton.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/tgbutton.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);
@@ -600,7 +600,7 @@ getbuttons (CControl * owner)
   button->SetX (26*27);
   button->SetY (0);
   button->SetHint (button->GetName ());
-  button->SetImgFileName (String (wxT(_SHARE)) + wxT("/icons/cdialog.png"));
+  button->SetImgFileName (lxString (wxT(_SHARE)) + wxT("/icons/cdialog.png"));
   button->SetFOwner (&Window1);
   button->EvMouseButtonPress = EVMOUSEBUTTONCLICK & CPWindow1::MouseButtonClick;
   owner->CreateChild (button);

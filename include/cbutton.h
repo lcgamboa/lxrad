@@ -43,16 +43,16 @@
 class CButton:public CControl
 {
 protected:
-  String Text;		///<Button Label
+  lxString Text;		///<Button Label
 public:
   CButton (void);
    ~CButton (void);
   int Create (CControl * control);
-  CStringList GetContext (void);
-  void SetContext (CStringList context);
+  lxStringList GetContext (void);
+  void SetContext (lxStringList context);
   //propiedades
-  void SetText (String t);
-  String GetText (void);
+  void SetText (lxString t);
+  lxString GetText (void);
   //events
   void key_press (wxKeyEvent* event);
   void key_release (wxKeyEvent* event);

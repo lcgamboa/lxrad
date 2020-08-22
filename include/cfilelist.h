@@ -45,17 +45,17 @@
 class CFileList:public CControl
 {
 protected:
-  String DefaultDir;	
+  lxString DefaultDir;	
   int CEvent (int event);
 public:
   CFileList (void);
   int Create (CControl * control);
-  CStringList GetContext (void);
-  void SetContext (CStringList context);
+  lxStringList GetContext (void);
+  void SetContext (lxStringList context);
   //propiedades
-  void SetDir (String dir);
-  String GetSelectedDir (void);
-  String GetSelectedFile (void);
+  void SetDir (lxString dir);
+  lxString GetSelectedDir (void);
+  lxString GetSelectedFile (void);
   CControl *GetChildByWidget (wxWindow * widget);
   void Event (wxEvent & event);
   //Events

@@ -44,7 +44,7 @@
 class CList:public CControl
 {
 protected:
-  CStringList ItemsList;
+  lxStringList ItemsList;
   int SelectedItem;
   bool ShowSelection;
   bool Sort;
@@ -54,20 +54,20 @@ public:
     CList (void);
    ~CList (void);
   int Create (CControl * control);
-  CStringList GetContext (void);
-  void SetContext (CStringList context);
+  lxStringList GetContext (void);
+  void SetContext (lxStringList context);
   //propiedades
-  void SetItems (String litens);
-  String GetItems (void);
-  void AddItem (String text);
-  void LoadItemsFromFile (String fname);
-  void SaveItemsToFile (String fname);
-  String GetItem (int item);
-  void SetItem (int item, String sitem);
+  void SetItems (lxString litens);
+  lxString GetItems (void);
+  void AddItem (lxString text);
+  void LoadItemsFromFile (lxString fname);
+  void SaveItemsToFile (lxString fname);
+  lxString GetItem (int item);
+  void SetItem (int item, lxString sitem);
   void SetSelectedItemN (int item);
-  void SetSelectedItem (String item);
+  void SetSelectedItem (lxString item);
   int GetSelectedItemN (void);
-  String GetSelectedItem (void);
+  lxString GetSelectedItem (void);
   int GetItemsCount (void);
   void DeleteItem (int item);
   void DeleteItems (bool clean = true);

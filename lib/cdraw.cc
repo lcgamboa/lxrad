@@ -106,7 +106,7 @@ CDraw::SetTransparent (bool transparent)
   Transparent = transparent;
 }
 
-CStringList
+lxStringList
 CDraw::GetContext (void)
 {
   CControl::GetContext ();
@@ -116,9 +116,9 @@ CDraw::GetContext (void)
 }
 
 void
-CDraw::SetContext (CStringList context)
+CDraw::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
 
   CControl::SetContext (context);
   for (uint i = 0; i < context.GetLinesCount (); i++)
@@ -136,14 +136,14 @@ CDraw::SetContext (CStringList context)
     };
 }
 
-String CDraw::GetImgFileName (void)
+lxString CDraw::GetImgFileName (void)
 {
   return FileName;
 };
 
 
 bool
-CDraw::SetImgFileName (String filename,double sx, double sy)
+CDraw::SetImgFileName (lxString filename,double sx, double sy)
 {
   FileName = filename;
   Sx=sx;
@@ -165,7 +165,7 @@ CDraw::SetImgFileName (String filename,double sx, double sy)
 };
 
 bool
-CDraw::SetImgFileName (String filename)
+CDraw::SetImgFileName (lxString filename)
 {
   FileName = filename;
   Sx=1;
@@ -203,7 +203,7 @@ bool CDraw::SetImgData (const char **data)
 };
 
 void
-CDraw::WriteImgToFile (String filename)
+CDraw::WriteImgToFile (lxString filename)
 {
   if (Widget != NULL)
     {

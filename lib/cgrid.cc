@@ -134,7 +134,7 @@ CGrid::Event (wxEvent & event)
 
 
 
-CStringList
+lxStringList
 CGrid::GetContext (void)
 {
   CControl::GetContext ();
@@ -155,9 +155,9 @@ CGrid::GetContext (void)
 };
 
 void
-CGrid::SetContext (CStringList context)
+CGrid::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
   CControl::SetContext (context);
   for (uint i = 0; i < context.GetLinesCount (); i++)
     {
@@ -242,13 +242,13 @@ CGrid::GetColsCount (void)
 };
 
 void 
-CGrid::SetCell (int row, int col, String val)
+CGrid::SetCell (int row, int col, lxString val)
 {
   if (Widget != NULL)
    ((wxGrid*)Widget)->SetCellValue( row, col, val);
 };
 
-String 
+lxString 
 CGrid::GetCell (int row, int col)
 {
   if (Widget != NULL)

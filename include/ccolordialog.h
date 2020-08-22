@@ -50,13 +50,13 @@ public:
   int Create (CControl * control);
   void Run (void);
   //propriedades
-  String GetColorName (void);
-  void SetColorName (String cname);
+  lxString GetColorName (void);
+  void SetColorName (lxString cname);
   wxColor GetColor (void);
   void SetColor (wxColor c);
   void SetColor (uint r, uint g, uint b);
-  CStringList GetContext (void);
-  void SetContext (CStringList context);
+  lxStringList GetContext (void);
+  void SetContext (lxStringList context);
   //events
   void (CControl::*EvOnClose) (int retId);  
 };

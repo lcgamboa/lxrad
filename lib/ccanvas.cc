@@ -257,7 +257,7 @@ CCanvas::SetColor (wxColor color)
 }
 
 void
-CCanvas::SetColor (String color)
+CCanvas::SetColor (lxString color)
 {
   SetFgColor(color);
   SetBgColor(color);
@@ -283,7 +283,7 @@ CCanvas::SetFgColor (wxColor color)
 };
 
 void
-CCanvas::SetFgColor (String color)
+CCanvas::SetFgColor (lxString color)
 {
   wxColourDatabase CB;
 
@@ -328,7 +328,7 @@ CCanvas::SetBgColor (wxColor color)
 };
 
 void
-CCanvas::SetBgColor (String color)
+CCanvas::SetBgColor (lxString color)
 {
   wxColourDatabase CB;
 
@@ -507,20 +507,20 @@ CCanvas::SetFont (wxFont font)
 
 
 void 
-CCanvas::Text (String str, int x, int y)
+CCanvas::Text (lxString str, int x, int y)
 {
   if (DC != NULL)DC->DrawText (str,x,y);
 };
   
 void 
-CCanvas::TextOnRect (String str, wxRect ret, unsigned int align )
+CCanvas::TextOnRect (lxString str, wxRect ret, unsigned int align )
 {
   if (DC != NULL)
      DC->DrawLabel(str,ret, align);
 }
 
 void 
-CCanvas::RotatedText (String str, int x, int y, int angle)
+CCanvas::RotatedText (lxString str, int x, int y, int angle)
 {
   if (DC != NULL)DC->DrawRotatedText (str,x,y,angle);
 }

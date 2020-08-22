@@ -110,7 +110,7 @@ CFileList::Event (wxEvent & event)
 
 
 void
-CFileList::SetDir (String dir)
+CFileList::SetDir (lxString dir)
 {
   DefaultDir = dir;
   if (Widget != NULL)
@@ -119,7 +119,7 @@ CFileList::SetDir (String dir)
     };
 };
 
-String CFileList::GetSelectedDir (void)
+lxString CFileList::GetSelectedDir (void)
 {
 
   if(Widget)
@@ -128,7 +128,7 @@ String CFileList::GetSelectedDir (void)
     return wxT("");
 };
 
-String CFileList::GetSelectedFile (void)
+lxString CFileList::GetSelectedFile (void)
 {
   
   if(Widget)
@@ -138,10 +138,10 @@ String CFileList::GetSelectedFile (void)
 };
 
 
-CStringList CFileList::GetContext (void)
+lxStringList CFileList::GetContext (void)
 {
   CControl::GetContext ();
-  Context.AddLine (xml_out (wxT("Dir"), wxT("StringList"), DefaultDir));
+  Context.AddLine (xml_out (wxT("Dir"), wxT("lxStringList"), DefaultDir));
   Context.AddLine (xml_out (wxT("EvFileListSelectDir"), wxT("Event"), btoa (GetEv ())));
   Context.AddLine (xml_out (wxT("EvFileListSelectFile"), wxT("Event"), btoa (GetEv ())));
   return Context;
@@ -149,9 +149,9 @@ CStringList CFileList::GetContext (void)
 
 
 void
-CFileList::SetContext (CStringList context)
+CFileList::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
 
   CControl::SetContext (context);
   for (uint i = 0; i < context.GetLinesCount (); i++)

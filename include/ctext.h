@@ -42,20 +42,20 @@
 class CText:public CControl
 {
 protected:
-  CStringList Lines;
+  lxStringList Lines;
   bool ReadOnly;
 public:
     CText (void);
    ~CText (void);
   int Create (CControl * control);
-  CStringList GetContext (void);
-  void SetContext (CStringList context);
+  lxStringList GetContext (void);
+  void SetContext (lxStringList context);
   void Clear ();
-  void AddLine (String line);
-  void InsertLine (String line, int ln);
+  void AddLine (lxString line);
+  void InsertLine (lxString line, int ln);
   void DelLine (int ln);
-  void LoadFromFile (String fname);
-  void SaveToFile (String fname);
+  void LoadFromFile (lxString fname);
+  void SaveToFile (lxString fname);
   //propiedades
   void SetReadOnly(bool r);
   bool GetReadOnly(void);

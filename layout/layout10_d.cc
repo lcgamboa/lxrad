@@ -9,7 +9,7 @@ CWindow10::CWindow10 (void)
   SetTitle (wxT("Splash"));
   SetCanDestroy(true);          
   SetTimeout(6000);
-  SetImgFileName (String (wxT(_SHARE)) +wxT("/icons/splash.png"));
+  SetImgFileName (lxString (wxT(_SHARE)) +wxT("/icons/splash.png"));
   /*#Others*/
 //lxrad automatic generated block end, don't edit above!  
 };

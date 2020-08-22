@@ -93,11 +93,11 @@ CToggleButton::Event (wxEvent &  event)
 
 
 
-CStringList
+lxStringList
 CToggleButton::GetContext (void)
 {
   CControl::GetContext ();
-  Context.AddLine (xml_out (wxT("Text"), wxT("String"), GetText ()));
+  Context.AddLine (xml_out (wxT("Text"), wxT("lxString"), GetText ()));
   Context.AddLine (xml_out (wxT("Check"), wxT("Int"), itoa(GetCheck ())));
 
   Context.AddLine (xml_out (wxT("EvOnToggleButton"), wxT("Event"), btoa (GetEv ())));
@@ -105,9 +105,9 @@ CToggleButton::GetContext (void)
 };
 
 void
-CToggleButton::SetContext (CStringList context)
+CToggleButton::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
 
   CControl::SetContext (context);
   for (uint i = 0; i < context.GetLinesCount (); i++)
@@ -141,14 +141,14 @@ bool CToggleButton::GetCheck (void)
 };
 
 void
-CToggleButton::SetText (String t)
+CToggleButton::SetText (lxString t)
 {
   Text = t;
   if (Widget != NULL)
      Widget->SetLabel(t);
 };
 
-String
+lxString
 CToggleButton::GetText (void)
 {
   if (Widget != NULL)

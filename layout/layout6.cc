@@ -1,4 +1,6 @@
 
+/*Controls combo Window*/
+
 #include"layout6.h"
 #include"layout6_d.cc"
 

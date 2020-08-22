@@ -43,7 +43,7 @@
 class CDirDialog:public CControl
 {
 private:
-  String DirName;
+  lxString DirName;
   long Type;
 public:
   CDirDialog (void);
@@ -51,12 +51,12 @@ public:
   int Create (CControl * control);
   void Run (void);
   //propriedades
-  String GetDirName (void);
-  void SetDirName (String dirname);
+  lxString GetDirName (void);
+  void SetDirName (lxString dirname);
   long GetType(void);
   void SetType(long type);
-  CStringList GetContext (void);
-  void SetContext (CStringList context);
+  lxStringList GetContext (void);
+  void SetContext (lxStringList context);
   //events
   void (CControl::*EvOnClose) (int retId);  
 };

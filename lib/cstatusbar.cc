@@ -64,7 +64,7 @@ CStatusbar::Create (CControl * control)
 //   ((wxStatusBar *)Widget)->SetStatusText(wxT("StatusBar test"), 0);
 //SetFieldsCount(int number = 1, int* widths = NULL)
 //GetStatusText(int i = 0)
-//SetStatusText(const wxString& text, int i = 0)
+//SetStatusText(const wxlxString& text, int i = 0)
 
   ((wxStatusBar *)Widget)->SetFieldsCount( Fields.GetLinesCount ());
   for (uint i = 0; i < Fields.GetLinesCount (); i++)
@@ -76,20 +76,20 @@ CStatusbar::Create (CControl * control)
 };
 
 
-CStringList
+lxStringList
 CStatusbar::GetContext (void)
 {
 //  CControl::GetContext ();
   CObject::GetContext ();
-  Context.AddLine (xml_out (wxT("Fields"), wxT("StringList"), GetFields ()));
+  Context.AddLine (xml_out (wxT("Fields"), wxT("lxStringList"), GetFields ()));
 
   return Context;
 };
 
 void
-CStatusbar::SetContext (CStringList context)
+CStatusbar::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
 //  CControl::SetContext (context);
   CObject::SetContext (context);
   for (uint i = 0; i < context.GetLinesCount (); i++)
@@ -102,7 +102,7 @@ CStatusbar::SetContext (CStringList context)
 
 //propiedades
 void
-CStatusbar::SetFields (String litems)
+CStatusbar::SetFields (lxString litems)
 {
   int f = 0;
   Fields.Clear ();
@@ -116,10 +116,10 @@ CStatusbar::SetFields (String litems)
 //  Draw ();
 };
 
-String 
+lxString 
 CStatusbar::GetFields (void)
 {
-  String list = wxT("");
+  lxString list = wxT("");
   for (uint c = 0; c < Fields.GetLinesCount (); c++)
     {
       list += Fields.GetLine (c) + wxT(",");
@@ -127,7 +127,7 @@ CStatusbar::GetFields (void)
   return list;
 };
 
-String
+lxString
 CStatusbar::GetField (int item)
 {
   if (item < (int) Fields.GetLinesCount ())
@@ -137,7 +137,7 @@ CStatusbar::GetField (int item)
 };
 
 void
-CStatusbar::SetField (int item, String sitem)
+CStatusbar::SetField (int item, lxString sitem)
 {
   if (item < (int) Fields.GetLinesCount ())
   {
@@ -148,7 +148,7 @@ CStatusbar::SetField (int item, String sitem)
 };
 
 void
-CStatusbar::AddField (String text)
+CStatusbar::AddField (lxString text)
 {
   Fields.AddLine (text);
 

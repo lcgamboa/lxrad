@@ -49,7 +49,7 @@
 class CWindow:public CControl
 {
 protected:
-  String Title;
+  lxString Title;
   unsigned long BorderColor;
   bool CanDestroy;
   CWindow *WParent;
@@ -76,9 +76,9 @@ public:
   void HideExclusive (void);
   void Update (void);
   int GetWNumber (void);
-  CStringList GetContext (void);
-  void SetContext (CStringList context);
-  int  LoadXMLContextAndCreateChilds (String filename, CControl * ctrl = NULL);
+  lxStringList GetContext (void);
+  void SetContext (lxStringList context);
+  int  LoadXMLContextAndCreateChilds (lxString filename, CControl * ctrl = NULL);
   void SetFocus (void);
   void SetControlOnFocus (CControl * control);
   CControl *GetControlOnFocus (void);
@@ -98,8 +98,8 @@ public:
   uint GetWidth (void);
   void SetHeight (uint height);
   uint GetHeight (void);
-  void SetTitle (const String & title);
-  String GetTitle (void);
+  void SetTitle (const lxString & title);
+  lxString GetTitle (void);
   int GetHScale (int w);
   int GetVScale (int h);
   //operator

@@ -56,19 +56,19 @@ CXpmButton::Create (CControl * control)
 };
 
 
-CStringList
+lxStringList
 CXpmButton::GetContext (void)
 {
   CControl::GetContext ();
-  Context.AddLine (xml_out (wxT("Text"), wxT("String"), GetText ()));
+  Context.AddLine (xml_out (wxT("Text"), wxT("lxString"), GetText ()));
   Context.AddLine (xml_out (wxT("ImgFileName"), wxT("File"), GetImgFileName ()));
   return Context;
 };
 
 void
-CXpmButton::SetContext (CStringList context)
+CXpmButton::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
 
   CControl::SetContext (context);
   for (uint i = 0; i < context.GetLinesCount (); i++)
@@ -100,7 +100,7 @@ CXpmButton::SetImgData (const char **data)
 };
 
 void
-CXpmButton::SetImgFileName (String imgfilename)
+CXpmButton::SetImgFileName (lxString imgfilename)
 {
   ImgFileName = imgfilename;
 /*FIX*/
@@ -108,20 +108,20 @@ CXpmButton::SetImgFileName (String imgfilename)
 //    gtk_image_set_from_file (GTK_IMAGE (Img), ImgFileName.c_str ());
 };
 
-String CXpmButton::GetImgFileName (void)
+lxString CXpmButton::GetImgFileName (void)
 {
   return ImgFileName;
 };
 
 void
-CXpmButton::SetText (String t)
+CXpmButton::SetText (lxString t)
 {
   Text = t;
 //  if (Widget != NULL)
 //    gtk_label_set_text (GTK_LABEL (Label), LocaleToUtf8 (Text).c_str ());
 };
 
-String
+lxString
 CXpmButton::GetText (void)
 {
 //  if (Widget != NULL)

@@ -1,4 +1,6 @@
 
+/* Open/Create Project Window*/
+
 #include"layout5.h"
 #include"layout5_d.cc"
 
@@ -114,7 +116,7 @@ CPWindow5::button3_EvMouseButtonRelease(CControl * control, uint button, uint x,
 	      CItemMenu *im;
 	      im = new CItemMenu;
 	      im->SetText (wxT("Window") + itoa (n));
-	      im->SetName (String(wxT("pmenu4_"))+wxT("Window") + itoa (n));
+	      im->SetName (lxString(wxT("pmenu4_"))+wxT("Window") + itoa (n));
 	      im->SetTag (n);
 	      im->SetFOwner (this);
               im->EvMenuActive = EVMENUACTIVE & CPWindow1::menu1_Windows_Windowx_EvMenuActive;

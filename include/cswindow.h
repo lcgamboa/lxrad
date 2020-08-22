@@ -43,14 +43,14 @@
 class CSWindow:public CWindow
 {
 protected:
-  String ImgFileName;
+  lxString ImgFileName;
   unsigned int Timeout;
 public:
     CSWindow (void);
    ~CSWindow (void);
   int Create (CControl * control);
   //propiedades
-  void SetImgFileName(String fname);
+  void SetImgFileName(lxString fname);
   void SetTimeout(unsigned int tout);
   //operator
   void *operator    new (size_t sz);

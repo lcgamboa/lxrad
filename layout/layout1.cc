@@ -23,6 +23,8 @@
    For e-mail suggestions :  lcgamboa@yahoo.com
    ######################################################################## */
 
+/* Principal Window*/
+
 #include"layout1.h"
 #include"layout1_d.cc"
 
@@ -40,20 +42,20 @@ CPWindow1 Window1;
 #include<dirent.h>
 
 int WN = 1;
-String Version = wxT(_VERSION);
+lxString Version = wxT(_VERSION);
 int PNW = 1;
-String PName = wxT("untitled");
-String PDir = wxT("~/");
-String POptions = wxT("-Wall -O2");
-String PLibs = wxT(" ");
-String PIncludeFile = wxT(" ");
+lxString PName = wxT("untitled");
+lxString PDir = wxT("~/");
+lxString POptions = wxT("-Wall -O2");
+lxString PLibs = wxT(" ");
+lxString PIncludeFile = wxT(" ");
 bool Save = false;
 bool Move;
-String operation = wxT("editar");
-String Browser = wxT("firefox");
-String Editor = wxT("xterm -e vim");
-String Debuger = wxT("ddd");
-String Home = wxT("");
+lxString operation = wxT("editar");
+lxString Browser = wxT("firefox");
+lxString Editor = wxT("xterm -e vim");
+lxString Debuger = wxT("ddd");
+lxString Home = wxT("");
 
 #include"layout2.h"
 #include"layout5.h"
@@ -175,7 +177,7 @@ CPWindow1::menu1_File_NewWindow_EvMenuActive(CControl * control)
       CItemMenu *im;
       im = new CItemMenu;
       im->SetText (wxT("Window") + itoa (n));
-      im->SetName (String(wxT("pmenu4_"))+wxT("Window") + itoa (n));
+      im->SetName (lxString(wxT("pmenu4_"))+wxT("Window") + itoa (n));
       im->SetTag (n);
       im->SetFOwner (this);
       im->EvMenuActive = EVMENUACTIVE & CPWindow1::menu1_Windows_Windowx_EvMenuActive;
@@ -204,7 +206,7 @@ CPWindow1::menu1_File_Save_EvMenuActive(CControl * control)
 void
 CPWindow1::menu1_File_Preferences_EvMenuActive(CControl * control)
 {
-  String temp;
+  lxString temp;
   wxTextFile fout;
 
   temp = Browser;
@@ -334,7 +336,7 @@ CPWindow1::menu1_Project_EditSource_EvMenuActive(CControl * control)
 void
 CPWindow1::menu1_Project_Debug_EvMenuActive(CControl * control)
 {
-  String temp;
+  lxString temp;
   wxSetWorkingDirectory(PDir);
   temp = POptions;
   POptions = wxT("-Wall -ggdb3");
@@ -350,19 +352,19 @@ CPWindow1::menu1_Project_Debug_EvMenuActive(CControl * control)
 void
 CPWindow1::menu1_Help_Contents_EvMenuActive(CControl * control)
 {
-  wxExecute(Browser + wxT(" ") + String (wxT(_SHARE)) + wxT("/docs/index.html"), wxEXEC_ASYNC, NULL);
+  wxExecute(Browser + wxT(" ") + lxString (wxT(_SHARE)) + wxT("/docs/index.html"), wxEXEC_ASYNC, NULL);
 };
 
 void
 CPWindow1::menu1_Help_Reference_EvMenuActive(CControl * control)
 {
-  wxExecute(Browser + wxT(" ") + String (wxT(_SHARE)) + wxT("/docs/doxygen/html/index.html"), wxEXEC_ASYNC, NULL);
+  wxExecute(Browser + wxT(" ") + lxString (wxT(_SHARE)) + wxT("/docs/doxygen/html/index.html"), wxEXEC_ASYNC, NULL);
 };
 
 void
 CPWindow1::menu1_Help_About_EvMenuActive(CControl * control)
 {
-  Message (wxT("LXRAD-") + String(wxT(_VERSION)) + wxT(" Developed by LCGamboa <lcgamboa@yahoo.com>"));
+  Message (wxT("LXRAD-") + lxString(wxT(_VERSION)) + wxT(" Developed by LCGamboa <lcgamboa@yahoo.com>"));
 };
 
 

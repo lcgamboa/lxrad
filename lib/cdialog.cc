@@ -74,7 +74,7 @@ CDialog::ButtonSigReleased (CControl * control)
 };
 
 bool
-Dialog (String label)
+Dialog (lxString label)
 {
   bool ret;
   CDialog *winput;

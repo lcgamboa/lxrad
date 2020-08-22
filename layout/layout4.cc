@@ -1,4 +1,6 @@
 
+/* Events Window*/
+
 #include"layout4.h"
 #include"layout4_d.cc"
 
@@ -12,7 +14,7 @@ CPWindow4 Window4;
 void
 CPWindow4::checkboxclick (CControl * control)
 {
-  CStringList List;
+  lxStringList List;
   CCheckBox *cb;
   CControl *ctrl;
 

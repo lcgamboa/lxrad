@@ -52,7 +52,7 @@ CColorDialog::Create (CControl * control)
   return CControl::Create (control);
 };
 
-String
+lxString
 CColorDialog::GetColorName (void)
 {
   wxColourDatabase CB;
@@ -60,7 +60,7 @@ CColorDialog::GetColorName (void)
 };
 
 void
-CColorDialog::SetColorName (String cname)
+CColorDialog::SetColorName (lxString cname)
 {
   wxColourDatabase CB;
 
@@ -98,20 +98,20 @@ CColorDialog::Run (void)
     (FOwner->*EvOnClose) (run);
 };
 
-CStringList
+lxStringList
 CColorDialog::GetContext (void)
 {
   //  CControl::GetContext ();
   CObject::GetContext ();
-  Context.AddLine (xml_out (wxT ("ColorName"), wxT ("String"), GetColorName ()));
+  Context.AddLine (xml_out (wxT ("ColorName"), wxT ("lxString"), GetColorName ()));
   Context.AddLine (xml_out (wxT ("EvOnClose"), wxT ("Event"), btoa (GetEv (true))));
   return Context;
 };
 
 void
-CColorDialog::SetContext (CStringList context)
+CColorDialog::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
   //  CControl::SetContext (context);
   CObject::SetContext (context);
   for (uint i = 0; i < context.GetLinesCount (); i++)

@@ -52,7 +52,7 @@ CGauge::Create (CControl * control)
         return CControl::Create (control);
 };
 
-CStringList CGauge::GetContext (void)
+lxStringList CGauge::GetContext (void)
 {
   CControl::GetContext ();
   Context.AddLine (xml_out (wxT("Range"), wxT("Int"), itoa(GetRange ())));
@@ -62,9 +62,9 @@ CStringList CGauge::GetContext (void)
 };
 
 void
-CGauge::SetContext (CStringList context)
+CGauge::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
 
   CControl::SetContext (context);
   for (uint i = 0; i < context.GetLinesCount (); i++)

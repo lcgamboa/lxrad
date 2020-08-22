@@ -58,7 +58,7 @@ CScroll::Create (CControl * control)
   return CControl::Create (control);
 };
 
-CStringList CScroll::GetContext (void)
+lxStringList CScroll::GetContext (void)
 {
   CControl::GetContext ();
   Context.AddLine (xml_out (wxT("Range"), wxT("Int"), itoa(GetRange ())));
@@ -69,9 +69,9 @@ CStringList CScroll::GetContext (void)
 };
 
 void
-CScroll::SetContext (CStringList context)
+CScroll::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
 
   CControl::SetContext (context);
   for (uint i = 0; i < context.GetLinesCount (); i++)

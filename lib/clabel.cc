@@ -30,9 +30,9 @@
 class wxClickText : public wxStaticText
 {
 public:
-wxClickText(wxWindow *parent, wxWindowID id, const wxString &label,
+wxClickText(wxWindow *parent, wxWindowID id, const lxString &label,
 const wxPoint &pos = wxDefaultPosition, const wxSize
-&size = wxDefaultSize, int style = 0, const wxString& name =
+&size = wxDefaultSize, int style = 0, const lxString& name =
 "staticText");
 virtual ~wxClickText();
 void OnMouseEvent( wxMouseEvent& event );
@@ -45,7 +45,7 @@ EVT_LEFT_DOWN(wxClickText::OnMouseEvent)
 END_EVENT_TABLE()
 
 wxClickText::wxClickText(wxWindow *parent, wxWindowID id, const
-wxString &label, const wxPoint &pos , const wxSize &size , int style , const wxString& name): 
+lxString &label, const wxPoint &pos , const wxSize &size , int style , const lxString& name): 
 wxStaticText(parent, id, label, pos, size, style/*|wxPOPUP_WINDOW*/, name)
 {}
 
@@ -109,19 +109,19 @@ unsigned int flags=0;
 
 
 
-CStringList
+lxStringList
 CLabel::GetContext (void)
 {
   CControl::GetContext ();
-  Context.AddLine (xml_out (wxT("Text"), wxT("String"), GetText ()));
+  Context.AddLine (xml_out (wxT("Text"), wxT("lxString"), GetText ()));
   Context.AddLine (xml_out (wxT("Align"), wxT("CAlign"), itoa (GetAlign ())));
   return Context;
 };
 
 void
-CLabel::SetContext (CStringList context)
+CLabel::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
 
   CControl::SetContext (context);
   for (uint i = 0; i < context.GetLinesCount (); i++)
@@ -136,14 +136,14 @@ CLabel::SetContext (CStringList context)
 
 //propierties
 void
-CLabel::SetText (String text)
+CLabel::SetText (lxString text)
 {
   Text = text;
   if (Widget != NULL)
    ((wxClickText*)Widget)->SetLabel(Text);
 };
 
-String
+lxString
 CLabel::GetText (void)
 {
 //  if (Widget != NULL)
@@ -197,7 +197,7 @@ CLabel::SetWidth (uint w)
 
 
 void
-CLabel::SetColorName (const String name)
+CLabel::SetColorName (const lxString name)
 {
   ColorName = name;
   

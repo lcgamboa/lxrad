@@ -44,9 +44,9 @@ class CObject
 protected:
   bool Ev[EVMAX];
   uint Evcount;
-  String Name;
-  String Class;
-  CStringList Context;
+  lxString Name;
+  lxString Class;
+  lxStringList Context;
   uint Tag;
   int Aux;
 public:
@@ -59,39 +59,39 @@ public:
   * \param name new name.
   * \return void.
   */
-  void SetName (const String name);
+  void SetName (const lxString name);
  /**
   * Get Control Name.
   *
   * \return Object Name.
   */
-  String GetName (void);
+  lxString GetName (void);
  /**
   * Get Classe Name.
   *
   * \return Object Class Name
   */
-  String GetClass (void);
+  lxString GetClass (void);
  /**
   * Set Classe Name.
   *
   * \param classn new class name.
   * \return void.
   */
-  void SetClass (const String classn);
+  void SetClass (const lxString classn);
  /**
   * Get XML Context Name.
   *
   * \return XML context.
   */
-  virtual CStringList GetContext (void);
+  virtual lxStringList GetContext (void);
  /**
   * Set XML Context .
   *
   * \param context XML context.
   * \return void.
   */
-  virtual void SetContext (CStringList context);
+  virtual void SetContext (lxStringList context);
  /**
   * Get Object Events.
   *

@@ -342,11 +342,11 @@ CWindow::Event (wxEvent & event)
 }
 
 
-CStringList
+lxStringList
 CWindow::GetContext (void)
 {
   CControl::GetContext ();
-  Context.AddLine (xml_out (wxT("Title"), wxT("String"), GetTitle ()));
+  Context.AddLine (xml_out (wxT("Title"), wxT("lxString"), GetTitle ()));
   Context.AddLine (xml_out (wxT("OverrideRedirect"), wxT("bool"), itoa (GetOverrideRedirect ())));
   //events 
   Context.AddLine (xml_out (wxT("EvOnCreate"), wxT("Event"), btoa (GetEv ())));
@@ -359,9 +359,9 @@ CWindow::GetContext (void)
 };
 
 void
-CWindow::SetContext (CStringList context)
+CWindow::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
   CControl::SetContext (context);
   for (uint i = 0; i < context.GetLinesCount (); i++)
     {
@@ -386,11 +386,11 @@ CWindow::SetContext (CStringList context)
 };
 
 int
-CWindow::LoadXMLContextAndCreateChilds (String filename, CControl* ctrl)
+CWindow::LoadXMLContextAndCreateChilds (lxString filename, CControl* ctrl)
 {
   wxTextFile file2;
-  CStringList list;
-  String line;
+  lxStringList list;
+  lxString line;
 
   file2.Open (filename);
   file2.GoToLine (-1);
@@ -426,7 +426,7 @@ CWindow::LoadXMLContextAndCreateChilds (String filename, CControl* ctrl)
 
               while (line.compare (wxT ("</") + ctrl->GetName () + wxT (">")) != 0)
                 {
-                  String controlclass, ctype, name, cname;
+                  lxString controlclass, ctype, name, cname;
 
                   cname = line.substr (1, line.size () - 2);
                   fgetline (file2, line);
@@ -475,7 +475,7 @@ void
 CWindow::SetFocus (void)
 {
   GetWWidget()->SetFocus();
-}
+};
 
 void
 CWindow::SetControlOnFocus (CControl * control)
@@ -493,7 +493,7 @@ CWindow::SetControlOnFocus (CControl * control)
       ControlOnFocus=NULL;
   };
 
-}
+};
 
 CControl *
 CWindow::GetControlOnFocus (void)
@@ -549,7 +549,7 @@ bool CWindow::GetCanDestroy (void)
 };
 
 void
-CWindow::SetTitle (const String & title)
+CWindow::SetTitle (const lxString & title)
 {
   Title = title;
 
@@ -558,7 +558,7 @@ if (GetWWidget() != NULL)
 
 };
 
-String
+lxString
 CWindow::GetTitle (void)
 {
   return Title;

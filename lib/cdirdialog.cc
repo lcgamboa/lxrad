@@ -57,7 +57,7 @@ CDirDialog::Create (CControl * control)
   return CControl::Create (control);
 };
 
-String
+lxString
 CDirDialog::GetDirName (void)
 {
   if (Widget != NULL)
@@ -67,7 +67,7 @@ CDirDialog::GetDirName (void)
 }
 
 void
-CDirDialog::SetDirName (String dirname)
+CDirDialog::SetDirName (lxString dirname)
 {
   DirName = dirname;
   if (Widget != NULL)
@@ -102,7 +102,7 @@ CDirDialog::Run (void)
     (FOwner->*EvOnClose) (run);
 }
 
-CStringList
+lxStringList
 CDirDialog::GetContext (void)
 {
   //  CControl::GetContext ();
@@ -112,9 +112,9 @@ CDirDialog::GetContext (void)
 };
 
 void
-CDirDialog::SetContext (CStringList context)
+CDirDialog::SetContext (lxStringList context)
 {
-  String name, type, value;  
+  lxString name, type, value;  
   //  CControl::SetContext (context);
   CObject::SetContext (context);
   for (uint i = 0; i < context.GetLinesCount (); i++)

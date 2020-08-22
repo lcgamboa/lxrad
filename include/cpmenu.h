@@ -46,20 +46,20 @@
 class CPMenu:public CControl
 {
 private:
-  String MenuItems;
-  String Text;
+  lxString MenuItems;
+  lxString Text;
   int CEvent (int event);
 public:
   CPMenu (void);
   int Create (CControl * control);
-  void SetMenuItems (String mitems);
-  String GetMenuItems (void);
-  CStringList GetContext (void);
-  void SetName (const String name);
-  void SetContext (CStringList context);
+  void SetMenuItems (lxString mitems);
+  lxString GetMenuItems (void);
+  lxStringList GetContext (void);
+  void SetName (const lxString name);
+  void SetContext (lxStringList context);
 //  void PopUp (wxEvent * event);
-  void SetText (String t);
-  String GetText (void);
+  void SetText (lxString t);
+  lxString GetText (void);
   void Destroy (void);
   
   bool Event (wxWindow * widget, wxEvent * event);

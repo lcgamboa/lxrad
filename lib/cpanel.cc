@@ -55,7 +55,7 @@ CPanel::Create (CControl * control)
 };
 
 
-CStringList
+lxStringList
 CPanel::GetContext (void)
 {
   CControl::GetContext ();
@@ -63,9 +63,9 @@ CPanel::GetContext (void)
 };
 
 void
-CPanel::SetContext (CStringList context)
+CPanel::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
   CControl::SetContext (context);
 /*
  for (uint i = 0; i < context.GetLinesCount (); i++)

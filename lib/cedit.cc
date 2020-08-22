@@ -56,19 +56,19 @@ return CControl::Create (control);
 };
 
 
-CStringList
+lxStringList
 CEdit::GetContext (void)
 {
   CControl::GetContext ();
-  Context.AddLine (xml_out (wxT("Text"), wxT("String"), GetText ()));
+  Context.AddLine (xml_out (wxT("Text"), wxT("lxString"), GetText ()));
   Context.AddLine (xml_out (wxT("ReadOnly"), wxT("int"), itoa(GetReadOnly ())));
   return Context;
 };
 
 void
-CEdit::SetContext (CStringList context)
+CEdit::SetContext (lxStringList context)
 {
-  String name, type, value;
+  lxString name, type, value;
 
   CControl::SetContext (context);
   for (uint i = 0; i < context.GetLinesCount (); i++)
@@ -85,14 +85,14 @@ CEdit::SetContext (CStringList context)
 //propriedades
 
 void
-CEdit::SetText (String t)
+CEdit::SetText (lxString t)
 {
   Text = t;
   if (Widget != NULL)
     ((wxTextCtrl*)Widget)->SetValue(Text);
 };
 
-String
+lxString
 CEdit::GetText (void)
 {
   if (Widget != NULL)
