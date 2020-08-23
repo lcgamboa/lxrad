@@ -66,10 +66,12 @@ newcontrolbycname (lxString controltype)
     {
       ncontrol = new CText;
     };
+#ifndef _NO_ADVANCED  
   if (controltype.compare (wxT("CSyledText")) == 0)
     {
       ncontrol = new CStyledText;
     };
+#endif  
   if (controltype.compare (wxT("CFileDialog")) == 0)
     {
       ncontrol = new CFileDialog;
@@ -94,6 +96,7 @@ newcontrolbycname (lxString controltype)
     {
       ncontrol = new CGauge;
     };
+#ifndef _NO_ADVANCED  
   if (controltype.compare (wxT("CGrid")) == 0)
     {
       ncontrol = new CGrid;
@@ -102,6 +105,7 @@ newcontrolbycname (lxString controltype)
     {
       ncontrol = new CHtml;
     };
+#endif
   if (controltype.compare (wxT("CStatusbar")) == 0)
     {
       ncontrol = new CStatusbar;
