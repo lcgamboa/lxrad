@@ -100,7 +100,7 @@ Message_sz (lxString str, int Width, int Height)
   wmessage->button1.SetX ((Width- wmessage->button1.GetWidth())/2);
   wmessage->button1.SetY (Height-65);
   wmessage->label1.SetWidth (Width-5);
-  wmessage->label1.SetHeight (Height-80);
+  wmessage->label1.SetHeight (Height-90);
 
   wxDisplaySize (&width,&height);  
   
