@@ -300,7 +300,7 @@ CCanvas::SetFgColor (lxString color)
 void
 CCanvas::SetFgColor (uint r, uint g, uint b)
 {
-  FgColor.Set(r,g,b);
+  FgColor.Set(r,g,b,0xFF);
 
   if (DC != NULL)
   {
@@ -345,7 +345,7 @@ CCanvas::SetBgColor (lxString color)
 void
 CCanvas::SetBgColor (uint r, uint g, uint b)
 {
-  BgColor.Set(r,g,b);
+  BgColor.Set(r,g,b,0xFF);
 
   if (DC != NULL)
   {
