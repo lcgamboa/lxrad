@@ -9,7 +9,7 @@ lib              - Source of liblxrad
 Requirements:
 XFree86        http://www.xfree.org
 wxwidgets      http://www.wxwidgets.org	
-OpenAl Soft    https://openal-soft.org
+OpenAL Soft    https://openal-soft.org
 
 Installation:
 
