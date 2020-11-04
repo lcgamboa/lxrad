@@ -406,7 +406,12 @@ CCanvas::Points (wxPoint * points, int npoints)
 void
 CCanvas::Line (int x1_, int y1_, int x2_, int y2_)
 {
-  if (DC != NULL)DC->DrawLine(  x1_, y1_, x2_, y2_);
+  if (DC != NULL)
+  {
+     Rotate(&x1_,&y1_);
+     Rotate(&x2_,&y2_);
+     DC->DrawLine(  x1_, y1_, x2_, y2_);
+  }
 }
 
 void
@@ -485,6 +490,7 @@ CCanvas::Circle (bool filled, int x, int y, int radius)
       DC->SetBrush(*Brush);
     else  
       DC->SetBrush(*wxTRANSPARENT_BRUSH );
+    Rotate(&x,&y);
     DC->DrawCircle (x, y,radius);
   }
 }
@@ -528,7 +534,11 @@ CCanvas::SetFont (wxFont font)
 void 
 CCanvas::Text (lxString str, int x, int y)
 {
-  if (DC != NULL)DC->DrawText (str,x,y);
+  if (DC != NULL)
+  {
+     Rotate(&x,&y);
+     DC->DrawText (str,x,y);
+  }
 }
   
 void 
