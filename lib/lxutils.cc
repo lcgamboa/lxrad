@@ -250,4 +250,29 @@ lxGetExecutablePath(lxString appname)
 }
 
 
+lxBitmap * 
+lxGetBitmapRotated(lxImage *image, CWindow * win, int orientation)
+{
+  lxImage im;
+
+  switch(orientation)
+  {
+    case 1:
+     im = image->Rotate90(1);
+     break;     
+    case 2:
+     im = image->Rotate180();
+     break;     
+    case 3:	    
+     im = image->Rotate90(0);
+     break;     
+    default:
+     im = *image;
+     break;
+  } 
+
+  lxBitmap * Bitmap = new xBitmap (im, win);
+  im.Destroy();
+  return Bitmap;
+}	
 

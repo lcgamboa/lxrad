@@ -59,6 +59,8 @@ private:
   int Width;
   int Height;
   int DirectDraw;
+  int orientation;
+  void Rotate(int *x, int *y);
 public:
     CCanvas (void);
    ~CCanvas (void);
@@ -66,7 +68,7 @@ public:
   int Create (wxWindow *drawable, wxBitmap * bitmap);
   void Destroy(void);
   void Init(void);
-  void Init(double sx,double sy);
+  void Init(double sx, double sy, int angle=0);
   void ChangeScale(double sx,double sy);
   void End(void);
   wxDC* GetDC (void);

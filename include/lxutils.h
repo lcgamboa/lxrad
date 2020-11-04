@@ -115,6 +115,8 @@ class xBitmap:public wxBitmap
 #define LXK_DOWN WXK_DOWN
 #define LXK_UP WXK_UP
 
+lxBitmap * lxGetBitmapRotated(lxImage *image, CWindow * win, int orientation); 
+
 lxString lxGetUserDataDir(lxString appname="");
 lxString lxGetTempDir(lxString appname="");
 lxString lxGetExecutablePath(lxString appname="");

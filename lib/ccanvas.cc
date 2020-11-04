@@ -26,6 +26,7 @@
 #include"../include/ccanvas.h"
 
 
+
 // CCanvas_____________________________________________________________
 
 CCanvas::CCanvas (void)
@@ -41,7 +42,8 @@ CCanvas::CCanvas (void)
   Bitmap=NULL;
   DirectDraw=true;
   Font= wxNullFont;  
-};
+  orientation=0;
+}
 
 CCanvas::~CCanvas (void)
 {
@@ -50,7 +52,7 @@ CCanvas::~CCanvas (void)
     delete BitmapBuffer;
     BitmapBuffer = NULL;
   }
-};
+}
 
 int
 CCanvas::Create (wxWindow * drawable,int directdraw=1)
@@ -95,13 +97,13 @@ wxDC *
 CCanvas::GetDC(void)
 {
   return  DC;
-};
+}
 
 wxClientDC * 
 CCanvas::GetWDC(void)
 {
   return  WDC;
-};
+}
   
   
 wxBitmap * 
@@ -111,13 +113,13 @@ CCanvas::GetBitmapBuffer(void)
     return BitmapBuffer;
   else
     return NULL;
-};
+}
 
 wxWindow * 
 CCanvas::GetDrawable(void)
 {
   return Drawable;
-};
+}
 
 void 
 CCanvas::SetBitmap(wxBitmap * bitmap,double xs, double ys)
@@ -133,13 +135,14 @@ CCanvas::SetBitmap(wxBitmap * bitmap,double xs, double ys)
     DC->SetUserScale(1,1);
     End();
   }
-};
+}
 
 void 
 CCanvas::Init(void)
 {
   int width,height;
-
+  
+  orientation=0;
 
   if(!DirectDraw)
   {
@@ -181,13 +184,19 @@ CCanvas::Init(void)
 }
 
 void 
-CCanvas::Init(double sx,double sy)
+CCanvas::Init(double sx, double sy, int _orientation)
 {
 
   Init();
 
-  DC->SetUserScale(sx,sy);
-  
+  if((sx != 1.0)||(sy != 1.0))
+  {
+    DC->SetUserScale(sx,sy);
+  }
+
+
+  orientation = _orientation;
+
 }
 
 void 
@@ -216,8 +225,8 @@ CCanvas::End(void)
        }
        delete WDC;
        WDC=NULL;
-    };
-  };
+    }
+  }
 
   if(DC != NULL)
   {
@@ -246,8 +255,8 @@ CCanvas::SetFunction(wxRasterOperationMode  function)
   if (DC != NULL)
   {
     DC->SetLogicalFunction(function);
-  };
-};
+  }
+}
 
 void
 CCanvas::SetColor (wxColor color)
@@ -280,7 +289,7 @@ CCanvas::SetFgColor (wxColor color)
     Pen->SetColour(FgColor);
     DC->SetPen(*Pen);
   } 
-};
+}
 
 void
 CCanvas::SetFgColor (lxString color)
@@ -295,7 +304,7 @@ CCanvas::SetFgColor (lxString color)
     Pen->SetColour(FgColor);
     DC->SetPen(*Pen);
   } 
-};
+}
 
 void
 CCanvas::SetFgColor (uint r, uint g, uint b)
@@ -308,12 +317,12 @@ CCanvas::SetFgColor (uint r, uint g, uint b)
     Pen->SetColour(FgColor);
     DC->SetPen(*Pen);
   } 
-};
+}
 
 wxColor CCanvas::GetFgColor (void)
 {
   return FgColor;
-};
+}
 
 void
 CCanvas::SetBgColor (wxColor color)
@@ -324,8 +333,8 @@ CCanvas::SetBgColor (wxColor color)
     DC->SetTextBackground( BgColor);
     Brush->SetColour(BgColor);
     DC->SetBrush(*Brush);
-  };
-};
+  }
+}
 
 void
 CCanvas::SetBgColor (lxString color)
@@ -339,8 +348,8 @@ CCanvas::SetBgColor (lxString color)
     DC->SetTextBackground( BgColor);
     Brush->SetColour(BgColor);
     DC->SetBrush(*Brush);
-  };
-};
+  }
+}
 
 void
 CCanvas::SetBgColor (uint r, uint g, uint b)
@@ -352,13 +361,13 @@ CCanvas::SetBgColor (uint r, uint g, uint b)
     DC->SetTextBackground( BgColor);
     Brush->SetColour(BgColor);
     DC->SetBrush(*Brush);
-  };
-};
+  }
+}
 
 wxColor CCanvas::GetBgColor (void)
 {
   return BgColor;
-};
+}
 
 void
 CCanvas::SetLineWidth (uint lwidth)
@@ -369,51 +378,55 @@ CCanvas::SetLineWidth (uint lwidth)
   {
     Pen->SetWidth(LWidth);
     DC->SetPen(*Pen);
-  };
-};
+  }
+}
 
 uint CCanvas::GetLineWidth (void)
 {
   return LWidth;
-};
+}
 
 void
 CCanvas::Point (int x, int y)
 {
-  if (DC != NULL) DC->DrawPoint ( x, y);
-};
+  if (DC != NULL)
+  {
+      Rotate(&x,&y);
+      DC->DrawPoint ( x, y);
+  }
+}
 
 void
 CCanvas::Points (wxPoint * points, int npoints)
 {
 //  gdk_draw_points (Drawable, GC, points, npoints);
   printf("Incomplete CCanvas::Points !\n");
-};
+}
 
 void
 CCanvas::Line (int x1_, int y1_, int x2_, int y2_)
 {
   if (DC != NULL)DC->DrawLine(  x1_, y1_, x2_, y2_);
-};
+}
 
 void
 CCanvas::Lines (wxPoint * points, int npoints)
 {
   if (DC != NULL)  DC->DrawLines(npoints, points);
-};
+}
 
 void
 CCanvas::Spline (wxPoint * points, int npoints)
 {
   if (DC != NULL)  DC->DrawSpline(npoints, points);
-};
+}
 
 /*
 void
 CCanvas::Segments (GdkSegment * segs, int nsegs)
 {
   gdk_draw_segments (Drawable, GC, segs, nsegs);
-};
+}
 */
 
 void
@@ -425,10 +438,16 @@ CCanvas::Rectangle (bool filled, int x, int y, int width, int height)
       DC->SetBrush(*Brush);
     else  
       DC->SetBrush(*wxTRANSPARENT_BRUSH );
-    
-    DC-> DrawRectangle ( x, y, width, height);
-  };
-};
+   
+    int x2,y2; 
+    x2=x+width;
+    y2=y+height;
+    Rotate(&x,&y);
+    Rotate(&x2,&y2);
+
+    DC-> DrawRectangle ( x, y, x2-x, y2-y);
+  }
+}
 
 void
 CCanvas::Arc (bool filled, int x, int y, int x1, int y1, int x2, int y2)
@@ -441,7 +460,7 @@ CCanvas::Arc (bool filled, int x, int y, int x1, int y1, int x2, int y2)
       DC->SetBrush(*wxTRANSPARENT_BRUSH );
     DC->DrawArc ( x, y, x1, y1, x2, y2);
   }  
-};
+}
 
 void
 CCanvas::Polygon (bool filled, wxPoint * points, int npoints)
@@ -455,7 +474,7 @@ CCanvas::Polygon (bool filled, wxPoint * points, int npoints)
   
     DC->DrawPolygon (npoints, points);
   }  
-};
+}
 
 void 
 CCanvas::Circle (bool filled, int x, int y, int radius)
@@ -467,8 +486,8 @@ CCanvas::Circle (bool filled, int x, int y, int radius)
     else  
       DC->SetBrush(*wxTRANSPARENT_BRUSH );
     DC->DrawCircle (x, y,radius);
-  };
-};
+  }
+}
   
 void 
 CCanvas::Ellipse(bool filled,int x, int y, int width, int height)
@@ -481,7 +500,7 @@ CCanvas::Ellipse(bool filled,int x, int y, int width, int height)
       DC->SetBrush(*wxTRANSPARENT_BRUSH );
     DC->DrawEllipse (x, y,width,height);
   }
-};
+}
 
 void 
 CCanvas::EllipticArc(bool filled,int x, int y, int width, int height, double start, double end)
@@ -495,7 +514,7 @@ CCanvas::EllipticArc(bool filled,int x, int y, int width, int height, double sta
     
     DC->DrawEllipticArc (x, y,width,height,start,end);
   }
-};
+}
 
   
 void 
@@ -510,7 +529,7 @@ void
 CCanvas::Text (lxString str, int x, int y)
 {
   if (DC != NULL)DC->DrawText (str,x,y);
-};
+}
   
 void 
 CCanvas::TextOnRect (lxString str, wxRect ret, unsigned int align )
@@ -520,9 +539,27 @@ CCanvas::TextOnRect (lxString str, wxRect ret, unsigned int align )
 }
 
 void 
-CCanvas::RotatedText (lxString str, int x, int y, int angle)
+CCanvas::RotatedText (lxString str, int x, int y, int _angle)
 {
-  if (DC != NULL)DC->DrawRotatedText (str,x,y,angle);
+  if (DC != NULL)
+  {
+     Rotate(&x,&y);
+     switch(orientation)
+     {
+        case 1:
+          DC->DrawRotatedText (str,x,y,_angle - 90);
+	  break;
+        case 2:
+          DC->DrawRotatedText (str,x,y,_angle + 180);
+	  break;
+        case 3:
+          DC->DrawRotatedText (str,x,y,_angle + 90);
+	  break;
+        default:
+          DC->DrawRotatedText (str,x,y,_angle);
+	  break;
+     }
+  }
 }
 
 
@@ -530,9 +567,8 @@ void
 CCanvas::FloodFill(int x, int y,wxColor color,wxFloodFillStyle  style)
 {
   if (DC != NULL)DC->FloodFill(x, y, color, style);
-};
+}
 
-  
 
 void 
 CCanvas::PutBitmap(wxBitmap * bitmap,int x, int y)
@@ -541,4 +577,30 @@ CCanvas::PutBitmap(wxBitmap * bitmap,int x, int y)
   {
      DC->DrawBitmap( *bitmap,x, y);
   }
-};
+}
+  
+void 
+CCanvas::Rotate(int *x, int *y)
+{
+ int ox=*x;
+  int oy=*y;
+
+  switch(orientation)
+  {
+    case 1:
+    *x= Width -oy;
+    *y= ox;
+    break;
+    case 2:
+    *x= Width -ox;
+    *y= Height -oy;
+    break;
+    case 3:
+    *x= oy;
+    *y= Height - ox;
+    break;
+    default:
+    break;
+  } 
+
+}
