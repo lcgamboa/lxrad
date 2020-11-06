@@ -536,7 +536,6 @@ CCanvas::Text (lxString str, int x, int y)
 {
   if (DC != NULL)
   {
-     Rotate(&x,&y);
      DC->DrawText (str,x,y);
   }
 }
@@ -585,6 +584,20 @@ CCanvas::PutBitmap(wxBitmap * bitmap,int x, int y)
 {
   if((bitmap != NULL) && (DC != NULL))
   {
+     Rotate(&x,&y);
+     switch(orientation)
+     {
+       case 1:
+         x-=bitmap->GetWidth();
+         break;	 
+       case 2:
+         x-=bitmap->GetWidth();
+         y-=bitmap->GetHeight();
+         break;	 
+       case 3:	       
+         y-=bitmap->GetHeight();
+	 break;
+     }
      DC->DrawBitmap( *bitmap,x, y);
   }
 }
