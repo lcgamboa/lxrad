@@ -36,11 +36,11 @@ CText::CText (void)
   Height = 100;
   SetClass (wxT("CText"));
   SetReadOnly (false);
-};
+}
 
 CText::~CText (void)
 {
-};
+}
 
 int
 CText::Create (CControl * control)
@@ -51,7 +51,7 @@ CText::Create (CControl * control)
   SetReadOnly (ReadOnly);
 
   return CControl::Create (control);
-};
+}
 
 lxStringList
 CText::GetContext (void)
@@ -60,7 +60,7 @@ CText::GetContext (void)
 //  Context.AddLine (xml_out (wxT("Text"), wxT("lxString"), GetText ()));
   Context.AddLine (xml_out (wxT("ReadOnly"), wxT("int"), itoa(GetReadOnly ())));
   return Context;
-};
+}
 
 void
 CText::SetContext (lxStringList context)
@@ -75,8 +75,8 @@ CText::SetContext (lxStringList context)
 //	SetText (value);
       if (name.compare (wxT("ReadOnly")) == 0)
 	SetReadOnly (atoi(value));
-    };
-};
+    }
+}
 
 void
 CText::Clear (void)
@@ -87,19 +87,31 @@ CText::Clear (void)
   if (Widget != NULL)
     {
       ((wxTextCtrl*)Widget)->Clear();
-    };
+    }
 
-};
+}
 
 void
-CText::AddLine (lxString line)
+CText::Append (lxString line)
 {
   Lines.AddLine (line);
   if (Widget != NULL)
        ((wxTextCtrl*)Widget)->AppendText(line.c_str());
   
   Draw ();
-};
+}
+
+void
+CText::AddLine (lxString line)
+{
+  Lines.AddLine (line);
+  if (Widget != NULL)
+  {
+       ((wxTextCtrl*)Widget)->AppendText(line.c_str());
+       ((wxTextCtrl*)Widget)->AppendText("\n");
+  }
+  Draw ();
+}
 
 void
 CText::InsertLine (lxString line, int ln)
@@ -109,9 +121,9 @@ CText::InsertLine (lxString line, int ln)
   {
        ((wxTextCtrl*)Widget)->Clear();
        ((wxTextCtrl*)Widget)->WriteText (Lines.GetBuffer ().c_str ());
-  };
+  }
   Draw ();
-};
+}
 
 void
 CText::DelLine (int ln)
@@ -123,7 +135,7 @@ CText::DelLine (int ln)
        ((wxTextCtrl*)Widget)->WriteText (Lines.GetBuffer ().c_str ());
   }
   Draw ();
-};
+}
 
 void
 CText::LoadFromFile (lxString fname)
@@ -138,8 +150,8 @@ CText::LoadFromFile (lxString fname)
   else
     {
       Lines.LoadFromFile (fname);
-    };
-};
+    }
+}
 
 void
 CText::SaveToFile (lxString fname)
@@ -147,16 +159,16 @@ CText::SaveToFile (lxString fname)
   if (Widget != NULL)
     {
       Lines.SetBuffer (((wxTextCtrl*)Widget)->GetValue().c_str() );
-    };
+    }
   Lines.SaveToFile (fname);
-};
+}
 
 //propiedades
 uint
 CText::GetCountLines (void)
 {
   return Lines.GetLinesCount ();
-};
+}
 
 void
 CText::SetReadOnly (bool r)
@@ -164,11 +176,11 @@ CText::SetReadOnly (bool r)
   ReadOnly = r;
   if (Widget != NULL)
       ((wxTextCtrl*)Widget)->SetEditable(!r);
-};
+}
 
 bool
 CText::GetReadOnly (void)
 {
   return ReadOnly;
-};
+}
 

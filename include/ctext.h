@@ -51,6 +51,7 @@ public:
   lxStringList GetContext (void);
   void SetContext (lxStringList context);
   void Clear ();
+  void Append (lxString line);
   void AddLine (lxString line);
   void InsertLine (lxString line, int ln);
   void DelLine (int ln);
