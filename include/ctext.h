@@ -44,6 +44,7 @@ class CText:public CControl
 protected:
   lxStringList Lines;
   bool ReadOnly;
+  int cursor_pos;
 public:
     CText (void);
    ~CText (void);
@@ -57,6 +58,8 @@ public:
   void DelLine (int ln);
   void LoadFromFile (lxString fname);
   void SaveToFile (lxString fname);
+  void SetCursorPos (int cpos);
+  void DelLine (void);
   //propiedades
   void SetReadOnly(bool r);
   bool GetReadOnly(void);

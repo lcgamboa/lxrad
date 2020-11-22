@@ -36,6 +36,7 @@ CText::CText (void)
   Height = 100;
   SetClass (wxT("CText"));
   SetReadOnly (false);
+  cursor_pos = 0;	
 }
 
 CText::~CText (void)
@@ -107,8 +108,8 @@ CText::AddLine (lxString line)
   Lines.AddLine (line);
   if (Widget != NULL)
   {
+       line+="\n";
        ((wxTextCtrl*)Widget)->AppendText(line.c_str());
-       ((wxTextCtrl*)Widget)->AppendText("\n");
   }
   Draw ();
 }
@@ -117,23 +118,46 @@ void
 CText::InsertLine (lxString line, int ln)
 {
   Lines.InsertLine (line, ln);
+  /*
   if (Widget != NULL)
   {
        ((wxTextCtrl*)Widget)->Clear();
        ((wxTextCtrl*)Widget)->WriteText (Lines.GetBuffer ().c_str ());
   }
+  */
+   printf ("Incomplete: %s -> %s :%i\n", __func__, __FILE__, __LINE__);
   Draw ();
+}
+
+void 
+CText::SetCursorPos (int cpos)
+{
+  cursor_pos = cpos;	
+}
+
+void 
+CText::DelLine (void)
+{
+  DelLine(cursor_pos);
 }
 
 void
 CText::DelLine (int ln)
 {
   Lines.DelLine (ln);
+ 
   if (Widget != NULL)
   {
-       ((wxTextCtrl*)Widget)->Clear();
-       ((wxTextCtrl*)Widget)->WriteText (Lines.GetBuffer ().c_str ());
+    if(ln == 0)
+     {
+       ((wxTextCtrl*)Widget)->Remove (0, ((wxTextCtrl*)Widget)->GetLineLength (ln)+1 );
+     }
+    else
+     {
+         printf ("Incomplete: %s -> %s :%i\n", __func__, __FILE__, __LINE__);
+     }
   }
+  
   Draw ();
 }
 
@@ -167,6 +191,10 @@ CText::SaveToFile (lxString fname)
 uint
 CText::GetCountLines (void)
 {
+   if (Widget != NULL)
+    {
+      return ((wxTextCtrl*)Widget)->GetNumberOfLines ();
+    }
   return Lines.GetLinesCount ();
 }
 
