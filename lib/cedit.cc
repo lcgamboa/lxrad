@@ -48,7 +48,7 @@ int
 CEdit::Create (CControl * control)
 {
 
-   Widget = new wxTextCtrl(control->GetWidget (),GetWid(),Text,wxPoint(GetX(),GetY()),wxSize(GetWidth(),GetHeight()),0,wxDefaultValidator,GetName());
+   Widget = new wxTextCtrl(control->GetWidget (),GetWid(),Text,wxPoint(GetX(),GetY()),wxSize(GetWidth(),GetHeight()),wxTE_PROCESS_ENTER,wxDefaultValidator,GetName());
 
   SetReadOnly (ReadOnly);
 

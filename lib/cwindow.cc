@@ -406,6 +406,7 @@ CWindow::LoadXMLContextAndCreateChilds (lxString filename, CControl* ctrl)
         {
           ctrl = this;
           ctrl->SetName(line.substr (1, line.size () - 2));//Get Window name
+          ctrl->SetFOwner (this);
           file2.GoToLine (-1);
         }
       }
