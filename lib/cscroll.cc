@@ -49,10 +49,11 @@ CScroll::Create (CControl * control)
 
         Widget = new wxScrollBar(control->GetWidget (),GetWid(),wxPoint(GetX(),GetY()),wxSize(GetWidth(),GetHeight()),Type,wxDefaultValidator,GetName());
 	
-	Widget->SetScrollbar(Position,1,Range,1);
+    Widget->SetScrollbar(Position,1,Range,1);
     
     Win = control->GetWin ();
 
+    Widget->Bind(wxEVT_SCROLL_THUMBTRACK,&CScroll::Event,this,GetWid()); 
     Widget->Bind(wxEVT_SCROLL_CHANGED,&CScroll::Event,this,GetWid()); 
 
   return CControl::Create (control);
@@ -92,6 +93,7 @@ CScroll::SetContext (lxStringList context)
 int CScroll::CEvent (int event)
 {
 if(event == wxEVT_SCROLL_CHANGED)return lxEVT_SCROLL_CHANGED;
+if(event == wxEVT_SCROLL_THUMBTRACK)return lxEVT_SCROLL_THUMBTRACK;
 
 return CControl::CEvent(event);
 }
@@ -106,6 +108,7 @@ CScroll::Event (wxEvent & event)
       switch (CEvent(event.GetEventType()))
 	{
 	case lxEVT_SCROLL_CHANGED:
+	case lxEVT_SCROLL_THUMBTRACK:
 	  if ((FOwner) && (EvOnChangePosition))
 	    (FOwner->*EvOnChangePosition) (this);
 //            printf("Scrollbar Change!!!\n");
