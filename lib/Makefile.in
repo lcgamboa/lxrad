@@ -5,6 +5,8 @@ all::
 LIBCFLAGS := $(CFLAGS) -fpic
 ARCFLAGS := $(CFLAGS) -static
 
+SVGLIB := -Wl,--whole-archive ../../lunasvg/build/liblunasvg.a -Wl,--no-whole-archive 
+
 # .ao files are used for static archives
 %.ao: %.cc
 	$(CXX) $(ARCFLAGS) -c $< -o $@
@@ -46,7 +48,7 @@ LIBSTOBJECTS := capplication.ao cbutton.ao cedit.ao cdraw.ao cimage.ao cdialog.a
 
 # How to create the shared library
 $(LIBSHLIBNAME): $(LIBSHOBJECTS)
-	$(CXX) -shared -Wl,-soname,$(LIBSHSONAME) -o $@  $^  @LIBS@
+	$(CXX) $(SVGLIB) -shared -Wl,-soname,$(LIBSHSONAME) -o $@  $^  @LIBS@
 	$(RM) $(LIBSTLIBNAME)
 	$(AR) rcvs $(LIBSTLIBNAME) $^
 
