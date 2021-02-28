@@ -34,6 +34,9 @@
 #include <memory>
 #include<dirent.h>
 
+#include"../../lunasvg/include/svgdocument.h"
+
+using namespace lunasvg;
 
 #if __cplusplus >= 201103L
 #define xauto_ptr  std::unique_ptr
@@ -41,238 +44,333 @@
 #define xauto_ptr  std::auto_ptr
 #endif
 
-bool lxUnzipDir(const lxString &in_filename, const lxString &out_dirname)
+bool
+lxUnzipDir(const lxString &in_filename, const lxString &out_dirname)
 {
-    bool ret = true;
+ bool ret = true;
 
-        wxFileSystem::AddHandler(new wxZipFSHandler);
-        wxFileSystem fs;
-           
-        xauto_ptr<wxZipEntry> entry(new wxZipEntry);
-        do {    
-            wxFileInputStream in(in_filename);
-            if (!in)
-            {
-                wxLogError(_T("Can not open file '")+in_filename+_T("'."));
-                ret = false;
-                break;
-            }
-            wxZipInputStream zip(in);
+ wxFileSystem::AddHandler (new wxZipFSHandler);
+ wxFileSystem fs;
 
-            //create dirs
-            while (entry.reset(zip.GetNextEntry()), entry.get() != NULL)
-            {
-                // access meta-data
-                lxString name = entry->GetName();
-                
-                if(dirname(name).Length() > 0)
-                {
-                    lxCreateDir(out_dirname+dirname(name));
-                }
-                
-                name = out_dirname + name;
+ xauto_ptr<wxZipEntry> entry (new wxZipEntry);
+ do
+  {
+   wxFileInputStream in (in_filename);
+   if (!in)
+    {
+     wxLogError (_T ("Can not open file '") + in_filename + _T ("'."));
+     ret = false;
+     break;
+    }
+   wxZipInputStream zip (in);
 
-                    
-                // read 'zip' to access the entry's data
-                if (entry->IsDir())
-                {
-                    int perm = entry->GetMode();
-                    wxFileName::Mkdir(name, perm, wxPATH_MKDIR_FULL);
-                }
-                else
-                {
-                    zip.OpenEntry(*entry.get());
-                    if (!zip.CanRead())
-                    {
-                        wxLogError(_T("Can not read zip entry '")+entry->GetName()+_T("'."));
-                        ret = false;
-                        break;
-                    }
-                    wxFileOutputStream file(name);
-                    if (!file)
-                    {
-                         wxLogError(_T("Can not create file '")+name+_T("'."));
-                         ret = false;
-                         break;
-                    }
-                    zip.Read(file);
-                }
-                       
-            }
-        } while(false);
+   //create dirs
+   while (entry.reset (zip.GetNextEntry ()), entry.get () != NULL)
+    {
+     // access meta-data
+     lxString name = entry->GetName ();
 
-    return ret;
+     if (dirname (name).Length () > 0)
+      {
+       lxCreateDir (out_dirname + dirname (name));
+      }
+
+     name = out_dirname + name;
+
+
+     // read 'zip' to access the entry's data
+     if (entry->IsDir ())
+      {
+       int perm = entry->GetMode ();
+       wxFileName::Mkdir (name, perm, wxPATH_MKDIR_FULL);
+      }
+     else
+      {
+       zip.OpenEntry (*entry.get ());
+       if (!zip.CanRead ())
+        {
+         wxLogError (_T ("Can not read zip entry '") + entry->GetName () + _T ("'."));
+         ret = false;
+         break;
+        }
+       wxFileOutputStream file (name);
+       if (!file)
+        {
+         wxLogError (_T ("Can not create file '") + name + _T ("'."));
+         ret = false;
+         break;
+        }
+       zip.Read (file);
+      }
+
+    }
+  }
+ while (false);
+
+ return ret;
 }
 
-
-bool 
+bool
 lxZipDir(const lxString &in_dirname, const lxString &out_filename)
 {
-   lxString sep(wxFileName::GetPathSeparator());
+ lxString sep (wxFileName::GetPathSeparator ());
 
-   wxArrayString files;
+ wxArrayString files;
 
-   wxDir::GetAllFiles(in_dirname,&files);//the dir contented all the files need to compress.
+ wxDir::GetAllFiles (in_dirname, &files); //the dir contented all the files need to compress.
 
-   wxFFileOutputStream  fileout(out_filename);
+ wxFFileOutputStream fileout (out_filename);
 
-   wxZipOutputStream zipout (fileout);
+ wxZipOutputStream zipout (fileout);
 
-   wxFFileInputStream *in = NULL;   
-   wxZipEntry *entry=NULL;
-   wxFileName *zipname = NULL;
+ wxFFileInputStream *in = NULL;
+ wxZipEntry *entry = NULL;
+ wxFileName *zipname = NULL;
 
-   for (size_t i = 0;i != files.GetCount(); ++i)
-   {
-      if (in!=NULL)
-      {
-         delete in;
-         in = NULL;
-      }
-      if (zipname!=NULL)
-      {
-         delete zipname;
-         zipname = NULL;
-      }
+ for (size_t i = 0; i != files.GetCount (); ++i)
+  {
+   if (in != NULL)
+    {
+     delete in;
+     in = NULL;
+    }
+   if (zipname != NULL)
+    {
+     delete zipname;
+     zipname = NULL;
+    }
 
-      in = new wxFFileInputStream(files[i]);
-      zipname = new wxFileName (files[i]);
-      if(zipname->MakeRelativeTo(in_dirname))
-      {
-         entry =  new wxZipEntry(wxT("picsimlab_workspace/")+zipname->GetFullPath());
-         zipout.PutNextEntry(entry);
-         zipout.Write(*(in));
-      }
-      else
-      {
-         return false;
-      }
-   }
-   zipout.CloseEntry();
-   zipout.Close();
-   fileout.Close();
-   if (in!=NULL)
-   {
-      delete in;
-      in = NULL;
-   }
-   if (zipname!=NULL)
-   {
-      delete zipname;
-      zipname = NULL;
-   }
-   return true;
+   in = new wxFFileInputStream (files[i]);
+   zipname = new wxFileName (files[i]);
+   if (zipname->MakeRelativeTo (in_dirname))
+    {
+     entry = new wxZipEntry (wxT ("picsimlab_workspace/") + zipname->GetFullPath ());
+     zipout.PutNextEntry (entry);
+     zipout.Write (*(in));
+    }
+   else
+    {
+     return false;
+    }
+  }
+ zipout.CloseEntry ();
+ zipout.Close ();
+ fileout.Close ();
+ if (in != NULL)
+  {
+   delete in;
+   in = NULL;
+  }
+ if (zipname != NULL)
+  {
+   delete zipname;
+   zipname = NULL;
+  }
+ return true;
 }
 
-bool lxRemoveFile(const char * fname)
+bool
+lxRemoveFile(const char * fname)
 {
-    return remove(fname);
+ return remove (fname);
 }
 
-bool lxRemoveDir(const char* dirname)
+bool
+lxRemoveDir(const char* dirname)
 {
-     DIR  *dp;
-     struct dirent *dent;
-     struct stat sb;
-     char fname[1024];
-     
-     dp = opendir (dirname);
+ DIR *dp;
+ struct dirent *dent;
+ struct stat sb;
+ char fname[1024];
 
-     if(dp)
-     {
-       while((dent=readdir(dp))!=NULL)
-       {
-          snprintf(fname,1024,"%s/%s",dirname,dent->d_name);  
-          stat(fname, &sb);
-          
-          if(S_ISREG(sb.st_mode))
-          {
-            lxRemoveFile(fname);
-          }
-          else if(S_ISDIR(sb.st_mode))
-          {
-            if(!(!strcmp(dent->d_name,".") || !strcmp(dent->d_name,"..")))
-            {    
-              lxRemoveDir(fname);
-            }
-          }
-       }
-       closedir(dp);
-       return rmdir(dirname);
-     }
-   return 0;
-}    
+ dp = opendir (dirname);
 
-bool 
+ if (dp)
+  {
+   while ((dent = readdir (dp)) != NULL)
+    {
+     snprintf (fname, 1024, "%s/%s", dirname, dent->d_name);
+     stat (fname, &sb);
+
+     if (S_ISREG (sb.st_mode))
+      {
+       lxRemoveFile (fname);
+      }
+     else if (S_ISDIR (sb.st_mode))
+      {
+       if (!(!strcmp (dent->d_name, ".") || !strcmp (dent->d_name, "..")))
+        {
+         lxRemoveDir (fname);
+        }
+      }
+    }
+   closedir (dp);
+   return rmdir (dirname);
+  }
+ return 0;
+}
+
+bool
 lxCreateDir(const char * dirname)
 {
-   DIR  *dp; 
-   dp = opendir (dirname);
+ DIR *dp;
+ dp = opendir (dirname);
 
-   if(dp)
-   {
-     return closedir(dp);
-   }
-   else
-   {
+ if (dp)
+  {
+   return closedir (dp);
+  }
+ else
+  {
 #ifndef __WXMSW__
-     return mkdir(dirname, S_IWUSR| S_IRUSR | S_IXUSR | S_IRGRP | S_IROTH ); 
+   return mkdir (dirname, S_IWUSR | S_IRUSR | S_IXUSR | S_IRGRP | S_IROTH);
 #else     
-     return mkdir(dirname);
+   return mkdir (dirname);
 #endif
-   }
-   return 0;
+  }
+ return 0;
 }
 
-
-lxString 
+lxString
 lxGetUserDataDir(lxString appname)
 {
-  wxTheApp->SetAppName (appname);
-  wxStandardPathsBase& stdp = wxStandardPaths::Get ();
-  return stdp.GetUserDataDir ();
+ wxTheApp->SetAppName (appname);
+ wxStandardPathsBase& stdp = wxStandardPaths::Get ();
+ return stdp.GetUserDataDir ();
 }
 
-lxString 
+lxString
 lxGetTempDir(lxString appname)
 {
-  wxTheApp->SetAppName (appname);
-  wxStandardPathsBase& stdp = wxStandardPaths::Get ();
-  return stdp.GetTempDir ();
+ wxTheApp->SetAppName (appname);
+ wxStandardPathsBase& stdp = wxStandardPaths::Get ();
+ return stdp.GetTempDir ();
 }
 
-lxString 
+lxString
 lxGetExecutablePath(lxString appname)
 {
-  wxTheApp->SetAppName (appname);
-  wxStandardPathsBase& stdp = wxStandardPaths::Get ();
-  return stdp.GetExecutablePath ();
+ wxTheApp->SetAppName (appname);
+ wxStandardPathsBase& stdp = wxStandardPaths::Get ();
+ return stdp.GetExecutablePath ();
 }
 
-
-lxBitmap * 
+lxBitmap *
 lxGetBitmapRotated(lxImage *image, CWindow * win, int orientation)
 {
-  lxImage im;
+ lxImage im;
 
-  switch(orientation)
+ switch (orientation)
   {
-    case 1:
-     im = image->Rotate90(1);
-     break;     
-    case 2:
-     im = image->Rotate180();
-     break;     
-    case 3:	    
-     im = image->Rotate90(0);
-     break;     
-    default:
-     im = *image;
-     break;
-  } 
+  case 1:
+   im = image->Rotate90 (1);
+   break;
+  case 2:
+   im = image->Rotate180 ();
+   break;
+  case 3:
+   im = image->Rotate90 (0);
+   break;
+  default:
+   im = *image;
+   break;
+  }
 
-  lxBitmap * Bitmap = new xBitmap (im, win);
-  im.Destroy();
-  return Bitmap;
-}	
+ lxBitmap * Bitmap = new xBitmap (im, win);
+ im.Destroy ();
+ return Bitmap;
+}
+
+bool
+xImage::LoadFile(const lxString fname, int orientation, float scalex, float scaley)
+{
+
+ if (fname.Contains (".svg"))
+  {
+   int width;
+   int height;
+
+   SVGDocument document;
+   if (document.loadFromFile ((const char *)fname.c_str ()))
+    {
+     width = document.documentWidth (96.0) * scalex;
+     height = document.documentHeight (96.0) * scaley;
+
+     Bitmap bitmap = document.renderToBitmap (width, height, 96.0, 0);
+
+     const unsigned char * bmp = bitmap.data ();
+     int size = bitmap.width () * bitmap.height ();
+     unsigned char * data = (unsigned char *) malloc (size * 3);
+     unsigned char * alpha = (unsigned char *) malloc (size);
+
+     for (int i = 0; i < size; i++)
+      {
+       data[(3 * i)] = bmp[(4 * i)];
+       data[(3 * i) + 1] = bmp[(4 * i) + 1];
+       data[(3 * i) + 2] = bmp[(4 * i) + 2];
+       alpha[i] = bmp[(4 * i) + 3];
+      }
+
+     lxImage image;
+     image.Create (bitmap.width (), bitmap.height (), data, alpha);
+
+     lxImage * im =this;
+     switch (orientation)
+      {
+      case 1:
+       *im = image.Rotate90 (1);
+       break;
+      case 2:
+       *im = image.Rotate180 ();
+       break;
+      case 3:
+       *im = image.Rotate90 (0);
+       break;
+      default:
+       *im = image;
+       break;
+      }
+
+     image.Destroy ();
+     
+     return 1;
+    }
+
+  }
+ else //png
+  {
+   lxImage image;
+
+   if (image.wxImage::LoadFile (fname))
+    {
+
+     lxImage * im =this;
+
+     image.Rescale (image.GetWidth () * scalex, image.GetHeight () * scaley);
+
+     switch (orientation)
+      {
+      case 1:
+       *im = image.Rotate90 (1);
+       break;
+      case 2:
+       *im = image.Rotate180 ();
+       break;
+      case 3:
+       *im = image.Rotate90 (0);
+       break;
+      default:
+       *im = image;
+       break;
+      }
+
+     image.Destroy ();
+
+     return 1;
+    }
+  }
+
+ return 0;
+
+}
 

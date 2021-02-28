@@ -25,204 +25,201 @@
 
 #include"../include/cdraw.h"
 #include"../include/cmessage.h"
+#include"../include/lxutils.h"
 
 // CDraw_____________________________________________________________
 
-CDraw::CDraw (void)
+CDraw::CDraw(void)
 {
-  FileName = wxT("");
-  Data = NULL;
-  LWidth = 0;
-  SetX (10);
-  SetY (10);
-  SetWidth (100);
-  SetHeight (100);
-  SetClass (wxT("CDraw"));
-  SetTransparent (false);
-  Sx=1;
-  Sy=1;
+ FileName = wxT ("");
+ Data = NULL;
+ LWidth = 0;
+ SetX (10);
+ SetY (10);
+ SetWidth (100);
+ SetHeight (100);
+ SetClass (wxT ("CDraw"));
+ SetTransparent (false);
+ Sx = 1;
+ Sy = 1;
 }
 
-CDraw::~CDraw (void)
-{
-}
+CDraw::~CDraw(void) { }
 
 int
-CDraw::Create (CControl * control)
+CDraw::Create(CControl * control)
 {
 
-  Win = control->GetWin ();
+ Win = control->GetWin ();
 
-   Widget = new wxPanel(control->GetWidget (),GetWid(),wxPoint(GetX(),GetY()),wxSize(GetWidth(),GetHeight()),wxTAB_TRAVERSAL,GetName());
-  
-   Widget->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW));
+ Widget = new wxPanel (control->GetWidget (), GetWid (), wxPoint (GetX (), GetY ()), wxSize (GetWidth (), GetHeight ()), wxTAB_TRAVERSAL, GetName ());
 
-  Canvas.Create(Widget,0);
+ Widget->SetBackgroundColour (wxSystemSettings::GetColour (wxSYS_COLOUR_WINDOW));
 
-  Canvas.Init();
-  Canvas.SetBgColor (255,255,255);
-  Canvas.SetFgColor (0 ,0, 0);
-  Canvas.SetLineWidth (LWidth);
-  Canvas.Rectangle ( true, 0, 0, Width, Height);
-  Canvas.End();
+ Canvas.Create (Widget, 0);
 
-  //Update ();
-  if (Data != NULL)
-    SetImgData (Data);
- 
-  if (FileName != wxT(""))
-    SetImgFileName (FileName);
+ Canvas.Init ();
+ Canvas.SetBgColor (255, 255, 255);
+ Canvas.SetFgColor (0, 0, 0);
+ Canvas.SetLineWidth (LWidth);
+ Canvas.Rectangle (true, 0, 0, Width, Height);
+ Canvas.End ();
+
+ //Update ();
+ if (Data != NULL)
+  SetImgData (Data);
+
+ if (FileName != wxT (""))
+  SetImgFileName (FileName);
 
 
-  return CControl::Create (control);
+ return CControl::Create (control);
 }
 
 void
-CDraw::Draw (void)
-{
-  /*FIX*/
-  // gdk_draw_pixmap(Widget->window,Widget->style->fg_gc[GTK_WIDGET_STATE (Widget)],Pixmap,0,0,0,0,Width,Height);
-  /*
-  GdkRectangle update_rect;
+CDraw::Draw(void) {
+ /*FIX*/
+ // gdk_draw_pixmap(Widget->window,Widget->style->fg_gc[GTK_WIDGET_STATE (Widget)],Pixmap,0,0,0,0,Width,Height);
+ /*
+ GdkRectangle update_rect;
 
-  update_rect.x = 0;
-  update_rect.y = 0;
-  update_rect.width = Width;
-  update_rect.height = Height;
+ update_rect.x = 0;
+ update_rect.y = 0;
+ update_rect.width = Width;
+ update_rect.height = Height;
   */
-  //gtk_widget_draw (Widget, &update_rect);
+ //gtk_widget_draw (Widget, &update_rect);
 
-  
-}
+ }
 
-bool CDraw::GetTransparent (void)
+bool
+CDraw::GetTransparent(void)
 {
-  return Transparent;
+ return Transparent;
 }
 
 void
-CDraw::SetTransparent (bool transparent)
+CDraw::SetTransparent(bool transparent)
 {
-  Transparent = transparent;
+ Transparent = transparent;
 }
 
 lxStringList
-CDraw::GetContext (void)
+CDraw::GetContext(void)
 {
-  CControl::GetContext ();
-  Context.AddLine (xml_out (wxT("Transparent"), wxT("bool"), itoa (GetTransparent ())));
-  Context.AddLine (xml_out (wxT("ImgFileName"), wxT("File"), GetImgFileName ()));
-  return Context;
+ CControl::GetContext ();
+ Context.AddLine (xml_out (wxT ("Transparent"), wxT ("bool"), itoa (GetTransparent ())));
+ Context.AddLine (xml_out (wxT ("ImgFileName"), wxT ("File"), GetImgFileName ()));
+ return Context;
 }
 
 void
-CDraw::SetContext (lxStringList context)
+CDraw::SetContext(lxStringList context)
 {
-  lxString name, type, value;
+ lxString name, type, value;
 
-  CControl::SetContext (context);
-  for (uint i = 0; i < context.GetLinesCount (); i++)
+ CControl::SetContext (context);
+ for (uint i = 0; i < context.GetLinesCount (); i++)
+  {
+   xml_in (Context.GetLine (i), name, type, value);
+   if (name.compare (wxT ("Transparent")) == 0)
+    SetTransparent (atoi (value));
+   if (name.compare (wxT ("ImgFileName")) == 0)
     {
-      xml_in (Context.GetLine (i), name, type, value);
-      if (name.compare (wxT("Transparent")) == 0)
-	SetTransparent (atoi (value));
-      if (name.compare (wxT("ImgFileName")) == 0)
-	{
-	  if (value.size () > 0)
-	    SetImgFileName (value);
-	  else
-	    SetImgFileName (wxT(""));
-	};
-    };
+     if (value.size () > 0)
+      SetImgFileName (value);
+     else
+      SetImgFileName (wxT (""));
+    }
+  }
 }
 
-lxString CDraw::GetImgFileName (void)
+lxString
+CDraw::GetImgFileName(void)
 {
-  return FileName;
-};
-
-
-bool
-CDraw::SetImgFileName (lxString filename,double sx, double sy)
-{
-  FileName = filename;
-  Sx=sx;
-  Sy=sy;
-
-  if ((Widget != NULL)&&(FileName != wxT("")))
-    {
-      wxImage  image;
-      if(image.LoadFile(FileName))
-      {
-        wxBitmap bitmap(image);
-        Canvas.SetBitmap(&bitmap,sx,sy);
-        Update ();
-      } 
-      return true;
-    }
-  else  
-      return false;
-};
-
-bool
-CDraw::SetImgFileName (lxString filename)
-{
-  FileName = filename;
-  Sx=1;
-  Sy=1;
-
-  if ((Widget != NULL)&&(FileName != wxT("")))
-    {
-      wxImage  image;
-      if(image.LoadFile(FileName))
-      {
-        wxBitmap bitmap(image);
-        Canvas.SetBitmap(&bitmap,1,1);
-        Update ();
-      };
-      return true;
-    }
-  else  
-      return false;
+ return FileName;
 }
 
-
-bool CDraw::SetImgData (const char **data)
+bool
+CDraw::SetImgFileName(lxString filename, double sx, double sy)
 {
-  wxBitmap  bitmap(data);
-  
-  Data=data;
+ FileName = filename;
+ Sx = sx;
+ Sy = sy;
 
-  if (Widget != NULL)
+ if ((Widget != NULL)&&(FileName != wxT ("")))
+  {
+   lxImage image;
+   if (image.LoadFile (FileName, 0, sx, sy))
     {
-      Canvas.SetBitmap(&bitmap,Sx,Sy);
-      Update ();
-    };
-
+     wxBitmap bitmap (image);
+     Canvas.SetBitmap (&bitmap, 1.0, 1.0);
+     Update ();
+    }
+   return true;
+  }
+ else
   return false;
-};
+}
+
+bool
+CDraw::SetImgFileName(lxString filename)
+{
+ FileName = filename;
+ Sx = 1;
+ Sy = 1;
+
+ if ((Widget != NULL)&&(FileName != wxT ("")))
+  {
+   wxImage image;
+   if (image.LoadFile (FileName))
+    {
+     wxBitmap bitmap (image);
+     Canvas.SetBitmap (&bitmap, 1, 1);
+     Update ();
+    }
+   return true;
+  }
+ else
+  return false;
+}
+
+bool
+CDraw::SetImgData(const char **data)
+{
+ wxBitmap bitmap (data);
+
+ Data = data;
+
+ if (Widget != NULL)
+  {
+   Canvas.SetBitmap (&bitmap, Sx, Sy);
+   Update ();
+  }
+
+ return false;
+}
 
 void
-CDraw::WriteImgToFile (lxString filename)
+CDraw::WriteImgToFile(lxString filename)
 {
-  if (Widget != NULL)
-    {
-	Canvas.GetBitmapBuffer()->SaveFile(filename, wxBITMAP_TYPE_PNG, NULL);
-    };
-};
+ if (Widget != NULL)
+  {
+   Canvas.GetBitmapBuffer ()->SaveFile (filename, wxBITMAP_TYPE_PNG, NULL);
+  }
+}
 
 //events  
 
-
 void
-CDraw::on_draw (wxPaintEvent * event)
+CDraw::on_draw(wxPaintEvent * event)
 {
-//  gdk_draw_drawable (Widget->window, Canvas.GetGC(), Pixmap, event->area.x, event->area.y, event->area.x, event->area.y, event->area.width, event->area.height);
-  Canvas.Init();
-  Canvas.End();
-  CControl::on_draw(event);
+ //  gdk_draw_drawable (Widget->window, Canvas.GetGC(), Pixmap, event->area.x, event->area.y, event->area.x, event->area.y, event->area.width, event->area.height);
+ Canvas.Init ();
+ Canvas.End ();
+ CControl::on_draw (event);
 
-  
+
 }
 
 

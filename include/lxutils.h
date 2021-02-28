@@ -39,9 +39,16 @@ class xBitmap:public wxBitmap
     xBitmap(unsigned int x, unsigned int y):wxBitmap(x,y){};
 };
 
+class xImage:public wxImage
+{
+  public:
+   bool LoadFile(const lxString fname, int orientation = 0, float scalex = 1.0,  float scaley = 1.0);
+   using wxImage::operator=;
+};
+
 
 #define lxT wxT
-#define lxImage wxImage
+#define lxImage xImage
 #define lxBitmap xBitmap
 #define lxFont wxFont
 #define lxSound wxSound

@@ -1,5 +1,6 @@
 Installation:
 
+./make_deps.sh
 autoconf
 ./configure
 

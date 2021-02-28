@@ -13,6 +13,7 @@ OpenAL Soft    https://openal-soft.org
 
 Installation:
 
+./make_deps.sh
 autoconf
 ./configure
 make           - Compile the liblxrad  and layout 
