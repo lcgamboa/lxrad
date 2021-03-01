@@ -276,7 +276,7 @@ lxGetBitmapRotated(lxImage *image, CWindow * win, int orientation)
    break;
   }
 
- lxBitmap * Bitmap = new xBitmap (im, win);
+ lxBitmap * Bitmap = new xBitmap (&im, win);
  im.Destroy ();
  return Bitmap;
 }
