@@ -258,7 +258,7 @@ lxGetExecutablePath(lxString appname)
 lxBitmap *
 lxGetBitmapRotated(lxImage *image, CWindow * win, int orientation)
 {
- lxImage im;
+ lxImage im(win);
 
  switch (orientation)
   {
@@ -311,7 +311,7 @@ xImage::LoadFile(const lxString fname, int orientation, float scalex, float scal
        alpha[i] = bmp[(4 * i) + 3];
       }
 
-     lxImage image;
+     lxImage image(NULL);
      image.Create (bitmap.width (), bitmap.height (), data, alpha);
 
      lxImage * im =this;
@@ -339,7 +339,7 @@ xImage::LoadFile(const lxString fname, int orientation, float scalex, float scal
   }
  else //png
   {
-   lxImage image;
+   lxImage image(NULL);
 
    if (image.wxImage::LoadFile (fname))
     {

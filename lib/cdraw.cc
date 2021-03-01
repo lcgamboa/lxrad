@@ -149,7 +149,7 @@ CDraw::SetImgFileName(lxString filename, double sx, double sy)
 
  if ((Widget != NULL)&&(FileName != wxT ("")))
   {
-   lxImage image;
+   lxImage image(Win);
    if (image.LoadFile (FileName, 0, sx, sy))
     {
      wxBitmap bitmap (image);
