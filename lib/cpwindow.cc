@@ -38,11 +38,11 @@ CPWindow::CPWindow (void)
 //  CWindow::CWindow();
   SetClass (wxT("CPWindow"));
   Window_=NULL;
-};
+}
 
 CPWindow::~CPWindow (void)
 {
-};
+}
 
 
 int
@@ -74,7 +74,7 @@ CPWindow::Create (CControl * control)
 
   return CControl::Create (control);
   
-};
+}
 
 
 
@@ -91,14 +91,14 @@ CPWindow::Destroy (void)
    {
      Widget->Close();
      Widget=NULL;
-   };
+   }
    
    if (Window_)
    {
      Window_->Destroy();
      Window_=NULL;
    }
-};
+}
 
 
 
@@ -111,7 +111,7 @@ CPWindow::GetWWidget (void)
     return Window_;
   else
     return NULL;
-};
+}
 
 void
 CPWindow::SetWidth (uint width)
@@ -151,7 +151,7 @@ new (size_t sz)
   m->Dynamic = true;
   m->CanDestroy = true;
   return (void *) m;
-};
+}
 
 void 
 CPWindow::operator
@@ -159,4 +159,4 @@ delete (void * p)
 {
   CPWindow* pc = static_cast<CPWindow*>(p);
   free(pc);
-};
+}

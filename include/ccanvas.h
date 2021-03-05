@@ -61,6 +61,8 @@ private:
   int DirectDraw;
   int orientation;
   void Rotate(int *x, int *y);
+  double Scalex;
+  double Scaley;
 public:
     CCanvas (void);
    ~CCanvas (void);

@@ -5,6 +5,8 @@ all::
 LIBCFLAGS := $(CFLAGS) -D_NO_ADVANCED 
 ARCFLAGS := $(CFLAGS) -static
 
+SVGLIB := -Wl,--whole-archive ../../lunasvg/buildw32/liblunasvg.a -Wl,--no-whole-archive 
+
 # .ao files are used for static archives
 %.ao: %.cc
 	$(CXX) $(ARCFLAGS) -c $< -o $@
@@ -46,7 +48,7 @@ LIBSTOBJECTS := capplication.ao cbutton.ao cedit.ao cdraw.ao cimage.ao cdialog.a
 
 # How to create the shared library
 $(LIBSHLIBNAME): $(LIBSHOBJECTS)
-	$(CXX) -shared -Wl,--out-implib,lxrad.dll.a -Wl,--no-undefined -Wl,--enable-runtime-pseudo-reloc -o $@  $^ `i686-w64-mingw32-msw-unicode-3.1 --libs std` -lOpenAL32
+	$(CXX) $(SVGLIB) -shared -Wl,--out-implib,lxrad.dll.a -Wl,--no-undefined -Wl,--enable-runtime-pseudo-reloc -o $@  $^ `i686-w64-mingw32-msw-unicode-3.1 --libs std` -lOpenAL32
 
 
 # And the static library
