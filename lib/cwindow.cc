@@ -55,11 +55,11 @@ CWindow::CWindow (void)
   EvOnLeave = NULL;
 //  CanDestroy= true;
   modalmode=NULL;
-};
+}
 
 CWindow::~CWindow (void)
 {
-};
+}
 
 
 int
@@ -91,7 +91,7 @@ CWindow::Create (CControl * control)
   
   return CControl::Create (control);
   
-};
+}
 
 
 
@@ -104,7 +104,7 @@ if(event == wxEVT_CLOSE_WINDOW)return lxEVT_CLOSE_WINDOW;
 if(event == wxEVT_SHOW)return lxEVT_SHOW;
 
 return CControl::CEvent(event);
-};
+}
 
 
 void
@@ -145,7 +145,7 @@ CWindow::WCreate (int WN, CWindow * window)
   if (Visible)
     Show ();
 
-};
+}
 
 void
 CWindow::Destroy (void)
@@ -162,27 +162,27 @@ CWindow::Destroy (void)
      Widget=NULL;
    }
    
-};
+}
 
 
 void
 CWindow::Draw (void)
 {
   CControl::Draw ();
-};
+}
 
 
 void
 CWindow::DestroyChild (CControl * control)
 {
   CControl::DestroyChild (control);
-};
+}
 
 void
 CWindow::DestroyChilds (void)
 {
   CControl::DestroyChilds ();
-};
+}
 
 
 
@@ -192,7 +192,7 @@ CWindow::WDestroy (void)
   Hide ();
   
   Application->ADestroyWindow (Wid);
-};
+}
 
 void
 CWindow::Show (void)
@@ -202,8 +202,8 @@ CWindow::Show (void)
     {
       ((wxFrame*)GetWWidget())->Show(true);
       ((wxFrame*)GetWWidget())->Raise();
-    };
-};
+    }
+}
 
 void
 CWindow::ShowExclusive (void)
@@ -212,7 +212,7 @@ CWindow::ShowExclusive (void)
   CanExitExclusive = true;
   modalmode = new wxWindowDisabler(GetWWidget()); 
 
-};
+}
 
 void
 CWindow::Hide (void)
@@ -221,8 +221,8 @@ CWindow::Hide (void)
     {
       SetVisible (false);
       ((wxFrame*)GetWWidget())->Show(false);
-    };
-};
+    }
+}
 
 void
 CWindow::HideExclusive (void)
@@ -234,43 +234,43 @@ CWindow::HideExclusive (void)
   }
   Hide ();
   CanExitExclusive = false;
-};
+}
 
 void
 CWindow::Update (void)
 {
   CControl::Update ();
-};
+}
 
 
 int
 CWindow::GetWNumber (void)
 {
   return WNumber;
-};
+}
 
 
 void
 CWindow::SetOverrideRedirect (bool redirect)
 {
   OverrideRedirect = redirect;
-};
+}
 
 bool CWindow::GetOverrideRedirect (void)
 {
   return OverrideRedirect;
-};
+}
 
 bool 
 CWindow::GetCanExitExclusive(void)
 {
   return CanExitExclusive;
-};
+}
 
 void
 CWindow::SetSaveUnder (bool saveunder)
 {
-};
+}
 
 
 void
@@ -305,7 +305,7 @@ CWindow::Event (wxEvent & event)
          else
          {
            ((wxCloseEvent *)&event)->Veto(); 
-         };
+         }
 */
         }
       return; 
@@ -326,7 +326,7 @@ CWindow::Event (wxEvent & event)
 	 {
          gtk_window_get_position (GTK_WINDOW (WWindow), &X, &Y);
          gtk_window_get_size (GTK_WINDOW (WWindow), (int*)&Width,(int*)&Height);
-	 };
+	 }
          CControl::Event (widget, event);
       return 1;
   
@@ -336,7 +336,7 @@ CWindow::Event (wxEvent & event)
     default:
       //return CControl::Event (widget, event);
       break;
-    };
+    }
 
    CControl::Event(event);
 }
@@ -356,7 +356,7 @@ CWindow::GetContext (void)
   Context.AddLine (xml_out (wxT("EvOnEnter"), wxT("Event"), btoa (GetEv ())));
   Context.AddLine (xml_out (wxT("EvOnLeave"), wxT("Event"), btoa (GetEv ())));
   return Context;
-};
+}
 
 void
 CWindow::SetContext (lxStringList context)
@@ -382,8 +382,8 @@ CWindow::SetContext (lxStringList context)
 	SetEv (atob (value));
       if (name.compare (wxT("EvOnLeave")) == 0)
 	SetEv (atob (value));
-    };
-};
+    }
+}
 
 int
 CWindow::LoadXMLContextAndCreateChilds (lxString filename, CControl* ctrl)
@@ -441,7 +441,7 @@ CWindow::LoadXMLContextAndCreateChilds (lxString filename, CControl* ctrl)
 		  if (ch->GetClass ().compare (wxT ("CItemMenu")) == 0)
                     {
                       ch->SetVisible (false, false);
-                    };
+                    }
                   */
                   ctrl->CreateChild (ch);
 
@@ -456,11 +456,11 @@ CWindow::LoadXMLContextAndCreateChilds (lxString filename, CControl* ctrl)
                     }
                   while ((line.compare (wxT ("</") + cname + wxT (">")) != 0));
                   fgetline (file2, line);
-                };
+                }
 
-            };
+            }
 
-        };
+        }
 
       file2.Close ();
       return 1;
@@ -469,14 +469,14 @@ CWindow::LoadXMLContextAndCreateChilds (lxString filename, CControl* ctrl)
     printf ("File (%s) not found!\n",(char *)filename.char_str());
 
   return 0;
-};
+}
 
 
 void
 CWindow::SetFocus (void)
 {
   GetWWidget()->SetFocus();
-};
+}
 
 void
 CWindow::SetControlOnFocus (CControl * control)
@@ -492,9 +492,9 @@ CWindow::SetControlOnFocus (CControl * control)
   {
       GetWidget()->SetFocus();
       ControlOnFocus=NULL;
-  };
+  }
 
-};
+}
 
 CControl *
 CWindow::GetControlOnFocus (void)
@@ -519,12 +519,12 @@ CWindow::GetControlOnFocus (void)
 	  {
 	     ControlOnFocus=Child[i];
 	     return Child[i];
-	  };
-	};
-    };
+	  }
+	}
+    }
   */
   return ControlOnFocus;
-};
+}
 
 wxWindow *
 CWindow::GetWWidget (void)
@@ -533,7 +533,7 @@ CWindow::GetWWidget (void)
     return Widget;
   else
     return NULL;
-};
+}
 
 
 //propiedades
@@ -542,12 +542,12 @@ void
 CWindow::SetCanDestroy (bool candestroy)
 {
   CanDestroy = candestroy;
-};
+}
 
 bool CWindow::GetCanDestroy (void)
 {
   return CanDestroy;
-};
+}
 
 void
 CWindow::SetTitle (const lxString & title)
@@ -557,13 +557,13 @@ CWindow::SetTitle (const lxString & title)
 if (GetWWidget() != NULL)
     ((wxFrame*)GetWWidget())->SetTitle(Title.c_str ());
 
-};
+}
 
 lxString
 CWindow::GetTitle (void)
 {
   return Title;
-};
+}
 
 void
 CWindow::SetX (int x)
@@ -572,7 +572,7 @@ CWindow::SetX (int x)
 
 if (GetWWidget() != NULL)
     ((wxFrame*)GetWWidget())->SetSize(X,Y,Width,Height,wxSIZE_AUTO);
-};
+}
 
 int
 CWindow::GetX (void)
@@ -581,7 +581,7 @@ CWindow::GetX (void)
     ((wxFrame*)GetWWidget())->GetPosition(&X,&Y);
   
   return X;
-};
+}
 
 void
 CWindow::SetY (int y)
@@ -590,7 +590,7 @@ CWindow::SetY (int y)
 
 if (GetWWidget() != NULL)
     ((wxFrame*)GetWWidget())->SetSize(X,Y,Width,Height,wxSIZE_AUTO);
-};
+}
 
 int
 CWindow::GetY (void)
@@ -599,7 +599,7 @@ CWindow::GetY (void)
     ((wxFrame*)GetWWidget())->GetPosition(&X,&Y);
 
   return   Y;
-};
+}
 
 void
 CWindow::SetWidth (uint width)
@@ -609,7 +609,7 @@ CWindow::SetWidth (uint width)
 if (GetWWidget() != NULL)
     ((wxFrame*)GetWWidget())->SetSize(X,Y,Width,Height,wxSIZE_AUTO);
 
-};
+}
   
 uint 
 CWindow::GetWidth (void)
@@ -618,7 +618,7 @@ CWindow::GetWidth (void)
     ((wxFrame*)GetWWidget())->GetSize((int*)&Width,(int*)&Height);
   
   return Width;
-};
+}
 
 void
 CWindow::SetHeight (uint height)
@@ -627,7 +627,7 @@ CWindow::SetHeight (uint height)
 
 if (GetWWidget() != NULL)
     ((wxFrame*)GetWWidget())->SetSize(X,Y,Width,Height,wxSIZE_AUTO);
-};
+}
 
 uint 
 CWindow::GetHeight(void)
@@ -636,17 +636,17 @@ if (GetWWidget() != NULL)
     ((wxFrame*)GetWWidget())->GetSize((int*)&Width,(int*)&Height);
    
    return Height;
-};
+}
 
 int CWindow::GetVScale (int h)
 {
   return (int) (h * VScale + 0.5);
-};
+}
 
 int CWindow::GetHScale (int w)
 {
   return (int) (w * HScale + 0.5);
-};
+}
 
 
 //operators
@@ -660,7 +660,7 @@ CWindow::operator new (size_t sz)
   m->Dynamic = true;
   m->CanDestroy = true;
   return (void *) m;
-};
+}
 
 
 void 
@@ -669,7 +669,7 @@ delete (void * p)
 {
   CWindow* pc = static_cast<CWindow*>(p);
   free(pc);
-};
+}
 
 
 //eventos
@@ -679,40 +679,40 @@ CWindow::on_create (void)
 {
   if ((FOwner) && (EvOnCreate))
     (FOwner->*EvOnCreate) (this);
-};
+}
 
 void
 CWindow::on_destroy (void)
 {
   if ((FOwner) && (EvOnDestroy))
     (FOwner->*EvOnDestroy) (this);
-};
+}
 
 void
 CWindow::on_show (void)
 {
   if ((FOwner) && (EvOnShow))
     (FOwner->*EvOnShow) (this);
-};
+}
 
 void
 CWindow::on_hide (void)
 {
   if ((FOwner) && (EvOnHide))
     (FOwner->*EvOnHide) (this);
-};
+}
 
 void
 CWindow::on_enter (void)
 {
   if ((FOwner) && (EvOnEnter))
     (FOwner->*EvOnEnter) (this);
-};
+}
 
 void
 CWindow::on_leave (void)
 {
   if ((FOwner) && (EvOnLeave))
     (FOwner->*EvOnLeave) (this);
-};
+}
 

@@ -301,18 +301,19 @@ xImage::LoadFile(const lxString fname, int orientation, float scalex, float scal
      const unsigned char * bmp = bitmap.data ();
      int size = bitmap.width () * bitmap.height ();
      unsigned char * data = (unsigned char *) malloc (size * 3);
-     unsigned char * alpha = (unsigned char *) malloc (size);
+     //unsigned char * alpha = (unsigned char *) malloc (size);
 
      for (int i = 0; i < size; i++)
       {
        data[(3 * i)] = bmp[(4 * i)];
        data[(3 * i) + 1] = bmp[(4 * i) + 1];
        data[(3 * i) + 2] = bmp[(4 * i) + 2];
-       alpha[i] = bmp[(4 * i) + 3];
+       //alpha[i] = bmp[(4 * i) + 3];
       }
 
      lxImage image(NULL);
-     image.Create (bitmap.width (), bitmap.height (), data, alpha);
+     //image.Create (bitmap.width (), bitmap.height (), data, alpha);
+     image.Create (bitmap.width (), bitmap.height (), data);
 
      lxImage * im =this;
      switch (orientation)

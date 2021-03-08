@@ -125,7 +125,8 @@ lxEVT_THREAD_END,
 lxEVT_SPINCTRL,
 lxEVT_SPINCTRLDOUBLE,
 lxEVT_TOGGLEBUTTON,
-lxEVT_SCROLL_THUMBTRACK
+lxEVT_SCROLL_THUMBTRACK,
+lxEVT_MOUSEWHEEL
 };
 
 #define Parent 99999
@@ -145,6 +146,7 @@ lxEVT_SCROLL_THUMBTRACK
 #define EVONDRAW                 (void(CControl::*)(CControl*))
 #define EVONFOCUSIN              (void(CControl::*)(CControl*))
 #define EVONFOCUSOUT             (void(CControl::*)(CControl*))
+#define EVMOUSEWHEEL             (void(CControl::*)(CControl*,const int))
 
 #define EVONCHECKBOX               (void(CControl::*)(CControl*))
 #define EVONCOMBOCHANGE            (void(CControl::*)(CControl*))

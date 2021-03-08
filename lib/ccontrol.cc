@@ -74,13 +74,14 @@ CControl::CControl (void)
   EvOnDraw = NULL;
   EvOnFocusIn = NULL;
   EvOnFocusOut = NULL;
+  EvMouseWheel = NULL;
 
   //CFont = NULL;
   ColorName = wxT("");
   ColorRGB[0]=0;
   ColorRGB[1]=0;
   ColorRGB[2]=1;
-};
+}
 
 CControl::~CControl ()
 {
@@ -92,12 +93,12 @@ CControl::~CControl ()
 	  if (Child[c]->GetDynamic ())
 	    delete Child[c];
 	  Child[c] = NULL;
-	};
+	}
       ChildCount = -1;
       delete[]Child;
       Child = NULL;
-    };
-};
+    }
+}
 
 int
 CControl::Create (CControl * control)
@@ -145,9 +146,7 @@ CControl::Create (CControl * control)
     Widget->Bind(wxEVT_LEAVE_WINDOW,&CControl::Event,this,GetWid()); 
     Widget->Bind(wxEVT_SET_FOCUS,&CControl::Event,this,GetWid()); 
     Widget->Bind(wxEVT_KILL_FOCUS,&CControl::Event,this,GetWid()); 
-
-
-  
+    Widget->Bind(wxEVT_MOUSEWHEEL,&CControl::Event,this,GetWid()); 
     }  
 
 
@@ -156,14 +155,14 @@ CControl::Create (CControl * control)
       for (int i = 0; i <= ChildCount; i++)
 	{
 	  CreateChild (Child[i], true);
-	};
-    };
+	}
+    }
 
   if (!Enable)
     {
       Enable = true;
       SetEnable (false);
-    };
+    }
 
   if (Visible)
     SetVisible (Visible);
@@ -179,7 +178,7 @@ CControl::Create (CControl * control)
     SetColor(ColorRGB[0],ColorRGB[1],ColorRGB[2]);  
 
   return 1;
-};
+}
 
 
 
@@ -200,7 +199,7 @@ CControl::Destroy (void)
   Widget = NULL;
 
 
-};
+}
 
 
 
@@ -211,20 +210,20 @@ CControl::GetWidget (void)
     return Widget;
   else
     return NULL;
-};
+}
 
 
 CWindow *
 CControl::GetWin (void)
 {
   return Win;
-};
+}
 
 void
 CControl::SetWin (CWindow * win)
 {
   Win = win;
-};
+}
 
 void
 CControl::SetName (const lxString name)
@@ -232,12 +231,12 @@ CControl::SetName (const lxString name)
   Name = name;
   if (Widget != NULL)
     Widget->SetName(Name.c_str ());
-};
+}
 
 lxString CControl::GetName (void)
 {
   return Name;
-};
+}
 
 void
 CControl::Draw (void)
@@ -263,7 +262,7 @@ CControl::Update (void)
 {
    if(Widget)
       Widget->Update();
-};
+}
 
 void
 CControl::Erase (void)
@@ -271,7 +270,7 @@ CControl::Erase (void)
     if ((Widget != NULL)&& (CanVisible == true))
       Widget->Hide();
 
-};
+}
 
 
 
@@ -294,6 +293,7 @@ if(event == wxEVT_LEAVE_WINDOW)return lxEVT_LEAVE_WINDOW;
 if(event == wxEVT_PAINT)return lxEVT_PAINT;
 if(event == wxEVT_SET_FOCUS)return lxEVT_SET_FOCUS;
 if(event == wxEVT_KILL_FOCUS)return lxEVT_KILL_FOCUS;
+if(event == wxEVT_MOUSEWHEEL) return lxEVT_MOUSEWHEEL;
 
 return -1;
 }
@@ -340,12 +340,17 @@ CControl::Event ( wxEvent & event)
 	case lxEVT_PAINT:
 	  on_draw ((wxPaintEvent *) &event);
 	  break;
+
+	case lxEVT_MOUSEWHEEL:
+	  mouse_wheel ((wxMouseEvent* ) &event);
+	  break;
+
 	default:
 	  //printf("default !!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 	  break;
-	};
+	}
 
-};
+}
 
 
 void
@@ -358,12 +363,12 @@ CControl::DestroyChilds (void)
       if (Child[c]->GetDynamic ())
 	delete Child[c];
       Child[c] = NULL;
-    };
+    }
   ChildCount = -1;
   delete[]Child;
   Child = NULL;
 
-};
+}
 
 void
 CControl::CreateChild (CControl * control, bool onlyput)
@@ -381,13 +386,13 @@ CControl::CreateChild (CControl * control, bool onlyput)
       if (Child)
 	delete[]Child;
       Child = Child1;
-    };
+    }
   
      if (Win != NULL)
      control->Create (this);
    
 
-};
+}
 
 void
 CControl::DestroyChild (CControl * control)
@@ -398,7 +403,7 @@ CControl::DestroyChild (CControl * control)
       {
 	childn = f;
 	break;
-      };
+      }
   if (childn != -1)
     {
       //Child[childn]->Eraser ();
@@ -410,8 +415,8 @@ CControl::DestroyChild (CControl * control)
 
       Child[ChildCount] = NULL;
       ChildCount--;
-    };
-};
+    }
+}
 
 
 lxStringList
@@ -447,7 +452,7 @@ CControl::GetContext (void)
 
 
   return Context;
-};
+}
 
 void
 CControl::SetContext (lxStringList context)
@@ -511,8 +516,8 @@ CControl::SetContext (lxStringList context)
 	SetEv (atob (value));
       if (name.compare (wxT("EvOnFocusOut")) == 0)
 	SetEv (atob (value));
-    };
-};
+    }
+}
 
 void
 CControl::WriteXMLContext (lxString filename, bool first)
@@ -534,11 +539,11 @@ CControl::WriteXMLContext (lxString filename, bool first)
          list.AddLine("<\\"+Child[i]->GetName()+">");
          list.AppendToFile(filename);    
        */
-    };
+    }
   list.Clear ();
   list.AddLine (wxT("</") + Name + wxT(">"));
   list.AppendToFile (filename);
-};
+}
 
 void
 CControl::LoadXMLContext (lxString filename)
@@ -590,11 +595,11 @@ CControl::LoadXMLContext (lxString filename)
 		    }
 		  while ((line.compare (wxT("</") + name + wxT(">")) != 0));
 		  fgetline (fin, line);
-		};
+		}
 
-	    };
+	    }
 
-	};
+	}
 
       fin.Close();
       //printf("<\\XML_%s>\n",Name.c_str());
@@ -603,31 +608,31 @@ CControl::LoadXMLContext (lxString filename)
     printf ("File not found!\n");
 
 
-};
+}
 
 lxString
 CControl::GetFontName (void)
 {
   return FontName;
-};
+}
   
 
 void 
 CControl::SetFont (const lxString font)
 {
   FontName=font;
-};
+}
 
 void
 CControl::SetFontSize (uint size)
 {
   FontSize = size;
-};
+}
 
 uint CControl::GetFontSize (void)
 {
   return FontSize;
-};
+}
 
 void
 CControl::SetHint (lxString hint)
@@ -637,12 +642,12 @@ CControl::SetHint (lxString hint)
 if ((Widget != NULL) && (Hint.size () > 0))
     Application.SetTips (this);
 */
-};
+}
 
 lxString CControl::GetHint (void)
 {
   return Hint;
-};
+}
 
 void
 CControl::SetX (int x)
@@ -652,13 +657,13 @@ CControl::SetX (int x)
        Widget->SetSize(X,Y,Width,Height,wxSIZE_USE_EXISTING);
        //Widget->SetSize(x,-1,-1,-1,wxSIZE_USE_EXISTING);
 
-};
+}
 
 int
 CControl::GetX (void)
 {
   return X;
-};
+}
 
 void
 CControl::SetY (int y)
@@ -667,13 +672,13 @@ CControl::SetY (int y)
   if ((Widget != NULL)&& (CanVisible == true))
        Widget->SetSize(X,Y,Width,Height,wxSIZE_USE_EXISTING);
        //Widget->SetSize(-1,y,-1,-1,wxSIZE_USE_EXISTING);
-};
+}
 
 int
 CControl::GetY (void)
 {
   return Y;
-};
+}
 
 void
 CControl::SetWidth (uint w)
@@ -682,12 +687,12 @@ CControl::SetWidth (uint w)
   if ((Widget != NULL)&& (CanVisible == true))
        Widget->SetSize(X,Y,Width,Height,wxSIZE_USE_EXISTING);
        //Widget->SetSize(-1,-1,w,-1,wxSIZE_USE_EXISTING);
-};
+}
 
 uint CControl::GetWidth (void)
 {
   return Width;
-};
+}
 
 void
 CControl::SetHeight (uint h)
@@ -696,34 +701,34 @@ CControl::SetHeight (uint h)
   if ((Widget != NULL)&& (CanVisible == true))
        Widget->SetSize(X,Y,Width,Height,wxSIZE_USE_EXISTING);
        //Widget->SetSize(-1,-1,-1,h,wxSIZE_USE_EXISTING);
-};
+}
 
 uint CControl::GetHeight (void)
 {
   return Height;
-};
+}
   
   
 void CControl::SetWid (int wid)
 {
   Wid=wid;
-};
+}
 
 long CControl::GetWid (void)
 {
   return Wid;
-};
+}
 
 void
 CControl::SetBorder (uint b)
 {
   Border = b;
-};
+}
 
 uint CControl::GetBorder (void)
 {
   return Border;
-};
+}
 
 void
 CControl::SetColorName (const lxString name)
@@ -734,7 +739,7 @@ CControl::SetColorName (const lxString name)
   if (Widget != NULL)
      Widget->SetOwnBackgroundColour(color);
 
-};
+}
 
 void
 CControl::SetColor (uint r, uint g, uint b)
@@ -746,7 +751,7 @@ CControl::SetColor (uint r, uint g, uint b)
   wxColour color(r,g,b);
   if (Widget != NULL)
      Widget->SetOwnBackgroundColour(color);
-};
+}
 
 void
 CControl::SetColor (wxColor color)
@@ -758,7 +763,7 @@ CControl::SetColor (wxColor color)
   if (Widget != NULL)
      Widget->SetOwnBackgroundColour(color);
 
-};
+}
 
 
 wxColor 
@@ -776,26 +781,26 @@ CControl::SetEnable (bool enable)
   if ((Widget != NULL)&& (CanVisible == true))
     Widget->Enable(enable);
 
-};
+}
 
 bool
 CControl::GetEnable (void)
 {
   return Enable;
-};
+}
 
 CControl *
 CControl::GetOwner (void)
 {
   return Owner;
-};
+}
 
 void
 CControl::SetOwner (CControl * control)
 {
   Owner = control;
 
-};
+}
 
 void
 CControl::SetVisible (bool visible, bool update)
@@ -821,17 +826,17 @@ CControl::SetVisible (bool visible, bool update)
   else
     Visible = visible;
   
-};
+}
 
 bool CControl::GetVisible (void)
 {
   return Visible;
-};
+}
 
 bool CControl::GetCanVisible (void)
 {
   return CanVisible;
-};
+}
 
 
 void
@@ -843,7 +848,7 @@ CControl::SetPopupMenu (CPMenu * popupmenu)
   {
     Widget->PopupMenu ((wxMenu*) (PopupMenu->GetWidget ()),PopupMenu->GetX() , PopupMenu->GetY());
   }
-};
+}
 
 void
 CControl::SetFocus (void)
@@ -851,8 +856,8 @@ CControl::SetFocus (void)
   if ((CanFocus)&&(Widget != NULL))
     {
       Widget->SetFocus();
-    };
-};
+    }
+}
 
 bool CControl::GetFocus (void)
 {
@@ -860,36 +865,36 @@ bool CControl::GetFocus (void)
     return Widget->FindFocus();
   else
     return false;
-};
+}
 
 void
 CControl::SetCanFocus (bool canfocus)
 {
   CanFocus = canfocus;
-};
+}
 
 bool CControl::GetCanFocus (void)
 {
   return CanFocus;
-};
+}
 
 bool CControl::GetDynamic (void)
 {
   return Dynamic;
-};
+}
 
 int
 CControl::GetChildCount (void)
 {
   return ChildCount;
-};
+}
 
 
 CControl *
 CControl::GetChild (uint child)
 {
   return Child[child];
-};
+}
 
 
 CControl *
@@ -911,7 +916,7 @@ CControl::GetChildByWidget (wxWindow * widget)
 
   return NULL;
 
-};
+}
 
 CControl *
 CControl::GetChildByWid (long wid)
@@ -930,7 +935,7 @@ CControl *ch;
 
   return NULL;
 
-};
+}
 
 
 
@@ -948,32 +953,32 @@ CControl *ch;
       return ch;
    }
   return NULL;
-};
+}
 
 
 void
 CControl::SetFOwner (CControl * control)
 {
   FOwner = control;
-};
+}
 
 CControl *
 CControl::GetFOwner (void)
 {
   return FOwner;
-};
+}
 
 void
 CControl::SetCanExecuteEvent (bool can)
 {
   CanExecuteEvent = can;
-};
+}
 
 bool
 CControl::GetCanExecuteEvent (void)
 {
   return CanExecuteEvent;
-};
+}
 
 //operators
 
@@ -987,7 +992,7 @@ new (size_t sz)
     puts ("out of memory");
   m->Dynamic = true;
   return (void *) m;
-};
+}
 
 void 
 CControl::operator
@@ -995,7 +1000,7 @@ delete (void * p)
 {
   CControl* pc = static_cast<CControl*>(p);
   free(pc);
-};
+}
 
 
 
@@ -1006,7 +1011,7 @@ CControl::mouse_move (wxMouseEvent * event)
 {
   if ((FOwner) && (EvMouseMove))
     (FOwner->*EvMouseMove) (this,event->GetButton(), (int) event->m_x, (int) event->m_y,(uint) event->ShiftDown());
-};
+}
 
 
 
@@ -1025,7 +1030,7 @@ CControl::button_press (wxMouseEvent * event)
   if ((PopupMenu != NULL) && (event->GetButton() == 3))
     Widget->PopupMenu((wxMenu*)(PopupMenu->GetWidget()),event->m_x,event->m_y);
     
-};
+}
 
 
 
@@ -1043,7 +1048,7 @@ CControl::button_release (wxMouseEvent * event)
       if ((FOwner) && (EvMouseButtonDoubleClick))
 	{
 	  (FOwner->*EvMouseButtonDoubleClick) (this, event->GetButton(), (int) event->m_x, (int) event->m_y, event->ShiftDown());
-	};
+	}
     }
   else
     {
@@ -1052,9 +1057,9 @@ CControl::button_release (wxMouseEvent * event)
 	  (FOwner->*EvMouseButtonClick) (this, event->GetButton(), (int) event->m_x, (int) event->m_y, event->ShiftDown());
 	}
       BTimeClick = BTimePress;
-    };
+    }
 
-};
+}
 
 
 
@@ -1080,7 +1085,7 @@ CControl::focus_in (wxMouseEvent * event)
 {
   if ((FOwner) && (EvOnFocusIn))
     (FOwner->*EvOnFocusIn) (this);
-};
+}
 
 
 
@@ -1089,15 +1094,21 @@ CControl::focus_out (wxMouseEvent * event)
 {
   if ((FOwner) && (EvOnFocusOut))
     (FOwner->*EvOnFocusOut) (this);
-};
-
-
+}
 
 void
 CControl::on_draw (wxPaintEvent * event)
 {
   if ((FOwner) && (EvOnDraw))
     (FOwner->*EvOnDraw) (this);
-};
+}
+
+	
+void
+CControl::mouse_wheel (wxMouseEvent * event)
+{
+  if ((FOwner) && (EvMouseWheel))
+    (FOwner->*EvMouseWheel) (this,event->GetWheelRotation ());
+}
 
 

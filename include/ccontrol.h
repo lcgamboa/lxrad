@@ -153,6 +153,7 @@ public:
   virtual void focus_in (wxMouseEvent* event);
   virtual void focus_out (wxMouseEvent* event);
   virtual void on_draw (wxPaintEvent* event);
+  virtual void mouse_wheel (wxMouseEvent* event);
 
   void (CControl::*EvMouseMove) (CControl * control,const uint button,const uint x,const uint y,const uint mask);
   void (CControl::*EvMouseButtonPress) (CControl * control,const uint button,const uint x,const uint y,const uint mask);
@@ -164,5 +165,6 @@ public:
   void (CControl::*EvOnDraw) (CControl * control);
   void (CControl::*EvOnFocusIn) (CControl * control);
   void (CControl::*EvOnFocusOut) (CControl * control);
+  void (CControl::*EvMouseWheel) (CControl * control, const int rotation);
 };
 #endif
