@@ -313,7 +313,6 @@ xImage::LoadFile(const lxString fname, int orientation, float scalex, float scal
 
      lxImage image(NULL);
      image.Create (bitmap.width (), bitmap.height (), data, alpha);
-     image.Create (bitmap.width (), bitmap.height (), data);
 
      lxImage * im =this;
      switch (orientation)
