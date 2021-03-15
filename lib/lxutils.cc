@@ -282,7 +282,7 @@ lxGetBitmapRotated(lxImage *image, CWindow * win, int orientation)
 }
 
 bool
-xImage::LoadFile(const lxString fname, int orientation, float scalex, float scaley)
+xImage::LoadFile(const lxString fname, int orientation, float scalex, float scaley, int useAlpha)
 {
 
  if (fname.Contains (".svg"))
@@ -332,7 +332,11 @@ xImage::LoadFile(const lxString fname, int orientation, float scalex, float scal
       }
 
      image.Destroy ();
-     
+    
+     if((!useAlpha)&&(im->HasAlpha()))
+     {
+       im->ClearAlpha();
+     }
      return 1;
     }
 
@@ -365,6 +369,11 @@ xImage::LoadFile(const lxString fname, int orientation, float scalex, float scal
       }
 
      image.Destroy ();
+     
+     if((!useAlpha)&&(im->HasAlpha()))
+     {
+       im->ClearAlpha();
+     }
 
      return 1;
     }

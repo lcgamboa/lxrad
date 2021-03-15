@@ -69,7 +69,7 @@ CCanvas::Create(wxWindow * drawable, int directdraw = 1)
  Drawable->GetSize (&Width, &Height);
 
  if (!DirectDraw)
-  BitmapBuffer = new wxBitmap (Width, Height, -1);
+  BitmapBuffer = new wxBitmap (Width, Height);
 
  return 1;
 }
@@ -601,7 +601,7 @@ CCanvas::PutBitmap(wxBitmap * bitmap, int x, int y)
      y -= bitmap->GetHeight ();
      break;
     }
-   DC->DrawBitmap (*bitmap, x, y);
+   DC->DrawBitmap (*bitmap, x, y, false);
   }
 }
 
