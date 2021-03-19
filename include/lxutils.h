@@ -136,5 +136,7 @@ bool lxRemoveFile(const char* fname);
 bool lxRemoveDir(const char* dirname);
 bool lxCreateDir(const char * dirname);
 
+unsigned int lxGetDisplayWidth(int disp);
+unsigned int lxGetDisplayHeight(int disp);
 
 #endif	/* LXUTILS_H */

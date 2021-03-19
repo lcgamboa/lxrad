@@ -31,8 +31,9 @@
 #include "wx/fs_zip.h"
 #include "wx/wfstream.h"
 #include "wx/dir.h"
+#include "wx/display.h"
 #include <memory>
-#include<dirent.h>
+#include <dirent.h>
 
 #include"../../lunasvg/include/svgdocument.h"
 
@@ -383,3 +384,16 @@ xImage::LoadFile(const lxString fname, int orientation, float scalex, float scal
 
 }
 
+
+unsigned int 
+lxGetDisplayWidth(int disp)
+{
+  wxDisplay display(disp);
+  return display.GetClientArea().GetWidth();
+}
+
+unsigned int lxGetDisplayHeight(int disp)
+{
+  wxDisplay display(disp);
+  return display.GetClientArea().GetHeight();
+}
