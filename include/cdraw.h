@@ -4,7 +4,7 @@
 
    ########################################################################
 
-   Copyright (c) : 2001  Luis Claudio Gamboa Lopes
+   Copyright (c) : 2001-2021  Luis Claudio Gamboa Lopes
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -50,8 +50,6 @@ private:
   uint LWidth;
   double Sx;
   double Sy;
-//  GdkPixmap *Pixmap;
-//  GtkWidget *Image;
 public:
     CDraw (void);
    ~CDraw (void);

@@ -43,7 +43,7 @@ class xImage:public wxImage
 {
   public:
    xImage(CWindow * win):wxImage(){};   
-   bool LoadFile(const lxString fname, int orientation = 0, float scalex = 1.0,  float scaley = 1.0, int usealpha = 0);
+   bool LoadFile(const lxString fname, int orientation = 0, double scalex = 1.0,  double  scaley = 1.0 , int usealpha = 0, double * ret_sx=NULL, double * ret_sy=NULL);
    using wxImage::operator=;
 };
 

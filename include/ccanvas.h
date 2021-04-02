@@ -4,7 +4,7 @@
 
    ########################################################################
 
-   Copyright (c) : 2001-2017  Luis Claudio Gamboa Lopes
+   Copyright (c) : 2001-2021  Luis Claudio Gamboa Lopes
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -35,9 +35,6 @@
 #include"cobject.h"
 #include"cwindow.h"
 
-//#define wxRasterOperationMode int 
-//#define wxFloodFillStyle int
-
 
 /** \brief Canvas Control.
  *
@@ -50,17 +47,17 @@ private:
   wxWindow *Drawable;
   wxBitmap *Bitmap;  
   wxColor FgColor, BgColor;
-  wxClientDC* WDC;	///<Window Draw Context
-  wxDC* DC;	///<Memory Draw Context
+  wxClientDC* WDC;	 ///<Window Draw Context
+  wxDC* DC;	         ///<Memory Draw Context
   wxBitmap * BitmapBuffer;
-  wxPen  *Pen;		///<Pen
-  wxBrush *Brush;	///<Brush
+  wxPen  *Pen;		 ///<Pen
+  wxBrush *Brush;	 ///<Brush
   wxFont Font;
   int Width;
   int Height;
   int DirectDraw;
   int orientation;
-  void Rotate(int *x, int *y);
+  void Rotate(float *x, float *y);
   double Scalex;
   double Scaley;
 public:
@@ -118,22 +115,22 @@ public:
   wxColor GetBgColor (void);
   void SetLineWidth (uint lwidth);
   uint GetLineWidth (void);
-  void Point (int x, int y);
+  void Point (float x, float y);
   void Points (wxPoint * points, int npoints);
-  void Line (int x1_, int y1_, int x2_, int y2_);
+  void Line (float x1_, float y1_, float x2_, float y2_);
   void Lines (wxPoint * points, int npoints);
   void Spline (wxPoint * points, int npoints);
   //void Segments (wxSegment * segs, int nsegs);
-  void Rectangle (bool filled, int x, int y, int width, int height);
+  void Rectangle (bool filled, float x, float y, float width, float height);
   void Arc (bool filled, int x, int y, int x1, int y1, int x2, int y2);
-  void Circle (bool filled, int x, int y, int radius);
-  void Text (lxString str, int x, int y);
-  void RotatedText (lxString str, int x, int y, int angle);
+  void Circle (bool filled, float x, float y, float radius);
+  void Text (lxString str, float x, float y);
+  void RotatedText (lxString str, float x, float y, float angle);
   void TextOnRect (lxString str, wxRect, unsigned int align );
   void Polygon (bool filled, wxPoint * points, int npoints);
   void Ellipse(bool filled,int x, int y, int width, int height);
   void EllipticArc(bool filled,int x, int y, int width, int height, double start, double end);
-  void PutBitmap(wxBitmap * bitmap,int x, int y);
+  void PutBitmap(wxBitmap * bitmap,float x, float y);
   
   void FloodFill(int x, int y,wxColor color, wxFloodFillStyle style);
 //events  

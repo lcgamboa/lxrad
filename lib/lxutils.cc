@@ -259,7 +259,7 @@ lxGetExecutablePath(lxString appname)
 lxBitmap *
 lxGetBitmapRotated(lxImage *image, CWindow * win, int orientation)
 {
- lxImage im(win);
+ lxImage im (win);
 
  switch (orientation)
   {
@@ -283,7 +283,7 @@ lxGetBitmapRotated(lxImage *image, CWindow * win, int orientation)
 }
 
 bool
-xImage::LoadFile(const lxString fname, int orientation, float scalex, float scaley, int useAlpha)
+xImage::LoadFile(const lxString fname, int orientation, double  scalex, double  scaley, int useAlpha, double * ret_sx, double * ret_sy)
 {
 
  if (fname.Contains (".svg"))
@@ -292,10 +292,17 @@ xImage::LoadFile(const lxString fname, int orientation, float scalex, float scal
    int height;
 
    SVGDocument document;
-   if (document.loadFromFile ((const char *)fname.c_str ()))
+   if (document.loadFromFile ((const char *) fname.c_str ()))
     {
      width = document.documentWidth (96.0) * scalex;
      height = document.documentHeight (96.0) * scaley;
+
+
+     if (ret_sx)
+      *ret_sx = ((double) width) / document.documentWidth (96.0);
+
+     if (ret_sy)
+      *ret_sy = ((double) height) / document.documentHeight (96.0);
 
      Bitmap bitmap = document.renderToBitmap (width, height, 96.0, 0);
 
@@ -312,10 +319,10 @@ xImage::LoadFile(const lxString fname, int orientation, float scalex, float scal
        alpha[i] = bmp[(4 * i) + 3];
       }
 
-     lxImage image(NULL);
+     lxImage image (NULL);
      image.Create (bitmap.width (), bitmap.height (), data, alpha);
 
-     lxImage * im =this;
+     lxImage * im = this;
      switch (orientation)
       {
       case 1:
@@ -333,23 +340,23 @@ xImage::LoadFile(const lxString fname, int orientation, float scalex, float scal
       }
 
      image.Destroy ();
-    
-     if((!useAlpha)&&(im->HasAlpha()))
-     {
-       im->ClearAlpha();
-     }
+
+     if ((!useAlpha)&&(im->HasAlpha ()))
+      {
+       im->ClearAlpha ();
+      }
      return 1;
     }
 
   }
  else //png
   {
-   lxImage image(NULL);
+   lxImage image (NULL);
 
    if (image.wxImage::LoadFile (fname))
     {
 
-     lxImage * im =this;
+     lxImage * im = this;
 
      image.Rescale (image.GetWidth () * scalex, image.GetHeight () * scaley);
 
@@ -370,11 +377,11 @@ xImage::LoadFile(const lxString fname, int orientation, float scalex, float scal
       }
 
      image.Destroy ();
-     
-     if((!useAlpha)&&(im->HasAlpha()))
-     {
-       im->ClearAlpha();
-     }
+
+     if ((!useAlpha)&&(im->HasAlpha ()))
+      {
+       im->ClearAlpha ();
+      }
 
      return 1;
     }
@@ -384,16 +391,16 @@ xImage::LoadFile(const lxString fname, int orientation, float scalex, float scal
 
 }
 
-
-unsigned int 
+unsigned int
 lxGetDisplayWidth(int disp)
 {
-  wxDisplay display(disp);
-  return display.GetClientArea().GetWidth();
+ wxDisplay display (disp);
+ return display.GetClientArea ().GetWidth ();
 }
 
-unsigned int lxGetDisplayHeight(int disp)
+unsigned int
+lxGetDisplayHeight(int disp)
 {
-  wxDisplay display(disp);
-  return display.GetClientArea().GetHeight();
+ wxDisplay display (disp);
+ return display.GetClientArea ().GetHeight ();
 }

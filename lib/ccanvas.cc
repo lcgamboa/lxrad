@@ -4,7 +4,7 @@
 
    ########################################################################
 
-   Copyright (c) : 2001  Luis Claudio Gamboa Lopes
+   Copyright (c) : 2001-2021  Luis Claudio Gamboa Lopes
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
 
 #include"../include/ccanvas.h"
 
-
+#include <wx/dcgraph.h>
 
 // CCanvas_____________________________________________________________
 
@@ -123,12 +123,14 @@ CCanvas::GetDrawable(void)
 void
 CCanvas::SetBitmap(wxBitmap * bitmap, double xs, double ys)
 {
- wxMemoryDC NDC;
+
 
  if (((BitmapBuffer != NULL) && (bitmap != NULL) && !DirectDraw) || (Bitmap != NULL))
   {
+   wxMemoryDC NDC (*bitmap);
+
    Init ();
-   NDC.SelectObject (*bitmap);
+   //NDC.SelectObject (*bitmap);
    DC->SetUserScale (xs, ys);
    DC->Blit (0, 0, bitmap->GetWidth (), bitmap->GetHeight (), &NDC, 0, 0);
    DC->SetUserScale (1, 1);
@@ -158,17 +160,19 @@ CCanvas::Init(void)
     }
 
    WDC = new wxClientDC (Drawable);
-   DC = new wxMemoryDC ();
-   ((wxMemoryDC *) DC)->SelectObject (*BitmapBuffer);
+   DC = new wxMemoryDC (*BitmapBuffer);
+   //((wxMemoryDC *) DC)->SelectObject (*BitmapBuffer);
   }
  else
   {
    if (Drawable != NULL)
-    DC = new wxClientDC (Drawable);
+    {
+     DC = new wxClientDC (Drawable);
+    }
    else if (Bitmap != NULL)
     {
-     DC = new wxMemoryDC ();
-     ((wxMemoryDC *) DC)->SelectObject (*Bitmap);
+     DC = new wxMemoryDC (*Bitmap);
+     //((wxMemoryDC *) DC)->SelectObject (*Bitmap);
     }
   }
 
@@ -190,7 +194,7 @@ CCanvas::Init(double sx, double sy, int _orientation)
 
  Scalex = sx;
  Scaley = sy;
- 
+
  if ((sx != 1.0) || (sy != 1.0))
   {
    DC->SetUserScale (sx, sy);
@@ -204,7 +208,7 @@ CCanvas::Init(double sx, double sy, int _orientation)
 void
 CCanvas::ChangeScale(double sx, double sy)
 {
- 
+
  Scalex = sx;
  Scaley = sy;
 
@@ -250,6 +254,7 @@ CCanvas::End(void)
    delete Brush;
    Brush = NULL;
   }
+
 
 }
 
@@ -394,7 +399,7 @@ CCanvas::GetLineWidth(void)
 }
 
 void
-CCanvas::Point(int x, int y)
+CCanvas::Point(float x, float y)
 {
  if (DC != NULL)
   {
@@ -411,7 +416,7 @@ CCanvas::Points(wxPoint * points, int npoints)
 }
 
 void
-CCanvas::Line(int x1_, int y1_, int x2_, int y2_)
+CCanvas::Line(float x1_, float y1_, float x2_, float y2_)
 {
  if (DC != NULL)
   {
@@ -442,7 +447,7 @@ CCanvas::Segments (GdkSegment * segs, int nsegs)
  */
 
 void
-CCanvas::Rectangle(bool filled, int x, int y, int width, int height)
+CCanvas::Rectangle(bool filled, float x, float y, float width, float height)
 {
  if (DC != NULL)
   {
@@ -451,7 +456,7 @@ CCanvas::Rectangle(bool filled, int x, int y, int width, int height)
    else
     DC->SetBrush (*wxTRANSPARENT_BRUSH);
 
-   int x2, y2;
+   float x2, y2;
    x2 = x + width;
    y2 = y + height;
    Rotate (&x, &y);
@@ -489,16 +494,40 @@ CCanvas::Polygon(bool filled, wxPoint * points, int npoints)
 }
 
 void
-CCanvas::Circle(bool filled, int x, int y, int radius)
+CCanvas::Circle(bool filled, float x, float y, float radius)
 {
  if (DC != NULL)
   {
-   if (filled)
-    DC->SetBrush (*Brush);
-   else
-    DC->SetBrush (*wxTRANSPARENT_BRUSH);
+   const wxMemoryDC *memdc = dynamic_cast<const wxMemoryDC*> (DC);
    Rotate (&x, &y);
-   DC->DrawCircle (x, y, radius);
+
+   if (memdc)
+    {
+     wxGraphicsContext *gc = wxGraphicsRenderer::GetDefaultRenderer ()->CreateContext (*memdc);
+
+     if (gc)
+      {
+       gc->SetAntialiasMode (wxANTIALIAS_DEFAULT);
+
+
+       gc->SetPen (*Pen);
+       if (filled)
+        gc->SetBrush (*Brush);
+       else
+        gc->SetBrush (*wxTRANSPARENT_BRUSH);
+
+       gc->DrawEllipse (x-radius, y-radius, radius * 2.0, radius * 2.0);
+      }
+    }
+   else
+    {
+     if (filled)
+      DC->SetBrush (*Brush);
+     else
+      DC->SetBrush (*wxTRANSPARENT_BRUSH);
+
+     DC->DrawCircle (x, y, radius);
+    }
   }
 }
 
@@ -537,7 +566,7 @@ CCanvas::SetFont(wxFont font)
 }
 
 void
-CCanvas::Text(lxString str, int x, int y)
+CCanvas::Text(lxString str, float x, float y)
 {
  if (DC != NULL)
   {
@@ -553,7 +582,7 @@ CCanvas::TextOnRect(lxString str, wxRect ret, unsigned int align)
 }
 
 void
-CCanvas::RotatedText(lxString str, int x, int y, int _angle)
+CCanvas::RotatedText(lxString str, float x, float y, float _angle)
 {
  if (DC != NULL)
   {
@@ -583,7 +612,7 @@ CCanvas::FloodFill(int x, int y, wxColor color, wxFloodFillStyle style)
 }
 
 void
-CCanvas::PutBitmap(wxBitmap * bitmap, int x, int y)
+CCanvas::PutBitmap(wxBitmap * bitmap, float x, float y)
 {
  if ((bitmap != NULL) && (DC != NULL))
   {
@@ -606,24 +635,24 @@ CCanvas::PutBitmap(wxBitmap * bitmap, int x, int y)
 }
 
 void
-CCanvas::Rotate(int *x, int *y)
+CCanvas::Rotate(float *x, float *y)
 {
- int ox = *x;
- int oy = *y;
+ float ox = *x;
+ float oy = *y;
 
  switch (orientation)
   {
   case 1:
-   *x = Width/Scalex - oy;
+   *x = Width / Scalex - oy;
    *y = ox;
    break;
   case 2:
-   *x = Width/Scalex - ox;
-   *y = Height/Scaley - oy;
+   *x = Width / Scalex - ox;
+   *y = Height / Scaley - oy;
    break;
   case 3:
    *x = oy;
-   *y = Height/Scaley - ox;
+   *y = Height / Scaley - ox;
    break;
   default:
    break;
