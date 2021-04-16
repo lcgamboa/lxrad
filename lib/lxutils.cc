@@ -35,7 +35,9 @@
 #include <memory>
 #include <dirent.h>
 
-#include"../../lunasvg/include/svgdocument.h"
+#include <iostream>
+#include <cstring>
+#include"../../lunasvg/include/document.h"
 
 using namespace lunasvg;
 
@@ -291,20 +293,21 @@ xImage::LoadFile(const lxString fname, int orientation, double  scalex, double  
    int width;
    int height;
 
-   SVGDocument document;
-   if (document.loadFromFile ((const char *) fname.c_str ()))
+   auto document = Document::loadFromFile (std::string (fname.c_str()));
+
+   if (document)
     {
-     width = document.documentWidth (96.0) * scalex;
-     height = document.documentHeight (96.0) * scaley;
+     width = document->width () * scalex;
+     height = document->height () * scaley;
 
 
      if (ret_sx)
-      *ret_sx = ((double) width) / document.documentWidth (96.0);
+      *ret_sx = ((double) width) / document->width ();
 
      if (ret_sy)
-      *ret_sy = ((double) height) / document.documentHeight (96.0);
+      *ret_sy = ((double) height) / document->height ();
 
-     Bitmap bitmap = document.renderToBitmap (width, height, 96.0, 0);
+     auto bitmap = document->renderToBitmap (width, height, 0);
 
      const unsigned char * bmp = bitmap.data ();
      int size = bitmap.width () * bitmap.height ();
