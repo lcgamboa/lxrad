@@ -8,11 +8,13 @@ all:$(SUBDIRS)
 
 static:$(SUBDIRS) 
 
-install:$(SUBDIRS) layout
+install:$(SUBDIRS)
 	
 clean:$(SUBDIRS) layout
 
 uninstall:$(SUBDIRS) layout
+
+layout: layout
 	
 $(SUBDIRS) layout:
 	$(MAKE) -C $@ $(MAKECMDGOALS)
