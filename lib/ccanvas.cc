@@ -403,8 +403,24 @@ CCanvas::Point(float x, float y)
 {
  if (DC != NULL)
   {
+   const wxMemoryDC *memdc = dynamic_cast<const wxMemoryDC*> (DC);
    Rotate (&x, &y);
-   DC->DrawPoint (x, y);
+
+   if (memdc)
+    {
+     wxGraphicsContext *gc = wxGraphicsRenderer::GetDefaultRenderer ()->CreateContext (*memdc);
+
+     if (gc)
+      {
+       gc->SetPen (*Pen);
+       gc->SetAntialiasMode (wxANTIALIAS_DEFAULT);
+       gc->DrawRectangle (x,y,1,1);
+      }
+    }
+   else
+    {
+     DC->DrawPoint (x, y);
+    }
   }
 }
 
@@ -516,7 +532,7 @@ CCanvas::Circle(bool filled, float x, float y, float radius)
        else
         gc->SetBrush (*wxTRANSPARENT_BRUSH);
 
-       gc->DrawEllipse (x-radius, y-radius, radius * 2.0, radius * 2.0);
+       gc->DrawEllipse (x - radius, y - radius, radius * 2.0, radius * 2.0);
       }
     }
    else
