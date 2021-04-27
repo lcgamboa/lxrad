@@ -412,7 +412,8 @@ CCanvas::Point(float x, float y)
 
      if (gc)
       {
-       gc->SetPen (*Pen);
+       gc->SetPen (*wxTRANSPARENT_PEN);
+       gc->SetBrush (*Brush);
        gc->SetAntialiasMode (wxANTIALIAS_DEFAULT);
        gc->DrawRectangle (x, y, 1, 1);
       }
@@ -483,12 +484,17 @@ CCanvas::Rectangle(bool filled, float x, float y, float width, float height)
        gc->SetAntialiasMode (wxANTIALIAS_DEFAULT);
 
 
-       gc->SetPen (*Pen);
-       if (filled)
-        gc->SetBrush (*Brush);
-       else
-        gc->SetBrush (*wxTRANSPARENT_BRUSH);
 
+       if (filled)
+        {
+         gc->SetPen (*wxTRANSPARENT_PEN);
+         gc->SetBrush (*Brush);
+        }
+       else
+        {
+         gc->SetPen (*Pen);
+         gc->SetBrush (*wxTRANSPARENT_BRUSH);
+        }
        gc->DrawRectangle (x, y, x2 - x, y2 - y);
       }
     }
