@@ -414,7 +414,7 @@ CCanvas::Point(float x, float y)
       {
        gc->SetPen (*Pen);
        gc->SetAntialiasMode (wxANTIALIAS_DEFAULT);
-       gc->DrawRectangle (x,y,1,1);
+       gc->DrawRectangle (x, y, 1, 1);
       }
     }
    else
@@ -467,18 +467,39 @@ CCanvas::Rectangle(bool filled, float x, float y, float width, float height)
 {
  if (DC != NULL)
   {
-   if (filled)
-    DC->SetBrush (*Brush);
-   else
-    DC->SetBrush (*wxTRANSPARENT_BRUSH);
-
    float x2, y2;
    x2 = x + width;
    y2 = y + height;
    Rotate (&x, &y);
    Rotate (&x2, &y2);
+   const wxMemoryDC *memdc = dynamic_cast<const wxMemoryDC*> (DC);
 
-   DC-> DrawRectangle (x, y, x2 - x, y2 - y);
+   if (memdc)
+    {
+     wxGraphicsContext *gc = wxGraphicsRenderer::GetDefaultRenderer ()->CreateContext (*memdc);
+
+     if (gc)
+      {
+       gc->SetAntialiasMode (wxANTIALIAS_DEFAULT);
+
+
+       gc->SetPen (*Pen);
+       if (filled)
+        gc->SetBrush (*Brush);
+       else
+        gc->SetBrush (*wxTRANSPARENT_BRUSH);
+
+       gc->DrawRectangle (x, y, x2 - x, y2 - y);
+      }
+    }
+   else
+    {
+     if (filled)
+      DC->SetBrush (*Brush);
+     else
+      DC->SetBrush (*wxTRANSPARENT_BRUSH);
+     DC-> DrawRectangle (x, y, x2 - x, y2 - y);
+    }
   }
 }
 
