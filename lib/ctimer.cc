@@ -46,11 +46,11 @@ CTimer::CTimer (void)
   Run = false;
   SetVisible (false);
   EvOnTime = NULL;
-};
+}
 
 CTimer::~CTimer (void)
 {
-};
+}
 
 int
 CTimer::Create (CControl * control)
@@ -67,14 +67,14 @@ CTimer::Create (CControl * control)
   {
      SetRunState (false);
      SetRunState (true);
-  };
+  }
 
   CanExecuteEvent=false;
   CControl::Create (control);
   CanExecuteEvent=true;
 
   return 0;
-};
+}
 
 void
 CTimer::Destroy (void)
@@ -89,7 +89,7 @@ CTimer::Destroy (void)
 #endif	  
 #endif  
   CControl::Destroy ();
-};
+}
 
 int CTimer::CEvent (int event)
 {
@@ -107,7 +107,7 @@ CTimer::Event (wxTimerEvent & te)
      { 
      (FOwner->*EvOnTime) (this);
      }
-};
+}
 
 
 lxStringList
@@ -119,7 +119,7 @@ CTimer::GetContext (void)
   Context.AddLine (xml_out (wxT("RunState"), wxT("int"), itoa (GetRunState ())));
   Context.AddLine (xml_out (wxT("EvOnTime"), wxT("Event"), btoa (GetEv (true))));
   return Context;
-};
+}
 
 void
 CTimer::SetContext (lxStringList context)
@@ -138,21 +138,29 @@ CTimer::SetContext (lxStringList context)
 	SetRunState (atoi (value));
       if (name.compare (wxT("EvOnTime")) == 0)
 	SetEv (atob (value),true);
-    };
-};
+    }
+}
 
 //propiedades
 
 void
 CTimer::SetTime (uint time)
 {
-  Time = time; 
-};
+  if(Time != time)
+  {
+     Time = time;
+     if(Run)
+     {
+       SetRunState(0);
+       SetRunState(1);
+     }
+  }
+}
 
 uint CTimer::GetTime (void)
 {
   return Time;
-};
+}
 
 void
 CTimer::SetRunState (bool run)
@@ -170,20 +178,20 @@ CTimer::SetRunState (bool run)
 	      Run = false;
    	     ((wxTimer*)Widget)->Stop();
 	     while(((wxTimer*)Widget)->IsRunning() == true);
-	    };
-	};
+	    }
+	}
       Run = run;
-    };
-};
+    }
+}
 
 bool CTimer::GetRunState (void)
 {
   return Run;
-};
+}
 
 void
 CTimer::SetName (const lxString name)
 {
   Name = name;
-};
+}
 
