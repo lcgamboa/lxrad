@@ -484,15 +484,17 @@ CCanvas::Rectangle(bool filled, float x, float y, float width, float height)
        gc->SetAntialiasMode (wxANTIALIAS_DEFAULT);
 
 
-
+       gc->SetPen (*Pen);
        if (filled)
         {
-         gc->SetPen (*wxTRANSPARENT_PEN);
+         if (width + height < 5)
+          {
+           gc->SetPen (*wxTRANSPARENT_PEN);
+          }
          gc->SetBrush (*Brush);
         }
        else
         {
-         gc->SetPen (*Pen);
          gc->SetBrush (*wxTRANSPARENT_BRUSH);
         }
        gc->DrawRectangle (x, y, x2 - x, y2 - y);
