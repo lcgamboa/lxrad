@@ -151,8 +151,7 @@ CTimer::SetTime (uint time)
      Time = time;
      if(Run)
      {
-       SetRunState(0);
-       SetRunState(1);
+        ((wxTimer*)Widget)->Start(Time,false);
      }
   }
 }

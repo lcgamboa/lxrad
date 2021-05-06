@@ -416,6 +416,7 @@ CCanvas::Point(float x, float y)
        gc->SetBrush (*Brush);
        gc->SetAntialiasMode (wxANTIALIAS_DEFAULT);
        gc->DrawRectangle (x, y, 1, 1);
+       delete gc;
       }
     }
    else
@@ -498,6 +499,7 @@ CCanvas::Rectangle(bool filled, float x, float y, float width, float height)
          gc->SetBrush (*wxTRANSPARENT_BRUSH);
         }
        gc->DrawRectangle (x, y, x2 - x, y2 - y);
+       delete gc;
       }
     }
    else
@@ -562,6 +564,7 @@ CCanvas::Circle(bool filled, float x, float y, float radius)
         gc->SetBrush (*wxTRANSPARENT_BRUSH);
 
        gc->DrawEllipse (x - radius, y - radius, radius * 2.0, radius * 2.0);
+       delete gc;
       }
     }
    else
