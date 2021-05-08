@@ -2,7 +2,7 @@
 AC_INIT(lxrad, 0.5, lcgamboa@yahoo.com)
 AC_PREREQ([2.50])
 AC_CONFIG_SRCDIR([lib/capplication.cc])
-AC_CONFIG_HEADER([config.h])
+AC_CONFIG_HEADERS([config.h])
 
 
 EXTERNAL_CFLAGS="$CFLAGS"
