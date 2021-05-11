@@ -35,6 +35,7 @@ CCanvas::CCanvas(void)
  SetClass (wxT ("CCanvas"));
  DC = NULL;
  WDC = NULL;
+ GC = NULL;
  Pen = NULL;
  Brush = NULL;
  BitmapBuffer = NULL;
@@ -161,18 +162,19 @@ CCanvas::Init(void)
 
    WDC = new wxClientDC (Drawable);
    DC = new wxMemoryDC (*BitmapBuffer);
-   //((wxMemoryDC *) DC)->SelectObject (*BitmapBuffer);
+   GC = wxGraphicsRenderer::GetDefaultRenderer ()->CreateContext (*((wxMemoryDC *) DC));
   }
  else
   {
    if (Drawable != NULL)
     {
      DC = new wxClientDC (Drawable);
+     GC = NULL;
     }
    else if (Bitmap != NULL)
     {
      DC = new wxMemoryDC (*Bitmap);
-     //((wxMemoryDC *) DC)->SelectObject (*Bitmap);
+     GC = wxGraphicsRenderer::GetDefaultRenderer ()->CreateContext (*((wxMemoryDC *) DC));
     }
   }
 
@@ -198,6 +200,10 @@ CCanvas::Init(double sx, double sy, int _orientation)
  if ((sx != 1.0) || (sy != 1.0))
   {
    DC->SetUserScale (sx, sy);
+#ifdef __WXMSW__   
+   if(GC)
+     GC->Scale(sx, sy);	 
+#endif
   }
 
 
@@ -213,7 +219,10 @@ CCanvas::ChangeScale(double sx, double sy)
  Scaley = sy;
 
  DC->SetUserScale (sx, sy);
-
+#ifdef __WXMSW__   
+ if(GC)
+   GC->Scale(sx, sy);	   
+#endif
 }
 
 void
@@ -241,6 +250,12 @@ CCanvas::End(void)
   {
    delete DC;
    DC = NULL;
+  }
+
+ if (GC != NULL)
+  {
+   delete GC;
+   GC = NULL;
   }
 
  if (Pen != NULL)
@@ -403,23 +418,17 @@ CCanvas::Point(float x, float y)
 {
  if (DC != NULL)
   {
-   const wxMemoryDC *memdc = dynamic_cast<const wxMemoryDC*> (DC);
    Rotate (&x, &y);
-
-   if (memdc)
-    {
-     wxGraphicsContext *gc = wxGraphicsRenderer::GetDefaultRenderer ()->CreateContext (*memdc);
-
-     if (gc)
+#ifndef __WXMSW__
+     if (GC)
       {
-       gc->SetPen (*wxTRANSPARENT_PEN);
-       gc->SetBrush (*Brush);
-       gc->SetAntialiasMode (wxANTIALIAS_DEFAULT);
-       gc->DrawRectangle (x, y, 1, 1);
-       delete gc;
+       GC->SetPen (*wxTRANSPARENT_PEN);
+       GC->SetBrush (*Brush);
+       GC->SetAntialiasMode (wxANTIALIAS_DEFAULT);
+       GC->DrawRectangle (x, y, 1, 1);
       }
-    }
    else
+#endif	   
     {
      DC->DrawPoint (x, y);
     }
@@ -474,35 +483,30 @@ CCanvas::Rectangle(bool filled, float x, float y, float width, float height)
    y2 = y + height;
    Rotate (&x, &y);
    Rotate (&x2, &y2);
-   const wxMemoryDC *memdc = dynamic_cast<const wxMemoryDC*> (DC);
 
-   if (memdc)
-    {
-     wxGraphicsContext *gc = wxGraphicsRenderer::GetDefaultRenderer ()->CreateContext (*memdc);
-
-     if (gc)
+#ifndef __WXMSW__
+     if (GC)
       {
-       gc->SetAntialiasMode (wxANTIALIAS_DEFAULT);
+       GC->SetAntialiasMode (wxANTIALIAS_DEFAULT);
 
 
-       gc->SetPen (*Pen);
+       GC->SetPen (*Pen);
        if (filled)
         {
          if (width + height < 5)
           {
-           gc->SetPen (*wxTRANSPARENT_PEN);
+           GC->SetPen (*wxTRANSPARENT_PEN);
           }
-         gc->SetBrush (*Brush);
+         GC->SetBrush (*Brush);
         }
        else
         {
-         gc->SetBrush (*wxTRANSPARENT_BRUSH);
+         GC->SetBrush (*wxTRANSPARENT_BRUSH);
         }
-       gc->DrawRectangle (x, y, x2 - x, y2 - y);
-       delete gc;
+       GC->DrawRectangle (x, y, x2 - x, y2 - y);
       }
-    }
    else
+#endif	   
     {
      if (filled)
       DC->SetBrush (*Brush);
@@ -545,28 +549,21 @@ CCanvas::Circle(bool filled, float x, float y, float radius)
 {
  if (DC != NULL)
   {
-   const wxMemoryDC *memdc = dynamic_cast<const wxMemoryDC*> (DC);
    Rotate (&x, &y);
 
-   if (memdc)
-    {
-     wxGraphicsContext *gc = wxGraphicsRenderer::GetDefaultRenderer ()->CreateContext (*memdc);
-
-     if (gc)
+     if (GC)
       {
-       gc->SetAntialiasMode (wxANTIALIAS_DEFAULT);
+       GC->SetAntialiasMode (wxANTIALIAS_DEFAULT);
 
 
-       gc->SetPen (*Pen);
+       GC->SetPen (*Pen);
        if (filled)
-        gc->SetBrush (*Brush);
+        GC->SetBrush (*Brush);
        else
-        gc->SetBrush (*wxTRANSPARENT_BRUSH);
+        GC->SetBrush (*wxTRANSPARENT_BRUSH);
 
-       gc->DrawEllipse (x - radius, y - radius, radius * 2.0, radius * 2.0);
-       delete gc;
+       GC->DrawEllipse (x - radius, y - radius, radius * 2.0, radius * 2.0);
       }
-    }
    else
     {
      if (filled)

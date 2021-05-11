@@ -49,6 +49,7 @@ private:
   wxColor FgColor, BgColor;
   wxClientDC* WDC;	 ///<Window Draw Context
   wxDC* DC;	         ///<Memory Draw Context
+  wxGraphicsContext * GC;
   wxBitmap * BitmapBuffer;
   wxPen  *Pen;		 ///<Pen
   wxBrush *Brush;	 ///<Brush

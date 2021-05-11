@@ -58,6 +58,8 @@ class xImage:public wxImage
 #define lxCursor wxCursor 
 #define lxFileName wxFileName
 #define lxTextFile wxTextFile
+#define lxMutex wxMutex
+#define lxCondition wxCondition
 
 #define lxSetCursor wxSetCursor 
 #define lxMilliSleep wxMilliSleep
