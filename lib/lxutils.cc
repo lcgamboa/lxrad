@@ -4,7 +4,7 @@
 
    ########################################################################
 
-   Copyright (c) : 2001-2018  Luis Claudio Gamboa Lopes
+   Copyright (c) : 2001-2021  Luis Claudio Gamboa Lopes
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -25,6 +25,7 @@
 
 
 #include"../include/lxutils.h"
+#include"../include/capplication.h"
 #include "wx/stdpaths.h"
 #include "wx/filesys.h"
 #include "wx/zipstrm.h"
@@ -407,3 +408,41 @@ lxGetDisplayHeight(int disp)
  wxDisplay display (disp);
  return display.GetClientArea ().GetHeight ();
 }
+
+
+lxString
+lxGetLocalFile(lxString file)
+{
+
+#ifndef __WXMSW__
+ if (file.Contains ("http"))
+  {
+   lxString appname = lowercase (basename(Application->Aargv[0]));
+
+   lxString name = file.substr (file.find (".com/") + 4, file.length ());
+
+   lxString local;
+
+   local.Printf ("%s/%s_local/%s", (const char *) lxGetTempDir(appname).c_str (),
+                 (const char *) appname.c_str (),
+                 (const char *) name.c_str ());
+
+   if (lxFileExists (local))
+    {
+     return local;
+    }
+
+   lxCreateDir (dirname (local));
+
+   lxString cmd = "cd \"" + dirname (local) + "\"; wget --inet4-only \"" + file + "\"";
+
+   system ((const char *) cmd.c_str ());
+
+   return local;
+  }
+#endif
+
+ //local file
+ return file;
+}
+
