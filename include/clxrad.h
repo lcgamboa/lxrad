@@ -126,7 +126,8 @@ lxEVT_SPINCTRL,
 lxEVT_SPINCTRLDOUBLE,
 lxEVT_TOGGLEBUTTON,
 lxEVT_SCROLL_THUMBTRACK,
-lxEVT_MOUSEWHEEL
+lxEVT_MOUSEWHEEL,
+lxEVT_DROP_FILES
 };
 
 #define EVMAX 50
@@ -168,6 +169,8 @@ lxEVT_MOUSEWHEEL
 #define EVONTOGGLEBUTTON	   (void(CControl::*)(CControl*))
 
 #define EVONCLOSE        (void(CControl::*)(const int))
+#define EVONDROPFILE     (void(CControl::*)(CControl*,const lxString fname))
+
 
 #define CA_LEFT   1
 #define CA_RIGHT  2

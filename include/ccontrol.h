@@ -54,6 +54,7 @@ protected:
   bool CanFocus;		///<CanFocus ?
   bool CanExecuteEvent;		///<Can Execute Event ?
   bool CanVisible;		///<Can be Visible ?
+  bool DragAcceptFiles;
   bool Enable;
   int X, Y;
   uint Width, Height;
@@ -89,6 +90,7 @@ public:
   virtual void Update (void);
   lxStringList GetContext (void);
   void SetContext (lxStringList context);
+  void SetDragAcceptFiles(bool accept);
 //propiedades
   void SetFont (const lxString font);
   lxString GetFontName (void);
@@ -154,6 +156,7 @@ public:
   virtual void focus_out (wxMouseEvent* event);
   virtual void on_draw (wxPaintEvent* event);
   virtual void mouse_wheel (wxMouseEvent* event);
+  virtual void on_drop_files(wxDropFilesEvent* event);
 
   void (CControl::*EvMouseMove) (CControl * control,const uint button,const uint x,const uint y,const uint mask);
   void (CControl::*EvMouseButtonPress) (CControl * control,const uint button,const uint x,const uint y,const uint mask);
@@ -166,5 +169,7 @@ public:
   void (CControl::*EvOnFocusIn) (CControl * control);
   void (CControl::*EvOnFocusOut) (CControl * control);
   void (CControl::*EvMouseWheel) (CControl * control, const int rotation);
+  void (CControl::*EvOnDropFile) (CControl * control, const lxString fname);
+
 };
 #endif

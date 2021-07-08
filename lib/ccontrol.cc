@@ -28,7 +28,7 @@
 #include"../include/cpmenu.h"
 #include"../include/capplication.h"
 
-
+#include <wx/dir.h>
 
 extern CApplication *Application;
 
@@ -57,6 +57,7 @@ CControl::CControl (void)
   CanExecuteEvent = true;
   CanFocus = true;
   CanVisible = true;
+  DragAcceptFiles = false;
   Enable = true;
   FOwner = NULL;
   FontName = wxT("-misc-fixed-medium-r-normal--10-100-75-75-c-60-iso8859-1");
@@ -75,6 +76,7 @@ CControl::CControl (void)
   EvOnFocusIn = NULL;
   EvOnFocusOut = NULL;
   EvMouseWheel = NULL;
+  EvOnDropFile = NULL;
 
   //CFont = NULL;
   ColorName = wxT("");
@@ -126,7 +128,10 @@ CControl::Create (CControl * control)
     widget=Widget;
 */
 
-
+  if(CanExecuteEvent && DragAcceptFiles)
+  {
+    SetDragAcceptFiles(DragAcceptFiles);
+  }
 
   if ((CanExecuteEvent) && (Widget != NULL))
     {
@@ -147,6 +152,7 @@ CControl::Create (CControl * control)
     Widget->Bind(wxEVT_SET_FOCUS,&CControl::Event,this,GetWid()); 
     Widget->Bind(wxEVT_KILL_FOCUS,&CControl::Event,this,GetWid()); 
     Widget->Bind(wxEVT_MOUSEWHEEL,&CControl::Event,this,GetWid()); 
+    Widget->Bind (wxEVT_DROP_FILES, &CControl::Event, this);
     }  
 
 
@@ -294,6 +300,7 @@ if(event == wxEVT_PAINT)return lxEVT_PAINT;
 if(event == wxEVT_SET_FOCUS)return lxEVT_SET_FOCUS;
 if(event == wxEVT_KILL_FOCUS)return lxEVT_KILL_FOCUS;
 if(event == wxEVT_MOUSEWHEEL) return lxEVT_MOUSEWHEEL;
+if (event == wxEVT_DROP_FILES) return lxEVT_DROP_FILES;
 
 return -1;
 }
@@ -344,6 +351,10 @@ CControl::Event ( wxEvent & event)
 	case lxEVT_MOUSEWHEEL:
 	  mouse_wheel ((wxMouseEvent* ) &event);
 	  break;
+
+        case lxEVT_DROP_FILES:
+          on_drop_files ((wxDropFilesEvent*) & event);
+          break;
 
 	default:
 	  //printf("default !!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
@@ -450,6 +461,7 @@ CControl::GetContext (void)
   Context.AddLine (xml_out (wxT("EvOnFocusIn"), wxT("Event"), btoa (GetEv ())));
   Context.AddLine (xml_out (wxT("EvOnFocusOut"), wxT("Event"), btoa (GetEv ())));
   Context.AddLine (xml_out (wxT("EvMouseWheel"), wxT("Event"), btoa (GetEv ())));
+  Context.AddLine (xml_out (wxT ("EvOnDropFile"), wxT ("Event"), btoa (GetEv ())));
 
   return Context;
 }
@@ -518,6 +530,8 @@ CControl::SetContext (lxStringList context)
 	SetEv (atob (value));
       if (name.compare (wxT("EvMouseWheel")) == 0)
 	SetEv (atob (value));
+      if (name.compare (wxT ("EvOnDropFile")) == 0)
+        SetEv (atob (value));
     }
 }
 
@@ -982,6 +996,16 @@ CControl::GetCanExecuteEvent (void)
   return CanExecuteEvent;
 }
 
+void
+CControl::SetDragAcceptFiles(bool accept)
+{
+ DragAcceptFiles = accept;
+ if (Widget != NULL)
+  {
+    Widget->DragAcceptFiles (accept);
+  }
+}
+
 //operators
 
 void *
@@ -1113,4 +1137,28 @@ CControl::mouse_wheel (wxMouseEvent * event)
     (FOwner->*EvMouseWheel) (this,event->GetWheelRotation ());
 }
 
+void
+CControl::on_drop_files(wxDropFilesEvent* event)
+{
+ if ((FOwner) && (EvOnDropFile))
+  {
+   wxString name;
+   wxString* dropped = event->GetFiles ();
+   wxArrayString files;
+
+   for (int i = 0; i < event->GetNumberOfFiles (); i++)
+    {
+     name = dropped[i];
+     if (wxFileExists (name))
+      files.push_back (name);
+     else if (wxDirExists (name))
+      wxDir::GetAllFiles (name, &files);
+    }
+ 
+   for (size_t i = 0; i < files.size (); i++)
+    {
+     (FOwner->*EvOnDropFile) (this, (const char *) files[i].c_str ());
+    }
+  }
+}
 
