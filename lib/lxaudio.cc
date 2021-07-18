@@ -126,13 +126,13 @@ lxaudio::BeepStart(float freq, float volume)
    for (unsigned i = 0; i < buf_size; i++)
     samples[i] = volume * 32760 * sin (2 * M_PI * i * freq / SAMPLE_RATE);
 
-   alBufferData (buf[0], AL_FORMAT_MONO16, samples, buf_size, SAMPLE_RATE);
+   alBufferData (buf[0], AL_FORMAT_MONO16, samples, buf_size * 2, SAMPLE_RATE);
    delete[] samples;
 
    alSourceQueueBuffers (src, 1, buf);
 
    alSourcei (src, AL_LOOPING, AL_TRUE);
-
+   alSourcei (src, AL_GAIN, 1);
    alSourcePlay (src);
   }
 }
@@ -147,6 +147,7 @@ lxaudio::BeepStop(void)
  alGetSourcei (src, AL_BUFFERS_QUEUED, &queue);
  if (queue)
   {
+   alSourcei (src, AL_GAIN, 0);
    alSourcei (src, AL_LOOPING, AL_FALSE);
 
    alSourceStop (src);
@@ -180,11 +181,12 @@ lxaudio::SoundPlay(short * samples, size_t buf_size)
  int BID =GetFreeBuffer();
  if (BID >= 0)
   {
-   alBufferData (buf[BID], AL_FORMAT_MONO16, samples, buf_size, SAMPLE_RATE);
+   alBufferData (buf[BID], AL_FORMAT_MONO16, samples, buf_size * 2, SAMPLE_RATE);
    alSourceQueueBuffers (src, 1, &buf[BID]);
    alGetSourcei (src, AL_SOURCE_STATE, &status);
    if (status != AL_PLAYING)
    {
+     alSourcei (src, AL_GAIN, 1);
      alSourcePlay (src);
    }
    return 1;
