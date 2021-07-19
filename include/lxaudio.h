@@ -22,7 +22,7 @@ public:
     unsigned int GetSampleRate(void);
     unsigned int GetMax(void);
 
-    void BeepStart(float freq = 440, float volume = 1.0);
+    void BeepStart(float freq = 440, float volume = 1.0, int type = 0);
     void BeepStop(void);
   
     int IsPlaying(void);

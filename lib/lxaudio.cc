@@ -106,7 +106,7 @@ lxaudio::GetMax(void)
 }
 
 void
-lxaudio::BeepStart(float freq, float volume)
+lxaudio::BeepStart(float freq, float volume, int type)
 {
  ALint queue;
  alGetSourcei (src, AL_BUFFERS_QUEUED, &queue);
@@ -115,7 +115,15 @@ lxaudio::BeepStart(float freq, float volume)
   {
    short* samples;
 
+   int ifreq = SAMPLE_RATE/freq; 
+
    size_t buf_size = SAMPLE_RATE;
+
+   int ffreq = SAMPLE_RATE/ifreq;
+
+   float in[3]={0,0,0};
+   float out[3]={0,0,0};
+
 
    samples = new short[buf_size];
 
@@ -124,8 +132,28 @@ lxaudio::BeepStart(float freq, float volume)
      printf ("It seems there is no more heap memory. Sorry we cannot make a beep!");
     }
    for (unsigned i = 0; i < buf_size; i++)
-    samples[i] = volume * 32760 * sin (2 * M_PI * i * freq / SAMPLE_RATE);
+   {
+    if(type == 0)
+    {
+      samples[i] = volume * 32760 * sin (2 * M_PI * i * ffreq / SAMPLE_RATE);
+    }
+    else
+    {
+       /*       
+          0.7837 z-1 - 0.7837 z-2
+    y1:  ----------------------
+         1 - 1.196 z-1 + 0.2068 z-2
+        */
+       in[2] = in[1];
+       in[1] = in[0];
+       in[0] = volume * 32760 * ((((sin (2 * M_PI * i * ffreq / SAMPLE_RATE))>0)-0.5)*2);
+       out[2] = out[1];
+       out[1] = out[0];
+       out[0] = 0.7837 * in[1] - 0.7837 * in[2] + 1.196 * out[1] - 0.2068 * out[2];
 
+       samples[i] = out[0];
+    }
+   }
    alBufferData (buf[0], AL_FORMAT_MONO16, samples, buf_size * 2, SAMPLE_RATE);
    delete[] samples;
 
