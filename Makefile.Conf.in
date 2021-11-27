@@ -15,8 +15,8 @@ CP = cp
 
 CFLAGS = -Wall -O2 -flto @CFLAGS@ @LDFLAGS@
 
-datarootdir = @datarootdir@
 prefix = @prefix@
+datarootdir = @datarootdir@
 exec_prefix = @exec_prefix@
 datadir = @datadir@
 includedir = @includedir@
