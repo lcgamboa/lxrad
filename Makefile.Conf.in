@@ -9,7 +9,7 @@ MKDIR = mkdir -p
 RM = rm -f
 CC = @CXX@
 CXX = @CXX@
-AR = ar
+AR = gcc-ar
 LN = ln -sfn
 CP = cp
 
