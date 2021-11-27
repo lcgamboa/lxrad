@@ -3,17 +3,12 @@ include ../Makefile.Conf
 all:
 static:
 install:
-	mkdir -p ${datadir}/lxrad/docs
-	mkdir -p ${datadir}/lxrad/docs/doxygen
-	mkdir -p ${datadir}/lxrad/docs/doxygen/html
+	install -d ${datadir}/lxrad/docs
+	install -d ${datadir}/lxrad/docs/doxygen
+	install -d ${datadir}/lxrad/docs/doxygen/html
 	cp -v *.* ${datadir}/lxrad/docs
 	cp -v README ${datadir}/lxrad/docs
 	cp -v doxygen/html/* ${datadir}/lxrad/docs/doxygen/html/
-	chmod 644 -R ${datadir}/lxrad/docs/*
-	chmod 644 -R ${datadir}/lxrad/docs/doxygen/html/*
-	chmod 755 ${datadir}/lxrad/docs
-	chmod 755 ${datadir}/lxrad/docs/doxygen
-	chmod 755 ${datadir}/lxrad/docs/doxygen/html
 
 clean:
 uninstall:
