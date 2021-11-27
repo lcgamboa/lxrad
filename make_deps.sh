@@ -10,3 +10,7 @@ mkdir build
 cd build
 cmake ..
 make -j4
+cd ..
+cd ..
+cd lxrad
+ln -s ../lunasvg/ lunasvg

@@ -38,7 +38,7 @@
 
 #include <iostream>
 #include <cstring>
-#include"../../lunasvg/include/lunasvg.h"
+#include"../lunasvg/include/lunasvg.h"
 
 using namespace lunasvg;
 

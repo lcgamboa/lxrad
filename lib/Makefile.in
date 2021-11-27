@@ -5,7 +5,7 @@ all::
 LIBCFLAGS := $(CFLAGS) -fpic
 ARCFLAGS := $(CFLAGS) -static
 
-SVGLIB := -Wl,--whole-archive ../../lunasvg/build/liblunasvg.a -Wl,--no-whole-archive 
+SVGLIB := -Wl,--whole-archive ../lunasvg/build/liblunasvg.a -Wl,--no-whole-archive 
 
 # .ao files are used for static archives
 %.ao: %.cc
