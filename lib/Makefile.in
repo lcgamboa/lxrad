@@ -45,16 +45,19 @@ LIBSTOBJECTS := capplication.ao cbutton.ao cedit.ao cdraw.ao cimage.ao cdialog.a
 		lxaudio.ao
 ifdef noadv
 LIBCFLAGS += -D_NO_ADVANCED
+SHLIBS= @LIBS@
 else
+SHLIBS= @LIBS@ @LIBSADV@"
 LIBSHOBJECTS += cstyledtext.lo cgrid.lo chtml.lo
 LIBSTOBJECTS += cstyledtext.ao cgrid.ao chtml.ao
 endif
 
 #LIBHEADERFILES := ../include/class.h ../include/controls.h 
 
+
 # How to create the shared library
 $(LIBSHLIBNAME): $(LIBSHOBJECTS)
-	$(CXX) $(SVGLIB) -shared -Wl,-soname,$(LIBSHSONAME) -o $@  $^  @LIBS@
+	$(CXX) $(SVGLIB) -shared -Wl,-soname,$(LIBSHSONAME) -o $@  $^  $(SHLIBS)
 	$(RM) $(LIBSTLIBNAME)
 	$(AR) rcvs $(LIBSTLIBNAME) $^
 

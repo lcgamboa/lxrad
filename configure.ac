@@ -1,6 +1,6 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(lxrad, 0.5, lcgamboa@yahoo.com)
-AC_PREREQ([2.50])
+AC_INIT([lxrad],[0.5],[lcgamboa@yahoo.com])
+AC_PREREQ([2.71])
 AC_CONFIG_SRCDIR([lib/capplication.cc])
 AC_CONFIG_HEADERS([config.h])
 
@@ -40,18 +40,21 @@ else
 fi
 
 WX_CXXFLAGS="`$WXCONFIG --cxxflags`"
-WX_LIBS="`$WXCONFIG --libs std stc`"
+WX_LIBS="`$WXCONFIG --libs std`"
+WX_LIBS_ADV="`$WXCONFIG --libs stc`"
 
 
 AC_SUBST(WX_LIBS)
+AC_SUBST(WX_LIBS_ADV)
  
 
 CFLAGS="$WX_CXXFLAGS $EXTERNAL_CFLAGS -D_LX_WX"
 LIBS="$LIBS $WX_LIBS"
+LIBSADV="$WX_LIBS_ADV"
 
 
 # Checks for header files.
-AC_HEADER_STDC
+
 AC_CHECK_HEADERS([stdlib.h string.h unistd.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
@@ -72,13 +75,14 @@ AC_SUBST(HOSTOS,`uname -sr || echo unknown`)
 AC_SUBST(HOSTCPU,`uname -m || echo unknown`)
 
 AC_SUBST(LIBS)
+AC_SUBST(LIBSADV)
 
 AC_SUBST(PREFIX)
 AC_SUBST(BINDIR)
 AC_SUBST(LIBDIR)
 
 
-AC_OUTPUT([Makefile
+AC_CONFIG_FILES([Makefile
            Makefile.Conf
 	   docs/Makefile
            include/Makefile
@@ -87,4 +91,5 @@ AC_OUTPUT([Makefile
            share/Makefile
            utils/Makefile
 	   utils/lxrad-config])
+AC_OUTPUT
 
