@@ -47,7 +47,7 @@ ifdef noadv
 LIBCFLAGS += -D_NO_ADVANCED
 SHLIBS= @LIBS@
 else
-SHLIBS= @LIBS@ @LIBSADV@"
+SHLIBS= @LIBS@ @LIBSADV@
 LIBSHOBJECTS += cstyledtext.lo cgrid.lo chtml.lo
 LIBSTOBJECTS += cstyledtext.ao cgrid.ao chtml.ao
 endif
