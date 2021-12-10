@@ -88,7 +88,7 @@ clean-lib:
 clean :: clean-lib
 
 install: all
-	strip -s $(LIBNAME).so
+	#strip -s $(LIBNAME).so
 	$(CP) -dvf $(LIBNAME)* ${libdir}
 
 uninstall:
