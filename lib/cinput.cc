@@ -100,4 +100,48 @@ Input (lxString label, lxString & str)
     str = winput->edit1.GetText ();
   winput->WDestroy ();
   return ret;
-};
+}
+
+
+bool
+Input_sz (lxString label, lxString & str, int Width, int Height)
+{
+  bool ret;
+  CInput *winput;
+  winput = new CInput;
+
+  int width, height;  
+	  
+  winput->SetWidth (Width);
+  winput->SetHeight (Height);
+  winput->button1.SetX ((Width- 3*winput->button1.GetWidth())/2);
+  winput->button1.SetY (Height-65);
+  winput->button2.SetX (((Width- 3*winput->button1.GetWidth())/2)+(2*winput->button1.GetWidth()));
+  winput->button2.SetY (Height-65);
+  winput->label1.SetWidth (Width-5);
+  winput->label1.SetHeight (Height-90);
+
+  wxDisplaySize (&width,&height);  
+  
+  winput->SetX ((width  - winput->GetWidth  ())/2);
+  winput->SetY ((height - winput->GetHeight ())/2);
+
+  winput->label1.SetText (label);
+  winput->edit1.SetText (str);
+  winput->Return=0;
+  Application->ACreateWindow (winput);
+  winput->SetCanDestroy (false);
+  winput->Draw ();
+  winput->ShowExclusive ();
+  while (winput->GetCanExitExclusive())
+  {
+    Application->ProcessEvents(winput->GetWWidget());
+    wxMilliSleep(100);
+  }
+  winput->SetCanDestroy (true);
+  ret = winput->Return;
+  if (ret)
+    str = winput->edit1.GetText ();
+  winput->WDestroy ();
+  return ret;
+}

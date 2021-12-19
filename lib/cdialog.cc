@@ -94,4 +94,46 @@ Dialog (lxString label)
   ret = winput->Return;
   winput->WDestroy ();
   return ret;
-};
+}
+
+
+bool
+Dialog_sz (lxString label, int Width, int Height)
+{
+  bool ret;
+  CDialog *winput;
+  winput = new CDialog;
+
+  int width, height;  
+	  
+  winput->SetWidth (Width);
+  winput->SetHeight (Height);
+  winput->button1.SetX ((Width- 3*winput->button1.GetWidth())/2);
+  winput->button1.SetY (Height-65);
+  winput->button2.SetX (((Width- 3*winput->button1.GetWidth())/2)+(2*winput->button1.GetWidth()));
+  winput->button2.SetY (Height-65);
+  winput->label1.SetWidth (Width-5);
+  winput->label1.SetHeight (Height-90);
+
+  wxDisplaySize (&width,&height);  
+  
+  winput->SetX ((width  - winput->GetWidth  ())/2);
+  winput->SetY ((height - winput->GetHeight ())/2);
+
+  winput->label1.SetText (label);
+  Application->ACreateWindow (winput);
+  winput->Return=0;
+  winput->SetCanDestroy (false);
+  winput->Draw ();
+  winput->ShowExclusive ();
+  while (winput->GetCanExitExclusive())
+  {
+    Application->ProcessEvents(winput->GetWWidget());
+    wxMilliSleep(100);
+  }
+  winput->SetCanDestroy (true);
+  ret = winput->Return;
+  winput->WDestroy ();
+  return ret;
+}
+
