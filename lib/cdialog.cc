@@ -109,11 +109,11 @@ Dialog_sz (lxString label, int Width, int Height)
   winput->SetWidth (Width);
   winput->SetHeight (Height);
   winput->button1.SetX ((Width- 3*winput->button1.GetWidth())/2);
-  winput->button1.SetY (Height-65);
+  winput->button1.SetY (Height-75);
   winput->button2.SetX (((Width- 3*winput->button1.GetWidth())/2)+(2*winput->button1.GetWidth()));
-  winput->button2.SetY (Height-65);
+  winput->button2.SetY (Height-75);
   winput->label1.SetWidth (Width-5);
-  winput->label1.SetHeight (Height-90);
+  winput->label1.SetHeight (Height-95);
 
   wxDisplaySize (&width,&height);  
   

@@ -98,9 +98,9 @@ Message_sz (lxString str, int Width, int Height)
   wmessage->SetWidth (Width);
   wmessage->SetHeight (Height);
   wmessage->button1.SetX ((Width- wmessage->button1.GetWidth())/2);
-  wmessage->button1.SetY (Height-65);
+  wmessage->button1.SetY (Height-75);
   wmessage->label1.SetWidth (Width-5);
-  wmessage->label1.SetHeight (Height-90);
+  wmessage->label1.SetHeight (Height-95);
 
   wxDisplaySize (&width,&height);  
   

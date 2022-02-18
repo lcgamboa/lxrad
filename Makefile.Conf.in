@@ -13,7 +13,7 @@ AR = gcc-ar
 LN = ln -sfn
 CP = cp
 
-CFLAGS = -Wall -O2 -g -flto @CFLAGS@ @LDFLAGS@
+CFLAGS = -Wall -O2 -g  @CFLAGS@ @LDFLAGS@
 
 
 prefix = @prefix@
