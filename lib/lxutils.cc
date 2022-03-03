@@ -309,6 +309,7 @@ xImage::LoadFile(const lxString fname, int orientation, double  scalex, double  
       *ret_sy = ((double) height) / document->height ();
 
      auto bitmap = document->renderToBitmap (width, height, 0);
+     bitmap.convertToRGBA();
 
      const unsigned char * bmp = bitmap.data ();
      int size = bitmap.width () * bitmap.height ();

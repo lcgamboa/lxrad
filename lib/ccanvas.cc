@@ -219,10 +219,12 @@ CCanvas::ChangeScale(double sx, double sy)
  Scaley = sy;
 
  DC->SetUserScale (sx, sy);
+/* removed for strange behavior 
 #ifdef __WXMSW__   
  if(GC)
    GC->Scale(sx, sy);	   
 #endif
+*/
 }
 
 void
