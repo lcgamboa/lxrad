@@ -66,6 +66,7 @@ public:
   //void SetAlign(CAlign align);
   //CAlign GetAlign(void);
   uint GetCountLines (void);
+  lxString GetLine (uint linen);
 };
 
 #endif

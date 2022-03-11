@@ -198,6 +198,16 @@ CText::GetCountLines (void)
   return Lines.GetLinesCount ();
 }
 
+lxString
+CText::GetLine (uint linen)
+{
+  if (Widget != NULL)
+  {
+      return (const char *)(((wxTextCtrl*)Widget)->GetLineText(linen).c_str());
+  }
+ return Lines.GetLine (linen);
+}
+
 void
 CText::SetReadOnly (bool r)
 {
