@@ -5,11 +5,17 @@ VERSION = @VERSION@
 MAINVER = @MAINVER@
 MINORVER = @MINORVER@
 
+OS := $(shell uname)
+
 MKDIR = mkdir -p
 RM = rm -f
 CC = @CXX@
 CXX = @CXX@
-AR = gcc-ar
+ifeq ($(OS),Darwin)
+    AR = ar
+else
+    AR = gcc-ar
+endif 
 LN = ln -sfn
 CP = cp
 
