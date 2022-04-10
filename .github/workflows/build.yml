@@ -1,0 +1,15 @@
+name: Build lxrad
+on: [push]
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install deps
+        run: sudo apt-get install libwxgtk3.0-gtk3-dev libopenal-dev doxygen
+      - name: Build
+        run: |
+          ./make_deps.sh
+          ./configure
+          make
+
