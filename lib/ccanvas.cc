@@ -421,16 +421,14 @@ CCanvas::Point(float x, float y)
  if (DC != NULL)
   {
    Rotate (&x, &y);
-#ifndef __WXMSW__
      if (GC)
       {
        GC->SetPen (*wxTRANSPARENT_PEN);
        GC->SetBrush (*Brush);
        GC->SetAntialiasMode (wxANTIALIAS_DEFAULT);
-       GC->DrawRectangle (x, y, 1, 1);
+       GC->DrawRectangle (x, y, 1.95, 1.95);
       }
    else
-#endif	   
     {
      DC->DrawPoint (x, y);
     }
