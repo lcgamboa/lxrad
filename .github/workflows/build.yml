@@ -12,4 +12,14 @@ jobs:
           ./make_deps.sh
           ./configure
           make
-
+  build-macos:
+    runs-on: macos-11
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install deps
+        run: brew install wxwidgets openal-soft doxygen
+      - name: Build
+        run: |
+          ./make_deps.sh
+          ./configure LDFLAGS=-L/usr/local/opt/openal-soft/lib CFLAGS=-I/usr/local/opt/openal-soft/include
+          make
