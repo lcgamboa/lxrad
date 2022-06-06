@@ -143,14 +143,14 @@ void
 CCheckBox::SetText (lxString t)
 {
   Text = t;
-//  if (Label != NULL)
-//    gtk_label_set_text (GTK_LABEL (Label), Text.c_str ());
-};
+  if (Widget != NULL)
+    ((wxCheckBox*)Widget)->SetLabel(Text.c_str ());
+}
 
 lxString
 CCheckBox::GetText (void)
 {
-//  if (Label != NULL)
-//    Text = gtk_label_get_text (GTK_LABEL (Label));
+  if (Widget != NULL)
+    Text =  ((wxCheckBox*)Widget)->GetLabel();
   return Text;
-};
+}
