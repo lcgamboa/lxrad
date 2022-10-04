@@ -47,6 +47,8 @@ class xImage:public wxImage
    using wxImage::operator=;
 };
 
+#define lxCOLOR_WINDOWTEXT wxSYS_COLOUR_WINDOWTEXT
+#define SystemColor(id) wxSystemSettings::GetColour(id)
 
 #define lxT wxT
 #define lxImage xImage
@@ -124,6 +126,7 @@ class xImage:public wxImage
 #define LXK_LEFT WXK_LEFT
 #define LXK_DOWN WXK_DOWN
 #define LXK_UP WXK_UP
+
 
 lxBitmap * lxGetBitmapRotated(lxImage *image, CWindow * win, int orientation); 
 
