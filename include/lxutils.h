@@ -48,6 +48,7 @@ class xImage:public wxImage
 };
 
 #define lxCOLOR_WINDOWTEXT wxSYS_COLOUR_WINDOWTEXT
+#define lxCOLOR_BTNFACE wxSYS_COLOUR_BTNFACE
 #define SystemColor(id) wxSystemSettings::GetColour(id)
 
 #define lxT wxT

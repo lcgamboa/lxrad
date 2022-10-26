@@ -38,7 +38,7 @@
 
 #include <iostream>
 #include <cstring>
-#include"../lunasvg/include/lunasvg.h"
+#include"../../lunasvg/include/lunasvg.h"
 
 using namespace lunasvg;
 
@@ -308,7 +308,8 @@ xImage::LoadFile(const lxString fname, int orientation, double  scalex, double  
      if (ret_sy)
       *ret_sy = ((double) height) / document->height ();
 
-     auto bitmap = document->renderToBitmap (width, height, 0);
+     lxColor backgrd =  SystemColor(lxCOLOR_BTNFACE);
+     auto bitmap = document->renderToBitmap (width, height,  (backgrd.Red()<<24) | (backgrd.Blue()<<16) | (backgrd.Green()<<8)| backgrd.Alpha());
      bitmap.convertToRGBA();
 
      const unsigned char * bmp = bitmap.data ();
