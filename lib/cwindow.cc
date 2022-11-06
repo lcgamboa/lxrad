@@ -536,7 +536,7 @@ CWindow::GetWWidget (void)
 }
 
 
-//propiedades
+//propriedades
 
 void
 CWindow::SetCanDestroy (bool candestroy)
@@ -646,6 +646,26 @@ int CWindow::GetVScale (int h)
 int CWindow::GetHScale (int w)
 {
   return (int) (w * HScale + 0.5);
+}
+
+int 
+CWindow::GetClientWidth (void)
+{
+  int cwidth=Width;
+  int cheight = Height;	
+  if (GetWWidget() != NULL)
+    ((wxFrame*)GetWWidget())->GetClientSize(&cwidth,&cheight);  
+  return cwidth;
+}
+
+int 
+CWindow::GetClientHeight(void)
+{
+  int cwidth=Width;
+  int cheight = Height;	
+  if (GetWWidget() != NULL)
+    ((wxFrame*)GetWWidget())->GetClientSize(&cwidth, &cheight);
+  return cheight;
 }
 
 

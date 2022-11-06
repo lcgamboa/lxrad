@@ -82,7 +82,7 @@ public:
   void SetFocus (void);
   void SetControlOnFocus (CControl * control);
   CControl *GetControlOnFocus (void);
-//propierty
+//proprierties
   virtual wxWindow* GetWWidget (void);
   void SetCanDestroy (bool candestroy);
   bool GetCanDestroy (void);
@@ -102,6 +102,8 @@ public:
   lxString GetTitle (void);
   int GetHScale (int w);
   int GetVScale (int h);
+  int GetClientHeight (void);
+  int GetClientWidth (void);
   //operator
   void *operator    new (size_t sz);
   void operator delete (void *p);
