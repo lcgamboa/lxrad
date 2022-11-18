@@ -96,9 +96,10 @@ void
 CText::Append (lxString line)
 {
   Lines.AddLine (line);
-  if (Widget != NULL)
+  if (Widget != NULL){
        ((wxTextCtrl*)Widget)->AppendText(line.c_str());
-  
+       ((wxTextCtrl*)Widget)->ShowPosition(((wxTextCtrl*)Widget)->GetLastPosition());
+  }
   Draw ();
 }
 
