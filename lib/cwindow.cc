@@ -393,13 +393,11 @@ CWindow::LoadXMLContextAndCreateChilds (lxString filename, CControl* ctrl)
   lxString line;
 
   file2.Open (filename);
-  file2.GoToLine (-1);
-
   
-
+  
   if (file2.IsOpened ())
     {
-
+      file2.GoToLine (-1);
       if(ctrl == NULL)//for owner window
       {
         if(fgetline (file2, line))
@@ -569,9 +567,28 @@ void
 CWindow::SetX (int x)
 {
   X = x;
-
-if (GetWWidget() != NULL)
+  
+  if (GetWWidget() != NULL){
+#ifdef __WXMSW__
+    int dwidth, dheight;
+    wxDisplaySize (&dwidth,&dheight);
+    if((int)(X+Width) > dwidth){
+	  if((int)Width > dwidth){
+	    Width = dwidth - 100;
+	  }	
+	  X= dwidth -Width -50;
+	}
+    if((int)(Y+Height) > dheight){
+	  if((int)Height > dheight){
+	    Height = dheight - 100;
+	  }	
+	  Y= dheight -Height -50;
+	}    
+#endif  
     ((wxFrame*)GetWWidget())->SetSize(X,Y,Width,Height,wxSIZE_AUTO);
+  }
+    
+    
 }
 
 int
@@ -588,8 +605,25 @@ CWindow::SetY (int y)
 {
   Y = y;
 
-if (GetWWidget() != NULL)
+if (GetWWidget() != NULL){
+#ifdef __WXMSW__
+    int dwidth, dheight;
+    wxDisplaySize (&dwidth,&dheight);
+    if((int)(X+Width) > dwidth){
+	  if((int)Width > dwidth){
+	    Width = dwidth - 100;
+	  }	
+	  X= dwidth -Width -50;
+	}
+    if((int)(Y+Height) > dheight){
+	  if((int)Height > dheight){
+	    Height = dheight -100;
+	  }	
+	  Y= dheight -Height -50;
+	}    
+#endif 
     ((wxFrame*)GetWWidget())->SetSize(X,Y,Width,Height,wxSIZE_AUTO);
+   }
 }
 
 int
