@@ -52,6 +52,7 @@ public:
   wxWindow* GetWWidget (void);
   void SetWidth (uint width);
   void SetHeight (uint height);
+  void Show (void);
   //operator
   void *operator    new (size_t sz);
   void operator delete (void *p);

@@ -136,6 +136,18 @@ CPWindow::SetHeight (uint height)
   }
 }
 
+void
+CPWindow::Show (void)
+{
+  SetVisible (true);
+  if (GetWWidget() != NULL)
+    {
+      ((wxFrame*)GetWWidget())->Show(true);
+      ((wxFrame*)GetWWidget())->Raise();
+      ((wxFrame*)GetWWidget())->SendSizeEvent();
+    }
+}
+
 //eventos
 
 

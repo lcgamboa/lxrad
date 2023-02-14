@@ -70,7 +70,7 @@ public:
   void DestroyChilds (void);
   virtual void WCreate (int WN, CWindow * window = NULL);
   virtual void WDestroy (void);
-  void Show (void);
+  virtual void Show (void);
   void ShowExclusive (void);
   virtual void Hide (void);
   void HideExclusive (void);
