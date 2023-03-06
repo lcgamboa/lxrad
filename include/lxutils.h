@@ -44,6 +44,7 @@ class xImage:public wxImage
   public:
    xImage(CWindow * win):wxImage(){};   
    bool LoadFile(const lxString fname, int orientation = 0, double scalex = 1.0,  double  scaley = 1.0 , int usealpha = 0, double * ret_sx=NULL, double * ret_sy=NULL);
+   bool CreateBlank(const unsigned int width, const unsigned int height, int orientation = 0, double scalex = 1.0,  double  scaley = 1.0 );
    using wxImage::operator=;
 };
 

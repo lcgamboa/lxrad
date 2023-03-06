@@ -405,6 +405,33 @@ xImage::LoadFile(const lxString fname, int orientation, double  scalex, double  
 
 }
 
+bool 
+xImage::CreateBlank(const unsigned int width, const unsigned int height, int orientation, double scalex, double  scaley ){
+
+  wxImage image (width * scalex, height *scaley, true);
+
+  lxImage * im = this;
+  switch (orientation)
+  {
+    case 1:
+      *im = image.Rotate90 (1);
+      break;
+    case 2:
+      *im = image.Rotate180 ();
+      break;
+    case 3:
+      *im = image.Rotate90 (0);
+      break;
+    default:
+      *im = image;
+      break;
+  }
+
+  image.Destroy ();
+
+  return 1;
+}
+
 unsigned int
 lxGetDisplayWidth(int disp)
 {
