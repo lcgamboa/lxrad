@@ -2,12 +2,12 @@ include ../Makefile.Conf
 
 all:: 
 
-CFLAGS+= -I../../lunasvg/buildw32/include/
+CFLAGS+= -I../../lunasvg/include/
 
 LIBCFLAGS := $(CFLAGS) -D_NO_ADVANCED 
 ARCFLAGS := $(CFLAGS) -static
 
-SVGLIB := -Wl,--whole-archive ../../lunasvg/buildw32/lib/liblunasvg.a -Wl,--no-whole-archive 
+SVGLIB := -Wl,--whole-archive ../../lunasvg/buildw32/liblunasvg.a -Wl,--no-whole-archive 
 
 # .ao files are used for static archives
 %.ao: %.cc

@@ -2,12 +2,12 @@ include ../Makefile.Conf
 
 all:: 
 
-CFLAGS+= -I../../lunasvg/build/include/
+CFLAGS+= -I../../lunasvg/include/
 
 LIBCFLAGS := $(CFLAGS) -fpic
 ARCFLAGS := $(CFLAGS) -static
 
-SVGLIB := ../lunasvg/build/lib/liblunasvg.a
+SVGLIB := ../lunasvg/build/liblunasvg.a
 
 # .ao files are used for static archives
 %.ao: %.cc
