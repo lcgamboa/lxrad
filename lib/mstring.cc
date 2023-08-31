@@ -33,7 +33,7 @@ lxString
 xml_out (lxString name, lxString type, lxString value)
 {
   return (wxT("  <") + name + wxT(" type=\"") + type + wxT("\">") + value + wxT("</") + name + wxT(">"));
-};
+}
 
 void
 xml_in (lxString data, lxString & name, lxString & type, lxString & value)
@@ -56,7 +56,7 @@ xml_in (lxString data, lxString & name, lxString & type, lxString & value)
   type=wxT("");
   value=wxT("");
   }
-};
+}
 
 
 lxString
@@ -81,7 +81,7 @@ LocaleToUtf8 (const lxString str)
   return ret;
 */
 return wxT("");
-};
+}
 
 lxString
 LocaleFromUtf8 (const lxString str)
@@ -106,7 +106,7 @@ LocaleFromUtf8 (const lxString str)
   return ret;
 */
 return wxT("");
-};
+}
 
 
 lxString
@@ -121,7 +121,7 @@ eqparse (lxString & str, lxString & arg)
   arg = temp.substr (0, pos1);
   lxString stype = temp.substr ((pos1 + 1), temp.size () - pos1 - 1);
   return stype;
-};
+}
 
 
 lxString
@@ -140,7 +140,7 @@ strnadd (const lxString & str, char c, uint n)
   lxString temp;
   temp = str.substr (0, n) + c + str.substr (n, str.size () - n);
   return temp;
-};
+}
 
 int
 atoi (const lxString & str)
@@ -150,7 +150,7 @@ atoi (const lxString & str)
 #else
   return wcstol (str.c_str (),NULL,0);
 #endif
-};
+}
 
 float
 atof (const lxString & str)
@@ -160,7 +160,7 @@ atof (const lxString & str)
 #else
   return wcstof(str.c_str (),NULL);
 #endif
-};
+}
 
 bool
 atob (const lxString & str)
@@ -171,31 +171,31 @@ atob (const lxString & str)
   else
     b = false;
   return b;
-};
+}
 
 lxString
 itoa (int n, const lxString & format)
 {
   return lxString::Format(format, n);
-};
+}
 
 lxString
 itoa (uint n, const lxString & format)
 {
   return lxString::Format(format, n);
-};
+}
 
 lxString
 itoa (long n, const lxString & format)
 {
   return lxString::Format(format, n);
-};
+}
 
 lxString
 ftoa (float f, const lxString & format)
 {
   return lxString::Format(format.c_str (), f);
-};
+}
 
 lxString
 btoa (bool b)
@@ -206,7 +206,7 @@ btoa (bool b)
   else
     str = wxT("FALSE");
   return str;
-};
+}
 
 lxString
 uppercase (const lxString & str)
@@ -233,7 +233,7 @@ basename (const lxString & str)
      pos = str.rfind (wxT("/"));
 #endif
   return str.substr (pos + 1, str.size () - pos - 1);
-};
+}
 
 lxString
 dirname (const lxString & str)
@@ -247,7 +247,7 @@ dirname (const lxString & str)
      pos = pos2;
 #endif
   return str.substr (0, pos + 1);
-};
+}
 
 
 bool
@@ -273,8 +273,8 @@ fgetline (wxTextFile & file, lxString & str)
       printf ("fatal error in function fgetline! (%s)\n",(const char *)wxSysErrorMsg(wxSysErrorCode()));
 #endif
       exit (-1);
-    };
-};
+    }
+}
 
 
 
@@ -286,7 +286,7 @@ mprint (lxString str)
 #else
   printf ("%s",(const char*) str.c_str ());
 #endif
-};
+}
 
 void
 eprint (lxString str)
@@ -296,7 +296,7 @@ eprint (lxString str)
 #else
   fprintf (stderr, "%s", (const char *)str.c_str ());
 #endif
-};
+}
 
 #ifdef _MSTRING
 //lxString _____________________________________________________________
@@ -305,7 +305,7 @@ eprint (lxString str)
 lxString::lxString (void)
 {
   Str = '\0';
-};
+}
 
 lxString::lxString (const lxString & str)
 {
@@ -316,7 +316,7 @@ lxString::lxString (const lxString & str)
     }
   else
     Str = '\0';
-};
+}
 
 lxString::lxString (const char &str)
 {
@@ -328,7 +328,7 @@ lxString::lxString (const char &str)
     }
   else
     Str = '\0';
-};
+}
 
 lxString::lxString (const char *str)
 {
@@ -339,7 +339,7 @@ lxString::lxString (const char *str)
     }
   else
     Str = '\0';
-};
+}
 
 lxString::lxString (const char *str, int size)
 {
@@ -351,7 +351,7 @@ lxString::lxString (const char *str, int size)
     }
   else
     Str = '\0';
-};
+}
 
 lxString::~lxString (void)
 {
@@ -359,8 +359,8 @@ lxString::~lxString (void)
     {
       delete[]Str;
       Str = NULL;
-    };
-};
+    }
+}
 
 const char *
 lxString::c_str (void) const
@@ -369,7 +369,7 @@ lxString::c_str (void) const
     return Str;
   else
     return NULL;
-};
+}
 
 int
 lxString::compare (const char *str) const
@@ -378,7 +378,7 @@ lxString::compare (const char *str) const
     return strcmp (Str, str);
   else
     return -1;
-};
+}
 
 int
 lxString::compare (const lxString & str) const
@@ -387,7 +387,7 @@ lxString::compare (const lxString & str) const
     return strcmp (Str, str.Str);
   else
     return -1;
-};
+}
 
 uint lxString::size (void) const
 {
@@ -395,7 +395,7 @@ uint lxString::size (void) const
     return strlen (Str);
   else
     return 0;
-};
+}
 
 uint lxString::length (void) const
 {
@@ -403,7 +403,7 @@ uint lxString::length (void) const
     return strlen (Str);
   else
     return 0;
-};
+}
 
 int
 lxString::erase (uint start, int num)
@@ -421,7 +421,7 @@ lxString::erase (uint start, int num)
     }
   else
     return 0;
-};
+}
 
 lxString lxString::substr (uint start, uint length) const
 {
@@ -444,7 +444,7 @@ lxString lxString::substr (uint start, uint length) const
     }
   else
     return '\0';
-};
+}
 
 int
 lxString::copy (char *str, uint sz) const
@@ -465,7 +465,7 @@ lxString::copy (char *str, uint sz) const
 	}
     }
   return 0;
-};
+}
 
 int
 lxString::find (const lxString & str) const
@@ -480,7 +480,7 @@ lxString::find (const lxString & str) const
     }
   else
     return 0;
-};
+}
 
 char *
 strrstr (const char *str1, const char *str2)
@@ -519,18 +519,18 @@ strrstr (const char *str1, const char *str2)
 		  c += strlen (temp);
 		  delete[]temp1;
 		  delete[]temp2;
-		};
+		}
 	    }
 	  else
 	    c = strlen (str1);
-	};
+	}
     }
   if (temp1)
     delete[]temp1;
   if (temp2)
     delete[]temp2;
   return NULL;
-};
+}
 
 
 int
@@ -550,7 +550,7 @@ lxString::rfind (const lxString & str) const
     }
   else
     return -1;			//length () + 1;
-};
+}
 
 
 lxString & lxString::operator = (const lxString & str)
@@ -566,9 +566,9 @@ lxString & lxString::operator = (const lxString & str)
 	}
       else
 	Str = '\0';
-    };
+    }
   return *this;
-};
+}
 
 lxString & lxString::operator = (const char *str)
 {
@@ -583,7 +583,7 @@ lxString & lxString::operator = (const char *str)
   else
     Str = '\0';
   return *this;
-};
+}
 
 lxString
 lxString::operator + (const lxString & str)
@@ -619,9 +619,9 @@ lxString::operator + (const lxString & str)
 	}
       else
 	temp.Str = "\0";
-    };
+    }
   return temp;
-};
+}
 
 
 lxString
@@ -649,9 +649,9 @@ lxString::operator + (const char *str)
 	}
       else
 	temp.Str = '\0';
-    };
+    }
   return temp;
-};
+}
 
 lxString
 lxString::operator + (const char &str)
@@ -671,10 +671,10 @@ lxString::operator + (const char &str)
     {
       temp.Str = new char[2];
       strcpy (temp.Str, str2);
-    };
+    }
 
   return temp;
-};
+}
 
 lxString & lxString::operator += (const lxString & str)
 {
@@ -686,7 +686,7 @@ lxString & lxString::operator += (const lxString & str)
     {
       delete Str;
       Str = NULL;
-    };
+    }
 
   if (str.Str != NULL)
     {
@@ -717,9 +717,9 @@ lxString & lxString::operator += (const lxString & str)
 	}
       else
 	Str = "\0";
-    };
+    }
   return *this;
-};
+}
 
 lxString & lxString::operator += (const char *str)
 {
@@ -727,7 +727,7 @@ lxString & lxString::operator += (const char *str)
   if (Str != NULL)
     {
       delete Str;
-    };
+    }
 
   if (str != NULL)
     {
@@ -749,9 +749,9 @@ lxString & lxString::operator += (const char *str)
 	}
       else
 	Str = '\0';
-    };
+    }
   return *this;
-};
+}
 
 lxString & lxString::operator += (const char &str)
 {
@@ -772,16 +772,16 @@ lxString & lxString::operator += (const char &str)
     {
       Str = new char[2];
       strcpy (Str, str2);
-    };
+    }
   return *this;
-};
+}
 
 char &
 lxString::operator[] (const uint & index)
 {
 //  if((Str)&&(index <= length()))
   return Str[index];
-};
+}
 
 lxString
 operator + (const char *str1, const lxString & str2)
@@ -797,9 +797,9 @@ operator + (const char *str1, const lxString & str2)
     {
       if (str2.Str)
 	return str2;
-    };
+    }
   return '\0';
-};
+}
 
 lxString
 operator + (const char &str1, const lxString & str2)
@@ -818,16 +818,16 @@ operator + (const char &str1, const lxString & str2)
     {
       if (str2.Str)
 	return str2;
-    };
+    }
   return '\0';
-};
+}
 
 /*
 ostream & operator << (ostream & os, const lxString & str)
 {
   os << str.Str;
   return os;
-};
+}
 */
 
 #endif
@@ -839,7 +839,7 @@ lxStringList::lxStringList (void)
 {
   Lines = NULL;
   LinesCount = 0;
-};
+}
 
 lxStringList::lxStringList (const lxStringList & list)
 {
@@ -848,8 +848,8 @@ lxStringList::lxStringList (const lxStringList & list)
   for (uint c = 0; c < list.GetLinesCount (); c++)
     {
       AddLine (list.GetLine (c));
-    };
-};
+    }
+}
 
 lxStringList::~lxStringList (void)
 {
@@ -857,14 +857,14 @@ lxStringList::~lxStringList (void)
     {
       delete[]Lines;
       Lines = NULL;
-    };
+    }
   LinesCount = 0;
-};
+}
 
 void
 lxStringList::Create ()
 {
-};
+}
 
 lxString lxStringList::GetLine (uint linen) const
 {
@@ -872,7 +872,7 @@ lxString lxStringList::GetLine (uint linen) const
     return Lines[linen];
   else
     return wxT("");
-};
+}
 
 #ifdef __UNICODE__
 const wchar_t *
@@ -885,14 +885,14 @@ lxStringList::GetLineStr (uint linen) const
     return Lines[linen].c_str ();
   else
     return NULL;
-};
+}
 
 void
 lxStringList::SetLine (lxString line, uint linen)
 {
   if(linen < (unsigned int)LinesCount)
     Lines[linen] = line;
-};
+}
 
 
 void
@@ -901,10 +901,10 @@ lxStringList::Clear (void)
   if (Lines)
     {
       delete[]Lines;
-    };
+    }
   Lines = NULL;
   LinesCount = 0;
-};
+}
 
 void
 lxStringList::AddLine (const lxString line)
@@ -920,7 +920,7 @@ lxStringList::AddLine (const lxString line)
 	delete[]Lines;
       Lines = ALines;
     }
-};
+}
 
 void
 lxStringList::InsertLine (lxString line, uint linen)
@@ -937,18 +937,18 @@ lxStringList::InsertLine (lxString line, uint linen)
   if (Lines)
     delete[]Lines;
   Lines = ALines;
-};
+}
 
 
 uint lxStringList::GetLinesCount (void) const
 {
   return LinesCount;
-};
+}
 
 void
 lxStringList::DelLine (uint linen)
 {
-  if(linen < (unsigned int)LinesCount)
+  if((int)linen < LinesCount)
   {
   LinesCount--;
   lxString *ALines = new lxString[LinesCount];
@@ -960,7 +960,7 @@ lxStringList::DelLine (uint linen)
     delete[]Lines;
   Lines = ALines;
   }
-};
+}
 
 bool
 lxStringList::LoadFromFile (lxString fname)
@@ -986,7 +986,7 @@ lxStringList::LoadFromFile (lxString fname)
     printf ("File not found!(%s)\n",(const char*)wxSysErrorMsg(wxSysErrorCode()));
 #endif
   return false;
-};
+}
 
 
 bool
@@ -1021,7 +1021,7 @@ lxStringList::SaveToFile (lxString fname)
 #endif
   return false;
 
-};
+}
 
 bool
 lxStringList::AppendToFile (lxString fname)
@@ -1047,7 +1047,7 @@ lxStringList::AppendToFile (lxString fname)
 #endif
   return false;
 
-};
+}
 
 
 lxStringList & lxStringList::operator = (const lxStringList & list)
@@ -1070,10 +1070,10 @@ lxStringList & lxStringList::operator = (const lxStringList & list)
 	{
 	  Lines = NULL;
 	  LinesCount = 0;
-	};
-    };
+	}
+    }
   return *this;
-};
+}
 
 lxString
 lxStringList::GetBuffer (void)
@@ -1084,7 +1084,7 @@ lxStringList::GetBuffer (void)
     buff += Lines[c] + wxT("\n");
 
   return buff;
-};
+}
 
 void
 lxStringList::SetBuffer (lxString buff)
@@ -1104,11 +1104,11 @@ lxStringList::SetBuffer (lxString buff)
 
       buff = buff.substr (endl + 1, buff.size ());
       endl = buff.find (wxT("\n"));
-    };
+    }
   if (buff.size () > 0)
     AddLine (buff);
 
-};
+}
 
 
 /*
@@ -1116,25 +1116,25 @@ lxStringList::SetBuffer (lxString buff)
 
 lxStringList::lxStringList (void)
 {
-};
+}
 
 lxStringList::lxStringList (const lxStringList & list)
 {
   for (uint c = 0; c < list.GetLinesCount (); c++)
     {
       AddLine (list.GetLine (c));
-    };
-};
+    }
+}
 
 lxStringList::~lxStringList (void)
 {
   List.erase (List.begin (), List.end ());
-};
+}
 
 void
 lxStringList::Create ()
 {
-};
+}
 
 string lxStringList::GetLine (uint linen) const
 {
@@ -1144,7 +1144,7 @@ string lxStringList::GetLine (uint linen) const
   for (uint a = 0; a < linen; a++)
     itList2++;
   return *itList2;
-};
+}
 
 const char *
 lxStringList::GetLineStr (uint linen) const
@@ -1155,7 +1155,7 @@ lxStringList::GetLineStr (uint linen) const
   for (uint a = 0; a < linen; a++)
     itList2++;
   return itList2->c_str ();
-};
+}
 
 void
 lxStringList::SetLine (string line, uint linen)
@@ -1164,20 +1164,20 @@ lxStringList::SetLine (string line, uint linen)
   for (uint a = 0; a < linen; a++)
     itList++;
   *itList = line;
-};
+}
 
 
 void
 lxStringList::Clear (void)
 {
   List.erase (List.begin (), List.end ());
-};
+}
 
 void
 lxStringList::AddLine (string line)
 {
   List.push_back (line);
-};
+}
 
 void
 lxStringList::InsertLine (string line, uint linen)
@@ -1186,13 +1186,13 @@ lxStringList::InsertLine (string line, uint linen)
   for (uint a = 0; a < linen; a++)
     itList++;
   List.insert (itList, line);
-};
+}
 
 
 uint lxStringList::GetLinesCount (void) const
 {
   return List.size ();
-};
+}
 
 void
 lxStringList::DelLine (uint linen)
@@ -1201,7 +1201,7 @@ lxStringList::DelLine (uint linen)
   for (uint a = 0; a < linen; a++)
     itList++;
   List.erase (itList);
-};
+}
 
 bool
 lxStringList::LoadFromFile (string fname)
@@ -1217,7 +1217,7 @@ lxStringList::LoadFromFile (string fname)
     printf ("File not found!\n");
  
  return false;
-};
+}
 
 bool
 lxStringList::SaveToFile (string fname)
@@ -1232,7 +1232,7 @@ lxStringList::SaveToFile (string fname)
     printf ("File not create!\n");
 
  return false;
-};
+}
 
 bool
 lxStringList::AppendToFile (string fname)
@@ -1247,7 +1247,7 @@ lxStringList::AppendToFile (string fname)
   else
     printf ("File not create!\n");
   return false;
-};
+}
 
 string lxStringList::GetBuffer (void)
 {
@@ -1257,7 +1257,7 @@ string lxStringList::GetBuffer (void)
     buff += *itList +"\n";
 
   return buff;
-};
+}
 
 void
 lxStringList::SetBuffer (string buff)
@@ -1277,11 +1277,11 @@ lxStringList::SetBuffer (string buff)
 
       buff = buff.substr (endl + 1, buff.size ());
       endl = buff.find ("\n");
-    };
+    }
   if (buff.size () > 0)
     AddLine (buff);
 
-};
+}
 #endif
 */
 
