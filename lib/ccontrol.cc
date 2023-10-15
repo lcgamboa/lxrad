@@ -651,6 +651,17 @@ uint CControl::GetFontSize (void)
 }
 
 void
+CControl::SetFontFamily(int family)
+{
+ FontFamily = family;
+ if (Widget != NULL){
+   wxFont font= Widget->GetFont();
+   font.SetFamily(static_cast<wxFontFamily>(family));
+   Widget->SetFont(font);
+ }
+}
+
+void
 CControl::SetHint (lxString hint)
 {
   Hint = hint;

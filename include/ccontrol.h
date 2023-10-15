@@ -65,6 +65,7 @@ protected:
   int ChildCount;
   lxString FontName;
   uint FontSize;
+  int FontFamily;
   CControl *Owner;
   bool Visible;
   CPMenu *PopupMenu;
@@ -93,6 +94,7 @@ public:
   void SetDragAcceptFiles(bool accept);
 //propiedades
   void SetFont (const lxString font);
+  void SetFontFamily (const int family);
   lxString GetFontName (void);
   void SetFontSize (uint size);
   uint GetFontSize (void);
