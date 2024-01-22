@@ -84,6 +84,8 @@ public:
   void SetFgColor (lxString color);
   void SetFgColor (uint r, uint g, uint b);
   void SetFont (wxFont font);
+  void SetFontSize (const int pointsize);
+  void SetFontWeight (const int weight);
   wxColor GetFgColor (void);
  /**
   * Set Background Color by wxColor.

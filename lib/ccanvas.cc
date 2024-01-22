@@ -607,7 +607,19 @@ void
 CCanvas::SetFont(wxFont font)
 {
  Font = font;
- if (DC != NULL)DC->SetFont (font);
+ if (DC != NULL)DC->SetFont (Font);
+}
+
+void 
+CCanvas::SetFontSize (const int pointsize){
+  Font.SetPointSize(pointsize);
+  if (DC != NULL)DC->SetFont (Font);
+}
+
+void 
+CCanvas::SetFontWeight (const int weight){
+  Font.SetWeight((wxFontWeight)weight);
+  if (DC != NULL)DC->SetFont (Font);
 }
 
 void
