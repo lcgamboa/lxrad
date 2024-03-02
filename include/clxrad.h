@@ -86,7 +86,17 @@ using namespace std;
 #include"mstring.h"
 
 
-#define Initialize IMPLEMENT_APP(CApplication);bool CApplication::OnInit(){Application=this;wxInitAllImageHandlers();Aargc=argc;Aargv=argv;OnInit_();return 1;};bool CApplication::OnInit_()
+#define Initialize IMPLEMENT_APP(CApplication); \
+bool CApplication::OnInit(){\
+Application=this;\
+wxInitAllImageHandlers();\
+Aargc=argc;\
+Aargv=argv;\
+Aargvw=argv;\
+OnInit_();\
+return 1;\
+};\
+bool CApplication::OnInit_()
 
 enum lxevent 
 {

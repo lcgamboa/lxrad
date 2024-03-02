@@ -57,8 +57,9 @@ private:
 public:
    virtual bool OnInit();
    virtual int OnExit();
-    int Aargc;
-  char **Aargv;
+   int Aargc;
+   char **Aargv;
+   wchar_t **Aargvw;
 //    CApplication (void);
 //   ~CApplication (void);
   void Start (void);
