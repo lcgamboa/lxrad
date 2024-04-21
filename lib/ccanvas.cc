@@ -456,7 +456,19 @@ CCanvas::Line(float x1_, float y1_, float x2_, float y2_)
 void
 CCanvas::Lines(wxPoint * points, int npoints)
 {
- if (DC != NULL) DC->DrawLines (npoints, points);
+ if (DC != NULL) 
+ {
+    float x, y;	 
+    for(int p = 0;  p < npoints; p++)
+    {
+      x = points[p].x;
+      y = points[p].y;
+      Rotate(&x, &y);
+      points[p].x = x;
+      points[p].y = y;
+    }
+    DC->DrawLines (npoints, points);
+ }
 }
 
 void
@@ -518,7 +530,7 @@ CCanvas::Rectangle(bool filled, float x, float y, float width, float height)
 }
 
 void
-CCanvas::Arc(bool filled, int x, int y, int x1, int y1, int x2, int y2)
+CCanvas::Arc(bool filled, float x1, float y1, float x2, float y2, float xc, float yc)
 {
  if (DC != NULL)
   {
@@ -526,7 +538,12 @@ CCanvas::Arc(bool filled, int x, int y, int x1, int y1, int x2, int y2)
     DC->SetBrush (*Brush);
    else
     DC->SetBrush (*wxTRANSPARENT_BRUSH);
-   DC->DrawArc (x, y, x1, y1, x2, y2);
+   
+   Rotate (&x1, &y1);
+   Rotate (&x2, &y2);
+   Rotate (&xc, &yc);
+   
+   DC->DrawArc (x1, y1, x2, y2, xc, yc);
   }
 }
 
@@ -539,6 +556,16 @@ CCanvas::Polygon(bool filled, wxPoint * points, int npoints)
     DC->SetBrush (*Brush);
    else
     DC->SetBrush (*wxTRANSPARENT_BRUSH);
+    
+   float x, y;	 
+   for(int p = 0; p < npoints; p++)
+   {
+      x = points[p].x;
+      y = points[p].y;
+      Rotate(&x, &y);
+      points[p].x = x;
+      points[p].y = y;
+   }
 
    DC->DrawPolygon (npoints, points);
   }
@@ -577,7 +604,7 @@ CCanvas::Circle(bool filled, float x, float y, float radius)
 }
 
 void
-CCanvas::Ellipse(bool filled, int x, int y, int width, int height)
+CCanvas::Ellipse(bool filled, float x, float y, float width, float height)
 {
  if (DC != NULL)
   {
@@ -585,12 +612,19 @@ CCanvas::Ellipse(bool filled, int x, int y, int width, int height)
     DC->SetBrush (*Brush);
    else
     DC->SetBrush (*wxTRANSPARENT_BRUSH);
-   DC->DrawEllipse (x, y, width, height);
+   
+   float x2, y2;
+   x2 = x + width;
+   y2 = y + height;
+   Rotate (&x, &y);
+   Rotate (&x2, &y2);
+   
+   DC->DrawEllipse (x, y, x2 - x, y2 -  y);
   }
 }
 
 void
-CCanvas::EllipticArc(bool filled, int x, int y, int width, int height, double start, double end)
+CCanvas::EllipticArc(bool filled, float x, float y, float width, float height, double start, double end)
 {
  if (DC != NULL)
   {
@@ -598,8 +632,42 @@ CCanvas::EllipticArc(bool filled, int x, int y, int width, int height, double st
     DC->SetBrush (*Brush);
    else
     DC->SetBrush (*wxTRANSPARENT_BRUSH);
+   
+   float x2, y2, w, h;
+   x2 = x + width;
+   y2 = y + height;
+   Rotate (&x, &y);
+   Rotate (&x2, &y2);
+   w = x2 - x;
+   h = y2 - y;
+ 
+   switch (orientation)
+   {
+     case 1:
+       start -= 90;
+       end -= 90;
+       x += w;
+       w = -w;
+       break; 
+     case 2:
+       start -= 180;
+       end -= 180;
+       x += w;
+       y += h;
+       w = -w;
+       h = -h;
+       break; 
+     case 3:
+       start -= 270;
+       end -= 270;
+       y += h;
+       h = -h;
+       break; 
+     default:
+      break; 
+   }
 
-   DC->DrawEllipticArc (x, y, width, height, start, end);
+   DC->DrawEllipticArc (x, y, w, h, start, end);
   }
 }
 

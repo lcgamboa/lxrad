@@ -125,14 +125,14 @@ public:
   void Spline (wxPoint * points, int npoints);
   //void Segments (wxSegment * segs, int nsegs);
   void Rectangle (bool filled, float x, float y, float width, float height);
-  void Arc (bool filled, int x, int y, int x1, int y1, int x2, int y2);
+  void Arc (bool filled, float x1, float y1, float x2, float y2, float xc, float yc);
   void Circle (bool filled, float x, float y, float radius);
   void Text (lxString str, float x, float y);
   void RotatedText (lxString str, float x, float y, float angle);
   void TextOnRect (lxString str, wxRect, unsigned int align );
   void Polygon (bool filled, wxPoint * points, int npoints);
-  void Ellipse(bool filled,int x, int y, int width, int height);
-  void EllipticArc(bool filled,int x, int y, int width, int height, double start, double end);
+  void Ellipse(bool filled,float x, float y, float width, float height);
+  void EllipticArc(bool filled, float x, float y, float width, float height, double start, double end);
   void PutBitmap(wxBitmap * bitmap,float x, float y);
   
   void FloodFill(int x, int y,wxColor color, wxFloodFillStyle style);
