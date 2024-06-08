@@ -628,11 +628,6 @@ CCanvas::EllipticArc(bool filled, float x, float y, float width, float height, d
 {
  if (DC != NULL)
   {
-   if (filled)
-    DC->SetBrush (*Brush);
-   else
-    DC->SetBrush (*wxTRANSPARENT_BRUSH);
-   
    float x2, y2, w, h;
    x2 = x + width;
    y2 = y + height;
@@ -666,8 +661,37 @@ CCanvas::EllipticArc(bool filled, float x, float y, float width, float height, d
      default:
       break; 
    }
+     if (GC)
+      {
+       GC->SetAntialiasMode (wxANTIALIAS_DEFAULT);
 
-   DC->DrawEllipticArc (x, y, w, h, start, end);
+
+       GC->SetPen (*Pen);
+       
+       if (filled){
+         GC->SetBrush (*Brush);
+         wxGraphicsPath fpath = GC->CreatePath();
+         float r = w/2;
+         fpath.MoveToPoint(x + r , y + r );
+         fpath.AddArc( x + r , y + r , r, -start * 0.01745329, -end * 0.01745329, 0);
+         fpath.CloseSubpath();
+         GC->FillPath(fpath);
+       }
+
+       wxGraphicsPath path = GC->CreatePath();
+       float r = w/2;
+       path.AddArc( x + r , y + r , r, -start * 0.01745329, -end * 0.01745329, 0);
+       GC->StrokePath(path);
+      }
+   else
+    {
+       if (filled)
+          DC->SetBrush (*Brush);
+       else
+          DC->SetBrush (*wxTRANSPARENT_BRUSH);
+       
+       DC->DrawEllipticArc (x, y, w, h, start, end);
+  }
   }
 }
 
