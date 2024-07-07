@@ -8,7 +8,7 @@ export CFLAGS="-fPIC"
 rm -rf build
 mkdir build
 cd build
-cmake ..
+cmake -DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON ..
 make -j4
 cd ..
 cd ..
