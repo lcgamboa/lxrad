@@ -1,6 +1,6 @@
 #!/bin/bash
 cd ..
-git clone --depth=1 https://github.com/sammycage/lunasvg.git
+git clone -b v2.4.1 --depth=1 https://github.com/sammycage/lunasvg.git
 cd lunasvg
 #git pull --no-rebase
 export CXXFLAGS="-fPIC"
