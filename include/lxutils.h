@@ -72,6 +72,7 @@ class xImage:public wxImage
 #define lxGetCwd wxGetCwd 
 #define lxLaunchDefaultBrowser wxLaunchDefaultBrowser
 #define lxSetWorkingDirectory wxSetWorkingDirectory
+#define lxCopyFile wxCopyFile
 #define lxRenameFile wxRenameFile
 #define lxLaunchDefaultApplication wxLaunchDefaultApplication
 
