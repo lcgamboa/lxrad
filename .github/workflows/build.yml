@@ -6,7 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install deps
-        run: sudo apt-get install libwxgtk3.0-gtk3-dev libopenal-dev doxygen
+        run: sudo apt-get install libwxgtk3.*-dev libopenal-dev doxygen
       - name: Build
         run: |
           ./make_deps.sh
