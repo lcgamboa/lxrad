@@ -69,7 +69,7 @@ endif
 # How to create the shared library
 $(LIBSHLIBNAME): $(LIBSHOBJECTS)
 ifeq ($(OS),Darwin)
-	$(CXX) $(LIBCFLAGS) -Wl,-all_load $(SVGLIB) -Wl,-noall_load -shared -Wl,-install_name,$(LIBSHSONAME) -o $@  $^  $(SHLIBS)
+	$(CXX) $(LIBCFLAGS) -Wl,-force_load $(SVGLIB) -shared -Wl,-install_name,$(LIBSHSONAME) -o $@  $^  $(SHLIBS)
 else
 	$(CXX) -Wl,--whole-archive $(SVGLIB) -Wl,--no-whole-archive -shared -Wl,-soname,$(LIBSHSONAME) -o $@  $^  $(SHLIBS)
 endif 
