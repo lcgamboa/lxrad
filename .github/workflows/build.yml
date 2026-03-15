@@ -21,5 +21,5 @@ jobs:
       - name: Build
         run: |
           ./make_deps.sh
-          ./configure LDFLAGS=-L/usr/local/opt/openal-soft/lib CFLAGS=-I/usr/local/opt/openal-soft/include
+          ./configure LDFLAGS=-L/opt/homebrew/opt/openal-soft/lib CFLAGS=-I/opt/homebrew/opt/openal-soft/include
           make
