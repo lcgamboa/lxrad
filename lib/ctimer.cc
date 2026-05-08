@@ -59,7 +59,7 @@ CTimer::Create (CControl * control)
 
    ((wxTimer*)Widget)->SetOwner(GetWidget(),GetWid());
   
-    Widget->Bind(wxEVT_TIMER,&CTimer::Event,this,GetWid()); 
+    Widget->Bind(wxEVT_TIMER,&CTimer::TEvent,this,GetWid()); 
 
       Win = control->GetWin ();
   
@@ -79,7 +79,7 @@ CTimer::Create (CControl * control)
 void
 CTimer::Destroy (void)
 {
-  Widget->Unbind(wxEVT_TIMER,&CTimer::Event,this,GetWid()); 
+  Widget->Unbind(wxEVT_TIMER,&CTimer::TEvent,this,GetWid()); 
   EvOnTime = NULL;
   SetRunState (false);
 #ifdef __WXMSW__
@@ -100,7 +100,7 @@ int CTimer::CEvent (int event)
 
   
 void 
-CTimer::Event (wxTimerEvent & te)
+CTimer::TEvent (wxTimerEvent & te)
 {
   te.Skip();
   if ((FOwner) && (EvOnTime)&&(Application->GetRun()))

@@ -57,6 +57,7 @@ public:
   bool GetRunState (void);
   void SetRunState (bool rs);
   void SetName (const lxString name);
+  using CControl::Event;
   void Event (wxCommandEvent & te);
 //Events
   void (CControl::*EvThreadRun) (CControl * control);

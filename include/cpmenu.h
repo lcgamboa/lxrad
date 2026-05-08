@@ -61,7 +61,7 @@ public:
   void SetText (lxString t);
   lxString GetText (void);
   void Destroy (void);
-  
+  using CControl::Event;
   bool Event (wxWindow * widget, wxEvent * event);
   //Events 
   void (CControl::*EvMenuActive) (CControl * control);

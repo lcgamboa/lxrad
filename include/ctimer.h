@@ -55,7 +55,7 @@ public:
   void SetTime (uint time);
   uint GetTime (void);
   void SetName (const lxString name);
-  void Event (wxTimerEvent & te);
+  void TEvent (wxTimerEvent & te);
 //Events
   void (CControl::*EvOnTime) (CControl * control);
 };
