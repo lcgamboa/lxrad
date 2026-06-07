@@ -69,6 +69,7 @@ class xImage:public wxImage
 #define lxSetCursor wxSetCursor 
 #define lxMilliSleep wxMilliSleep
 #define lxFileExists wxFileExists
+#define lxDirExists wxDirExists
 #define lxExecute wxExecute
 #define lxGetCwd wxGetCwd 
 #define lxLaunchDefaultBrowser wxLaunchDefaultBrowser
