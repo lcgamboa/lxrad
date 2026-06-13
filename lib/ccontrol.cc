@@ -1168,7 +1168,7 @@ CControl::on_drop_files(wxDropFilesEvent* event)
  
    for (size_t i = 0; i < files.size (); i++)
     {
-     (FOwner->*EvOnDropFile) (this, (const char *) files[i].c_str ());
+     (FOwner->*EvOnDropFile) (this, files[i]);
     }
   }
 }
