@@ -135,6 +135,7 @@ class xImage:public wxImage
 
 lxBitmap * lxGetBitmapRotated(lxImage *image, CWindow * win, int orientation); 
 
+lxString lxGetDocumentsDir(lxString appname="");
 lxString lxGetUserDataDir(lxString appname="");
 lxString lxGetTempDir(lxString appname="");
 lxString lxGetExecutablePath(lxString appname="");

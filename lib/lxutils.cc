@@ -236,6 +236,14 @@ lxCreateDir(const char * dirname)
 }
 
 lxString
+lxGetDocumentsDir(lxString appname)
+{
+ wxTheApp->SetAppName (appname);
+ wxStandardPathsBase& stdp = wxStandardPaths::Get ();
+ return stdp.GetDocumentsDir ();
+}
+
+lxString
 lxGetUserDataDir(lxString appname)
 {
  wxTheApp->SetAppName (appname);
