@@ -640,7 +640,7 @@ CWindow::SetWidth (uint width)
 {
   Width = width;
 
-if (GetWWidget() != NULL)
+  if (GetWWidget() != NULL)
     ((wxFrame*)GetWWidget())->SetSize(X,Y,Width,Height,wxSIZE_AUTO);
 
 }
@@ -685,23 +685,38 @@ int CWindow::GetHScale (int w)
 int 
 CWindow::GetClientWidth (void)
 {
-  int cwidth=Width;
-  int cheight = Height;	
   if (GetWWidget() != NULL)
-    ((wxFrame*)GetWWidget())->GetClientSize(&cwidth,&cheight);  
-  return cwidth;
+    ((wxFrame*)GetWWidget())->GetClientSize(&CWidth,&CHeight);  
+  return CWidth;
 }
 
 int 
 CWindow::GetClientHeight(void)
 {
-  int cwidth=Width;
-  int cheight = Height;	
   if (GetWWidget() != NULL)
-    ((wxFrame*)GetWWidget())->GetClientSize(&cwidth, &cheight);
-  return cheight;
+    ((wxFrame*)GetWWidget())->GetClientSize(&CWidth, &CHeight);
+  return CHeight;
 }
 
+void 
+CWindow::SetClientWidth (int w)
+{
+  CWidth = w;
+  if (GetWWidget() != NULL){
+    ((wxFrame*)GetWWidget())->SetClientSize(CWidth,CHeight);  
+    ((wxFrame*)GetWWidget())->GetSize((int*)&Width,(int*)&Height);
+  }
+}
+
+void 
+CWindow::SetClientHeight(int h)
+{
+  CHeight = h;	
+  if (GetWWidget() != NULL){
+    ((wxFrame*)GetWWidget())->SetClientSize(CWidth, CHeight);
+    ((wxFrame*)GetWWidget())->GetSize((int*)&Width,(int*)&Height);
+  }
+}
 
 //operators
 

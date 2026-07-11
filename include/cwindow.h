@@ -59,6 +59,8 @@ protected:
   float VScale;
   float HScale;
   int CEvent (int event);
+  int CWidth;
+  int CHeight;
   wxWindowDisabler * modalmode;
 public:
     CWindow (void);
@@ -104,6 +106,8 @@ public:
   int GetVScale (int h);
   int GetClientHeight (void);
   int GetClientWidth (void);
+  void SetClientHeight (int h);
+  void SetClientWidth (int w);
   //operator
   void *operator    new (size_t sz);
   void operator delete (void *p);
