@@ -112,7 +112,6 @@ public:
 /*
 #else
 
-using namespace std;
 #include<string>
 #include<iostream>
 #include<fstream>

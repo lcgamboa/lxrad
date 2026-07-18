@@ -38,9 +38,11 @@
 
 #include <iostream>
 #include <cstring>
+#include <filesystem>
 #include"../../lunasvg/include/lunasvg.h"
 
 using namespace lunasvg;
+namespace fs = std::filesystem;
 
 #if __cplusplus >= 201103L
 #define xauto_ptr  std::unique_ptr
@@ -76,7 +78,7 @@ lxUnzipDir(const lxString &in_filename, const lxString &out_dirname)
 
      if (dirname (name).Length () > 0)
       {
-       lxCreateDir (out_dirname + dirname (name));
+          wxFileName::Mkdir (out_dirname + dirname (name), wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL);
       }
 
      name = out_dirname + name;
@@ -85,8 +87,7 @@ lxUnzipDir(const lxString &in_filename, const lxString &out_dirname)
      // read 'zip' to access the entry's data
      if (entry->IsDir ())
       {
-       int perm = entry->GetMode ();
-       wxFileName::Mkdir (name, perm, wxPATH_MKDIR_FULL);
+       wxFileName::Mkdir (name, wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL);
       }
      else
       {
@@ -233,6 +234,28 @@ lxCreateDir(const char * dirname)
 #endif
   }
  return 0;
+}
+
+bool 
+lxCreateDirs(const char * dirname){
+  return fs::create_directories(dirname);
+}
+
+bool 
+lxCopyDirs(const char * src, const char * dst){
+
+  if (fs::exists(src) && fs::exists(dst) && fs::equivalent(src, dst)) {
+        return 0 ;
+  }
+
+  try{
+    fs::copy(src, dst,fs::copy_options::recursive |
+                           fs::copy_options::overwrite_existing);
+    return 1;
+  }      
+  catch (const fs::filesystem_error& e) {
+    return 0;
+  }                
 }
 
 lxString
