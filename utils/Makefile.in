@@ -5,8 +5,8 @@ all:
 static:
 
 install:
-	chmod 755 lxrad-config
-	${CP} -v lxrad-config ${bindir}/
+	install -d ${bindir}
+	install -m 755 lxrad-config ${bindir}
 
 uninstall:
 	${RM} ${bindir}/lxrad-config
