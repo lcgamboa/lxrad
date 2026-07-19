@@ -40,6 +40,16 @@ else
     AC_MSG_ERROR([wxWidgets is required. Try --with-wx-config.])
 fi
 
+# Check for doxygen
+AC_PATH_PROG([DOXYGEN], [doxygen])
+if test -z "$DOXYGEN"; then
+    AC_MSG_WARN([Doxygen not found. Documentation will not be built.])
+    DOC_TARGET=""
+else
+    DOC_TARGET="doc"
+fi
+AC_SUBST([DOC_TARGET])
+
 WX_CXXFLAGS="`$WXCONFIG --cxxflags`"
 WX_LIBS="`$WXCONFIG --libs std`"
 WX_LIBS_ADV="`$WXCONFIG --libs stc`"
