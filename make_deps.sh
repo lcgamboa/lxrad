@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 cd ..
 git clone -b v2.4.1 --depth=1 https://github.com/sammycage/lunasvg.git
 cd lunasvg
