@@ -10,7 +10,7 @@ rm -rf build
 mkdir build
 cd build
 cmake -DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON ..
-make -j4
+make -j$(getconf _NPROCESSORS_ONLN)
 cd ..
 cd ..
 cd lxrad
