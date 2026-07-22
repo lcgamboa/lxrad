@@ -647,6 +647,7 @@ build_cpu
 build
 WX_LIBS_ADV
 WX_LIBS
+DOCS_SUBDIR
 DOC_TARGET
 DOXYGEN
 OPENAL_LIBS
@@ -5716,9 +5717,12 @@ if test -z "$DOXYGEN"; then
     { printf '%s\n' "$as_me:${as_lineno-$LINENO}: WARNING: Doxygen not found. Documentation will not be built." >&5
 printf '%s\n' "$as_me: WARNING: Doxygen not found. Documentation will not be built." >&2;}
     DOC_TARGET=""
+    DOCS_SUBDIR=""
 else
     DOC_TARGET="doc"
+    DOCS_SUBDIR="docs"
 fi
+
 
 
 WX_CFLAGS="`$WXCONFIG --cflags`"

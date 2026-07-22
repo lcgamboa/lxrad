@@ -1,6 +1,6 @@
 include Makefile.Conf
 
-SUBDIRS= lib include share docs utils
+SUBDIRS= lib include share @DOCS_SUBDIR@ utils
 .PHONY: $(SUBDIRS) layout
 
 all:$(SUBDIRS) @DOC_TARGET@

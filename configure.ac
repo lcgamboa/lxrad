@@ -45,10 +45,13 @@ AC_PATH_PROG([DOXYGEN], [doxygen])
 if test -z "$DOXYGEN"; then
     AC_MSG_WARN([Doxygen not found. Documentation will not be built.])
     DOC_TARGET=""
+    DOCS_SUBDIR=""
 else
     DOC_TARGET="doc"
+    DOCS_SUBDIR="docs"
 fi
 AC_SUBST([DOC_TARGET])
+AC_SUBST([DOCS_SUBDIR])
 
 WX_CFLAGS="`$WXCONFIG --cflags`"
 WX_CXXFLAGS="`$WXCONFIG --cxxflags`"
