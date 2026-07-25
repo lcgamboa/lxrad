@@ -502,7 +502,12 @@ lxGetLocalFile(lxString file)
 
    lxCreateDir (dirname (local));
 
+#ifdef __WXOSX__
+   /* macOS ships curl, not wget */
+   lxString cmd = "cd \"" + dirname (local) + "\"; curl -4 -L -O \"" + file + "\"";
+#else
    lxString cmd = "cd \"" + dirname (local) + "\"; wget --inet4-only \"" + file + "\"";
+#endif
 
    system ((const char *) cmd.c_str ());
 

@@ -215,8 +215,17 @@ void
 CDraw::on_draw(wxPaintEvent * event)
 {
  //  gdk_draw_drawable (Widget->window, Canvas.GetGC(), Pixmap, event->area.x, event->area.y, event->area.x, event->area.y, event->area.width, event->area.height);
+#ifdef __WXOSX__
+ /* wxOSX: blit the offscreen buffer inside the paint event, where a
+    valid graphics context exists */
+ wxPaintDC pdc (Widget);
+ wxBitmap *buffer = Canvas.GetBitmapBuffer ();
+ if (buffer != NULL)
+  pdc.DrawBitmap (*buffer, 0, 0, false);
+#else
  Canvas.Init ();
  Canvas.End ();
+#endif
  CControl::on_draw (event);
 
 

@@ -160,7 +160,13 @@ CCanvas::Init(void)
      BitmapBuffer = new wxBitmap (Width, Height, -1);
     }
 
+#ifdef __WXOSX__
+   /* wxOSX only provides a valid graphics context inside a paint event,
+      the offscreen buffer is blitted by the CDraw paint handler instead */
+   WDC = NULL;
+#else
    WDC = new wxClientDC (Drawable);
+#endif
    DC = new wxMemoryDC (*BitmapBuffer);
    GC = wxGraphicsRenderer::GetDefaultRenderer ()->CreateContext (*((wxMemoryDC *) DC));
   }
@@ -246,6 +252,9 @@ CCanvas::End(void)
      delete WDC;
      WDC = NULL;
     }
+#ifdef __WXOSX__
+   Drawable->Refresh (false);
+#endif
   }
 
  if (DC != NULL)
