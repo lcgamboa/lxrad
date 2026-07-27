@@ -15,12 +15,12 @@ AX_CXX_COMPILE_STDCXX_11
 
 
 # Checks for libraries.
-AC_CHECK_LIB([openal], [alGenSources],
-cat >>confdefs.h <<_ACEOF
-#define HAVE_OPENAL 1
-_ACEOF
-LIBS="-lopenal $LIBS",
-AC_MSG_WARN([libopenal Not Found!]))
+PKG_CHECK_MODULES([OPENAL], [openal], [
+    AC_DEFINE([HAVE_OPENAL], [1], [Define to 1 if you have the openal library])
+    LIBS="$OPENAL_LIBS $LIBS"
+], [
+    AC_MSG_ERROR([libopenal Not Found via pkg-config!])
+])
 
 #check for wxwidget
 WXCONFIG=wx-config
@@ -40,6 +40,20 @@ else
     AC_MSG_ERROR([wxWidgets is required. Try --with-wx-config.])
 fi
 
+# Check for doxygen
+AC_PATH_PROG([DOXYGEN], [doxygen])
+if test -z "$DOXYGEN"; then
+    AC_MSG_WARN([Doxygen not found. Documentation will not be built.])
+    DOC_TARGET=""
+    DOCS_SUBDIR=""
+else
+    DOC_TARGET="doc"
+    DOCS_SUBDIR="docs"
+fi
+AC_SUBST([DOC_TARGET])
+AC_SUBST([DOCS_SUBDIR])
+
+WX_CFLAGS="`$WXCONFIG --cflags`"
 WX_CXXFLAGS="`$WXCONFIG --cxxflags`"
 WX_LIBS="`$WXCONFIG --libs std`"
 WX_LIBS_ADV="`$WXCONFIG --libs stc`"
@@ -49,7 +63,9 @@ AC_SUBST(WX_LIBS)
 AC_SUBST(WX_LIBS_ADV)
  
 
-CFLAGS="$WX_CXXFLAGS $EXTERNAL_CFLAGS -D_LX_WX"
+CFLAGS="$WX_CFLAGS $OPENAL_CFLAGS $EXTERNAL_CFLAGS -D_LX_WX"
+CXXFLAGS="$WX_CXXFLAGS $OPENAL_CFLAGS $EXTERNAL_CFLAGS -D_LX_WX"
+
 LIBS="$LIBS $WX_LIBS"
 LIBSADV="$WX_LIBS_ADV"
 
