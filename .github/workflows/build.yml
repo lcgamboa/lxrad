@@ -19,6 +19,8 @@ jobs:
       - name: Install deps
         run: brew install wxwidgets openal-soft doxygen
       - name: Build
+        env:
+          PKG_CONFIG_PATH: "$(brew --prefix openal-soft)/lib/pkgconfig:${PKG_CONFIG_PATH-}"
         run: |
           ./make_deps.sh
           ./configure LDFLAGS=-L/opt/homebrew/opt/openal-soft/lib CFLAGS="-I/opt/homebrew/opt/openal-soft/include" CXXFLAGS="-std=c++17"
