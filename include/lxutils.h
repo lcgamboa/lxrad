@@ -77,7 +77,7 @@ class xImage:public wxImage
 #define lxCopyFile wxCopyFile
 #define lxRenameFile wxRenameFile
 #define lxLaunchDefaultApplication wxLaunchDefaultApplication
-
+#define lxGetHomeDir wxGetHomeDir
 
 #define lxSysErrorMsg wxSysErrorMsg
 #define lxSysErrorCode wxSysErrorCode
