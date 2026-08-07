@@ -80,26 +80,24 @@ return CControl::CEvent(event);
 void
 CItemMenu::Event (wxEvent & event)
 {
-  event.Skip();
-/*
-#ifdef __WXGTK__   
-  if ((Owner->GetWidget() == (widget-1))&&(event->GetId() == GetWid()))
-#else
-  if (event->GetId() == GetWid())
-#endif
-*/
 //activate event in control
       switch (CEvent(event.GetEventType()))
 	{
 	case lxEVT_COMMAND_MENU_SELECTED:
 	if ((FOwner) && (EvMenuActive))
+	  {
+	    //don't Skip: the event must be marked as processed, otherwise
+	    //wxOSX wxMenu::HandleCommandProcess calls item->GetPeer()->DoDefault()
+	    //on a wxMenuItem the handler may have destroyed (use after free)
 	    (FOwner->*EvMenuActive) (this);
-	  return ;
+	    return ;
+	  }
 	  break;
 	default:
             //return CControl::Event (widget, event);
 	  break;
 	};
+  event.Skip();
 };
 
 
