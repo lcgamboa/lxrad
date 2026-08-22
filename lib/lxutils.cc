@@ -244,18 +244,20 @@ lxCreateDirs(const char * dirname){
 bool 
 lxCopyDirs(const char * src, const char * dst){
 
-  if (fs::exists(src) && fs::exists(dst) && fs::equivalent(src, dst)) {
-        return 0 ;
-  }
-
+  fs::path psrc = std::filesystem::weakly_canonical(src);
+  fs::path pdst = std::filesystem::weakly_canonical(dst);
   try{
-    fs::copy(src, dst,fs::copy_options::recursive |
+    if (fs::exists(psrc) && fs::exists(pdst)){
+      if(!fs::equivalent(psrc, pdst)) {
+        fs::copy(psrc, pdst,fs::copy_options::recursive |
                            fs::copy_options::overwrite_existing);
-    return 1;
-  }      
-  catch (const fs::filesystem_error& e) {
-    return 0;
-  }                
+        return 1;
+      }
+    }
+  } catch (const fs::filesystem_error& e) {
+	  std::cerr << "Error: " << e.what() << std::endl;
+  }
+  return 0;                
 }
 
 lxString
